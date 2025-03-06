@@ -1,274 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillForce</title>
-    <link rel="stylesheet" href="./../static/css/index.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
     <header class="header">
-         <div class="together">
-        <div class="logo">
-            <div><img src="#" alt="S"></div>
-            <div><a href="#" class="link-course">SkillForce</a></div>
+        <div class="logo-and-create-curs">
+            <div class="logo">
+                <img src="../static/icons/LOGO.svg" alt="" class="logo__img">
+                <div class="logo__text">SkillForse</div>
+            </div>
+            <div class="logo-and-create-curs__create-curs">Создать курс</div>
         </div>
-            <a class="link-course" href="#">Создать курс</a>
-           </div>
-        <div class="search">
-
-            <form class="form-search" action="#">
-                <button class="button-search"><img src="../static/img/109164.jpg" alt="S"></button>
-
-                <input class="search-course" type="text" placeholder="Найти">
-
-            </form>
-        </div>
-        <div class="account">
-            <div class="profile"><a href="#" class="link-course">MyName</a></div>
-                <div><img src="#" alt="S"></div>
-
-
+        <form class="search-form">
+            <img class="search-form__icon" src="../static/icons/iconSearch.svg">
+            <input type="search" placeholder="Поиск" class="search-form__input">
+        </form>
+        <div class="button-menu">
+            <div class="button" id="buttonLogin">ж
+                <div class="button__text">Войти</div>
+                <img src="../static/icons/login.svg" alt="Войти" class="button__img">
+            </div>
         </div>
     </header>
-    <div class="catalog">
-        <div style="margin-bottom: 12px;">
-            <a href="#" class="link-catalog">Каталог</a>
-        </div>
-        <div class="catalog-grid">
-            <div class="catalog-mini">
-            <select class="catalog-select-one">
-                <option class="catalog-select">Какое направление?</option>
-            </select>
-            <select class="catalog-select-one">
-                <option class="catalog-select">Что изучать?</option>
-            </select>
-            <select class="catalog-select-one">
-                <option class="catalog-select">Какая цель?</option>
-            </select>
+    <div class="line"></div>
+    <header class="filters">
+        <div class="headlines">Каталог</div>
+        <div class="filter-select">
+            <div class="filter--type--selector">
+                Какое направление?
+                <img src="../static/icons/arrow-down.svg" alt="" class="filter__icon">
             </div>
-            <div class="catalog-button">
-            <button class="catalog-button" href="#">Фильтры</button>
+            <div class="filter--type--selector">
+                Что изучать?
+                <img src="../static/icons/arrow-down.svg" alt="" class="filter__icon">
+            </div>
+            <div class="filter--type--selector">
+                Какая цель?
+                <img src="../static/icons/arrow-down.svg" alt="" class="filter__icon">
+            </div>
+            <div class="filter--type--button">
+                <img src="../static/icons/filter.svg" alt="" class="filter__icon">
+                Фильтры
+            </div>
+        </div>
+    </header>
+    <section class="content">
+        <div class="cards">
+            <div class="card">
+                <div class="picture">
+                    <img src="../static/icons/pictureTest.png" alt="" class="picture__img">
+                    <div class="description-icons">
+                        <div class="description left up">
+                            <img src="../static/icons/time.svg" alt="" class="description__icon">
+                            144 ч
+                        </div>
+                        <div class="description left down">
+                            <img src="../static/icons/user.svg" alt="" class="description__icon">
+                            700
+                        </div>
+                        <div class="heart right up">
+                            <img src="../static/icons/heart.svg" alt="" class="heart__img">
+                        </div>
+                    </div>
                 </div>
-        </div>
-        </div>
-        <div class="card">
-            <div class="link-card">
-                <div class="up">
-                <img class="img-card" src="./../static/img/обложка-3.jpg" alt="S">
-                    <img class="img-up" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    <div>
-                        <p class="time" style="margin:0; opacity: 1">144 ч</p>
-                    <button class="btn-up"></button>
+                <div class="name">
+                    Программирование на Python с нуля с использование фреймворка наааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа
+                </div>
+                <div class="raiting-and-price">
+                    <div class="raiting">
+                        <img src="../static/icons/star.svg" alt="" class="raiting__star full">
+                        <img src="../static/icons/star.svg" alt="" class="raiting__star full">
+                        <img src="../static/icons/star.svg" alt="" class="raiting__star full">
+                        <img src="../static/icons/star.svg" alt="" class="raiting__star full">
+                        <img src="../static/icons/star.svg" alt="" class="raiting__star">
                     </div>
-                    <div>
-                        <p class="people" style="margin:0; opacity: 1">700</p>
-                    <button class="btn-up-2"></button>
-                    </div>
-                    </div>
-                    <div class="middle">
-                <p>Приветррррррррррррррррррррр</p>
-                        </div>
-
-                <div class="bottom">
-                    <div class="left">
-                <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    </div>
-                    <div class="right">
-                        2500 руб.
-                    </div>
-                    </div>
+                    <div class="raiting-and-price__price">2 500 ₽</div>
+                </div>
             </div>
-            <div class="link-card">
-                <div class="up">
-                <img class="img-card" src="./../static/img/обложка-3.jpg" alt="S">
-                    <img class="img-up" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    <div>
-                        <p class="time" style="margin:0; opacity: 1">144 ч</p>
-                    <button class="btn-up"></button>
-                    </div>
-                    <div>
-                        <p class="people" style="margin:0; opacity: 1">700</p>
-                    <button class="btn-up-2"></button>
-                    </div>
-                    </div>
-                    <div class="middle">
-                <p>Приветррррррррррррррррррррр</p>
-                        </div>
-
-                <div class="bottom">
-                    <div class="left">
-                <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    </div>
-                    <div class="right">
-                        2500 руб.
-                    </div>
-                    </div>
+            <div class="card">
+        
             </div>
-            <div class="link-card">
-                <div class="up">
-                <img class="img-card" src="./../static/img/обложка-3.jpg" alt="S">
-                    <img class="img-up" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    <div>
-                        <p class="time" style="margin:0; opacity: 1">144 ч</p>
-                    <button class="btn-up"></button>
-                    </div>
-                    <div>
-                        <p class="people" style="margin:0; opacity: 1">700</p>
-                    <button class="btn-up-2"></button>
-                    </div>
-                    </div>
-                    <div class="middle">
-                <p>Привет</p>
-                        </div>
-
-                <div class="bottom">
-                    <div class="left">
-                <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    </div>
-                    <div class="right">
-                        2500 руб.
-                    </div>
-                    </div>
+            <div class="card">
+        
             </div>
-            <div class="link-card">
-                <div class="up">
-                <img class="img-card" src="./../static/img/обложка-3.jpg" alt="S">
-                    <img class="img-up" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    <div>
-                        <p class="time" style="margin:0; opacity: 1">144 ч</p>
-                    <button class="btn-up"></button>
-                    </div>
-                    <div>
-                        <p class="people" style="margin:0; opacity: 1">700</p>
-                    <button class="btn-up-2"></button>
-                    </div>
-                    </div>
-                    <div class="middle">
-                <p>Привет</p>
-                        </div>
-
-                <div class="bottom">
-                    <div class="left">
-                <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    </div>
-                    <div class="right">
-                        2500 руб.
-                    </div>
-                    </div>
+            <div class="card">
+        
+            </div>
+            <div class="card">
+        
+            </div>
+            <div class="card">
+        
+            </div>
+            <div class="card">
+        
+            </div>
+            <div class="card">
+        
+            </div>
+            <div class="card">
+        
+            </div>
+            <div class="card">
+        
             </div>
         </div>
+    </section>
+    <script src="js/handlebars.js"></script>
 
-<div class="card">
-            <div class="link-card">
-                <div class="up">
-                <img class="img-card" src="./../static/img/обложка-3.jpg" alt="S">
-                    <img class="img-up" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    <div>
-                        <p class="time" style="margin:0; opacity: 1">144 ч</p>
-                    <button class="btn-up"></button>
-                    </div>
-                    <div>
-                        <p class="people" style="margin:0; opacity: 1">700</p>
-                    <button class="btn-up-2"></button>
-                    </div>
-                    </div>
-                    <div class="middle">
-                <p>Привет</p>
-                        </div>
-
-                <div class="bottom">
-                    <div class="left">
-                <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    </div>
-                    <div class="right">
-                        2500 руб.
-                    </div>
-                    </div>
-            </div>
-            <div class="link-card">
-                <div class="up">
-                <img class="img-card" src="./../static/img/обложка-3.jpg" alt="S">
-                    <img class="img-up" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    <div>
-                        <p class="time" style="margin:0; opacity: 1">144 ч</p>
-                    <button class="btn-up"></button>
-                    </div>
-                    <div>
-                        <p class="people" style="margin:0; opacity: 1">700</p>
-                    <button class="btn-up-2"></button>
-                    </div>
-                    </div>
-                    <div class="middle">
-                <p>Привет</p>
-                        </div>
-
-                <div class="bottom">
-                    <div class="left">
-                <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    </div>
-                    <div class="right">
-                        2500 руб.
-                    </div>
-                    </div>
-            </div>
-            <div class="link-card">
-                <div class="up">
-                <img class="img-card" src="./../static/img/обложка-3.jpg" alt="S">
-                    <img class="img-up" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    <div>
-                        <p class="time" style="margin:0; opacity: 1">144 ч</p>
-                    <button class="btn-up"></button>
-                    </div>
-                    <div>
-                        <p class="people" style="margin:0; opacity: 1">700</p>
-                    <button class="btn-up-2"></button>
-                    </div>
-                    </div>
-                    <div class="middle">
-                <p>Приветррррр</p>
-                        </div>
-
-                <div class="bottom">
-                    <div class="left">
-                <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                        <img class="heart" src="./../static/img/gljancevoe-serdechko.png" alt="S">
-                    </div>
-                    <div class="right">
-                        2500 руб.
-                    </div>
-                    </div>
-            </div>
-
-
-
-        </div>
 </body>
 </html>

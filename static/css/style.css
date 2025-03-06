@@ -1,0 +1,255 @@
+body {
+    margin: 0px;
+    background-color: #1E3E62;
+}
+
+input[type="text"] {
+    background: none;
+    border: none;
+    padding: none;
+}
+
+.header {
+    padding: 30px 40px 30px 40px;
+    background-color: #0B192C;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logo-and-create-curs {
+    width: 320px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo__img {
+    height: 40px;
+    width: 40px;
+}
+
+.logo__text {
+    color: #D0CBCB;
+    font-size: 24px;
+}
+
+.logo-and-create-curs__create-curs {
+    color: #D0CBCB;
+    font-size: 16px;
+}
+
+.search-form {
+    height: 32px;
+    width: 448px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    background: rgba(147, 128, 128, 0.2);
+    border-radius: 16px;
+    padding: 4px 16px 4px 16px;
+}
+
+.search-form__icon {
+    height: 19px;
+    width: 19px;
+    color: #B7B5B7;
+}
+
+.search-form__input {
+    all: unset;
+    width: 100%;
+    color: #B7B5B7;
+}
+
+.button-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 8;
+}
+
+.button {
+    height: 40px;
+    padding: 0px 16px 0px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.button__text {
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.line {
+    border-color: rgba(147, 128, 128, 0.21);
+    margin-top: -1px;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    background-color: #0B192C;
+    border-top: 1px solid rgba(147, 128, 128, 0.21);
+    height: 199px;
+}
+
+.filter-select {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.headlines {
+    font-size: 48px;
+    color: #D0CBCB;
+}
+
+.filter--type--selector {
+    padding: 12px 16px 12px 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 350px;
+    background-color: #1E3E62;
+    font-size: 20px;
+    color: #D0CBCB;
+    border-radius: 16px;
+}
+
+.filter--type--button {
+    padding: 12px 16px 12px 16px;
+    background-color: #1E3E62;
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    color: #D0CBCB;
+    border-radius: 16px;
+    gap: 8px;
+}
+
+.filter__icon {
+    height: 24px;
+    width: 24px;
+}
+
+.content {
+    padding: 56px 366px 56px 366px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cards {
+    width: 1188px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    width: 279px;
+    height: 360px;
+    border-radius: 12px;
+    background-color: #0B192C;
+    box-sizing: border-box;
+    gap: 2px;
+}
+
+.picture {
+    border-radius: 12px;
+    position: relative;
+    height: 263px;
+    width: 263px;
+}
+
+.description-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.description {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    background: rgba(30, 62, 98, 0.9);
+    border-radius: 24px;
+    padding: 4px 24px 4px 24px;
+    gap: 4px;
+    color: #D0CBCB;
+}
+
+.heart {
+    position: absolute;
+}
+
+.heart__img {
+    height: 34px;
+    width: 32px;
+}
+
+.up {
+    top: 8px;
+}
+
+.down {
+    bottom: 8px;
+}
+
+.left {
+    left: 8px;
+}
+
+.right {
+    right: 8px;
+}
+
+.description__icon {
+    height: 14px;
+    width: 14px;
+}
+
+.name {
+    color: #D0CBCB;
+    font-size: 16px;
+    overflow: hidden;
+    height: 100%;
+}
+
+.raiting-and-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #FF6500;
+}
+
+.raiting {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+}
+
+.raiting__star {
+    color: #D0CBCB;
+    background-image: #D0CBCB;
+}
