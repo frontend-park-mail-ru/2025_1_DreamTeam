@@ -3,7 +3,7 @@ const fs = require('fs');
 const server = http.createServer((req, res) => {
 
     const {url} = req;
-    const fileName = url === '/' ? '/index.html' : url;
+    const fileName = url === '/' ? '/login.html' : url;
     try{
         file = fs.readFileSync(`./public${fileName}`);
     } catch (error) {
@@ -15,7 +15,5 @@ const server = http.createServer((req, res) => {
     res.end(file);
     // res.end('okay');
 });
-
-console.log('HELLO WORLD');
 
 server.listen(8001, '127.0.0.1', () => {});
