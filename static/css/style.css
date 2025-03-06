@@ -204,10 +204,6 @@ input[type="text"] {
     height: fit-content;
 }
 
-.heart {
-
-}
-
 .heart__img {
     height: 34px;
     width: 32px;
@@ -226,20 +222,20 @@ input[type="text"] {
     flex-grow: 1;
 }
 
-.raiting-and-price {
+.rating-and-price {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     color: #FF6500;
 }
 
-.raiting {
+.rating {
     display: flex;
     flex-direction: row;
     gap: 2px;
 }
 
-.raiting__star {
+.rating__star {
     color: #D0CBCB;
     background-image: #D0CBCB;
 }
