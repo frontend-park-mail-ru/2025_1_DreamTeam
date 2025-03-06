@@ -57,7 +57,6 @@ const data = [
 {{else}}
   <div class="dont-content">
   Нету курсов
-  <div class="button reload" id='button-reload'>reload</div>
   </div>
   {{/if}}
 `;
@@ -70,15 +69,7 @@ const rerender = () => {
 
   const htmlString = template(context);
 
-  document.getElementById("app").innerHTML = htmlString;
-
-  if (context.countCourses === 0) {
-    const buttonReload = document.getElementById("button-reload");
-    buttonReload.addEventListener("click", () => {
-      window.location.reload();
-      console.log("Нету курсов");
-    });
-  }
+  document.getElementById("app").insertAdjacentHTML("beforeend", htmlString);
 };
 
 rerender();
