@@ -104,7 +104,8 @@ input[type="text"] {
     align-items: center;
     background-color: #0B192C;
     border-top: 1px solid rgba(147, 128, 128, 0.21);
-    height: 199px;
+    height: 200px;
+    box-sizing: border-box;
 }
 
 .filter-select {
