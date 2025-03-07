@@ -84,11 +84,13 @@ input[type="text"] {
     flex-direction: row;
     align-items: center;
     gap: 8px;
-}
-
-.button__text {
     color: #FFFFFF;
     font-size: 16px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
 }
 
 .line {
@@ -257,4 +259,14 @@ input[type="text"] {
     padding: 16px;
     border-radius: 16px;
     cursor: pointer;
+}
+
+.card:hover {
+    border: 2px solid #FF6500;
+    padding: 6px;
+}
+
+.button:hover {
+    background-color: #B7B5B7;
+    color: #0B192C;
 }
