@@ -17,10 +17,10 @@ const data = [
   }
 ]
 
-const template = Handlebars.templates['card.hbs']; 
+const template = Handlebars.templates['card.hbs'];
 
 const rerender = () => {
-  
+
   const context = { course: data, countCourses: data.length };
 
   const htmlString = template(context);
