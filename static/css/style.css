@@ -3,12 +3,6 @@ body {
     background-color: #1E3E62;
 }
 
-input[type="text"] {
-    background: none;
-    border: none;
-    padding: none;
-}
-
 .header {
     padding: 30px 40px 30px 40px;
     background-color: #0B192C;
