@@ -1,5 +1,11 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+templates['menu.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"button-menu\">\n    <div class=\"button_type_menu\" id=\"button-close-menu\">\n        <div class=\"button__text\">Свернуть</div>\n        <img src=\"../static/icons/close-menu.svg\" alt=\"Войти\" class=\"button__img\">\n    </div>\n    <div class=\"button_type_menu\" id=\"button-profile\">\n        <div class=\"button__text\">Профиль</div>\n        <img src=\"../static/icons/profile.svg\" alt=\"Войти\" class=\"button__img\">\n    </div>\n    <div class=\"button_type_menu\" id=\"button-setting\">\n        <div class=\"button__text\">Настройки</div>\n        <img src=\"../static/icons/setting.svg\" alt=\"Войти\" class=\"button__img\">\n    </div>\n    <div class=\"button_type_menu\" id=\"button-logout\">\n        <div class=\"button__text\">Выход</div>\n        <img src=\"../static/icons/logout.svg\" alt=\"Войти\" class=\"button__img\">\n    </div>\n</div>";
+},"useData":true});
+templates['login-account.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"button-menu\">\n    Тигр гордый\n    <div class=\"avatar\" id=\"avatar\">\n        <img src=\"../static/icons/menu.svg\" alt=\"Меню\" class=\"avatar__icon\">\n        <img src=\"../static/icons/avatar.png\" alt=\"Аватарка\" class=\"avatar__img\">\n    </div>\n</div>";
+},"useData":true});
 templates['card.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -38,6 +44,6 @@ templates['card.hbs'] = template({"1":function(container,depth0,helpers,partials
         return undefined
     };
 
-  return ((stack1 = lookupProperty(helpers,"if").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"count-courses") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(4, data, 0),"data":data,"loc":{"start":{"line":1,"column":0},"end":{"line":42,"column":9}}})) != null ? stack1 : "");
+  return ((stack1 = lookupProperty(helpers,"if").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"count_courses") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(4, data, 0),"data":data,"loc":{"start":{"line":1,"column":0},"end":{"line":42,"column":9}}})) != null ? stack1 : "");
 },"useData":true});
 })();

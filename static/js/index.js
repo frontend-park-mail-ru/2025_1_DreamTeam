@@ -17,15 +17,34 @@ const data = [
   }
 ]
 
-const template = Handlebars.templates['card.hbs'];
+const template_card = Handlebars.templates['card.hbs'];
+const template_menu = Handlebars.templates['menu.hbs'];
+const template_login = Handlebars.templates['login-account.hbs'];
 
 const rerender = () => {
 
-  const context = { course: data, countCourses: data.length };
+  const context = { course: data, count_courses: data.length };
 
-  const htmlString = template(context);
+  const htmlString = template_card(context);
 
-  document.getElementById("app").insertAdjacentHTML("beforeend", htmlString);
+  document.getElementById("app").innerHTML = htmlString;
+
+  const avatar = document.getElementById("avatar");
+
+  // Обработчик открытия меню
+  if( avatar ) {
+    avatar.addEventListener("click", () => {
+      const htmlString = template_menu();
+      document.getElementById("menu").innerHTML = htmlString;
+
+      // Обработчик закрытия меню(накладывается сразу после открытия)
+      document.getElementById("button-close-menu").addEventListener("click", () => {
+        const htmlString = template_login();
+        document.getElementById("menu").innerHTML = htmlString;
+        rerender();
+      });
+    });
+  }
 };
 
 rerender();
