@@ -21,16 +21,35 @@ const template_card = Handlebars.templates['card.hbs'];
 const template_menu = Handlebars.templates['menu.hbs'];
 const template_login = Handlebars.templates['login-account.hbs'];
 const template_logout = Handlebars.templates['logout.hbs'];
-const template_window_login = Handlebars.templates[''];
+const template_window_login = Handlebars.templates['window-login.hbs'];
 
 const rerender = (data) => {
   const context = { course: data, count_courses: data.length };
   const htmlString = template_card(context);
   document.getElementById("app").innerHTML = htmlString;
 
-  const avatar = document.getElementById("avatar");
+  // Обработчик входа в аккаунт
+  const login = document.getElementById("button-login");
+  if (login) {
+    login.addEventListener("click", () => {
+      const htmlString = template_window_login();
+      document.getElementById("blur").innerHTML = htmlString;
+
+      document.getElementById("blur").addEventListener("click", () => {
+        document.getElementById("blur").innerHTML = "";
+      });
+
+      const windowElement = document.getElementById("window");
+      if (windowElement) {
+        windowElement.addEventListener("click", (event) => {
+          event.stopPropagation();
+        });
+      }
+    });
+  }
 
   // Обработчик открытия меню
+  const avatar = document.getElementById("avatar");
   if (avatar) {
     avatar.addEventListener("click", () => {
       const htmlString = template_menu();
@@ -47,9 +66,9 @@ const rerender = (data) => {
       };
 
       // Обработчик закрытия меню
-      const closeButton = document.getElementById("button-close-menu");
-      if (closeButton) {
-        closeButton.addEventListener("click", () => {
+      const close_button = document.getElementById("button-close-menu");
+      if (close_button) {
+        close_button.addEventListener("click", () => {
           const htmlString = template_login();
           document.getElementById("menu").innerHTML = htmlString;
           rerender(data);
