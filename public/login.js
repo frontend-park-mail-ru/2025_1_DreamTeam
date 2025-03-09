@@ -79,6 +79,7 @@ async function registerUser(email, name, password) {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(userData),
     });
 
@@ -109,6 +110,7 @@ async function loginUser (email, password) {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(loginData),
     });
 
