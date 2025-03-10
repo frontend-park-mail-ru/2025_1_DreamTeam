@@ -83,12 +83,12 @@ async function fetch_logout() {
  * @param {string} password_admitInput - Значение поля подтверждения пароля.
  */
 let emptyInput = (errorInput, emailInput, nameInput, passwordInput, password_admitInput) => {
-  document.getElementById("error").innerText = errorInput;
-  console.log("clear error")
-  document.getElementById("email").value = emailInput;
-  document.getElementById("name").value = nameInput;
-  document.getElementById("password").value = passwordInput;
-  document.getElementById("password_admit").value = password_admitInput;
+  document.getElementById('error').innerText = errorInput;
+  console.log('clear error');
+  document.getElementById('email').value = emailInput;
+  document.getElementById('name').value = nameInput;
+  document.getElementById('password').value = passwordInput;
+  document.getElementById('password_admit').value = password_admitInput;
 };
 
 /**
@@ -99,10 +99,10 @@ let emptyInput = (errorInput, emailInput, nameInput, passwordInput, password_adm
  * @param {string} password_admitInput - Стиль границы подтверждения пароля.
  */
 let errorColor = (errorInput, emailInput, passwordInput, password_admitInput) => {
-  document.getElementById("error").style.color = errorInput;
-  document.getElementById("email").style.border = emailInput;
-  document.getElementById("password").style.border = passwordInput;
-  document.getElementById("password_admit").style.border = password_admitInput;
+  document.getElementById('error').style.color = errorInput;
+  document.getElementById('email').style.border = emailInput;
+  document.getElementById('password').style.border = passwordInput;
+  document.getElementById('password_admit').style.border = password_admitInput;
 };
 
 /**
@@ -194,7 +194,7 @@ async function register_user(mail, name, password) {
       errorColor('#CC0202', '2px solid #CC0202', 'none', 'none');
     }
   } catch (err) {
-    //    document.getElementById("error").innerText = data.error;
+    console.error('Ошибка проверки авторизации:', err);
     document.getElementById('error').style.color = '#CC0202';
   }
 }
@@ -280,8 +280,8 @@ const rerender = (data, username) => {
   if (search) {
     document.getElementById('search').addEventListener('keydown', (event) => {
       if (event.key === 'Enter') {
-        event.preventDefault(); // Останавливает стандартное поведение (отправку формы)
-        searchFunction(); // Запускает функцию поиска
+        event.preventDefault();
+        // searchFunction();
       }
     });
   }
