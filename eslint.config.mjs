@@ -3,7 +3,7 @@ import pluginJs from '@eslint/js';
 
 export default [
   {
-    ignores: ['node_modules', 'templates.js', 'public/templates.js'],
+    ignores: ['node_modules', 'templates.js', 'public/templates.js', 'server.js'],
   },
   {
     languageOptions: {
