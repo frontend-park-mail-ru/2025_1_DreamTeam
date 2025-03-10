@@ -221,6 +221,16 @@ const rerender = (data, username) => {
     document.getElementById("menu").innerHTML = htmlString;
   }
 
+  const search = document.getElementById("search");
+  if (search) {
+    document.getElementById("search").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Останавливает стандартное поведение (отправку формы)
+        searchFunction(); // Запускает функцию поиска
+      }
+    });
+  }
+
   // Обработчик входа в аккаунт
   const login = document.getElementById("button-login");
   if (login) {
