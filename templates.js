@@ -7,7 +7,16 @@ templates['logout.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(co
     return "<div class=\"button-menu\" id=\"menu\">\n    <div class=\"button_type_menu\" id=\"button-login\">\n        Войти\n        <img src=\"../static/icons/login.svg\" alt=\"Войти\" class=\"button__img\">\n    </div>\n</div>";
 },"useData":true});
 templates['login-account.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"button-menu\" id=\"menu\">\n    Тигр гордый\n    <div class=\"avatar\" id=\"avatar\">\n        <img src=\"../static/icons/menu.svg\" alt=\"Меню\" class=\"avatar__icon\">\n        <img src=\"../static/icons/avatar.png\" alt=\"Аватарка\" class=\"avatar__img\">\n    </div>\n</div>";
+    var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "<div class=\"button-menu\" id=\"menu\">\n    "
+    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"name") || (depth0 != null ? lookupProperty(depth0,"name") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"name","hash":{},"data":data,"loc":{"start":{"line":2,"column":4},"end":{"line":2,"column":14}}}) : helper)))
+    + "\n    <div class=\"avatar\" id=\"avatar\">\n        <img src=\"../static/icons/menu.svg\" alt=\"Меню\" class=\"avatar__icon\">\n        <img src=\"../static/icons/avatar.png\" alt=\"Аватарка\" class=\"avatar__img\">\n    </div>\n</div>";
 },"useData":true});
 templates['card.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -50,6 +59,6 @@ templates['card.hbs'] = template({"1":function(container,depth0,helpers,partials
   return ((stack1 = lookupProperty(helpers,"if").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"count_courses") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(4, data, 0),"data":data,"loc":{"start":{"line":1,"column":0},"end":{"line":42,"column":9}}})) != null ? stack1 : "");
 },"useData":true});
 templates['window-login.hbs'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"blur\">\n    <div id=\"window\" class=\"window\">\n        <div class=\"form\">\n            <div class=\"logo\">SkillForce</div>\n            <div class=\"error\"></div>\n            <input type=\"email\" placeholder=\"Почта\" class=\"form__input\">\n            <input type=\"text\" placeholder=\"Псевдоним\" class=\"form__input\">\n            <input type=\"password\" placeholder=\"Пароль\" class=\"form__input\">\n            <input type=\"password\" placeholder=\"Подтвердить пароль\" class=\"form__input\">\n        </div>\n        <div class=\"buttons\">\n            <button class=\"buttons__button active\" id=\"sign-up\">Регистрация</button>\n            <button class=\"buttons__button\" id=\"log-in\">Вход</button>\n        </div>\n    </div>\n</div>";
+    return "<div class=\"blur\">\n    <div id=\"window\" class=\"window\">\n        <div class=\"form\">\n            <div class=\"logo\">SkillForce</div>\n            <div class=\"error\" id=\"error\"></div>\n            <input type=\"email\" id=\"email\" placeholder=\"Почта\" class=\"form__input\">\n            <input type=\"text\" id=\"name\" placeholder=\"Псевдоним\" class=\"form__input\">\n            <input type=\"password\" id=\"password\" placeholder=\"Пароль\" class=\"form__input\">\n            <input type=\"password\" id=\"password_admit\" placeholder=\"Подтвердить пароль\" class=\"form__input\">\n        </div>\n        <div class=\"buttons\">\n            <button class=\"buttons__button active\" id=\"sign-up\">Регистрация</button>\n            <button class=\"buttons__button\" id=\"log-in\">Вход</button>\n        </div>\n    </div>\n</div>";
 },"useData":true});
 })();

@@ -1,11 +1,15 @@
 const ip = "http://217.16.21.64";
 const port = "8080";
 const ip_port = `${ip}:${port}/api/getCourses`;
-const is_authorized = `${ip}:${port}/api/isAuthorized`
+const username = `${ip}:${port}/api/isAuthorized`
+const register_url = `${ip}:${port}/api/register`;
+const login_url = `${ip}:${port}/api/login`;
+const logout = `${ip}:${port}/api/logout`;
+const falseSymbols = /[!@#$%^&*+`;<>]/;
 
-async function checkAuth() {
+async function check_auth() {
   try {
-    const response = await fetch(is_authorized, {
+    const response = await fetch(username, {
       method: "GET",
       credentials: "include",
     });
@@ -14,7 +18,7 @@ async function checkAuth() {
 
     if (response.ok && !data.error) {
       console.log("✅ Пользователь авторизован");
-      return true;
+      return data.user.name;
     } else {
       console.log("❌ Пользователь НЕ авторизован");
       return false;
@@ -26,7 +30,7 @@ async function checkAuth() {
   }
 }
 
-async function fetchData() {
+async function fetch_data() {
   try {
     const response = await fetch(ip_port);
     if (!response.ok) {
@@ -41,21 +45,171 @@ async function fetchData() {
   }
 }
 
+async function fetch_logout() {
+  try {
+      const response = await fetch(logout, {
+      credentials: "include"
+    });
+
+    if (!response.ok) {
+      throw new Error(`Ошибка выхода: ${response.status}`);
+    }
+
+    console.log("✅ Успешный выход");
+    return true;
+  } catch (error) {
+    console.error("Ошибка запроса:", error);
+    return [];
+  }
+}
+
+let emptyInput = (errorInput, emailInput, nameInput, passwordInput, password_admitInput) => {
+  document.getElementById("error").innerText = errorInput;
+  console.log("clear error")
+  document.getElementById("email").value = emailInput;
+  document.getElementById("name").value = nameInput;
+  document.getElementById("password").value = passwordInput;
+  document.getElementById("password_admit").value = password_admitInput;
+}
+
+let errorColor = (errorInput, emailInput, passwordInput, password_admitInput) => {
+  document.getElementById("error").style.color = errorInput;
+  document.getElementById("email").style.border = emailInput;
+  document.getElementById("password").style.border = passwordInput;
+  document.getElementById("password_admit").style.border = password_admitInput;
+}
+
+let check_password = () => {
+  if (document.getElementById("password").value !== document.getElementById("password_admit").value){
+    document.getElementById("error").style.color = '#CC0202';
+    emptyInput('Пароли не совпадают', document.getElementById("email").value, document.getElementById("name").value, '', '');
+    errorColor('none', 'none', 'none', '2px solid #CC0202');
+    return false;
+  }
+
+  if (document.getElementById("password").value.length < 8 || document.getElementById("password").value.length > 32) {
+//        if (falseSymbols.test(document.getElementById("password").value)){
+//            document.getElementById("error").innerText = 'Пароль не должен содержать символы !@#$%^&*+`;<>!';
+//            emptyInput('Пароль должен содержать символы !@#$%^&*+`;<>!', document.getElementById("email").value, name.value, '', '');
+//            return false;
+//        }
+      emptyInput('Пароль должен содержать от 8 до 32 символов!', document.getElementById("email").value, document.getElementById("name").value, '', '');
+      errorColor('none', 'none', '2px solid #CC0202', '2px solid #CC0202');
+      return false;
+      }
+      document.getElementById("error").innerText = '';
+  return true;
+}
+
+let btn_registration = () => {
+//    infoIcon(password);
+  if (check_password()) {
+    console.log("check");
+    document.getElementById("error").innerText = '';
+    register_user(document.getElementById("email").value, document.getElementById("name").value, document.getElementById("password").value);
+  }
+}
+
+let btn_authorization = () => {
+  loginUser(document.getElementById("email").value, document.getElementById("password").value);
+}
+
+async function register_user(mail, name, password) {
+const userData = {
+  email: mail,
+  name: name,
+  password: password
+};
+
+try {
+  const response = await fetch(register_url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(userData),
+  });
+
+  const data = await response.json();
+
+  if (response.ok) {
+    document.getElementById("error").innerText = "Пользователь успешно зарегистрирован";
+    errorColor('white', 'none', 'none', 'none');
+    const is_authenticated = await check_auth();
+    const courses = await fetch_data();
+    rerender(courses, is_authenticated);
+  } else {
+      if (response.status == 404) {
+          document.getElementById("error").innerText = "Пользователь уже существует";
+      } else {
+          document.getElementById("error").innerText = data.error;
+      }
+      errorColor('#CC0202', '2px solid #CC0202', 'none', 'none');
+  }
+} catch (err) {
+//    document.getElementById("error").innerText = data.error;
+  document.getElementById("error").style.color = '#CC0202';
+}
+}
+
+async function loginUser (mail, passwordInput) {
+const loginData = {
+  email: mail,
+  password: passwordInput
+};
+
+try {
+  const response = await fetch(login_url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(loginData),
+  });
+
+  const data = await response.json();
+
+  if (response.ok) {
+    document.getElementById("error").innerText = "Успешный вход";
+    errorColor('white', 'none', 'none', 'none');
+    const username = await check_auth();
+    const courses = await fetch_data();
+    rerender(courses, username);
+  } else {
+      if (response.status == 404) {
+          document.getElementById("error").innerText = "Неверные почта или пароль";
+      } else {
+          document.getElementById("error").innerText = data.error;
+      }
+      errorColor('#CC0202', '2px solid #CC0202', '2px solid #CC0202', 'none');
+
+  }
+} catch (err) {
+  document.getElementById("error").innerText = "Ошибка сети", err;
+  document.getElementById("error").style.color = '#CC0202';
+}
+};
+
 const template_card = Handlebars.templates['card.hbs'];
 const template_menu = Handlebars.templates['menu.hbs'];
 const template_login = Handlebars.templates['login-account.hbs'];
 const template_logout = Handlebars.templates['logout.hbs'];
 const template_window_login = Handlebars.templates['window-login.hbs'];
 
-const rerender = (data, is_authorized) => {
+const rerender = (data, username) => {
   const context = { course: data, count_courses: data.length };
   const htmlString = template_card(context);
   document.getElementById("app").innerHTML = htmlString;
-
+  console.log(username);
   // Проверка авторизации и рендеринг
-  if (is_authorized) {
+  if (username) {
     const htmlString = template_login();
     document.getElementById("menu").innerHTML = htmlString;
+    if (document.getElementById("window")) {
+      document.getElementById("blur").innerHTML = ""
+    }
   } else {
     const htmlString = template_logout();
     document.getElementById("menu").innerHTML = htmlString;
@@ -66,6 +220,7 @@ const rerender = (data, is_authorized) => {
   if (login) {
     login.addEventListener("click", () => {
       const htmlString = template_window_login();
+
       document.getElementById("blur").innerHTML = htmlString;
 
       document.getElementById("blur").addEventListener("click", () => {
@@ -81,19 +236,33 @@ const rerender = (data, is_authorized) => {
 
       const signup = document.getElementById("sign-up");
       const login = document.getElementById("log-in");
-
       if (login && signup) {
         login.addEventListener("click", () => {
           if (!login.classList.contains("active")) {
+            console.log("debug: mode login");
+            emptyInput('', '', '', '', '');
+            errorColor('white', 'none', 'none', 'none');
             login.classList.add("active");
             signup.classList.remove("active");
+            document.getElementById("name").classList.add("hidden");
+            document.getElementById("password_admit").classList.add("hidden");
+          } else {
+            btn_authorization();
           }
         })
 
         signup.addEventListener("click", () => {
           if (!signup.classList.contains("active")) {
+            console.log("debug: mode signup");
+            emptyInput('', '', '', '', '');
+            errorColor('white', 'none', 'none', 'none');
             signup.classList.add("active");
             login.classList.remove("active");
+            document.getElementById("name").classList.remove("hidden");
+            document.getElementById("password_admit").classList.remove("hidden");
+          } else {
+            console.log("REGISTER");
+            btn_registration();
           }
         })
       }
@@ -110,7 +279,8 @@ const rerender = (data, is_authorized) => {
       // Обработчик выхода из аккаунта
       const logout = document.getElementById("button-logout");
       if (logout) {
-        logout.addEventListener("click", () => {
+        logout.addEventListener("click", async () => {
+          await fetch_logout();
           const htmlString = template_logout();
           document.getElementById("menu").innerHTML = htmlString;
           rerender(data, false);
@@ -123,7 +293,7 @@ const rerender = (data, is_authorized) => {
         close_button.addEventListener("click", () => {
           const htmlString = template_login();
           document.getElementById("menu").innerHTML = htmlString;
-          rerender(data, true);
+          rerender(data, username);
         });
       }
     });
@@ -131,8 +301,8 @@ const rerender = (data, is_authorized) => {
 };
 
 async function initialize() {
-  const [is_authenticated, data] = await Promise.all([checkAuth(), fetchData()]);
-  rerender(data, is_authenticated);
+  const [username, data] = await Promise.all([check_auth(), fetch_data()]);
+  rerender(data, username);
 }
 
 initialize();
