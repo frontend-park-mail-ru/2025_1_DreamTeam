@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillForce</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oxygen+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-and-create-curs">
+            <div class="logo">
+                <img src="../static/icons/logo.svg" alt="" class="logo__img">
+                <div class="logo__text">SkillForce</div>
+            </div>
+            <div class="logo-and-create-curs__create-curs">Создать курс</div>
+        </div>
+        <form class="search-form">
+            <img class="search-form__icon" src="../static/icons/iconSearch.svg">
+            <input type="search" placeholder="Поиск" class="search-form__input">
+        </form>
+        <div class="button-menu" id="menu">
+            <div class="button_type_menu" id="button-login">
+                Войти
+                <img src="../static/icons/login.svg" alt="Войти" class="button__img">
+            </div>
+        </div>
+    </header>
+    <div class="line"></div>
+    <header class="filters">
+        <div class="headlines">Каталог</div>
+        <div class="filter-select">
+            <div class="filter--type--selector">
+                Какое направление?
+                <img src="../static/icons/arrow-down.svg" alt="" class="filter__icon">
+            </div>
+            <div class="filter--type--selector">
+                Что изучать?
+                <img src="../static/icons/arrow-down.svg" alt="" class="filter__icon">
+            </div>
+            <div class="filter--type--selector">
+                Какая цель?
+                <img src="../static/icons/arrow-down.svg" alt="" class="filter__icon">
+            </div>
+            <div class="filter--type--button">
+                <img src="../static/icons/filter.svg" alt="" class="filter__icon">
+                Фильтры
+            </div>
+        </div>
+    </header>
+    <section id="app" class="content">
+    </section>
+    <div id="blur" class="zone"></div>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+    <script src="../templates.js"></script>
+    <script src="../static/js/index.js"></script>
+</body>
+</html>
