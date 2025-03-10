@@ -9,7 +9,10 @@ export default [
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        Handlebars: 'readonly',
+      },
     },
     rules: {
       'semi': ['error', 'always'], // Требует точку с запятой
