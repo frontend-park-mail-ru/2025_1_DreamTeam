@@ -6,6 +6,10 @@ const register_url = `${ip}:${port}/api/register`;
 const login_url = `${ip}:${port}/api/login`;
 const logout = `${ip}:${port}/api/logout`;
 
+/**
+ * Проверяет авторизацию пользователя
+ * @returns {Promise<string|boolean>} Возвращает им я пользователя или false, если пользователь не авторизован
+ */
 async function check_auth() {
   try {
     const response = await fetch(username, {
@@ -29,6 +33,10 @@ async function check_auth() {
   }
 }
 
+/**
+ * Запрашивает данные курсов
+ * @returns {Promise<Array>} Возвращает массив курсов или пустой массив в случае ошибки
+ */
 async function fetch_data() {
   try {
     const response = await fetch(ip_port);
@@ -44,6 +52,10 @@ async function fetch_data() {
   }
 }
 
+/**
+ * Выполняет выход пользователя
+ * @returns {Promise<boolean>} Возвращает true в случае успеха, иначе false
+ */
 async function fetch_logout() {
   try {
     const response = await fetch(logout, {
@@ -62,22 +74,41 @@ async function fetch_logout() {
   }
 }
 
+/**
+ * Очищает поля формы и устанавливает сообщение об ошибке.
+ * @param {string} errorInput - Текст ошибки.
+ * @param {string} emailInput - Значение поля email.
+ * @param {string} nameInput - Значение поля имени.
+ * @param {string} passwordInput - Значение поля пароля.
+ * @param {string} password_admitInput - Значение поля подтверждения пароля.
+ */
 let emptyInput = (errorInput, emailInput, nameInput, passwordInput, password_admitInput) => {
-  document.getElementById('error').innerText = errorInput;
-  console.log('clear error');
-  document.getElementById('email').value = emailInput;
-  document.getElementById('name').value = nameInput;
-  document.getElementById('password').value = passwordInput;
-  document.getElementById('password_admit').value = password_admitInput;
+  document.getElementById("error").innerText = errorInput;
+  console.log("clear error")
+  document.getElementById("email").value = emailInput;
+  document.getElementById("name").value = nameInput;
+  document.getElementById("password").value = passwordInput;
+  document.getElementById("password_admit").value = password_admitInput;
 };
 
+/**
+ * Изменяет цвет ошибок для полей формы.
+ * @param {string} errorInput - Цвет ошибки.
+ * @param {string} emailInput - Стиль границы email.
+ * @param {string} passwordInput - Стиль границы пароля.
+ * @param {string} password_admitInput - Стиль границы подтверждения пароля.
+ */
 let errorColor = (errorInput, emailInput, passwordInput, password_admitInput) => {
-  document.getElementById('error').style.color = errorInput;
-  document.getElementById('email').style.border = emailInput;
-  document.getElementById('password').style.border = passwordInput;
-  document.getElementById('password_admit').style.border = password_admitInput;
+  document.getElementById("error").style.color = errorInput;
+  document.getElementById("email").style.border = emailInput;
+  document.getElementById("password").style.border = passwordInput;
+  document.getElementById("password_admit").style.border = password_admitInput;
 };
 
+/**
+ * Проверяет соответствие паролей и их длину.
+ * @returns {boolean} Возвращает true, если пароли соответствуют требованиям, иначе false.
+ */
 let check_password = () => {
   if (document.getElementById('password').value !== document.getElementById('password_admit').value) {
     document.getElementById('error').style.color = '#CC0202';
@@ -100,6 +131,9 @@ let check_password = () => {
   return true;
 };
 
+/**
+ * Логика отправки запроса при нажатии кнопки регистрации.
+ */
 let btn_registration = () => {
   //    infoIcon(password);
   if (check_password()) {
@@ -109,10 +143,19 @@ let btn_registration = () => {
   }
 };
 
+/**
+ * Логика отправки запроса при нажатии кнопки авторизации.
+ */
 let btn_authorization = () => {
   login_user(document.getElementById('email').value, document.getElementById('password').value);
 };
 
+/**
+ * Отправляет данные пользователя для регистрации.
+ * @param {string} mail - Email пользователя.
+ * @param {string} name - Имя пользователя.
+ * @param {string} password - Пароль пользователя.
+ */
 async function register_user(mail, name, password) {
   const user_data = {
     email: mail,
@@ -156,11 +199,16 @@ async function register_user(mail, name, password) {
   }
 }
 
-async function login_user(mail, passwordInput) {
-  const login_data = {
-    email: mail,
-    password: passwordInput
-  };
+/**
+ * Отправляет данные пользователя для авторизации.
+ * @param {string} mail - Email пользователя.
+ * @param {string} passwordInput - Пароль пользователя.
+ */
+async function login_user (mail, passwordInput) {
+const login_data = {
+  email: mail,
+  password: passwordInput
+};
 
   try {
     const response = await fetch(login_url, {
@@ -197,12 +245,20 @@ async function login_user(mail, passwordInput) {
   }
 };
 
+/**
+ * Шаблоны Handlebars для рендеринга интерфейса
+ */
 const template_card = Handlebars.templates['card.hbs'];
 const template_menu = Handlebars.templates['menu.hbs'];
 const template_login = Handlebars.templates['login-account.hbs'];
 const template_logout = Handlebars.templates['logout.hbs'];
 const template_window_login = Handlebars.templates['window-login.hbs'];
 
+/**
+ * Перерисовывает интерфейс на основе данных и статуса пользователя
+ * @param {Array} data - Список курсов
+ * @param {string | boolean} username - Имя пользователя или false, если не авторизован
+ */
 const rerender = (data, username) => {
   const context = { course: data, count_courses: data.length };
   const htmlString = template_card(context);
@@ -333,6 +389,9 @@ const rerender = (data, username) => {
   }
 };
 
+/**
+ * Инициализация приложения: загрузка данных и рендеринг
+ */
 async function initialize() {
   const [username, data] = await Promise.all([check_auth(), fetch_data()]);
   rerender(data, username);
