@@ -128,7 +128,7 @@ a {
 .changes {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 12px;
     justify-content: center;
     align-items: center;
     background-color: #0B192C;
@@ -141,6 +141,10 @@ a {
     display: flex;
     flex-direction: row;
     gap: 24px;
+    width: 820 px;
+    height: 102px;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 .title {
@@ -152,10 +156,18 @@ a {
 .change--type--selector {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
     color: #D0CBCB;
+    border-radius: 16px;
+    background-color: #1E3E62;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 32px;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
 }
 
 .profile {
@@ -295,9 +307,10 @@ a {
     height: 100vh;
 }
 
-.window {
-    width: 493px;
-    height: 350px;
+.editing__icon {
+    height: 24px;
+    width: 24px;
+    align-items: center;
 }
 
 .logo {
