@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillForce</title>
+    <link rel="stylesheet" href="../static/css/settings.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oxygen+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-and-create-curs">
+            <div class="logo">
+                <img src="../static/icons/logo.svg" alt="" class="logo__img">
+                <div class="logo__text">SkillForce</div>
+            </div>
+            <div class="logo-and-create-curs__create-curs">Создать курс</div>
+        </div>
+        <form class="search-form">
+            <img class="search-form__icon" src="../static/icons/iconSearch.svg">
+            <input id="search" type="text" placeholder="Поиск" class="search-form__input">
+        </form>
+        <div class="button-menu" id="menu">
+            <div class="button_type_menu" id="button-login">
+                Войти
+                <img src="../static/icons/login.svg" alt="Войти" class="button__img">
+            </div>
+        </div>
+    </header>
+    <div class="line"></div>
+    <header class="changes">
+        <div class="title">Тигр Гордый</div>
+        <div class="change-select">
+            <a class="change--type--selector" href="#" style="color: #55D16B;">
+                Редактирование профиля
+            </a>
+            <a class="change--type--selector" href="#">
+                Изменить почту
+            </a>
+            <a class="change--type--selector" href="#">
+                Изменить пароль
+            </a>
+        </div>
+    </header>
+
+    <div id="blur" class="zone"></div>
+    <div class="profile">
+        <div class="strings">
+            Ваше имя
+            <input type="text" class="text__input" style="height: 39px;">
+        </div>
+        <div class="strings">
+            О себе
+            <textarea class="text__input" style="height: 70px;"></textarea>
+        </div>
+        <div class="strings">
+            Приватность
+            <div>
+                <input type="checkbox" class="checkbox__input activate">
+                Сделать профиль приватным
+            </div>
+        </div>
+        <div class="strings">
+            <div></div>
+            <button class="button__input">Сохранить</button>
+        </div>
+        <div class="strings__avatar">
+            Аватарка
+            <div class="picture__load__delete">
+                <img src="../static/icons/avatar.png" alt="" class="avatar__image">
+                <div class="load__delete">
+                    <label class="text__decoration"><input type="file" accept=".jpg, .jpeg, .png" class="image__input">Загрузить</label>
+                    <a href="#" class="text__decoration">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+    <script src="../templates.js"></script>
+    <script src="../static/js/index.js"></script>
+</body>
+</html>
