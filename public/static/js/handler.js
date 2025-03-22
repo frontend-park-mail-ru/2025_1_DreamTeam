@@ -1,12 +1,12 @@
-export function set_event_click(button, callback) {
-    button.addEventListener("click", callback);
+export function setEventClick(button, callback) {
+    button.addEventListener('click', callback);
 }
 
-export function blocking_click(element) {
-    set_event_click(element, stop_propagation);
+export function blockingClick(element) {
+    setEventClick(element, stopPropagation);
 }
 
 // Вызывается в blocking_click
-export function stop_propagation(event) {
+export function stopPropagation(event) {
     event.stopPropagation();
 }

@@ -1,50 +1,50 @@
-import { close_window, view_error, view_error_clear, text_error_input } from "./view-window.js";
-import { rerender_header } from "./header.js";
-import { ip, port, fetch_logout } from "./api.js";
-import { set_event_click } from "./handler.js";
-import { switch_active, hidden_input, show_input } from "./view-window.js";
-import { check_input } from "./validate.js";
+import { closeWindow, viewError, viewErrorClear, textErrorInput } from './view-window.js';
+import { rerenderHeader } from './header.js';
+import { IP, PORT, fetchLogout } from './api.js';
+import { setEventClick } from './handler.js';
+import { switchActive, hiddenInput, showInput } from './view-window.js';
+import { checkInput } from './validate.js';
 
 async function authorized() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-    const result = await login_user(email, password);
+    const result = await loginUser(email, password);
 
     if (result === true) {
-        rerender_header();
-        close_window();
+        rerenderHeader();
+        closeWindow();
     } else {
-        view_error("error_color_red", "error__input", "error__input", "error__input", "error__input");
-        text_error_input(result, email, name, password, password_admit);
+        viewError('error_color_red', 'error__input', 'error__input', 'error__input', 'error__input');
+        textErrorInput(result, email, name, password, password_admit);
     }
 }
 
 async function registration() {
-    const email = document.getElementById("email").value;
-    const name = document.getElementById("name").value;
-    const password = document.getElementById("password").value;
-    const password_admit = document.getElementById("password_admit").value;
+    const email = document.getElementById('email').value;
+    const name = document.getElementById('name').value;
+    const password = document.getElementById('password').value;
+    const password_admit = document.getElementById('password_admit').value;
 
-    const result = check_input(email, name, password, password_admit);
+    const result = checkInput(email, name, password, password_admit);
 
     if (result === true) {
-        if (await register_user(email, name, password)) {
-            rerender_header();
-            close_window();
+        if (await registerUser(email, name, password)) {
+            rerenderHeader();
+            closeWindow();
         } else {
-            view_error("error_color_red", "error__input", "error__input", "error__input", "error__input");
-            text_error_input(result, email, name, password, password_admit);
+            viewError('error_color_red', 'error__input', 'error__input', 'error__input', 'error__input');
+            textErrorInput(result, email, name, password, password_admit);
         }
     }
 }
 
-export async function login_user(email, password) {
+export async function loginUser(email, password) {
     try {
-        const response = await fetch(`${ip}:${port}/api/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        const response = await fetch(`${IP}:${PORT}/api/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ email, password }),
         });
 
@@ -55,17 +55,17 @@ export async function login_user(email, password) {
             return data.error;
         }
     } catch (err) {
-        console.error("Ошибка сети:", err);
-        return "Ошибка сети:";
+        console.error('Ошибка сети:', err);
+        return 'Ошибка сети:';
     }
 }
 
-export async function register_user(email, name, password) {
+export async function registerUser(email, name, password) {
     try {
-        const response = await fetch(`${ip}:${port}/api/register`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
+        const response = await fetch(`${IP}:${PORT}/api/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify({ email, name, password }),
     });
 
@@ -76,66 +76,66 @@ export async function register_user(email, name, password) {
             return data.error;
         }
     } catch (err) {
-        console.error("Ошибка сети:", err);
-        return "Ошибка сети:";
+        console.error('Ошибка сети:', err);
+        return 'Ошибка сети:';
     }
 }
 
 export function confirm() {
-  const confirm = document.getElementById("log-in");
-  const cancel = document.getElementById("sign-up");
+  const confirm = document.getElementById('log-in');
+  const cancel = document.getElementById('sign-up');
 
-  set_event_click(confirm, logout);
-  set_event_click(cancel, close_window);
+  setEventClick(confirm, logout);
+  setEventClick(cancel, closeWindow);
 }
 
 async function logout() {
-  await fetch_logout();
-  rerender_header();
-  close_window();
+  await fetchLogout();
+  rerenderHeader();
+  closeWindow();
 }
 
-export function handler_button_window() {
-  const login = document.getElementById("log-in");
-  const signup = document.getElementById("sign-up");
+export function handlerButtonWindow() {
+  const login = document.getElementById('log-in');
+  const signup = document.getElementById('sign-up');
 
-  set_event_click(login, handler_button_window_login);
-  set_event_click(signup, handler_button_window_signup);
-  if (login.classList.contains("active")) {
+  setEventClick(login, handlerButtonWindowLogin);
+  setEventClick(signup, handlerButtonWindowSignup);
+  if (login.classList.contains('active')) {
       authorized();
   }
   else {
-      login.classList.add("active");
-      signup.classList.remove("active");
+      login.classList.add('active');
+      signup.classList.remove('active');
   }
 }
 
-export function handler_button_window_login() {
-  const login = document.getElementById("log-in");
-  const signup = document.getElementById("sign-up");
-  const email = document.getElementById("email").value;
+export function handlerButtonWindowLogin() {
+  const login = document.getElementById('log-in');
+  const signup = document.getElementById('sign-up');
+  const email = document.getElementById('email').value;
 
-  if (login.classList.contains("active")) {
+  if (login.classList.contains('active')) {
       authorized();
   } else {
-      switch_active(login, signup, "active");
-      hidden_input();
-      view_error_clear("error_color_red", "error__input", "error__input", "error__input", "error__input");
-      text_error_input("", email, "", "", "");
+      switchActive(login, signup, 'active');
+      hiddenInput();
+      viewErrorClear('error_color_red', 'error__input', 'error__input', 'error__input', 'error__input');
+      textErrorInput('', email, '', '', '');
   }
 }
 
-export function handler_button_window_signup() {
-  const login = document.getElementById("log-in");
-  const signup = document.getElementById("sign-up");
-  const email = document.getElementById("email").value;
+export function handlerButtonWindowSignup() {
+  const login = document.getElementById('log-in');
+  const signup = document.getElementById('sign-up');
+  const email = document.getElementById('email').value;
 
-  if (signup.classList.contains("active")) {
+  if (signup.classList.contains('active')) {
       registration();
   } else {
-      switch_active(signup, login, "active");
-      show_input();
-      view_error_clear("error_color_red", "error__input", "error__input", "error__input", "error__input");
-      text_error_input("", email, "", "", "");
+      switchActive(signup, login, 'active');
+      showInput();
+      viewErrorClear('error_color_red', 'error__input', 'error__input', 'error__input', 'error__input');
+      textErrorInput('', email, '', '', '');
   }
 }

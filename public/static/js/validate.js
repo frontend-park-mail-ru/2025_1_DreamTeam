@@ -1,47 +1,47 @@
-import { view_error, view_error_clear, text_error_input } from "./view-window.js";
+import { viewError, viewErrorClear, textErrorInput } from './view-window.js';
 
-function validate_email(email) {
-    const email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+function validateEmail(email) {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    return email_pattern.test(email);
+    return emailPattern.test(email);
 }
 
-function validate_name(name) {
-    const name_pattern = /[^a-zA-Z0-9_-]/;
+function validateName(name) {
+    const namePattern = /[^a-zA-Z0-9_-]/;
 
-    return name_pattern.test(name);
+    return namePattern.test(name);
 }
 
-export function check_input(email, name, password, password_admit) {
-    view_error_clear("error_color_red", "error__input", "error__input", "error__input", "error__input");
-    text_error_input("", email, name, password, password_admit)
-    if (!validate_email(email)) {
-        view_error("error_color_red", "error__input", null, null, null);
-        text_error_input("Некорректный e-mail", email, name, password, password_admit);
+export function checkInput(email, name, password, password_admit) {
+    viewErrorClear('error_color_red', 'error__input', 'error__input', 'error__input', 'error__input');
+    textErrorInput('', email, name, password, password_admit)
+    if (!validateEmail(email)) {
+        viewError('error_color_red', 'error__input', null, null, null);
+        textErrorInput('Некорректный e-mail', email, name, password, password_admit);
         return false
     }
 
     if (name.length < 2 || name.length > 16) {
-        view_error("error_color_red", null, "error__input", null, null);
-        text_error_input("Псевдоним должен содержать от 2 до 16 символов", email, name, password, password_admit);
+        viewError('error_color_red', null, 'error__input', null, null);
+        textErrorInput('Псевдоним должен содержать от 2 до 16 символов', email, name, password, password_admit);
         return false
     }
 
-    if (validate_name(name)) {
-        view_error("error_color_red", null, "error__input", null, null);
-        text_error_input("Псевдоним содержит недопустимые символы", email, name, password, password_admit);
+    if (validateName(name)) {
+        viewError('error_color_red', null, 'error__input', null, null);
+        textErrorInput('Псевдоним содержит недопустимые символы', email, name, password, password_admit);
         return false
     }
 
     if (password.length < 8 || password.length > 32) {
-        view_error("error_color_red", null, null, "error__input", "error__input");
-        text_error_input("Пароль должен содержать от 8 до 32 символов", email, name, password, password_admit);
+        viewError('error_color_red', null, null, 'error__input', 'error__input');
+        textErrorInput('Пароль должен содержать от 8 до 32 символов', email, name, password, password_admit);
         return false;
     }
 
     if (password !== password_admit) {
-        view_error("error_color_red", null, null, "error__input", "error__input");
-        text_error_input("Пароли не совпадают", email, name, password, password_admit);
+        viewError('error_color_red', null, null, 'error__input', 'error__input');
+        textErrorInput('Пароли не совпадают', email, name, password, password_admit);
         return false;
     }
 
