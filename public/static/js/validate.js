@@ -1,5 +1,48 @@
 import { viewError, viewErrorClear, textErrorInput } from './view-window.js';
 
+export class Validate {
+    constructor() {
+        this.rules = [];
+    }
+
+    max(length) {
+        this.rules.push({
+            check: (value) => value.length <= length,
+            message: (fieldName) => `${fieldName} должен содержать не более ${length} символов`,
+        });
+        return this;
+    }
+
+    min(length) {
+        this.rules.push({
+            check: (value) => value.length >= length,
+            message: (fieldName) => `${fieldName} должен содержать не менее ${length} символов`,
+        });
+        return this;
+    }
+
+    regex(pattern) {
+        const regular = new RegExp(pattern);
+        this.rules.push({
+            check: (value) => regular.test(value),
+            message: (fieldName) => `${fieldName} содержит недопустимые символы`,
+        });
+        return this;
+    }
+
+    execute(value, fieldName = 'Значение') {
+        let result = this.rules.map(rule => ({
+                isValid: rule.check(value),
+                error: rule.message(fieldName),
+            }));
+
+        return {
+            isValid: result.map(r => r.isValid),
+            errorMessage: result.map(r => r.error),
+        };
+    }
+}
+
 function validateEmail(email) {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
