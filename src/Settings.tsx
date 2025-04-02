@@ -71,6 +71,7 @@ export function SettingContent() {
   );
 }
 
+// TODO:Перенесу в API
 const ip = 'http://217.16.21.64';
 const port = '8080';
 const username = `${ip}:${port}/api/isAuthorized`;
