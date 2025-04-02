@@ -26,7 +26,7 @@ export function SettingHeader() {
 }
 
 
-export function Setting() {
+export function SettingContent() {
 //   const [data, setData] = useState("");
     const information = {
         name: 'tiger',
@@ -76,103 +76,96 @@ const port = '8080';
 const username = `${ip}:${port}/api/isAuthorized`;
 const update_url = `${ip}:${port}/api/updateProfile`;
 const photo_url = `${ip}:${port}/api/updateProfilePhoto`;
-const name = document.getElementById('name_input');
-const bio = document.getElementById('textarea_input');
-const private = document.getElementById('private_input');
-const button = document.getElementById('button_input');
-const avatar = document.getElementById('new_avatar_input');
-const set_avatar = document.getElementById('avatar_input');
+
+// const updateProfile = async (bio, email, hide_email, name) => {
+//     const data = {
+//         bio: bio,
+//         email: email,
+//         hide_email: hide_email,
+//         name: name
+//     };
+
+//     try {
+//         const response = await fetch(update_url, {
+//             credentials: "include",
+//             method: 'POST', // Метод запроса
+//             headers: {
+//                 'Content-Type': 'application/json', // Указываем тип содержимого
+//             },
+//             body: JSON.stringify(data), // Преобразуем объект в JSON строку
+//         });
 
 
-const updateProfile = async (bio, email, hide_email, name) => {
-    const data = {
-        bio: bio,
-        email: email,
-        hide_email: hide_email,
-        name: name
-    };
+//         const result = await response.json(); // Парсим ответ как JSON
+//         if (response.ok) {
+//             return true;
+//         }
+//         alert('Данные некорректные');
+//         return false;
+//     } catch (error) {
+//         console.error('Error updating profile:', error); // Обработка ошибок
+//     }
+// }
 
-    try {
-        const response = await fetch(update_url, {
-            credentials: "include",
-            method: 'POST', // Метод запроса
-            headers: {
-                'Content-Type': 'application/json', // Указываем тип содержимого
-            },
-            body: JSON.stringify(data), // Преобразуем объект в JSON строку
-        });
+// const uploadProfilePhoto = async (file) => {
+//     const formData = new FormData();
+//     console.log(file);
 
+//     formData.append('avatar', file);
 
-        const result = await response.json(); // Парсим ответ как JSON
-        if (response.ok) {
-            return true;
-        }
-        alert('Данные некорректные');
-        return false;
-    } catch (error) {
-        console.error('Error updating profile:', error); // Обработка ошибок
-    }
-}
+//     const jsonData = JSON.stringify({ avatar: file.name});
+//     formData.append('data', jsonData);
 
-const uploadProfilePhoto = async (file) => {
-    const formData = new FormData();
-    console.log(file);
+//     try {
+//     const response = await fetch(photo_url, {
+//         method: 'POST',
+//         body: formData,
+//         credentials: "include"
+//     });
+//     const responseData = await response.json();
+//     if (responseData){
+//         getAuthorizedUser().then(result => {
+//             set_avatar.src = result['user']['avatar_src'];
+//         })
+//     }
+//     } catch (error) {
+//     console.error('Ошибка при загрузке фото', error);
+//     }
+// }
 
-    formData.append('avatar', file);
+// // Событие для загрузки фотки
+// avatar.addEventListener('change', (event) => {
+//     event.preventDefault();
+//     const file = event.target.files[0];
+//     if (file) {
+//         uploadProfilePhoto(file);
+//     }
+// });
 
-    const jsonData = JSON.stringify({ avatar: file.name});
-    formData.append('data', jsonData);
+// //Дима и Ваня скоро напишут на delete photo ручку
+// const delete_photo = () => {
+//     uploadProfilePhoto("");
+// }
 
-    try {
-    const response = await fetch(photo_url, {
-        method: 'POST',
-        body: formData,
-        credentials: "include"
-    });
-    const responseData = await response.json();
-    if (responseData){
-        getAuthorizedUser().then(result => {
-            set_avatar.src = result['user']['avatar_src'];
-        })
-    }
-    } catch (error) {
-    console.error('Ошибка при загрузке фото', error);
-    }
-}
+// // обновляет данные по нажатию кнопки class button__input
+// const save_data = () => {
+//     getAuthorizedUser().then(result => {
+//         console.log(private.checked);
+//         updateProfile(bio.value, result['user']['email'], private.checked, name.value);
+//     })
+// }
 
-// Событие для загрузки фотки
-avatar.addEventListener('change', (event) => {
-    event.preventDefault();
-    const file = event.target.files[0];
-    if (file) {
-        uploadProfilePhoto(file);
-    }
-});
+// // Вставляет текст в поля + приват чек
 
-//Дима и Ваня скоро напишут на delete photo ручку
-const delete_photo = () => {
-    uploadProfilePhoto("");
-}
-
-// обновляет данные по нажатию кнопки class button__input
-const save_data = () => {
-    getAuthorizedUser().then(result => {
-        console.log(private.checked);
-        updateProfile(bio.value, result['user']['email'], private.checked, name.value);
-    })
-}
-
-// Вставляет текст в поля + приват чек
-
-const info_profile = () => {
-    getAuthorizedUser().then(result => {
-        name.value = result['user']['name'];
-        bio.value = result['user']['bio'];
-        if (result['user']['hide_email']) {
-            private.checked = true;
-        } else {
-            private.checked = false;
-        }
-        set_avatar.src = result['user']['avatar_src'];
-    })
-}
+// const info_profile = () => {
+//     getAuthorizedUser().then(result => {
+//         name.value = result['user']['name'];
+//         bio.value = result['user']['bio'];
+//         if (result['user']['hide_email']) {
+//             private.checked = true;
+//         } else {
+//             private.checked = false;
+//         }
+//         set_avatar.src = result['user']['avatar_src'];
+//     })
+// }
