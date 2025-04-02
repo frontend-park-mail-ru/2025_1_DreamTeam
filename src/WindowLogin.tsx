@@ -64,38 +64,40 @@ export default function WindowLogin() {
     },
   ];
   return (
-    <div class="window">
-      <div class="form">
-        <div class="logo">SkillForce</div>
-        <div class="error" id="error"></div>
-        {inputField.map((field) => (
-          <InputField
-            key={field.key}
-						keys={field.key}
-            type={field.type}
-            placeholder={field.placeholder}
-            hidden={field.hidden}
-            onChanged={field.onChanged}
-          />
-        ))}
-      </div>
-      <div class="buttons">
-        <button
-          class={`buttons__button ${state === "signup" ? "active" : ""}`}
-          ON_click={() => {
-            state === "login" ? setState("signup") : signup();
-          }}
-        >
-          Регистрация
-        </button>
-        <button
-          class={`buttons__button ${state === "login" ? "active" : ""}`}
-          ON_click={() => {
-            state === "signup" ? setState("login") : login();
-          }}
-        >
-          Вход
-        </button>
+    <div class="blur" ON_mousedown={closeWindow}>
+      <div class="window" ON_mousedown={(event: PointerEvent) => event.stopPropagation()}>
+        <div class="form">
+          <div class="logo">SkillForce</div>
+          <div class="error" id="error"></div>
+          {inputField.map((field) => (
+            <InputField
+              key={field.key}
+              keys={field.key}
+              type={field.type}
+              placeholder={field.placeholder}
+              hidden={field.hidden}
+              onChanged={field.onChanged}
+            />
+          ))}
+        </div>
+        <div class="buttons">
+          <button
+            class={`buttons__button ${state === "signup" ? "active" : ""}`}
+            ON_click={() => {
+              state === "login" ? setState("signup") : signup();
+            }}
+          >
+            Регистрация
+          </button>
+          <button
+            class={`buttons__button ${state === "login" ? "active" : ""}`}
+            ON_click={() => {
+              state === "signup" ? setState("login") : login();
+            }}
+          >
+            Вход
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -104,7 +106,7 @@ export default function WindowLogin() {
 // TODO: Чтобы рендер не сбивал фокус
 function InputField({
   type,
-	keys,
+  keys,
   placeholder,
   hidden,
   onChanged = () => {
@@ -112,7 +114,7 @@ function InputField({
   },
 }: {
   type: string;
-	keys: string,
+  keys: string;
   placeholder: string;
   hidden: boolean;
   onChanged?: (newValue: string) => {
@@ -140,7 +142,7 @@ function InputField({
         const resultValidate = onChanged(e.target.value);
         if (resultValidate.isValid.includes(false)) {
           console.log("error", e.target.value, errorState);
-					console.log("focus", document.activeElement as HTMLElement | null)
+          console.log("focus", document.activeElement as HTMLElement | null);
           setErrorState({
             isValid: resultValidate.isValid,
             errorMessage: resultValidate.errorMessage,
@@ -150,6 +152,11 @@ function InputField({
       }}
     />
   );
+}
+
+function closeWindow() {
+  const blur = document.getElementById("blur") as Element;
+  blur.innerHTML = "";
 }
 
 function signup() {}

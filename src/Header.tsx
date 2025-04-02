@@ -8,15 +8,38 @@ import profile from "./icons/profile.svg";
 import setting from "./icons/setting.svg";
 import logout from "./icons/logout.svg";
 import { useState } from "./ourReact/jsx-runtime";
+import WindowLogin from "./WindowLogin";
+import { createApp } from "./ourReact/jsx-runtime";
+import { checkAuth } from "./api";
 
-export default function Header() {
+export default function Header({
+  page,
+  setPage,
+}: {
+  page: string;
+  setPage: Function;
+}) {
   const [isLogin, setIsLogin] = useState({ username: "", menuStatus: false });
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    checkAuth().then((data) => {
+      setIsLogin(data);
+    });
+    setIsLoading(false);
+  }
+
   return (
     <div class="header">
-      <Logo key="logo" />
+      <Logo key="logo" page={page} setPage={setPage} />
       <Search key="search" />
 
-      <GetMenuComponent key="menu" isLogin={isLogin} setIsLogin={setIsLogin} />
+      <GetMenuComponent
+        key="menu"
+        isLogin={isLogin}
+        setIsLogin={setIsLogin}
+        page={page}
+        setPage={setPage}
+      />
     </div>
   );
 }
@@ -24,17 +47,18 @@ export default function Header() {
 function GetMenuComponent({
   isLogin,
   setIsLogin,
+  page,
+  setPage,
 }: {
   isLogin: { username: string; menuStatus: boolean };
   setIsLogin: (value: { username: string; menuStatus: boolean }) => void;
+  page: string;
+  setPage: Function;
 }) {
   if (isLogin.username === "") {
     return (
       <div>
-        <MenuLogout
-          key="buttonLogin"
-          onClick={() => setIsLogin({ username: "name123", menuStatus: false })}
-        />
+        <MenuLogout key="buttonLogin" onClick={() => openWindow()} />
       </div>
     );
   }
@@ -53,15 +77,27 @@ function GetMenuComponent({
   }
   return (
     <div>
-      <MenuOpen key="menuOpen" setIsLogin={setIsLogin} isLogin={isLogin} />
+      <MenuOpen
+        key="menuOpen"
+        setIsLogin={setIsLogin}
+        isLogin={isLogin}
+        page={page}
+        setPage={setPage}
+      />
     </div>
   );
 }
 
-function Logo() {
+function Logo({ page, setPage }: { page: string; setPage: Function }) {
   return (
     <div class="logo-and-create-curs">
-      <div class="logo">
+      <div
+        class="logo"
+        ON_click={() => {
+          setPage("MainMenu");
+          console.log("logo click", page);
+        }}
+      >
         <img src={logo} alt="" class="logo__img"></img>
         <div class="logo__text">SkillForce</div>
       </div>
@@ -116,12 +152,17 @@ function MenuLogin({
 }
 
 function MenuOpen({
-  setIsLogin,
   isLogin,
+  setIsLogin,
+  page,
+  setPage,
 }: {
-  setIsLogin: (value: { username: string; menuStatus: boolean }) => void;
   isLogin: { username: string; menuStatus: boolean };
+  setIsLogin: (value: { username: string; menuStatus: boolean }) => void;
+  page: string;
+  setPage: Function;
 }) {
+  console.log("page MenuOpen", page);
   const arrayButtons = [
     {
       name: "Свернуть",
@@ -135,12 +176,14 @@ function MenuOpen({
       image: profile,
       onClick: () => {
         setIsLogin({ username: isLogin.username, menuStatus: false });
+        setPage("Setting");
       },
     },
     {
       name: "Настройки",
       image: setting,
       onClick: () => {
+        setPage("Setting");
         setIsLogin({ username: isLogin.username, menuStatus: false });
       },
     },
@@ -181,4 +224,9 @@ function ButtonMenu({
       <img src={image} alt="Войти" class="button__img"></img>
     </div>
   );
+}
+
+function openWindow() {
+  const blur = document.getElementById("blur") as Element;
+  createApp(blur, WindowLogin);
 }

@@ -1,48 +1,61 @@
 import arrowDown from "./icons/arrow-down.svg";
 import filter from "./icons/filter.svg";
 import { Card } from "./Card";
+import { Course, getCourses } from "./api";
+import { useState } from "./ourReact/jsx-runtime";
 
-const myObject = {
-  title: "My Title",
-  price: "100",
-  purchases_amount: "100",
-  time_to_pass: "50",
-};
+// const myObject = {
+//   title: "My Title",
+//   price: "100",
+//   purchases_amount: "100",
+//   time_to_pass: "50",
+// };
+
+// export function MainMenuContent() {
+//   const cards = [myObject, myObject, myObject, myObject, myObject];
+//   return (
+//     <div class="content">
+//       <div class="cards">
+//         {cards.map((card, index) => (
+//           <Card
+//             key={index}
+//             title={card.title}
+//             price={card.price}
+//             purchases_amount={card.purchases_amount}
+//             time_to_pass={card.time_to_pass}
+//           />
+//         ))}
+//       </div>
+//     </div>
+//   );
+//}
 
 export function MainMenuContent() {
-  const cards = [myObject, myObject, myObject, myObject, myObject];
+  const [cards, setCards] = useState<Course[]>([]);
+  const [isLoading, setLoading] = useState(true);
+  if (isLoading) {
+    getCourses().then((data) => {
+      setCards(data);
+    });
+    setLoading(false);
+  }
+  console.log("render MainMenuContent");
   return (
-    <div class="cards">
-      {cards.map((card, index) => (
-        <Card
-          key={index}
-          title={card.title}
-          price={card.price}
-          purchases_amount={card.purchases_amount}
-          time_to_pass={card.time_to_pass}
-        />
-      ))}
+    <div class="content">
+      <div class="cards">
+        {cards.map((card) => (
+          <Card
+            key={`card-${card.id}`}
+            title={card.title}
+            price={`${card.price.toString()}`}
+            purchases_amount={`${card.purchases_amount.toString()}`}
+            time_to_pass={`${card.time_to_pass.toString()}`}
+          />
+        ))}
+      </div>
     </div>
   );
 }
-
-// export async function MainMenuContent() {
-//   // const cards = [myObject, myObject, myObject];
-//   const cards: Course[] = await getCourses();
-//   return (
-//     <div class="cards">
-//       {cards.map((card) => (
-//         <Card
-//           key={`card-${card.id}`}
-//           title={card.title}
-//           price={card.price.toString()}
-//           purchases_amount={card.purchases_amount.toString()}
-//           time_to_pass={card.time_to_pass.toString()}
-//         />
-//       ))}
-//     </div>
-//   );
-// }
 
 export function MainMenuHeader() {
   const arrayFilter = [
