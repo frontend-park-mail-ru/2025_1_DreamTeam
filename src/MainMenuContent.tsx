@@ -36,10 +36,16 @@ export function MainMenuContent() {
   if (isLoading) {
     getCourses().then((data) => {
       setCards(data);
+      setLoading(false);
     });
-    setLoading(false);
   }
   console.log("render MainMenuContent");
+  if (isLoading) {
+    // TODO: Потом добавлю вывод более подробный
+    return <div class="content">
+      Курсы отсутствуют, либо произошла ошибка запросов
+    </div>
+  }
   return (
     <div class="content">
       <div class="cards">

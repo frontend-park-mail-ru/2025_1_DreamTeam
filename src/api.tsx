@@ -26,11 +26,11 @@ export async function checkAuth() {
       return data.user.name;
     } else {
       console.log("❌ Пользователь НЕ авторизован");
-      return false;
+      return "";
     }
   } catch (error) {
     console.error("Ошибка проверки авторизации:", error);
-    return false;
+    return "";
   }
 }
 

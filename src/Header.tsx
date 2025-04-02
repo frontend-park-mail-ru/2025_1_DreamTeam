@@ -23,7 +23,8 @@ export default function Header({
   const [isLoading, setIsLoading] = useState(true);
   if (isLoading) {
     checkAuth().then((data) => {
-      setIsLogin(data);
+      // setIsLogin({username: "fef", menuStatus: false});
+      setIsLogin({ username: data, menuStatus: false });
     });
     setIsLoading(false);
   }
