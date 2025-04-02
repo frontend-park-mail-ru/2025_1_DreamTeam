@@ -1,8 +1,28 @@
 import { useState } from "./ourReact/jsx-runtime";
 import Validate from "./Validate";
 
+interface FieldState {
+  value: string;
+  isValid: boolean[];
+  errorMessage: string[];
+}
+
+type FormData = {
+  emailField: FieldState;
+  nameField: FieldState;
+  passwordField: FieldState;
+  admitPasswordField: FieldState;
+  [key: string]: FieldState;
+};
+
 export default function WindowLogin() {
   const [state, setState] = useState("login");
+  const [formData, setFormData] = useState<FormData>({
+    emailField: { value: "", isValid: [], errorMessage: [] },
+    nameField: { value: "", isValid: [], errorMessage: [] },
+    passwordField: { value: "", isValid: [], errorMessage: [] },
+    admitPasswordField: { value: "", isValid: [], errorMessage: [] },
+  });
 
   const inputField = [
     {
