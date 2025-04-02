@@ -85,7 +85,10 @@ export default function WindowLogin() {
   ];
   return (
     <div class="blur" ON_mousedown={closeWindow}>
-      <div class="window" ON_mousedown={(event: PointerEvent) => event.stopPropagation()}>
+      <div
+        class="window"
+        ON_mousedown={(event: PointerEvent) => event.stopPropagation()}
+      >
         <div class="form">
           <div class="logo">SkillForce</div>
           <div class="error" id="error"></div>
@@ -97,6 +100,8 @@ export default function WindowLogin() {
               placeholder={field.placeholder}
               hidden={field.hidden}
               onChanged={field.onChanged}
+              data={formData[field.key]}
+              setData={setFormData}
             />
           ))}
         </div>
@@ -126,12 +131,13 @@ export default function WindowLogin() {
 // TODO: Чтобы рендер не сбивал фокус
 function InputField({
   type,
-  keys,
   placeholder,
   hidden,
   onChanged = () => {
     return { isValid: [], errorMessage: [] };
   },
+  data,
+  setData,
 }: {
   type: string;
   keys: string;
