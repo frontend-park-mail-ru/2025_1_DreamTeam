@@ -66,3 +66,49 @@ export async function fetchLogout() {
     return [];
   }
 }
+
+export async function loginUser(email: string, password: string) {
+  try {
+    const response = await fetch(`${IP}:${PORT}/api/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      return true;
+    } else {
+      return data.error;
+    }
+  } catch (err) {
+    console.error("Ошибка сети:", err);
+    return "Ошибка сети:";
+  }
+}
+
+export async function registerUser(
+  email: string,
+  name: string,
+  password: string
+) {
+  try {
+    const response = await fetch(`${IP}:${PORT}/api/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, name, password }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      return true;
+    } else {
+      return data.error;
+    }
+  } catch (err) {
+    console.error("Ошибка сети:", err);
+    return "Ошибка сети:";
+  }
+}
