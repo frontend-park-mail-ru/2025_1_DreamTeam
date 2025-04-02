@@ -140,13 +140,14 @@ function InputField({
   setData,
 }: {
   type: string;
-  keys: string;
   placeholder: string;
   hidden: boolean;
   onChanged?: (newValue: string) => {
     isValid: boolean[];
     errorMessage: string[];
   };
+  data: FieldState;
+  setData: Function
 }) {
   const [errorState, setErrorState] = useState<{
     isValid: boolean[];
