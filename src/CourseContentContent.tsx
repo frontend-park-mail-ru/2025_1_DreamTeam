@@ -1,6 +1,6 @@
-import arrowDown from "./icons/arrow-down.svg";
-import filter from "./icons/filter.svg";
-import closeCourse from "./icons/closeCourse.svg"
+import arrowDown from "../public/static/icons/arrow-down.svg";
+import filter from "../public/static/icons/filter.svg";
+import closeCourse from "../public/static/icons/closeCourse.svg"
 
 export function CourseContent({ idCourse }: { idCourse: string }) {
   return (

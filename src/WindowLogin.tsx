@@ -1,6 +1,6 @@
 import { useState } from "./ourReact/jsx-runtime";
 import Validate from "./Validate";
-import error from "./icons/error.svg";
+import error from "../public/static/icons/error.svg";
 import { loginUser, registerUser } from "./api";
 
 interface FieldState {

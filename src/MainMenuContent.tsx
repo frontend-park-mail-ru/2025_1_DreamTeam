@@ -1,5 +1,5 @@
-import arrowDown from "./icons/arrow-down.svg";
-import filter from "./icons/filter.svg";
+import arrowDown from "../public/static/icons/arrow-down.svg";
+import filter from "../public/static/icons/filter.svg";
 import { Card } from "./Card";
 import { Course, getCourses } from "./api";
 import { useState } from "./ourReact/jsx-runtime";

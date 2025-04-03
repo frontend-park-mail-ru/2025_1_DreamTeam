@@ -1,8 +1,8 @@
-import timeIcon from "./icons/time.svg";
-import heartIcon from "./icons/heart.svg";
-import userIcon from "./icons/user.svg";
-import starIcon from "./icons/star.svg";
-import testImage from "./icons/picture-test.png";
+import timeIcon from "../public/static/icons/time.svg";
+import heartIcon from "../public/static/icons/heart.svg";
+import userIcon from "../public/static/icons/user.svg";
+import starIcon from "../public/static/icons/star.svg";
+import testImage from "../public/static/icons/picture-test.png";
 
 export function Card({
   title,
