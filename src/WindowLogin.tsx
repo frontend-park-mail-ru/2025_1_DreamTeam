@@ -203,7 +203,7 @@ function closeWindow() {
 }
 
 function signup(formData: FormData, setErrorAuth: Function) {
-  return
+  return;
 }
 
 // TODO: Вывод конкретной причины ошибки(Неправильный данные, занятая почта и тд)
@@ -223,6 +223,7 @@ async function login(formData: FormData, setErrorAuth: Function) {
 
   if (result === true) {
     setErrorAuth("Успешный вход");
+    closeWindow();
   } else {
     setErrorAuth("Неправильные данные");
   }
