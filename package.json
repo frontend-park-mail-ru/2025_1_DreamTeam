@@ -1,13 +1,25 @@
 {
-  "name": "vdom-tutorial",
+  "name": "2025_1_dreamteam",
   "private": true,
   "version": "0.0.0",
+  "description": "Команда DreamTeam - Проект Stepic Участники:     Санталов Дмитрий     Скороходов Иван     Сафарова Николь     Джамзаров Дамир Менторы:     Щербаков Сергей     Алёхин Владислав     Даша Ченцова     Максим Сиканов",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/2025_1_DreamTeam.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/2025_1_DreamTeam/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/2025_1_DreamTeam#readme",
   "devDependencies": {
     "typescript": "~5.7.2",
     "vite": "^6.2.0"
