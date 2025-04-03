@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillForce</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oxygen+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-and-create-curs">
+            <div class="logo">
+                <img src="../static/icons/logo.svg" alt="" class="logo__img">
+                <div class="logo__text">SkillForce</div>
+            </div>
+            <div class="logo-and-create-curs__create-curs">Создать курс</div>
+        </div>
+        <form class="search-form">
+            <img class="search-form__icon" src="../static/icons/iconSearch.svg">
+            <input id="search" type="text" placeholder="Поиск" class="search-form__input">
+        </form>
+        <div class="button-menu" id="menu">
+            <div class="button_type_menu" id="button-login">
+                Войти
+                <img src="../static/icons/login.svg" alt="Войти" class="button__img">
+            </div>
+        </div>
+    </header>
+    <header class="info">
+        <div class="headlines">Информационная безопасность</div>
+        <div class="headlines under">
+            1. Введение 1.1. Первый урок
+        </div>
+        <div class="lesson--pages">
+            <img src="../static/icons/passed_circle.svg" alt="" class="pages__icon">
+            <img src="../static/icons/line_green.svg" alt="" class="pages__icon connect">
+            <img src="../static/icons/passed_circle.svg" alt="" class="pages__icon">
+            <img src="../static/icons/line_green.svg" alt="" class="pages__icon connect">
+            <div class="text--on--circle">
+                <img src="../static/icons/green_circle.svg" alt="" class="pages__icon">
+                <div class="numbers--of--pages">3</div>
+            </div>
+            <img src="../static/icons/line.svg" alt="" class="pages__icon connect">
+            <div class="text--on--circle">
+                <img src="../static/icons/empty_circle.svg" alt="" class="pages__icon">
+                <div class="numbers--of--pages none">4</div>
+            </div>
+        </div>
+    </header>
+    <div class="lesson--content">
+        <div class="lesson--text">
+            <h2>На курсе </h2>
+        <p><strong>Разведка в сети</strong> – это процесс сбора информации об объекте или цели в интернете. Это может быть любая информация, которая может помочь в осуществлении дальнейших действий по отношению к объекту. Например, определение уязвимостей или сбор данных для атаки.</p>
+        <p><strong>Сетевой сканер</strong> – это программа, предназначенная для сканирования компьютерных сетей и обнаружения устройств, портов и служб, работающих на этих устройствах. Они используются для проверки безопасности сетей, выявления уязвимостей и проверки соответствия настроек безопасности определенным стандартам.</p>
+        <p><strong>Доменное имя</strong> – это уникальное текстовое имя, которое используется для идентификации адреса ресурса в Интернете.</p>
+        <p><strong>SSL (Secure Sockets Layer) сертификат</strong> – это цифровой сертификат, который подтверждает подлинность веб-сайта и обеспечивает защищенное соединение между веб-браузером и сервером, на котором расположен веб-сайт. Сертификаты выпускаются специальными доверенными удостоверяющими центрами по всему миру, представляют из себя файлы определенного формата, которые располагаются на серверах, для предоставления их пользователям и проверки легитимности сервисов.</p>
+        </div>
+        <div class="lesson--pages bottom">
+            <button class="page--choose">
+                <label>Предыдущая</label>
+            </button>
+            <button class="page--check">
+                Отметить непройденным
+            </button>
+            <button class="page--choose">
+                Следующая
+            </button>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+    <script src="../templates.js"></script>
+    <script src="../static/js/settings.js"></script>
+</body>
+</html>
