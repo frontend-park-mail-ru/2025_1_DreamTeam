@@ -12,80 +12,51 @@ export interface Course {
   src_image: string;
 }
 
-export async function checkAuth() {
+async function apiFetch(url: string, options = {}) {
   try {
-    const response = await fetch(`${IP}:${PORT}/api/isAuthorized`, {
-      method: "GET",
+    const response = await fetch(`${IP}:${PORT}/api${url}`, {
       credentials: "include",
+      ...options,
     });
 
     const data = await response.json();
-
-    if (response.ok && !data.error) {
-      console.log("✅ Пользователь авторизован");
-      return data.user.name;
-    } else {
-      console.log("❌ Пользователь НЕ авторизован");
-      return "";
+    if (!response.ok) {
+      throw new Error(data.error || `Ошибка: ${response.status}`);
     }
+
+    return data;
   } catch (error) {
-    console.error("Ошибка проверки авторизации:", error);
-    return "";
+    console.error(`Ошибка запроса к ${url}:`, error);
+    return null;
   }
 }
 
-export async function getCourses(): Promise<Course[]> {
-  try {
-    const response = await fetch(`${IP}:${PORT}/api/getCourses`);
-    if (!response.ok) {
-      throw new Error(`Ошибка: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Данные:", data);
-    return data.bucket_courses || [];
-  } catch (error) {
-    console.error("Ошибка запроса:", error);
-    return [];
+export async function checkAuth() {
+  const data = await apiFetch("/isAuthorized");
+  if (data && !data.error) {
+    console.log("✅ Пользователь авторизован");
+    return data.user.name;
   }
+  console.log("❌ Пользователь НЕ авторизован");
+  return "";
+}
+
+export async function getCourses() {
+  const data = await apiFetch("/getCourses");
+  return data?.bucket_courses || [];
 }
 
 export async function fetchLogout() {
-  try {
-    const response = await fetch(`${IP}:${PORT}/api/logout`, {
-      credentials: "include",
-    });
-
-    if (!response.ok) {
-      throw new Error(`Ошибка выхода: ${response.status}`);
-    }
-
-    console.log("✅ Успешный выход");
-    return true;
-  } catch (error) {
-    console.error("Ошибка запроса:", error);
-    return false;
-  }
+  return (await apiFetch("/logout")) !== null;
 }
 
 export async function loginUser(email: string, password: string) {
-  try {
-    const response = await fetch(`${IP}:${PORT}/api/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await response.json();
-    if (response.ok) {
-      return true;
-    } else {
-      return data.error;
-    }
-  } catch (err) {
-    console.error("Ошибка сети:", err);
-    return "Ошибка сети:";
-  }
+  const data = await apiFetch("/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  return data ? true : "Ошибка авторизации";
 }
 
 export async function registerUser(
@@ -93,22 +64,10 @@ export async function registerUser(
   name: string,
   password: string
 ) {
-  try {
-    const response = await fetch(`${IP}:${PORT}/api/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ email, name, password }),
-    });
-
-    const data = await response.json();
-    if (response.ok) {
-      return true;
-    } else {
-      return data.error;
-    }
-  } catch (err) {
-    console.error("Ошибка сети:", err);
-    return "Ошибка сети:";
-  }
+  const data = await apiFetch("/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, name, password }),
+  });
+  return data ? true : "Ошибка регистрации";
 }
