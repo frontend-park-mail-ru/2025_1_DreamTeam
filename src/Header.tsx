@@ -112,7 +112,6 @@ function Search() {
     <div class="search-form">
       <img class="search-form__icon" src={search}></img>
       <input
-        id="text"
         type="text"
         placeholder="Поиск"
         class="search-form__input"

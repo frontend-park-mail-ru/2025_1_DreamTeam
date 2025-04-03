@@ -11,7 +11,7 @@ type FormData = {
   emailField: FieldState;
   nameField: FieldState;
   passwordField: FieldState;
-  admitPasswordField: FieldState;
+  passwordAdmitField: FieldState;
   [key: string]: FieldState;
 };
 
@@ -21,7 +21,7 @@ export default function WindowLogin() {
     emailField: { value: "", isValid: [], errorMessage: [] },
     nameField: { value: "", isValid: [], errorMessage: [] },
     passwordField: { value: "", isValid: [], errorMessage: [] },
-    admitPasswordField: { value: "", isValid: [], errorMessage: [] },
+    passwordAdmitField: { value: "", isValid: [], errorMessage: [] },
   });
 
   const inputField = [
@@ -83,6 +83,15 @@ export default function WindowLogin() {
       },
     },
   ];
+
+  // Обновляем одну строчку состояния
+  function setFormDataState(key: string, newFieldData: FieldState) {
+    setFormData({
+      ...formData,
+      [key]: newFieldData,
+    });
+  }
+
   return (
     <div class="blur" ON_mousedown={closeWindow}>
       <div
@@ -101,15 +110,15 @@ export default function WindowLogin() {
               hidden={field.hidden}
               onChanged={field.onChanged}
               data={formData[field.key]}
-              setData={setFormData}
+              setData={setFormDataState}
             />
           ))}
         </div>
         <div class="buttons">
           <button
-            class={`buttons__button ${state === "signup" ? "active" : ""}`}
+            class={`buttons__button ${state === "signup" ? "active"  : ""}`}
             ON_click={() => {
-              state === "login" ? setState("signup") : signup();
+              state === "login" ? setState("signup") : signup(formData);
             }}
           >
             Регистрация
@@ -117,7 +126,7 @@ export default function WindowLogin() {
           <button
             class={`buttons__button ${state === "login" ? "active" : ""}`}
             ON_click={() => {
-              state === "signup" ? setState("login") : login();
+              state === "signup" ? setState("login") : login(formData);
             }}
           >
             Вход
@@ -128,9 +137,11 @@ export default function WindowLogin() {
   );
 }
 
-// TODO: Чтобы рендер не сбивал фокус
+// TODO: Чтобы рендер не сбивал фокус и при наведении на иконку ошибки сделать tooltrip
+// Решить проблемы с перерисовкой всех элементов, даже если меняется один
 function InputField({
   type,
+  keys,
   placeholder,
   hidden,
   onChanged = () => {
@@ -140,6 +151,7 @@ function InputField({
   setData,
 }: {
   type: string;
+  keys: string;
   placeholder: string;
   hidden: boolean;
   onChanged?: (newValue: string) => {
@@ -147,37 +159,34 @@ function InputField({
     errorMessage: string[];
   };
   data: FieldState;
-  setData: Function
+  setData: (key: string, newFieldData: FieldState) => void;
 }) {
-  const [errorState, setErrorState] = useState<{
-    isValid: boolean[];
-    errorMessage: string[];
-    value: string;
-  }>({
-    isValid: [],
-    errorMessage: [],
-    value: "",
-  });
   return (
+    <div
+      class={`field-input ${hidden ? "hidden" : ""} ${
+        data.isValid.includes(false) ? "error__input" : ""
+      }`}
+    >
     <input
+        class="field-input__input"
       type={type}
-      id={keys}
       placeholder={placeholder}
-      class={`form__input ${hidden ? "hidden" : ""}`}
-      value={errorState.value}
+        value={data.value}
       ON_input={(e: { target: HTMLInputElement }) => {
         const resultValidate = onChanged(e.target.value);
-        if (resultValidate.isValid.includes(false)) {
-          console.log("error", e.target.value, errorState);
-          console.log("focus", document.activeElement as HTMLElement | null);
-          setErrorState({
+          console.log("resultValidate", resultValidate);
+          setData(keys, {
+            value: e.target.value,
             isValid: resultValidate.isValid,
             errorMessage: resultValidate.errorMessage,
-            value: e.target.value,
           });
+          if (resultValidate.isValid.includes(false)) {
+            console.log("error", e.target.value);
         }
       }}
     />
+      {data.isValid.includes(false) ? <img class="icon" src={error} /> : ""}
+    </div>
   );
 }
 
