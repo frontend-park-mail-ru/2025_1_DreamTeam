@@ -72,11 +72,11 @@ export function SettingContent() {
 }
 
 // TODO:Перенесу в API
-const ip = 'http://217.16.21.64';
-const port = '8080';
-const username = `${ip}:${port}/api/isAuthorized`;
-const update_url = `${ip}:${port}/api/updateProfile`;
-const photo_url = `${ip}:${port}/api/updateProfilePhoto`;
+// const ip = 'http://217.16.21.64';
+// const port = '8080';
+// const username = `${ip}:${port}/api/isAuthorized`;
+// const update_url = `${ip}:${port}/api/updateProfile`;
+// const photo_url = `${ip}:${port}/api/updateProfilePhoto`;
 
 // const updateProfile = async (bio, email, hide_email, name) => {
 //     const data = {
