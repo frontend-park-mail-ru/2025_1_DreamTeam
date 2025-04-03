@@ -11,11 +11,6 @@ body {
   justify-content: space-between;
 }
 
-.head {
-  display: flex;
-  flex-direction: column;
-}
-
 .logo-and-create-curs {
   width: 320px;
   height: 40px;
@@ -416,7 +411,7 @@ body {
   box-sizing: border-box;
   color: #ffffff;
   font-family: "Open Sans", sans-serif;
-  font-size: 16px;;
+  font-size: 16px;
 }
 
 .field-input__input {
@@ -432,16 +427,16 @@ body {
   height: 20px;
 }
 
-.error {
+.field-error {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
 }
 
-.error_color_red {
+.field-error__error {
   color: #cc0202;
 }
 
-.error__input {
+.field-input__error {
   border: 2px solid #cc0202;
 }
 
