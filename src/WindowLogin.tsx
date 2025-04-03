@@ -1,5 +1,7 @@
 import { useState } from "./ourReact/jsx-runtime";
 import Validate from "./Validate";
+import error from "./icons/error.svg";
+import { loginUser } from "./api";
 
 interface FieldState {
   value: string;
@@ -23,6 +25,7 @@ export default function WindowLogin() {
     passwordField: { value: "", isValid: [], errorMessage: [] },
     passwordAdmitField: { value: "", isValid: [], errorMessage: [] },
   });
+  const [errorAuth, setErrorAuth] = useState("");
 
   const inputField = [
     {
@@ -116,9 +119,11 @@ export default function WindowLogin() {
         </div>
         <div class="buttons">
           <button
-            class={`buttons__button ${state === "signup" ? "active"  : ""}`}
+            class={`buttons__button ${state === "signup" ? "active" : ""}`}
             ON_click={() => {
-              state === "login" ? setState("signup") : signup(formData);
+              state === "login"
+                ? setState("signup")
+                : signup(formData, setErrorAuth);
             }}
           >
             Регистрация
@@ -126,7 +131,9 @@ export default function WindowLogin() {
           <button
             class={`buttons__button ${state === "login" ? "active" : ""}`}
             ON_click={() => {
-              state === "signup" ? setState("login") : login(formData);
+              state === "signup"
+                ? setState("login")
+                : login(formData, setErrorAuth);
             }}
           >
             Вход
@@ -167,13 +174,13 @@ function InputField({
         data.isValid.includes(false) ? "error__input" : ""
       }`}
     >
-    <input
+      <input
         class="field-input__input"
-      type={type}
-      placeholder={placeholder}
+        type={type}
+        placeholder={placeholder}
         value={data.value}
-      ON_input={(e: { target: HTMLInputElement }) => {
-        const resultValidate = onChanged(e.target.value);
+        ON_input={(e: { target: HTMLInputElement }) => {
+          const resultValidate = onChanged(e.target.value);
           console.log("resultValidate", resultValidate);
           setData(keys, {
             value: e.target.value,
@@ -182,9 +189,9 @@ function InputField({
           });
           if (resultValidate.isValid.includes(false)) {
             console.log("error", e.target.value);
-        }
-      }}
-    />
+          }
+        }}
+      />
       {data.isValid.includes(false) ? <img class="icon" src={error} /> : ""}
     </div>
   );
@@ -195,6 +202,28 @@ function closeWindow() {
   blur.innerHTML = "";
 }
 
-function signup() {}
+function signup(formData: FormData, setErrorAuth: Function) {
+  return
+}
 
-function login() {}
+// TODO: Вывод конкретной причины ошибки(Неправильный данные, занятая почта и тд)
+async function login(formData: FormData, setErrorAuth: Function) {
+  const emailError = formData.emailField.isValid.includes(false);
+  const passwordError = formData.passwordField.isValid.includes(false);
+
+  if (emailError || passwordError) {
+    console.log("Ошибка: неверные данные для входа.");
+    return;
+  }
+
+  const email = formData.emailField.value;
+  const password = formData.passwordField.value;
+
+  const result = await loginUser(email, password);
+
+  if (result === true) {
+    setErrorAuth("Успешный вход");
+  } else {
+    setErrorAuth("Неправильные данные");
+  }
+}
