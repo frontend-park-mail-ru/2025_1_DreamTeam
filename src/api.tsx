@@ -63,7 +63,7 @@ export async function fetchLogout() {
     return true;
   } catch (error) {
     console.error("Ошибка запроса:", error);
-    return [];
+    return false;
   }
 }
 

@@ -1,7 +1,7 @@
 import { useState } from "./ourReact/jsx-runtime";
 import Validate from "./Validate";
 import error from "./icons/error.svg";
-import { loginUser } from "./api";
+import { loginUser, registerUser } from "./api";
 
 interface FieldState {
   value: string;
@@ -19,13 +19,13 @@ type FormData = {
 
 export default function WindowLogin() {
   const [state, setState] = useState("login");
+  const [errorAuth, setErrorAuth] = useState("");
   const [formData, setFormData] = useState<FormData>({
     emailField: { value: "", isValid: [], errorMessage: [] },
     nameField: { value: "", isValid: [], errorMessage: [] },
     passwordField: { value: "", isValid: [], errorMessage: [] },
     passwordAdmitField: { value: "", isValid: [], errorMessage: [] },
   });
-  const [errorAuth, setErrorAuth] = useState("");
 
   const inputField = [
     {
@@ -103,7 +103,7 @@ export default function WindowLogin() {
       >
         <div class="form">
           <div class="logo">SkillForce</div>
-          <div class="error" id="error"></div>
+          <div class="error error_color_red">{errorAuth}</div>
           {inputField.map((field) => (
             <InputField
               key={field.key}
@@ -202,17 +202,50 @@ function closeWindow() {
   blur.innerHTML = "";
 }
 
-function signup(formData: FormData, setErrorAuth: Function) {
+// TODO: Вывод конкретной причины ошибки(Неправильный данные, занятая почта и тд)
+// TODO: Закрыть окно и рендер header, чтобы увидеть автар и имя пользователя
+async function signup(formData: FormData, setErrorAuth: Function) {
+  const emailError = formData.emailField.isValid.includes(false);
+  const nameError = formData.nameField.isValid.includes(false);
+  const passwordError = formData.passwordField.isValid.includes(false);
+  const passwordAdmitError =
+    formData.passwordAdmitField.isValid.includes(false);
+
+  if (emailError || nameError || passwordError || passwordAdmitError) {
+    console.error("Ошибка регистрации");
+    setErrorAuth("Поля заполнены не корректно");
+    return;
+  }
+
+  const email = formData.emailField.value;
+  const name = formData.nameField.value;
+  const password = formData.passwordField.value;
+  const passwordAdmit = formData.passwordAdmitField.value;
+
+  if (password !== passwordAdmit) {
+    setErrorAuth("Пароли не совпадают");
+    return;
+  }
+
+  const result = await registerUser(email, name, password);
+
+  if (result) {
+    setErrorAuth("Успешная регистрация");
+    closeWindow();
+  }
+
   return;
 }
 
 // TODO: Вывод конкретной причины ошибки(Неправильный данные, занятая почта и тд)
+// TODO: Закрыть окно и рендер header, чтобы увидеть автар и имя пользователя
 async function login(formData: FormData, setErrorAuth: Function) {
   const emailError = formData.emailField.isValid.includes(false);
   const passwordError = formData.passwordField.isValid.includes(false);
 
   if (emailError || passwordError) {
-    console.log("Ошибка: неверные данные для входа.");
+    console.error("Ошибка входа");
+    setErrorAuth("Поля заполнены не корректно");
     return;
   }
 

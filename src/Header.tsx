@@ -10,7 +10,7 @@ import logout from "./icons/logout.svg";
 import { useState } from "./ourReact/jsx-runtime";
 import WindowLogin from "./WindowLogin";
 import { createApp } from "./ourReact/jsx-runtime";
-import { checkAuth } from "./api";
+import { checkAuth, fetchLogout } from "./api";
 
 export default function Header({
   page,
@@ -59,7 +59,7 @@ function GetMenuComponent({
   if (isLogin.username === "") {
     return (
       <div>
-        <MenuLogout key="buttonLogin" onClick={() => openWindow()} />
+        <MenuLogout key="buttonLogin" click={() => openWindow()} />
       </div>
     );
   }
@@ -69,7 +69,7 @@ function GetMenuComponent({
         <MenuLogin
           key="buttonAvatar"
           username={isLogin.username}
-          onClick={() =>
+          click={() =>
             setIsLogin({ username: isLogin.username, menuStatus: true })
           }
         />
@@ -111,18 +111,14 @@ function Search() {
   return (
     <div class="search-form">
       <img class="search-form__icon" src={search}></img>
-      <input
-        type="text"
-        placeholder="Поиск"
-        class="search-form__input"
-      ></input>
+      <input type="text" placeholder="Поиск" class="search-form__input"></input>
     </div>
   );
 }
 
-function MenuLogout({ onClick }: { onClick: Function }) {
+function MenuLogout({ click }: { click: Function }) {
   return (
-    <div class="block-menu" ON_click={onClick}>
+    <div class="block-menu" ON_click={click}>
       <div class="button_type_menu" id="button-login">
         Войти
         <img src={login} alt="Войти" class="button__img"></img>
@@ -131,15 +127,9 @@ function MenuLogout({ onClick }: { onClick: Function }) {
   );
 }
 
-function MenuLogin({
-  username,
-  onClick,
-}: {
-  username: string;
-  onClick: Function;
-}) {
+function MenuLogin({ username, click }: { username: string; click: Function }) {
   return (
-    <div class="block-menu" ON_click={onClick}>
+    <div class="block-menu" ON_click={click}>
       <div class="block-avatar" id="block-avatar">
         {username}
         <div class="avatar" id="avatar">
@@ -167,14 +157,14 @@ function MenuOpen({
     {
       name: "Свернуть",
       image: closeMenu,
-      onClick: () => {
+      click: () => {
         setIsLogin({ username: isLogin.username, menuStatus: false });
       },
     },
     {
       name: "Профиль",
       image: profile,
-      onClick: () => {
+      click: () => {
         setIsLogin({ username: isLogin.username, menuStatus: false });
         setPage("Setting");
       },
@@ -182,7 +172,7 @@ function MenuOpen({
     {
       name: "Настройки",
       image: setting,
-      onClick: () => {
+      click: () => {
         setPage("Setting");
         setIsLogin({ username: isLogin.username, menuStatus: false });
       },
@@ -190,8 +180,13 @@ function MenuOpen({
     {
       name: "Выйти",
       image: logout,
-      onClick: () => {
-        setIsLogin({ username: "", menuStatus: false });
+      click: async () => {
+        const result = await fetchLogout();
+        if (result) {
+          setIsLogin({ username: "", menuStatus: false });
+        } else {
+          console.error("Ошибка выхода");
+        }
       },
     },
   ];
@@ -202,7 +197,7 @@ function MenuOpen({
           key={`button-${index}`}
           name={button.name}
           image={button.image}
-          onClick={button.onClick}
+          click={button.click}
         />
       ))}
     </div>
@@ -212,14 +207,14 @@ function MenuOpen({
 function ButtonMenu({
   name,
   image,
-  onClick,
+  click,
 }: {
   name: string;
   image: string;
-  onClick: Function;
+  click: Function;
 }) {
   return (
-    <div class="button_type_menu" ON_click={onClick}>
+    <div class="button_type_menu" ON_click={click}>
       <div class="button__text">{name}</div>
       <img src={image} alt="Войти" class="button__img"></img>
     </div>
