@@ -4,32 +4,6 @@ import { Card } from "./Card";
 import { Course, getCourses } from "./api";
 import { useState } from "./ourReact/jsx-runtime";
 
-// const myObject = {
-//   title: "My Title",
-//   price: "100",
-//   purchases_amount: "100",
-//   time_to_pass: "50",
-// };
-
-// export function MainMenuContent() {
-//   const cards = [myObject, myObject, myObject, myObject, myObject];
-//   return (
-//     <div class="content">
-//       <div class="cards">
-//         {cards.map((card, index) => (
-//           <Card
-//             key={index}
-//             title={card.title}
-//             price={card.price}
-//             purchases_amount={card.purchases_amount}
-//             time_to_pass={card.time_to_pass}
-//           />
-//         ))}
-//       </div>
-//     </div>
-//   );
-//}
-
 export function MainMenuContent() {
   const [cards, setCards] = useState<Course[]>([]);
   const [isLoading, setLoading] = useState(true);

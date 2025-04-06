@@ -171,7 +171,7 @@ function InputField({
   return (
     <div
       class={`field-input ${hidden ? "hidden" : ""} ${
-        data.isValid.includes(false) ? "error__input" : ""
+        data.isValid.includes(false) ? "field-input__error" : ""
       }`}
     >
       <input
