@@ -35,6 +35,7 @@ type ChildrenType =
   | JSXElementType
   | string
   | (JSXElementType | string)[]
+  | boolean
   | undefined;
 type NormalizedChildrenType = (JSXElementType | string)[];
 

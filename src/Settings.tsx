@@ -7,7 +7,7 @@ type UpdateData = {
   name: string;
   email: string;
   bio: string;
-  private: boolean;
+  hide_email: boolean;
   avatar_src: string;
 };
 
@@ -42,11 +42,11 @@ export function SettingContent() {
     name: "",
     email: "",
     bio: "",
-    private: false,
+    hide_email: false,
     avatar_src: "",
   });
   const [isLoading, setLoading] = useState(true);
-
+  console.log(information);
   if (isLoading) {
     getAuthorizedUser().then((result) => {
       setInformation(result);
@@ -64,7 +64,7 @@ export function SettingContent() {
       "",
       information.bio,
       information.email,
-      information.private,
+      information.hide_email,
       information.name
     );
   };
@@ -111,7 +111,10 @@ export function SettingContent() {
             type="checkbox"
             class="checkbox__input"
             id="private_input"
-            checked={information.private}
+            {...(information.hide_email ? { checked: true } : {})}
+            ON_change={(event: { target: { checked: boolean } }) => {
+              setInformationState("hide_email", event.target.checked);
+            }}
           />
           Сделать профиль приватным
         </div>
@@ -141,9 +144,9 @@ export function SettingContent() {
                   id="new_avatar_input"
                   ON_change={(event: { target: { files: File[] } }) => {
                     console.log(event.target.files[0]);
-                    uploadProfilePhoto(event.target.files[0]);
+                    const result = uploadProfilePhoto(event.target.files[0]);
                     // TODO: Когда у бека будет готово возвращение пути, добавить отрисовка.
-                    // setInformationState("avatar_src", event.target.files[0]);
+                    // setInformationState("avatar_src", result);
                   }}
                 />
                 Загрузить
