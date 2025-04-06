@@ -352,7 +352,11 @@ class ComponentInstance<PropsType extends ComponentPropsType> {
     }
     const parentElem = this.domElement?.elem.parentElement;
     // 1) Заменяем корневой элемент
-    if (this.domElement?.type !== this.vTree?.tagName) {
+    if (
+      this.domElement?.elem.tagName.toUpperCase() !==
+      this.vTree?.tagName.toUpperCase()
+    ) {
+      console.log("Replace root element", this.domElement, this.vTree);
       const prevChild = this.domElement?.elem;
       this.domElement = {
         type: "element",
