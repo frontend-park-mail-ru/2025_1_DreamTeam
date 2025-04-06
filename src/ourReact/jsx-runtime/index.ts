@@ -110,7 +110,10 @@ function useState<T>(
 }
 
 const storeMap: Map<string, any> = new Map();
-const storeSubscribersIndex: Map<ComponentInstance<any>, Set<string>> = new Map();
+const storeSubscribersIndex: Map<
+  ComponentInstance<any>,
+  Set<string>
+> = new Map();
 const storeSubscribers: Map<string, Set<ComponentInstance<any>>> = new Map();
 
 export function defineStore<S>(
