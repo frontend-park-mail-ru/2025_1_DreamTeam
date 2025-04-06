@@ -1,15 +1,6 @@
 import { useState } from "./ourReact/jsx-runtime";
 import { getAuthorizedUser, updateProfile, uploadProfilePhoto } from "./api";
-import Validate from "./validate";
-
-type UpdateData = {
-  name: string;
-  email: string;
-  bio: string;
-  private: boolean;
-  avatar_src: string;
-};
-import { getAuthorizedUser, updateProfile, uploadProfilePhoto } from "./api";
+// TODO: Добавить валидатор у инпутов
 import Validate from "./validate";
 
 type UpdateData = {
@@ -66,43 +57,6 @@ export function SettingHeader() {
 }
 
 export function SettingContent() {
-  const [information, setInformation] = useState<UpdateData>({
-    name: "",
-    email: "",
-    bio: "",
-    private: false,
-    avatar_src: "",
-  });
-  const [isLoading, setLoading] = useState(true);
-
-  if (isLoading) {
-    getAuthorizedUser().then((result) => {
-      setInformation(result);
-      setLoading(false);
-    });
-  }
-
-  if (isLoading) {
-    console.log("loading");
-    return <div>Загрузка</div>;
-  }
-
-  const save_data = () => {
-    updateProfile(
-      "",
-      information.bio,
-      information.email,
-      information.private,
-      information.name
-    );
-  };
-
-  function setInformationState(key: string, newFieldData: string | boolean) {
-    setInformation({
-      ...information,
-      [key]: newFieldData,
-    });
-  }
   const [information, setInformation] = useState<UpdateData>({
     name: "",
     email: "",
