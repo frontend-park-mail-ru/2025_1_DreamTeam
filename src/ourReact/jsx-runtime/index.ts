@@ -242,6 +242,9 @@ const patchAttributes = (repr: DOMElement, newAttrs: Map<string, any>) => {
   // 4) Добавить новые атрибуты и event listeners
   newAttrs.forEach((v, k) => {
     if (!repr.attrs.has(k)) {
+      if (k === "innerHTML") {
+        repr.elem.innerHTML = v;
+      }
       if (k.startsWith("ON_")) {
         const type = k.slice(3);
         const cb = v as () => void;
