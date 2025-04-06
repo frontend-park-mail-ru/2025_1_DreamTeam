@@ -1,72 +1,158 @@
 import { useState } from "./ourReact/jsx-runtime";
+import { getAuthorizedUser, updateProfile, uploadProfilePhoto } from "./api";
+import Validate from "./validate";
 
+type UpdateData = {
+  name: string;
+  email: string;
+  bio: string;
+  private: boolean;
+  avatar_src: string;
+};
 
 export function SettingHeader() {
-//   const [data, setData] = useState("");
 
   return (
     <header class="changes">
-        <div class="headlines">Тигр Гордый</div>
-        <div class="change-select">
-            <button class="choose--type--button" style="width: 314px;">
-                <img src="../static/icons/user_settings.svg" alt="" class="editing__icon" />
-                Редактирование профиля
-            </button>
-            <button class="choose--type--button" style="width: 218px;">
-                <img src="../static/icons/mail.svg" alt="" class="editing__icon" />
-                Изменить почту
-            </button>
-            <button class="choose--type--button" style="width: 232px;">
-                <img src="../static/icons/lock.svg" alt="" class="editing__icon" />
-                Изменить пароль
-            </button>
-        </div>
+      <div class="headlines">Настройки</div>
+      <div class="change-select">
+        <button class="choose--type--button" style="width: 314px;">
+          <img
+            src="../static/icons/user_settings.svg"
+            alt=""
+            class="editing__icon"
+          />
+          Редактирование профиля
+        </button>
+        <button class="choose--type--button" style="width: 218px;">
+          <img src="../static/icons/mail.svg" alt="" class="editing__icon" />
+          Изменить почту
+        </button>
+        <button class="choose--type--button" style="width: 232px;">
+          <img src="../static/icons/lock.svg" alt="" class="editing__icon" />
+          Изменить пароль
+        </button>
+      </div>
     </header>
   );
 }
 
-
 export function SettingContent() {
-//   const [data, setData] = useState("");
-    const information = {
-        name: 'tiger',
-        bio: 'О себе',
-        private: false
-    }
+  const [information, setInformation] = useState<UpdateData>({
+    name: "",
+    email: "",
+    bio: "",
+    private: false,
+    avatar_src: "",
+  });
+  const [isLoading, setLoading] = useState(true);
+
+  if (isLoading) {
+    getAuthorizedUser().then((result) => {
+      setInformation(result);
+      setLoading(false);
+    });
+  }
+
+  if (isLoading) {
+    console.log("loading");
+    return <div>Загрузка</div>;
+  }
+
+  const save_data = () => {
+    updateProfile(
+      "",
+      information.bio,
+      information.email,
+      information.private,
+      information.name
+    );
+  };
+
+  function setInformationState(key: string, newFieldData: string | boolean) {
+    setInformation({
+      ...information,
+      [key]: newFieldData,
+    });
+  }
 
   return (
     <div class="profile">
-        <div class="strings">
-            Ваше имя
-            <input type="text" class="text__input" style="height: 39px;" id="name_input" value={information.name} />
+      <div class="strings">
+        Ваше имя
+        <input
+          type="text"
+          class="text__input"
+          style="height: 39px;"
+          id="name_input"
+          value={information.name}
+          ON_input={(event: { target: { value: string } }) => {
+            setInformationState("name", event.target.value);
+          }}
+        />
+      </div>
+      <div class="strings">
+        О себе
+        <textarea
+          class="text__input"
+          style="height: 70px;"
+          id="textarea_input"
+          ON_input={(event: { target: { value: string } }) => {
+            setInformationState("bio", event.target.value);
+          }}
+        >
+          {information.bio}
+        </textarea>
+      </div>
+      <div class="strings">
+        Приватность
+        <div>
+          <input
+            type="checkbox"
+            class="checkbox__input"
+            id="private_input"
+            checked={information.private}
+          />
+          Сделать профиль приватным
         </div>
-        <div class="strings">
-            О себе
-            <textarea class="text__input" style="height: 70px;" id="textarea_input">{information.bio}</textarea>
+      </div>
+      <div class="strings">
+        <div></div>
+        <button class="button__input" id="button_input" ON_click={save_data}>
+          Сохранить
+        </button>
+      </div>
+      <div class="strings__avatar">
+        Аватарка
+        <div class="picture__load__delete">
+          <img
+            src={information.avatar_src}
+            alt=""
+            class="avatar__image"
+            id="avatar_input"
+          />
+          <div class="load__delete">
+            <form method="post" enctype="multipart/form-data">
+              <label class="text__decoration">
+                <input
+                  type="file"
+                  accept=".jpg, .jpeg, .png"
+                  class="image__input"
+                  id="new_avatar_input"
+                  ON_change={(event: { target: { files: File[] } }) => {
+                    uploadProfilePhoto(event.target.files[0]);
+                    setInformationState("avatar_src", event.target.files[0]);
+                    }}
+                />
+                Загрузить
+              </label>
+            </form>
+            <a class="text__decoration" onclick={delete_photo}>
+              Удалить
+            </a>
+          </div>
         </div>
-        <div class="strings">
-            Приватность
-            <div>
-                <input type="checkbox" class="checkbox__input" id="private_input" checked={information.private} />
-                Сделать профиль приватным
-            </div>
-        </div>
-        <div class="strings">
-            <div></div>
-            <button class="button__input" id="button_input" onclick="{save_data()}">Сохранить</button>
-        </div>
-        <div class="strings__avatar">
-            Аватарка
-            <div class="picture__load__delete">
-                <img src="../static/icons/avatar.png" alt="" class="avatar__image" id="avatar_input" />
-                <div class="load__delete">
-                    <form method="post" enctype="multipart/form-data">
-                        <label class="text__decoration"><input type="file" accept=".jpg, .jpeg, .png" class="image__input" id="new_avatar_input" />Загрузить</label>
-                    </form>
-                    <a class="text__decoration" onclick="delete_photo()">Удалить</a>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
   );
 }
@@ -77,62 +163,6 @@ export function SettingContent() {
 // const username = `${ip}:${port}/api/isAuthorized`;
 // const update_url = `${ip}:${port}/api/updateProfile`;
 // const photo_url = `${ip}:${port}/api/updateProfilePhoto`;
-
-// const updateProfile = async (bio, email, hide_email, name) => {
-//     const data = {
-//         bio: bio,
-//         email: email,
-//         hide_email: hide_email,
-//         name: name
-//     };
-
-//     try {
-//         const response = await fetch(update_url, {
-//             credentials: "include",
-//             method: 'POST', // Метод запроса
-//             headers: {
-//                 'Content-Type': 'application/json', // Указываем тип содержимого
-//             },
-//             body: JSON.stringify(data), // Преобразуем объект в JSON строку
-//         });
-
-
-//         const result = await response.json(); // Парсим ответ как JSON
-//         if (response.ok) {
-//             return true;
-//         }
-//         alert('Данные некорректные');
-//         return false;
-//     } catch (error) {
-//         console.error('Error updating profile:', error); // Обработка ошибок
-//     }
-// }
-
-// const uploadProfilePhoto = async (file) => {
-//     const formData = new FormData();
-//     console.log(file);
-
-//     formData.append('avatar', file);
-
-//     const jsonData = JSON.stringify({ avatar: file.name});
-//     formData.append('data', jsonData);
-
-//     try {
-//     const response = await fetch(photo_url, {
-//         method: 'POST',
-//         body: formData,
-//         credentials: "include"
-//     });
-//     const responseData = await response.json();
-//     if (responseData){
-//         getAuthorizedUser().then(result => {
-//             set_avatar.src = result['user']['avatar_src'];
-//         })
-//     }
-//     } catch (error) {
-//     console.error('Ошибка при загрузке фото', error);
-//     }
-// }
 
 // // Событие для загрузки фотки
 // avatar.addEventListener('change', (event) => {
@@ -146,27 +176,4 @@ export function SettingContent() {
 // //Дима и Ваня скоро напишут на delete photo ручку
 // const delete_photo = () => {
 //     uploadProfilePhoto("");
-// }
-
-// // обновляет данные по нажатию кнопки class button__input
-// const save_data = () => {
-//     getAuthorizedUser().then(result => {
-//         console.log(private.checked);
-//         updateProfile(bio.value, result['user']['email'], private.checked, name.value);
-//     })
-// }
-
-// // Вставляет текст в поля + приват чек
-
-// const info_profile = () => {
-//     getAuthorizedUser().then(result => {
-//         name.value = result['user']['name'];
-//         bio.value = result['user']['bio'];
-//         if (result['user']['hide_email']) {
-//             private.checked = true;
-//         } else {
-//             private.checked = false;
-//         }
-//         set_avatar.src = result['user']['avatar_src'];
-//     })
 // }
