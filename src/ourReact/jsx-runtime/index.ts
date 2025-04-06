@@ -109,6 +109,38 @@ function useState<T>(
   ];
 }
 
+const storeMap: Map<string, any> = new Map();
+const storeSubscribersIndex: Map<ComponentInstance<any>, Set<string>> = new Map();
+const storeSubscribers: Map<string, Set<ComponentInstance<any>>> = new Map();
+
+export function defineStore<S>(
+  storeName: string,
+  storeContent: S
+): [useStore: () => S, setStore: (newStoreContent: S) => void] {
+  storeMap.set(storeName, storeContent);
+  storeSubscribers.set(storeName, new Set());
+  const useStore = () => {
+    if (activeInstance !== undefined) {
+      // Подписать инстанс на store
+      if (!storeSubscribersIndex.has(activeInstance)) {
+        storeSubscribersIndex.set(activeInstance, new Set());
+      }
+      if (!storeSubscribersIndex.get(activeInstance)?.has(storeName)) {
+        storeSubscribersIndex.get(activeInstance)?.add(storeName);
+        storeSubscribers.get(storeName)?.add(activeInstance);
+      }
+    }
+    return storeMap.get(storeName);
+  };
+  const setStore = (newStoreContent: S) => {
+    storeMap.set(storeName, newStoreContent);
+    storeSubscribers.get(storeName)?.forEach((instance) => {
+      markDirty(instance);
+    });
+  };
+  return [useStore, setStore];
+}
+
 // ----- Конец хуков
 
 const schedUpdate = () => {
