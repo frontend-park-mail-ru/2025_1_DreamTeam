@@ -304,7 +304,7 @@ class ComponentInstance<PropsType extends ComponentPropsType> {
 
     // 2) Удалить невостребованные интасы;
     this.instanceMap.forEach((v, k) => {
-      if (newInstanceMap.has(k)) {
+      if (!newInstanceMap.has(k)) {
         v.destroy();
         this.instanceMap.delete(k);
       }
