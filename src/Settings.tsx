@@ -147,6 +147,7 @@ export function SettingContent() {
                     const result = uploadProfilePhoto(event.target.files[0]);
                     // TODO: Когда у бека будет готово возвращение пути, добавить отрисовка.
                     // setInformationState("avatar_src", result);
+                    result;
                   }}
                 />
                 Загрузить
