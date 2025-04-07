@@ -12,12 +12,12 @@ import WindowLogin from "./WindowLogin";
 import { createApp } from "./ourReact/jsx-runtime";
 import { checkAuth, fetchLogout } from "./api";
 
-export default function Header({
+export default function Navbar({
   page,
   setPage,
 }: {
   page: string;
-  setPage: Function;
+  setPage: (newPage: string) => void;
 }) {
   const [isLogin, setIsLogin] = useState({ username: "", menuStatus: false });
   const [isLoading, setIsLoading] = useState(true);
@@ -54,7 +54,7 @@ function GetMenuComponent({
   isLogin: { username: string; menuStatus: boolean };
   setIsLogin: (value: { username: string; menuStatus: boolean }) => void;
   page: string;
-  setPage: Function;
+  setPage: (newPage: string) => void;
 }) {
   if (isLogin.username === "") {
     return (
