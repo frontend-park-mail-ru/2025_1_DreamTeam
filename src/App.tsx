@@ -74,7 +74,7 @@ export default function App() {
   //     <GoogleIcon key="2324" i="home" />
   //     <GoogleIcon key="232e4" i="menu" />
   //   </div>
-  );
+  // );
   return (
     <div>
       <Navbar key="MainHeader" page={page} setPage={setPage} />
