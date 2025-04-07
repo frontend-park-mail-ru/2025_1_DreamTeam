@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "Google Icon";
+  src: url("public/static/fonts/icons.woff2") format("woff2");
+  font-weight: 400;
+}
+
+.google-icon {
+  font-style: normal !important;
+  font-family: Google Icon;
+}
