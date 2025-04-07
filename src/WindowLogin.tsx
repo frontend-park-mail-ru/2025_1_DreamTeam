@@ -107,18 +107,21 @@ export default function WindowLogin() {
         <div class="form">
           <div class="logo">SkillForce</div>
           <div class="error error_color_red">{errorAuth}</div>
-          {inputField.map((field) => (
-            <InputField
-              key={field.key}
-              keys={field.key}
-              type={field.type}
-              placeholder={field.placeholder}
-              hidden={field.hidden}
-              onChanged={field.onChanged}
-              data={formData[field.key]}
-              setData={setFormDataState}
-            />
-          ))}
+          {inputField.map((field) => {
+            console.log(field.key, formData[field.key]);
+            return (
+              <InputWithValidation
+                key={field.key}
+                keys={field.key}
+                type={field.type}
+                placeholder={field.placeholder}
+                hidden={field.hidden}
+                onChanged={field.onChanged}
+                data={formData[field.key]}
+                setData={setFormDataState}
+              />
+            );
+          })}
         </div>
         <div class="buttons">
           <button
@@ -143,59 +146,6 @@ export default function WindowLogin() {
           </button>
         </div>
       </div>
-    </div>
-  );
-}
-
-// TODO: Чтобы рендер не сбивал фокус и при наведении на иконку ошибки сделать tooltrip
-// Решить проблемы с перерисовкой всех элементов, даже если меняется один
-function InputField({
-  type,
-  keys,
-  placeholder,
-  hidden,
-  onChanged = () => {
-    return { isValid: [], errorMessage: [] };
-  },
-  data,
-  setData,
-}: {
-  type: string;
-  keys: string;
-  placeholder: string;
-  hidden: boolean;
-  onChanged?: (newValue: string) => {
-    isValid: boolean[];
-    errorMessage: string[];
-  };
-  data: FieldState;
-  setData: (key: string, newFieldData: FieldState) => void;
-}) {
-  return (
-    <div
-      class={`field-input ${hidden ? "hidden" : ""} ${
-        data.isValid.includes(false) ? "field-input__error" : ""
-      }`}
-    >
-      <input
-        class="field-input__input"
-        type={type}
-        placeholder={placeholder}
-        value={data.value}
-        ON_input={(e: { target: HTMLInputElement }) => {
-          const resultValidate = onChanged(e.target.value);
-          console.log("resultValidate", resultValidate);
-          setData(keys, {
-            value: e.target.value,
-            isValid: resultValidate.isValid,
-            errorMessage: resultValidate.errorMessage,
-          });
-          if (resultValidate.isValid.includes(false)) {
-            console.log("error", e.target.value);
-          }
-        }}
-      />
-      {data.isValid.includes(false) ? <img class="icon" src={error} /> : ""}
     </div>
   );
 }
