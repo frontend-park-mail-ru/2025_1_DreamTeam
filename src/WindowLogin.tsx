@@ -3,13 +3,13 @@ import Validate from "./validate";
 import { loginUser, registerUser } from "./api";
 import InputWithValidation from "@/components/InputWithValidation";
 
-interface FieldState {
+export interface FieldState {
   value: string;
   isValid: boolean[];
   errorMessage: string[];
 }
 
-type FormData = {
+export type FormData = {
   emailField: FieldState;
   nameField: FieldState;
   passwordField: FieldState;
@@ -18,6 +18,7 @@ type FormData = {
 };
 
 export default function WindowLogin() {
+  console.log("I am rerendering");
   const [state, setState] = useState("login");
   const [errorAuth, setErrorAuth] = useState("");
   const [formData, setFormData] = useState<FormData>({
@@ -94,6 +95,8 @@ export default function WindowLogin() {
       [key]: newFieldData,
     });
   }
+
+  console.log("Form data", JSON.stringify(formData), inputField);
 
   return (
     <div class="blur" ON_mousedown={closeWindow}>
