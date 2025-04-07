@@ -1,1 +1,1 @@
-export * from "../jsx-runtime";
+export * from "@/ourReact/jsx-runtime";
