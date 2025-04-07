@@ -764,20 +764,24 @@ body {
   display: flex;
   flex-direction: row;
   align-items: end;
+  display: inline;
 }
 
 .course-description__text-text {
   font-size: 20px;
+  display: inline;
 }
 
 .course-description__text-number {
   font-size: 16px;
+  display: inline;
 }
 
 .course-tags {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .course-tag {
