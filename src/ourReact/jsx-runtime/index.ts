@@ -53,7 +53,9 @@ const flatten = (arr: any): any[] => {
   return ret;
 };
 
+// TODO: Сделать адекватную реализацию; а это вот позорище надо убрать подальше
 function deepEqual(obj1: any, obj2: any) {
+  return false;
   if (JSON.stringify(obj1) !== JSON.stringify(obj2)) {
     return false;
   }
@@ -151,10 +153,8 @@ const schedUpdate = () => {
     if (dirtyInstance[i].size) {
       dirtyInstance[i].forEach((instance) => {
         instance.update();
-        console.log(document.activeElement); // фокус на инптуе
-        dirtyInstance[i].delete(instance);
-        console.log(document.activeElement); // фокус на боди
       });
+      dirtyInstance[i] = new Set();
       window.requestAnimationFrame(() => {
         schedUpdate();
       });
@@ -314,7 +314,7 @@ class ComponentInstance<PropsType extends ComponentPropsType> {
     this.instanceMap.forEach((v, k) => {
       const newProps = newInstanceMap.get(k) as JSXComponent<any>;
       if (!deepEqual(v.props, newProps)) {
-        v.props = newProps;
+        v.props = newProps.props;
         markDirty(v);
       }
     });
@@ -346,7 +346,6 @@ class ComponentInstance<PropsType extends ComponentPropsType> {
   }
   /** Обновить свои DOM-узлы и разместить дочерние интасы */
   patchDOMNodes() {
-    console.log(this);
     if (this.vTree === undefined) {
       throw new Error();
     }
@@ -448,7 +447,9 @@ class ComponentInstance<PropsType extends ComponentPropsType> {
       }
 
       if (typeof vNode !== "string" && domNode.type === "element") {
-        if (domNode.elem.tagName !== vNode.tagName) {
+        if (
+          domNode.elem.tagName.toUpperCase() !== vNode.tagName.toUpperCase()
+        ) {
           const newElementRepr: DOMElement = {
             type: "element",
             eventListeners: [],
@@ -458,6 +459,8 @@ class ComponentInstance<PropsType extends ComponentPropsType> {
           };
           domRepr.splice(domReprIndex, 1, newElementRepr);
           NodeArray.push(newElementRepr.elem);
+        } else {
+          NodeArray.push(domNode.elem);
         }
         const elemRepr = domRepr[domReprIndex] as DOMElement;
         patchAttributes(elemRepr, vNode.attributes);
@@ -507,7 +510,7 @@ const createApp = (elem: Element, fn: () => JSXElementType) => {
 export type { JSX };
 export { jsx, jsx as jsxs, jsx as jsxDEV, createApp, useState };
 
-function arrangeNodes(parent: Node, children: Node[]) {
+function arrangeNodes(parent: Element, children: Node[]) {
   let curNode: Node | null = parent.firstChild;
   children.forEach((child) => {
     if (curNode !== child) {
