@@ -1,7 +1,6 @@
 import { useState } from "./ourReact/jsx-runtime";
 import { getAuthorizedUser, updateProfile, uploadProfilePhoto } from "./api";
 // TODO: Добавить валидатор у инпутов
-import Validate from "./validate";
 
 type UpdateData = {
   name: string;
@@ -55,7 +54,6 @@ export function SettingContent() {
   }
 
   if (isLoading) {
-    console.log("loading");
     return <div>Загрузка</div>;
   }
 
