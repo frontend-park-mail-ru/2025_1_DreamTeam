@@ -9,7 +9,9 @@ export interface Course {
   time_to_pass: number;
   title: string;
   description: string;
+  rating: number;
   src_image: string;
+  tags: string[];
 }
 
 async function apiFetch(url: string, options = {}) {
