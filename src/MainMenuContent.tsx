@@ -20,6 +20,7 @@ export function MainMenuContent() {
       Курсы отсутствуют, либо произошла ошибка запросов
     </div>
   }
+
   return (
     <div class="content">
       <div class="cards">
@@ -27,9 +28,14 @@ export function MainMenuContent() {
           <Card
             key={`card-${card.id}`}
             title={card.title}
-            price={`${card.price.toString()}`}
-            purchases_amount={`${card.purchases_amount.toString()}`}
-            time_to_pass={`${card.time_to_pass.toString()}`}
+            image={card.src_image}
+            price={card.price}
+            description={card.description}
+            id={card.id}
+            rating={card.rating}
+            tags={card.tags}
+            purchases_amount={card.purchases_amount}
+            time_to_pass={card.time_to_pass}
           />
         ))}
       </div>
