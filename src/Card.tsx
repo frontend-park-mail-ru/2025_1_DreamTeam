@@ -70,7 +70,11 @@ export function Card({
           <img src={starIcon} alt="" class="rating__star full"></img>
           <img src={starIcon} alt="" class="rating__star"></img>
         </div>
-        <div class="rating-and-price__price">{price} ₽</div>
+        <div
+          class={`rating-and-price__price ${price === 0 ? "color-free" : ""}`}
+        >
+          {price !== 0 ? `${price.toString()} ₽` : "Бесплатно"}
+        </div>
       </div>
     </div>
   );
