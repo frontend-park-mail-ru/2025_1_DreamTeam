@@ -11,51 +11,30 @@ import { useState } from "./ourReact/jsx-runtime";
 import WindowLogin from "./WindowLogin";
 import { createApp } from "./ourReact/jsx-runtime";
 import { checkAuth, fetchLogout } from "./api";
+import { setPage, setCourseOpen, setUser, useUser } from "./App";
 
-export default function Navbar({
-  page,
-  setPage,
-}: {
-  page: string;
-  setPage: (newPage: string) => void;
-}) {
-  const [isLogin, setIsLogin] = useState({ username: "", menuStatus: false });
+export default function Navbar() {
   const [isLoading, setIsLoading] = useState(true);
   if (isLoading) {
     checkAuth().then((data) => {
       // setIsLogin({username: "fef", menuStatus: false});
-      setIsLogin({ username: data, menuStatus: false });
+      setUser({ username: data, menuStatus: false });
     });
     setIsLoading(false);
   }
 
   return (
     <div class="header">
-      <Logo key="logo" page={page} setPage={setPage} />
+      <Logo key="logo" />
       <Search key="search" />
 
-      <GetMenuComponent
-        key="menu"
-        isLogin={isLogin}
-        setIsLogin={setIsLogin}
-        page={page}
-        setPage={setPage}
-      />
+      <GetMenuComponent key="menu" />
     </div>
   );
 }
 
-function GetMenuComponent({
-  isLogin,
-  setIsLogin,
-  page,
-  setPage,
-}: {
-  isLogin: { username: string; menuStatus: boolean };
-  setIsLogin: (value: { username: string; menuStatus: boolean }) => void;
-  page: string;
-  setPage: (newPage: string) => void;
-}) {
+function GetMenuComponent() {
+  const isLogin = useUser();
   if (isLogin.username === "") {
     return (
       <div>
@@ -70,7 +49,7 @@ function GetMenuComponent({
           key="buttonAvatar"
           username={isLogin.username}
           click={() =>
-            setIsLogin({ username: isLogin.username, menuStatus: true })
+            setUser({ username: isLogin.username, menuStatus: true })
           }
         />
       </div>
@@ -78,25 +57,19 @@ function GetMenuComponent({
   }
   return (
     <div>
-      <MenuOpen
-        key="menuOpen"
-        setIsLogin={setIsLogin}
-        isLogin={isLogin}
-        page={page}
-        setPage={setPage}
-      />
+      <MenuOpen key="menuOpen" />
     </div>
   );
 }
 
-function Logo({ page, setPage }: { page: string; setPage: Function }) {
+function Logo() {
   return (
     <div class="logo-and-create-curs">
       <div
         class="logo"
         ON_click={() => {
+          setCourseOpen({});
           setPage("MainMenu");
-          console.log("logo click", page);
         }}
       >
         <img src={logo} alt="" class="logo__img"></img>
@@ -141,31 +114,21 @@ function MenuLogin({ username, click }: { username: string; click: Function }) {
   );
 }
 
-function MenuOpen({
-  isLogin,
-  setIsLogin,
-  page,
-  setPage,
-}: {
-  isLogin: { username: string; menuStatus: boolean };
-  setIsLogin: (value: { username: string; menuStatus: boolean }) => void;
-  page: string;
-  setPage: Function;
-}) {
-  console.log("page MenuOpen", page);
+function MenuOpen() {
+  const isLogin = useUser();
   const arrayButtons = [
     {
       name: "Свернуть",
       image: closeMenu,
       click: () => {
-        setIsLogin({ username: isLogin.username, menuStatus: false });
+        setUser({ username: isLogin.username, menuStatus: false });
       },
     },
     {
       name: "Профиль",
       image: profile,
       click: () => {
-        setIsLogin({ username: isLogin.username, menuStatus: false });
+        setUser({ username: isLogin.username, menuStatus: false });
         setPage("Setting");
       },
     },
@@ -174,7 +137,7 @@ function MenuOpen({
       image: setting,
       click: () => {
         setPage("Setting");
-        setIsLogin({ username: isLogin.username, menuStatus: false });
+        setUser({ username: isLogin.username, menuStatus: false });
       },
     },
     {
@@ -183,7 +146,7 @@ function MenuOpen({
       click: async () => {
         const result = await fetchLogout();
         if (result) {
-          setIsLogin({ username: "", menuStatus: false });
+          setUser({ username: "", menuStatus: false });
         } else {
           console.error("Ошибка выхода");
         }
