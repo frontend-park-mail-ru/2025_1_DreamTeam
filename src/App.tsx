@@ -35,18 +35,17 @@ interface CourseOpen {
   description?: string;
   id?: number;
   price?: number;
-  rating?: string;
+  rating?: number;
   src_image?: string;
   tags?: string[];
-  purchases_amount?: string;
-  time_to_pass?: string;
+  purchases_amount?: number;
+  time_to_pass?: number;
 }
 
 export default function App() {
-  const [page, setPage] = useState("CourseMenu");
   let header;
   let content;
-  switch (page) {
+  switch (usePage()) {
     case "MainMenu":
       header = <MainMenuHeader key="MainMenuHeader" />;
       content = <MainMenuContent key="MainMenuContent" />;
@@ -77,18 +76,9 @@ export default function App() {
   // );
   return (
     <div>
-      <Navbar key="MainHeader" page={page} setPage={setPage} />
+      <Navbar key="MainHeader" />
       {header}
       {content}
-    </div>
-  );
-}
-
-export function Ren() {
-  return (
-    <div>
-      <div></div>
-      <div></div>
     </div>
   );
 }
