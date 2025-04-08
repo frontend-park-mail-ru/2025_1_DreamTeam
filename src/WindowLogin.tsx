@@ -180,6 +180,11 @@ async function signup(formData: FormData, setErrorAuth: Function) {
     return;
   }
 
+  if (!email || !name || !password || !passwordAdmit) {
+    setErrorAuth("Заполните все поля");
+    return;
+  }
+
   const result = await registerUser(email, name, password);
 
   if (result) {
@@ -204,6 +209,11 @@ async function login(formData: FormData, setErrorAuth: Function) {
 
   const email = formData.emailField.value;
   const password = formData.passwordField.value;
+
+  if (!email || !password) {
+    setErrorAuth("Заполните все поля");
+    return;
+  }
 
   const result = await loginUser(email, password);
 
