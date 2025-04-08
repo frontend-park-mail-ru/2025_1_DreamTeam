@@ -2,26 +2,53 @@ import timeIcon from "../public/static/icons/time.svg";
 import heartIcon from "../public/static/icons/heart.svg";
 import userIcon from "../public/static/icons/user.svg";
 import starIcon from "../public/static/icons/star.svg";
+import { setCourseOpen, setPage } from "@/App";
 import testImage from "../public/static/icons/picture-test.png";
 
 export function Card({
   title,
   price,
+  image,
+  description,
+  id,
+  rating,
   purchases_amount,
   time_to_pass,
+  tags,
 }: {
   title: string;
-  price: string;
-  purchases_amount: string;
-  time_to_pass: string;
+  price: number;
+  image: string;
+  description: string;
+  id: number;
+  rating: number;
+  purchases_amount: number;
+  time_to_pass: number;
+  tags: string[];
 }) {
   return (
-    <div class="card">
+    <div
+      class="card"
+      ON_click={() => {
+        setCourseOpen({
+          description,
+          id,
+          price,
+          purchases_amount,
+          rating,
+          src_image: image,
+          tags,
+          time_to_pass,
+          title,
+        });
+        setPage("CourseMenu");
+      }}
+    >
       <div class="picture" style={`background-image: url(${testImage})`}>
         <div class="descriptions">
           <div class="description">
             <img src={timeIcon} alt="" class="description__icon"></img>
-            {time_to_pass} ч
+            {time_to_pass.toString()} ч
           </div>
           <div class="heart">
             <img src={heartIcon} alt="" class="heart__img"></img>
@@ -30,7 +57,7 @@ export function Card({
         <div class="descriptions">
           <div class="description">
             <img src={userIcon} alt="" class="description__icon"></img>
-            {purchases_amount}
+            {purchases_amount.toString()}
           </div>
         </div>
       </div>
