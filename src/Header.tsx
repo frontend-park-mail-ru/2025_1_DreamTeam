@@ -164,6 +164,7 @@ function MenuOpen() {
       name: "Настройки",
       image: setting,
       click: () => {
+        setMenu(false);
         setPage("Setting");
       },
     },
