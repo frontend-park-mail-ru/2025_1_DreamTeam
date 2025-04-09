@@ -35,14 +35,14 @@ async function apiFetch(url: string, options = {}) {
   }
 }
 
-export async function checkAuth() {
+export async function checkAuth(): Promise<UserProfile> {
   const data = await apiFetch("/isAuthorized");
   if (data && !data.error) {
     console.log("✅ Пользователь авторизован");
-    return data.user.name;
+    return data.user;
   }
   console.log("❌ Пользователь НЕ авторизован");
-  return "";
+  return false;
 }
 
 export async function getCourses() {
@@ -96,7 +96,15 @@ export async function getAuthorizedUser() {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
-  return data ? data.user : "Ошибка запроса";
+  return data
+    ? data.user
+    : {
+        name: "",
+        email: "",
+        bio: "",
+        avatar_src: "path_to_default",
+        hide_email: false,
+      };
 }
 
 export async function uploadProfilePhoto(file: File) {

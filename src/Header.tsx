@@ -11,46 +11,69 @@ import { useState } from "./ourReact/jsx-runtime";
 import WindowLogin from "./WindowLogin";
 import { createApp } from "./ourReact/jsx-runtime";
 import { checkAuth, fetchLogout } from "./api";
-import { setPage, setCourseOpen, setUser, useUser } from "./App";
+import {
+  setPage,
+  setCourseOpen,
+  setUser,
+  useUser,
+  setMenu,
+  useMenu,
+  UserProfile,
+} from "./App";
 
 export default function Navbar() {
   const [isLoading, setIsLoading] = useState(true);
   if (isLoading) {
     checkAuth().then((data) => {
-      // setIsLogin({username: "fef", menuStatus: false});
-      setUser({ username: data, menuStatus: false });
+      if (data === false) {
+        setIsLoading(false);
+        return;
+      }
+      console.log(data);
+      setUser({
+        name: data.name,
+        email: data.email,
+        bio: data.bio,
+        avatar_src: data.avatar_src,
+        hide_email: data.hide_email,
     });
     setIsLoading(false);
+    });
   }
 
+  if (isLoading) {
+    return <div>"загрузка";</div>;
+  }
+
+  console.log(useUser());
+
+  console.log("header");
   return (
     <div class="header">
       <Logo key="logo" />
       <Search key="search" />
 
-      <GetMenuComponent key="menu" />
+      <GetMenuComponent user={useUser()} key="menu" />
     </div>
   );
 }
 
-function GetMenuComponent() {
-  const isLogin = useUser();
-  if (isLogin.username === "") {
+function GetMenuComponent({ user }: { user: UserProfile }) {
+  if (user === false) {
     return (
       <div>
         <MenuLogout key="buttonLogin" click={() => openWindow()} />
       </div>
     );
   }
-  if (!isLogin.menuStatus) {
+  if (useMenu() === false) {
+    console.log("If menuStatus false", user);
     return (
       <div>
         <MenuLogin
+          username={`${user.name}`}
+          avatar={user.avatar_src}
           key="buttonAvatar"
-          username={isLogin.username}
-          click={() =>
-            setUser({ username: isLogin.username, menuStatus: true })
-          }
         />
       </div>
     );
@@ -100,14 +123,20 @@ function MenuLogout({ click }: { click: Function }) {
   );
 }
 
-function MenuLogin({ username, click }: { username: string; click: Function }) {
+function MenuLogin({ username, avatar }: { username: string; avatar: string }) {
   return (
-    <div class="block-menu" ON_click={click}>
-      <div class="block-avatar" id="block-avatar">
+    <div
+      class="block-menu"
+      ON_click={() => {
+        setMenu(true);
+        console.log(useUser());
+      }}
+    >
+      <div class="block-avatar">
         {username}
-        <div class="avatar" id="avatar">
+        <div class="avatar">
           <img src={menu} alt="Меню" class="avatar__icon"></img>
-          <img src={testAvatar} alt="Аватарка" class="avatar__img"></img>
+          <img src={avatar} alt="Аватарка" class="avatar__img"></img>
         </div>
       </div>
     </div>
@@ -115,20 +144,19 @@ function MenuLogin({ username, click }: { username: string; click: Function }) {
 }
 
 function MenuOpen() {
-  const isLogin = useUser();
   const arrayButtons = [
     {
       name: "Свернуть",
       image: closeMenu,
       click: () => {
-        setUser({ username: isLogin.username, menuStatus: false });
+        setMenu(false);
       },
     },
     {
       name: "Профиль",
       image: profile,
       click: () => {
-        setUser({ username: isLogin.username, menuStatus: false });
+        setMenu(false);
         setPage("Setting");
       },
     },
@@ -137,7 +165,6 @@ function MenuOpen() {
       image: setting,
       click: () => {
         setPage("Setting");
-        setUser({ username: isLogin.username, menuStatus: false });
       },
     },
     {
@@ -146,7 +173,9 @@ function MenuOpen() {
       click: async () => {
         const result = await fetchLogout();
         if (result) {
-          setUser({ username: "", menuStatus: false });
+          setMenu(false);
+          setUser;
+          console.log("успешный выход");
         } else {
           console.error("Ошибка выхода");
         }
@@ -157,7 +186,7 @@ function MenuOpen() {
     <div class="block-menu">
       {arrayButtons.map((button, index) => (
         <ButtonMenu
-          key={`button-${index}`}
+          key={`button-menu-${index}`}
           name={button.name}
           image={button.image}
           click={button.click}
