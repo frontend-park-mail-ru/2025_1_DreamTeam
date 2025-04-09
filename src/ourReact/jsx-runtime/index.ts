@@ -290,6 +290,9 @@ class ComponentInstance<PropsType extends ComponentPropsType> {
     activeInstance = this;
     activeStateIndex = 0;
     this.vTree = this.func(this.props);
+    if (this.vTree === undefined) {
+      throw new Error("vTree is undefined");
+    }
     activeInstance = undefined;
   }
   /** Обновить instanceMap в соответствии в VTRee */
