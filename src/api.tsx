@@ -1,3 +1,4 @@
+import { UserProfile } from "./App";
 import { CourseStructure, Part } from "./CourseMenu";
 
 export const IP = "http://217.16.21.64";
@@ -92,6 +93,7 @@ export async function updateProfile(
 }
 
 export async function getAuthorizedUser() {
+  console.log("authFetch");
   const data = await apiFetch("/isAuthorized", {
     method: "GET",
     headers: { "Content-Type": "application/json" },
