@@ -1,3 +1,5 @@
+import { CourseStructure, Part } from "./CourseMenu";
+
 export const IP = "http://217.16.21.64";
 export const PORT = "8080";
 
@@ -116,7 +118,7 @@ export async function uploadProfilePhoto(file: File) {
     });
     const responseData = await response.json();
     if (responseData) {
-      return true;
+      return responseData.url;
     }
   } catch (error) {
     console.error("Ошибка при загрузке фото", error);
