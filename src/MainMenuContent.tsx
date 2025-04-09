@@ -16,9 +16,7 @@ export function MainMenuContent() {
   console.log("render MainMenuContent");
   if (isLoading) {
     // TODO: Потом добавлю вывод более подробный
-    return <div class="content">
-      Курсы отсутствуют, либо произошла ошибка запросов
-    </div>
+    return <div class="content">Загрузка</div>;
   }
 
   return (
