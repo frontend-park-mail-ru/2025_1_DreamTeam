@@ -36,8 +36,8 @@ export default function Navbar() {
         bio: data.bio,
         avatar_src: data.avatar_src,
         hide_email: data.hide_email,
-    });
-    setIsLoading(false);
+      });
+      setIsLoading(false);
     });
   }
 
