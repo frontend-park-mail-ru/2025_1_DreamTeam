@@ -143,7 +143,10 @@ export function CourseMenuContent2({ parts }: { parts: CourseStructure }) {
       <div class="section-content">
         <div>Пустышка</div>
         <div class="content-table">
-          {parts.parts.map((part, index) => {
+          {parts.parts.length === 0 ? (
+            <div class="dont-content">Содержание отсутствует</div>
+          ) : (
+            parts.parts.map((part, index) => {
             const chapterIsDone = part.buckets.every((bucket) =>
               bucket.lessons.every((lesson) => lesson.is_done)
             )
@@ -166,7 +169,8 @@ export function CourseMenuContent2({ parts }: { parts: CourseStructure }) {
                 )}
               </div>
             );
-          })}
+            })
+          )}
         </div>
         <EnterCourse
           mark={15}
