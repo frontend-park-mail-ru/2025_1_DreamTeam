@@ -1,5 +1,7 @@
 import { useState } from "./ourReact/jsx-runtime";
 import { getAuthorizedUser, updateProfile, uploadProfilePhoto } from "./api";
+import { setUser, useUser } from "./App";
+import { info } from "console";
 // TODO: Добавить валидатор у инпутов
 
 type UpdateData = {
@@ -53,11 +55,17 @@ export function SettingContent() {
     });
   }
 
+  console.log("rerenderSetting");
   if (isLoading) {
     return <div>Загрузка</div>;
   }
 
   const save_data = () => {
+    const user = useUser();
+    if (user === false) {
+      console.error("Ошибка в save_data");
+      return;
+    }
     updateProfile(
       "",
       information.bio,
@@ -65,6 +73,13 @@ export function SettingContent() {
       information.hide_email,
       information.name
     );
+    setUser({
+      name: information.name,
+      email: information.email,
+      bio: information.bio,
+      avatar_src: user.avatar_src,
+      hide_email: information.hide_email,
+    });
   };
 
   function setInformationState(key: string, newFieldData: string | boolean) {
@@ -140,12 +155,31 @@ export function SettingContent() {
                   accept=".jpg, .jpeg, .png"
                   class="image__input"
                   id="new_avatar_input"
-                  ON_change={(event: { target: { files: File[] } }) => {
-                    console.log(event.target.files[0]);
-                    const result = uploadProfilePhoto(event.target.files[0]);
+                  ON_change={async (event: { target: { files: File[] } }) => {
+                    const result = await uploadProfilePhoto(
+                      event.target.files[0]
+                    );
+                    const user = useUser();
+
+                    if (user === false) {
+                      console.error("Ошибка в setting");
+                      return;
+                    }
+
+                    console.log("что скажешь", result);
+                    if (typeof result !== "string") {
+                      console.log("не повезло", result);
+                      return;
+                    }
                     // TODO: Когда у бека будет готово возвращение пути, добавить отрисовка.
-                    // setInformationState("avatar_src", result);
-                    result;
+                    setInformationState("avatar_src", result);
+                    setUser({
+                      name: user.name,
+                      email: user.email,
+                      bio: user.bio,
+                      hide_email: user.hide_email,
+                      avatar_src: result,
+                    });
                   }}
                 />
                 Загрузить
