@@ -125,3 +125,10 @@ export async function uploadProfilePhoto(file: File) {
     return false;
   }
 }
+
+export async function getCourseRoadmap(
+  courseId: number
+): Promise<CourseStructure> {
+  const data = await apiFetch(`/getCourseRoadmap?courseId=${courseId}`);
+  return data?.course_roadmap || { parts: [] };
+}
