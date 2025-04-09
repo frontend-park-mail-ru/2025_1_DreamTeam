@@ -46,13 +46,19 @@ export function SettingContent() {
     hide_email: false,
     avatar_src: "",
   });
+
   const [isLoading, setLoading] = useState(true);
   console.log(information);
   if (isLoading) {
-    getAuthorizedUser().then((result) => {
-      setInformation(result);
-      setLoading(false);
-    });
+    const user = useUser();
+
+    if (user === false) {
+      console.error("Ошибка в setting");
+      return;
+    }
+
+    setInformation(useUser() as UpdateData);
+    setLoading(false);
   }
 
   console.log("rerenderSetting");
