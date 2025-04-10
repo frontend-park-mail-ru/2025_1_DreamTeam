@@ -85,8 +85,13 @@ export function CourseMenuHeader() {
           </div>
         </div>
         <div class="changes1">
-          {sections.map((section, index) => (
-            <div class={"change" + (index === 0 ? " change-active" : "")}>
+          {sections.map((section) => (
+            <div
+              ON_click={section.click}
+              class={
+                "change" + (useFunc === section.type ? " change-active" : "")
+              }
+            >
               <img class="changes1__img" src={section.image} />
               {section.name}
             </div>
