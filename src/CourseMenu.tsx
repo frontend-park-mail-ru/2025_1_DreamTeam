@@ -106,6 +106,27 @@ export function CourseMenuHeader() {
   );
 }
 
+export function CourseMenuContent3() {
+  const [useStatus, setStatus] = useState("description");
+
+  return (
+    <div>
+      <CourseMenuHeader
+        key="CourseHeader"
+        useFunc={useStatus}
+        setFunc={setStatus}
+      />
+      {useStatus === "description" ? (
+        <CourseMenuContent key="CourseDescription" />
+      ) : useStatus === "content" ? (
+        <CourseMenuContent2 key="CourseContent" />
+      ) : (
+        ""
+      )}
+    </div>
+  );
+}
+
 export function CourseMenuContent() {
   const data = useCourseOpen();
   return (
