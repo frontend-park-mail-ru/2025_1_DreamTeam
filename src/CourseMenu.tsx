@@ -137,7 +137,31 @@ export type CourseStructure = {
   parts: Part[];
 };
 
-export function CourseMenuContent2({ parts }: { parts: CourseStructure }) {
+export function CourseMenuContent2() {
+  const [parts, setParts] = useState<CourseStructure>({ parts: [] });
+  const [isLoading, setLoading] = useState(true);
+  const courseOpen = useCourseOpen();
+
+  if (courseOpen.id === undefined) {
+    console.error("ID is undefined");
+    return <div class="content">Ошибка: ID не найден</div>;
+  }
+
+  if (isLoading) {
+    getCourseRoadmap(courseOpen.id).then((data) => {
+      console.log("data", data);
+      setParts(data);
+      console.log("data2", parts);
+      setLoading(false);
+    });
+  }
+
+  console.log("render CourseMenu");
+  if (isLoading) {
+    // TODO: Потом добавлю вывод более подробный
+    return <div class="content">Загрузка</div>;
+  }
+
   return (
     <div class="content">
       <div class="section-content">
