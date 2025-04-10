@@ -143,7 +143,7 @@ export function CourseMenuContent2({ parts }: { parts: CourseStructure }) {
       <div class="section-content">
         <div>Пустышка</div>
         <div class="content-table">
-          {parts.parts.length === 0 ? (
+          {!parts.parts?.length ? (
             <div class="dont-content">Содержание отсутствует</div>
           ) : (
             parts.parts.map((part, index) => {
@@ -172,13 +172,18 @@ export function CourseMenuContent2({ parts }: { parts: CourseStructure }) {
             })
           )}
         </div>
-        <EnterCourse
-          mark={15}
-          bestMark={19}
-          countTest={12}
-          countTimeToPassVideo={6550}
-          countLesson={27}
-        />
+        {parts.parts?.length ? (
+          <EnterCourse
+            key="EnterCourse"
+            mark={0}
+            bestMark={0}
+            countTest={countTests(parts.parts)}
+            countTimeToPassVideo={0}
+            countLesson={countLessons(parts.parts)}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
