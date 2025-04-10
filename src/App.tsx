@@ -2,6 +2,7 @@ import GoogleIcon from "./components/GoogleIcon";
 import {
   CourseMenuContent,
   CourseMenuContent2,
+  CourseMenuContent3,
   CourseMenuHeader,
   CourseStructure,
 } from "./CourseMenu";
@@ -53,8 +54,8 @@ export default function App() {
       content = <SettingContent key="SettingContent" />;
       break;
     case "CourseMenu":
-      header = <CourseMenuHeader key="CourseMenuHeader" />;
-      content = <CourseMenuContent key="CourseMenuContent" />;
+      header = <div></div>;
+      content = <CourseMenuContent3 key="CourseMenuContent" />;
       break;
     // case "Profile":
     // header = <ProfileHeader key="ProfileHeader" />;
