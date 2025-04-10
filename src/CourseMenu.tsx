@@ -141,34 +141,34 @@ export function CourseMenuContent2({ parts }: { parts: CourseStructure }) {
   return (
     <div class="content">
       <div class="section-content">
-        <div>Пустышка</div>
+        <div></div>
         <div class="content-table">
           {!parts.parts?.length ? (
             <div class="dont-content">Содержание отсутствует</div>
           ) : (
             parts.parts.map((part, index) => {
-            const chapterIsDone = part.buckets.every((bucket) =>
-              bucket.lessons.every((lesson) => lesson.is_done)
-            )
-              ? "color_is_done"
-              : "color_is_not_done";
+              const chapterIsDone = part.buckets.every((bucket) =>
+                bucket.lessons.every((lesson) => lesson.is_done)
+              )
+                ? "color_is_done"
+                : "color_is_not_done";
 
-            return (
-              <div>
-                <Chapter
-                  key={`chapter-${part.part_id}`}
-                  title={part.part_title}
-                  subchapters={part.buckets}
-                />
-                {index !== parts.parts.length - 1 ? (
-                  <div class="progress__progress-line_type_medium">
-                    <div class={`line ${chapterIsDone}`}></div>
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
-            );
+              return (
+                <div>
+                  <Chapter
+                    key={`chapter-${part.part_id}`}
+                    title={part.part_title}
+                    subchapters={part.buckets}
+                  />
+                  {index !== parts.parts.length - 1 ? (
+                    <div class="progress__progress-line_type_medium">
+                      <div class={`line ${chapterIsDone}`}></div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              );
             })
           )}
         </div>
