@@ -17,13 +17,39 @@ import { useState } from "@/ourReact/jsx-runtime";
 import GoogleIcon from "./components/GoogleIcon";
 import { GoogleIconType } from "./components/GoogleIcon/GoogleIcon";
 
-export function CourseMenuHeader() {
-  console.log(useCourseOpen());
+export function CourseMenuHeader({
+  useFunc,
+  setFunc,
+}: {
+  useFunc: string;
+  setFunc: (argv0: string) => void;
+}) {
   const data = useCourseOpen();
   const sections = [
-    { name: "Описание", image: descIcon },
-    { name: "Содержание", image: contentIcon },
-    { name: "Отзывы", image: reviewIcon },
+    {
+      type: "description",
+      name: "Описание",
+      image: descIcon,
+      click: () => {
+        setFunc("description");
+      },
+    },
+    {
+      type: "content",
+      name: "Содержание",
+      image: contentIcon,
+      click: () => {
+        setFunc("content");
+      },
+    },
+    {
+      type: "review",
+      name: "Отзывы",
+      image: reviewIcon,
+      click: () => {
+        setFunc("review");
+      },
+    },
   ];
   return (
     <header class="course-header1">
