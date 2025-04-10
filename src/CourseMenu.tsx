@@ -16,6 +16,8 @@ import arrowDownIcon from "../public/static/icons/arrowDown40x40.svg";
 import { useState } from "@/ourReact/jsx-runtime";
 import GoogleIcon from "./components/GoogleIcon";
 import { GoogleIconType } from "./components/GoogleIcon/GoogleIcon";
+import { getCourseRoadmap } from "./api";
+import { router } from "./router";
 
 export function CourseMenuHeader({
   useFunc,
