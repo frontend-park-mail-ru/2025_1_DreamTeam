@@ -1,7 +1,15 @@
 import "./GoogleIcon.css";
 
-type GoogleIconType = "search" | "home" | "menu";
+export type GoogleIconType = "search" | "home" | "menu" | "play_Lesson";
 
-export default function GoogleIcon({ i }: { i: GoogleIconType }) {
-  return <i class={"google-icon"}>{i}</i>;
+export default function GoogleIcon({
+  i,
+  width,
+  height,
+}: {
+  i: GoogleIconType;
+  width: number;
+  height: number;
+}) {
+  return <i class={`google-icon w-${width} h-${height}`}>{i}</i>;
 }
