@@ -265,6 +265,32 @@ function pluralize(count: number, words: [string, string, string]) {
   return words[2];
 }
 
+function countLessons(parts: Part[]): number {
+  return parts.reduce((lessonCount, part) => {
+    return (
+      lessonCount +
+      part.buckets.reduce((bucketCount, bucket) => {
+        return bucketCount + bucket.lessons.length;
+      }, 0)
+    );
+  }, 0);
+}
+
+function countTests(parts: Part[]): number {
+  return parts.reduce((testCount, part) => {
+    return (
+      testCount +
+      part.buckets.reduce((bucketCount, bucket) => {
+        return (
+          bucketCount +
+          bucket.lessons.filter((lesson) => lesson.lesson_type === "test")
+            .length
+        );
+      }, 0)
+    );
+  }, 0);
+}
+
 export function EnterCourse({
   mark,
   bestMark,
