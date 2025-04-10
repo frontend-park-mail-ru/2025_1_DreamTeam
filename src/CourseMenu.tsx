@@ -118,6 +118,7 @@ export function CourseMenuContent() {
 export type Lesson = {
   lesson_id: number;
   lesson_title: string;
+  lesson_type: string;
   is_done: boolean;
 };
 
