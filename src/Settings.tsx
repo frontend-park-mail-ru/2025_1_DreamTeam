@@ -54,7 +54,10 @@ export function SettingContent() {
 
     if (user === false) {
       console.error("Ошибка в setting");
-      return;
+      // ПРОВЕРИТЬ НА ПРОДЕ ЧТО РАБОТАЕТ КОРРЕКТНО
+      // СНАЧАЛА ПОЛЬЗОВАТЕЛЬ НЕАВТОРИЗОВАН ПОТОМ ХЕДЕР МЕНЯЕТ СТАТУС И ПОЛЬЗОВАТЕЛЬ АВТОРИЗОВАН
+      setLoading(false);
+      return <div>Не авторизован</div>;
     }
 
     setInformation(useUser() as UpdateData);
@@ -63,7 +66,7 @@ export function SettingContent() {
 
   console.log("rerenderSetting");
   if (isLoading) {
-    return <div>Загрузка</div>;
+    return <div class="content">Загрузка</div>;
   }
 
   const save_data = () => {
