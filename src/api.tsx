@@ -1,4 +1,4 @@
-import { UserProfile } from "./App";
+import { CourseOpen, UserProfile } from "./App";
 import { CourseStructure, Part } from "./CourseMenu";
 
 export const IP = "http://217.16.21.64";
@@ -49,6 +49,11 @@ export async function checkAuth(): Promise<UserProfile> {
 export async function getCourses() {
   const data = await apiFetch("/getCourses");
   return data?.bucket_courses || [];
+}
+
+export async function getCourse(id: number): Promise<CourseOpen> {
+  const data = await apiFetch(`/getCourse?courseId=${id}`);
+  return data?.course || {};
 }
 
 export async function fetchLogout() {
