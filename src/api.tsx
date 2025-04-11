@@ -1,3 +1,5 @@
+import { CourseStructure } from "./Class";
+
 export const IP = "http://217.16.21.64";
 export const PORT = "8080";
 
@@ -120,4 +122,31 @@ export async function uploadProfilePhoto(file: File) {
     console.error("Ошибка при загрузке фото", error);
     return false;
   }
+}
+
+export async function getLessons(id: number) : Promise<CourseStructure> {
+  const data = await apiFetch(`/getCourseLesson?courseId=${id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
+  });
+  return data ? data : "Ошибка запроса";
+}
+
+export async function getNextLessons(course_id: number, lesson_id: number) {
+  const data = await apiFetch(`/getNextLesson?courseId=${course_id}&lessonId=${lesson_id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
+  });
+  return data ? data : "Ошибка запроса";
+}
+
+export async function notCompleted(
+  lesson_id: number
+) {
+  const data = await apiFetch("/markLessonAsNotCompleted", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ lesson_id }), // Преобразуем объект в JSON строку
+  });
+  return data ? true : "Ошибка запроса";
 }
