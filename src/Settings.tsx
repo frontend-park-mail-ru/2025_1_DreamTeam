@@ -194,7 +194,12 @@ export function SettingContent() {
                 Загрузить
               </label>
             </form>
-            <a class="text__decoration" ON_click={deletePhoto}>
+            <a
+              class="text__decoration"
+              ON_click={() => {
+                deletePhoto();
+              }}
+            >
               Удалить
             </a>
           </div>
