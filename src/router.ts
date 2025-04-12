@@ -24,6 +24,7 @@ class Router {
         const { state, view, params } = matched;
         setPage(state);
         view();
+        params;
         return;
       }
 
@@ -48,6 +49,7 @@ class Router {
       const { state, view, params } = matched;
       setPage(state);
       view();
+      params;
       return;
     } else {
       this.notFoundView();

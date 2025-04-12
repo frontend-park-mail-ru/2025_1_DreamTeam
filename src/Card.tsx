@@ -2,8 +2,7 @@ import timeIcon from "../public/static/icons/time.svg";
 import heartIcon from "../public/static/icons/heart.svg";
 import userIcon from "../public/static/icons/user.svg";
 import starIcon from "../public/static/icons/star.svg";
-import { setCourseOpen, setPage } from "@/App";
-import testImage from "../public/static/icons/picture-test.png";
+import { setCourseOpen } from "@/App";
 import { router } from "./router";
 
 export function Card({

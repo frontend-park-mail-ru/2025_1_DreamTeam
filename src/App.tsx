@@ -1,20 +1,18 @@
 import { getCourse } from "./api";
-import GoogleIcon from "./components/GoogleIcon";
-import { CourseMenu, Lesson } from "./CourseMenu";
+import { CourseMenu } from "./CourseMenu";
 import Navbar from "./Header";
 import { MainMenuContent, MainMenuHeader } from "./MainMenuContent";
 import NotFoundView from "./nonFound";
-import { defineStore, useState } from "./ourReact/jsx-runtime";
+import { defineStore } from "./ourReact/jsx-runtime";
 import { router } from "./router";
 import { SettingContent, SettingHeader } from "./Settings";
-import WindowLogin from "./WindowLogin";
 export const [useCourseOpen, setCourseOpen] = defineStore(
   "CourseOpen",
   {} as CourseOpen
 );
-export const [useLessonData, setLessonData] = defineStore(
+export const [useLessonID, setLessonID] = defineStore<number | false>(
   "LessonData",
-  {} as Lesson
+  false
 );
 export const [usePage, setPage] = defineStore("Page", "MainMenu");
 export const [useMenu, setMenu] = defineStore("menu", false);

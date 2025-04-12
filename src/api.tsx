@@ -1,5 +1,6 @@
 import { CourseOpen, UserProfile } from "./App";
-import { CourseStructure, Part } from "./CourseMenu";
+import { CourseStructure } from "./CourseMenu";
+import { LessonsStructure } from "./Lesson";
 
 export const IP = "http://217.16.21.64";
 export const PORT = "8080";

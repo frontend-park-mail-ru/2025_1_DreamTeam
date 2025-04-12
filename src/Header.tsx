@@ -2,7 +2,6 @@ import logo from "public/static/icons/logo.svg";
 import search from "public/static/icons/iconSearch.svg";
 import login from "public/static/icons/login.svg";
 import menu from "public/static/icons/menu.svg";
-import testAvatar from "public/static/icons/avatar.png";
 import closeMenu from "public/static/icons/close-menu.svg";
 import profile from "public/static/icons/profile.svg";
 import setting from "public/static/icons/setting.svg";
@@ -12,7 +11,6 @@ import WindowLogin from "./WindowLogin";
 import { createApp } from "./ourReact/jsx-runtime";
 import { checkAuth, fetchLogout } from "./api";
 import {
-  setPage,
   setCourseOpen,
   setUser,
   useUser,
