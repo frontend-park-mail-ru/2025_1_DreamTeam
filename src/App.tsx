@@ -41,6 +41,37 @@ export interface CourseOpen {
   time_to_pass?: number;
 }
 
+router.register("/", "MainMenu", () => {
+  console.log("Главная страница");
+});
+
+router.register("/settings", "Setting", () => {
+  console.log("Настройки");
+});
+
+router.register("/course", "CourseMenu", () => {
+  console.log("Курс");
+});
+
+router.register("/course/{id}", "CourseMenu", async () => {
+  const match = router.matchPathToRoute(location.pathname);
+  const id = Number(match?.params.id);
+
+  if (!isNaN(id)) {
+    const course = await getCourse(id);
+    if (course) {
+      setCourseOpen(course);
+    } else {
+      // TODO: Выводить 404 если не существует курса
+      console.error("курс не найден");
+      setCourseOpen({});
+    }
+  }
+});
+
+router.setNotFoundView(NotFoundView);
+router.start();
+
 export default function App() {
   let header;
   let content;
