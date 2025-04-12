@@ -58,7 +58,7 @@ export function CourseMenuHeader({
       <div class="close-page"></div>
       <div class="header-content">
         <div class="header-info">
-          <div class="course-image"></div>
+          <img class="course-image" src={`${data.src_image}`} alt="" />
           <div class="course-text">
             <div class="course-name">{data.title}</div>
             <div class="course-descriptions">
@@ -130,7 +130,7 @@ export function CourseMenuHeader({
         class="close-page"
         ON_click={() => {
           setCourseOpen({});
-          setPage("MainMenu");
+          router.goByState("MainMenu");
         }}
       >
         <img style={"cursor: pointer;"} src={closeIcon} />
@@ -139,7 +139,8 @@ export function CourseMenuHeader({
   );
 }
 
-export function CourseMenuContent3() {
+export function CourseMenu() {
+  // TODO: Добавить новую логику отрисовки информации через запрос
   const [useStatus, setStatus] = useState("description");
 
   return (
@@ -150,9 +151,9 @@ export function CourseMenuContent3() {
         setFunc={setStatus}
       />
       {useStatus === "description" ? (
-        <CourseMenuContent key="CourseDescription" />
+        <CourseMenuDescription key="CourseDescription" />
       ) : useStatus === "content" ? (
-        <CourseMenuContent2 key="CourseContent" />
+        <CourseMenuContent key="CourseContent" />
       ) : (
         ""
       )}
@@ -160,7 +161,7 @@ export function CourseMenuContent3() {
   );
 }
 
-export function CourseMenuContent() {
+export function CourseMenuDescription() {
   const data = useCourseOpen();
   return (
     <div class="content">
@@ -192,7 +193,7 @@ export type CourseStructure = {
   parts: Part[];
 };
 
-export function CourseMenuContent2() {
+export function CourseMenuContent() {
   const [parts, setParts] = useState<CourseStructure>({ parts: [] });
   const [isLoading, setLoading] = useState(true);
   const courseOpen = useCourseOpen();

@@ -1,11 +1,5 @@
 import GoogleIcon from "./components/GoogleIcon";
-import {
-  CourseMenuContent,
-  CourseMenuContent2,
-  CourseMenuContent3,
-  CourseMenuHeader,
-  CourseStructure,
-} from "./CourseMenu";
+import { CourseMenu, Lesson } from "./CourseMenu";
 import Navbar from "./Header";
 import { MainMenuContent, MainMenuHeader } from "./MainMenuContent";
 import { defineStore, useState } from "./ourReact/jsx-runtime";
@@ -86,7 +80,7 @@ export default function App() {
       break;
     case "CourseMenu":
       header = <div></div>;
-      content = <CourseMenuContent3 key="CourseMenuContent" />;
+      content = <CourseMenu key="CourseMenuContent" />;
       break;
     // case "Profile":
     // header = <ProfileHeader key="ProfileHeader" />;
