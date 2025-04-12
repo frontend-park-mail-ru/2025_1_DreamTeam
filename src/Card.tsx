@@ -26,6 +26,7 @@ export function Card({
   time_to_pass: number;
   tags: string[];
 }) {
+  // TODO: Добавить новую логику открытия курса через запрос
   return (
     <div
       class="card"
@@ -41,10 +42,10 @@ export function Card({
           time_to_pass,
           title,
         });
-        setPage("CourseMenu");
+        router.goByState("CourseMenu");
       }}
     >
-      <div class="picture" style={`background-image: url(${testImage})`}>
+      <div class="picture" style={`background-image: url(${image})`}>
         <div class="descriptions">
           <div class="description">
             <img src={timeIcon} alt="" class="description__icon"></img>

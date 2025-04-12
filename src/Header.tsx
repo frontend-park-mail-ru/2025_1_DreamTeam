@@ -20,6 +20,7 @@ import {
   useMenu,
   UserProfile,
 } from "./App";
+import { router } from "./router";
 
 export default function Navbar() {
   const [isLoading, setIsLoading] = useState(true);
@@ -92,7 +93,7 @@ function Logo() {
         class="logo"
         ON_click={() => {
           setCourseOpen({});
-          setPage("MainMenu");
+          router.goByState("MainMenu");
         }}
       >
         <img src={logo} alt="" class="logo__img"></img>
@@ -157,7 +158,7 @@ function MenuOpen() {
       image: profile,
       click: () => {
         setMenu(false);
-        setPage("Setting");
+        router.goByState("Setting");
       },
     },
     {
@@ -165,7 +166,7 @@ function MenuOpen() {
       image: setting,
       click: () => {
         setMenu(false);
-        setPage("Setting");
+        router.goByState("Setting");
       },
     },
     {
