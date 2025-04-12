@@ -4,6 +4,7 @@ import userIcon from "../public/static/icons/user.svg";
 import starIcon from "../public/static/icons/star.svg";
 import { setCourseOpen, setPage } from "@/App";
 import testImage from "../public/static/icons/picture-test.png";
+import { router } from "./router";
 
 export function Card({
   title,
