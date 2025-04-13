@@ -358,7 +358,13 @@ export function Chapter({
                   <div class="progress__progress-line_type_small">
                     <div class={`line ${subchapterIsDone}`}></div>
                   </div>
-                  <div class="subchapter">
+                  <div
+                    class="subchapter"
+                    ON_click={() => {
+                      setLessonID(subchapter.lessons[0].lesson_id);
+                      router.goToPath(`/course/${useCourseOpen().id}/lessons`);
+                    }}
+                  >
                     <div class="progress__progress-circle_type_small">
                       <div class={`circle w-24 h-24 ${subchapterIsDone}`}></div>
                     </div>
