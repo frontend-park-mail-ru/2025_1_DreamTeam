@@ -176,7 +176,10 @@ function MenuOpen() {
         const result = await fetchLogout();
         if (result) {
           setMenu(false);
-          setUser;
+          setUser(false);
+          if (usePage() === "Setting") {
+            setPage("MainMenu");
+          }
           console.log("успешный выход");
         } else {
           console.error("Ошибка выхода");
