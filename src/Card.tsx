@@ -42,7 +42,7 @@ export function Card({
           time_to_pass,
           title,
         });
-        router.goByState("CourseMenu");
+        router.goToPath(`/course/${id}`);
       }}
     >
       <div class="picture" style={`background-image: url(${image})`}>
