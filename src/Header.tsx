@@ -17,6 +17,9 @@ import {
   setMenu,
   useMenu,
   UserProfile,
+  setLessonID,
+  usePage,
+  setPage,
 } from "./App";
 import { router } from "./router";
 
@@ -90,7 +93,6 @@ function Logo() {
       <div
         class="logo"
         ON_click={() => {
-          setCourseOpen({});
           router.goByState("MainMenu");
         }}
       >
