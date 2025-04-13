@@ -105,10 +105,40 @@ export function CourseMenuHeader({
               >
                 {data.price === 0 ? "Бесплатно" : `${data.price?.toString()} ₽`}
               </div>
-              <div class="course-price-and-button__button">
-                <img class="button__icon" src={addCourseIcon} />
-                Записаться на курс
-              </div>
+              {!data.is_purchased ? (
+                <div
+                  class="course-price-and-button__button"
+                  ON_click={() => {
+                    console.log("Записаться");
+                    const id = data.id;
+                    if (id === undefined) {
+                      console.error("Ошибка");
+                      return;
+                    }
+                    setLessonID(false);
+                    router.goToPath(`/course/${useCourseOpen().id}/lessons`);
+                  }}
+                >
+                  <img class="button__icon" src={addCourseIcon} />
+                  Записаться на курс
+                </div>
+              ) : (
+                <div
+                  class="course-price-and-button__button"
+                  ON_click={() => {
+                    console.log("Записаться");
+                    const id = data.id;
+                    if (id === undefined) {
+                      console.error("Ошибка");
+                      return;
+                    }
+                    setLessonID(false);
+                    router.goToPath(`/course/${useCourseOpen().id}/lessons`);
+                  }}
+                >
+                  Продолжить
+                </div>
+              )}
             </div>
           </div>
         </div>

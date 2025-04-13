@@ -38,6 +38,7 @@ export interface CourseOpen {
   tags?: string[];
   purchases_amount?: number;
   time_to_pass?: number;
+  is_purchased?: boolean;
 }
 
 router.register("/", "MainMenu", () => {
