@@ -1,6 +1,7 @@
-import { getCourse } from "./api";
+import { checkAuth, getCourse, getLessons, validEmail } from "./api";
 import { CourseMenu } from "./CourseMenu";
 import Navbar from "./Header";
+import { LessonPage } from "./Lesson";
 import { MainMenuContent, MainMenuHeader } from "./MainMenuContent";
 import NotFoundView from "./nonFound";
 import { defineStore } from "./ourReact/jsx-runtime";
