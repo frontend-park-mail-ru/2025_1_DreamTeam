@@ -94,6 +94,8 @@ function Logo() {
         class="logo"
         ON_click={() => {
           router.goByState("MainMenu");
+          setCourseOpen({});
+          setLessonID(false);
         }}
       >
         <img src={logo} alt="" class="logo__img"></img>

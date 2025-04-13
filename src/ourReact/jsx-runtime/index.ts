@@ -498,7 +498,15 @@ class ComponentInstance<PropsType extends ComponentPropsType> {
       this.domElement?.elem.parentElement.removeChild(this.domElement.elem);
     }
 
-    this.domElement = undefined;
+    if (storeSubscribersIndex.has(this)) {
+      storeSubscribersIndex.get(this)?.forEach((storeName) => {
+        const storeSubs = storeSubscribers.get(storeName);
+        if (storeSubs != undefined) {
+          storeSubs.delete(this);
+        }
+      });
+      storeSubscribersIndex.delete(this);
+    }
   }
 }
 
