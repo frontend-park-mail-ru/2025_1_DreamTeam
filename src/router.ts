@@ -93,6 +93,19 @@ class Router {
     return null;
   }
 
+  goToPath(path: string) {
+    const matched = this.matchPathToRoute(path);
+
+    if (matched) {
+      const { state, view, params } = matched;
+      setPage(state);
+      history.pushState({ page: state }, "", path);
+      view();
+    } else {
+      this.notFoundView();
+    }
+  }
+
   back() {
     history.back();
   }
