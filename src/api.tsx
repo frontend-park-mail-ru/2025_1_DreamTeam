@@ -151,7 +151,7 @@ export async function getCourseRoadmap(
 
 export async function getLessons(
   id: number
-): Promise<LessonsStructure | string> {
+): Promise<LessonsStructure | undefined> {
   const data = await apiFetch(`/getCourseLesson?courseId=${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
