@@ -101,24 +101,31 @@ export function LessonPage() {
   const [text, setText] = useState<LessonsStructure>(exam);
   const [isLoading, setLoading] = useState(true);
   if (isLoading) {
-    const id = useLessonID();
-    if (id === false) {
-      console.error(id);
-      return <div>Ошибка</div>;
-    }
     const courseId = useCourseOpen().id;
     if (courseId === undefined) {
       console.error("Ошибка");
       return <div>Ошибка</div>;
     }
-    getNextLessons(courseId, id).then((result) => {
-      if (typeof result === "string") {
-        console.error(result);
-        return <div>Ошибка</div>;
-      }
-      setText(result);
-      setLoading(false);
-    });
+    const id = useLessonID();
+    if (id === false) {
+      getLessons(courseId).then((result) => {
+        if (result === undefined) {
+          console.error(result);
+          return <div>Ошибка</div>;
+        }
+        setText(result);
+        setLoading(false);
+      });
+    } else {
+      getNextLessons(courseId, id).then((result) => {
+        if (typeof result === "string") {
+          console.error(result);
+          return <div>Ошибка</div>;
+        }
+        setText(result);
+        setLoading(false);
+      });
+    }
   }
   if (isLoading) {
     console.log("loading");
