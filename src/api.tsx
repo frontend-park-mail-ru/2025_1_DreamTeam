@@ -156,7 +156,7 @@ export async function getLessons(
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
-  return data ? data : "Ошибка запроса";
+  return data ? data : undefined;
 }
 
 export async function getNextLessons(course_id: number, lesson_id: number) {
@@ -185,4 +185,12 @@ export async function deletePhoto() {
     headers: { "Content-Type": "application/json" },
   });
   return data ? true : "Ошибка удаления";
+}
+
+export async function validEmail(token: string) {
+  const data = await apiFetch(`/validEmail?token=${token}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  return data ? data : undefined;
 }
