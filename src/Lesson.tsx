@@ -255,7 +255,12 @@ export function LessonContentText({
           page_id={pagesPrev}
           type="Предыдущая"
           onClick={() => {
-            getNextLessons(1, pagesPrev).then((result) => {
+            const courseId = useCourseOpen().id;
+            if (courseId === undefined) {
+              console.error("Course не определён");
+              return;
+            }
+            getNextLessons(courseId, pagesPrev).then((result) => {
               setText(result);
             });
           }}
