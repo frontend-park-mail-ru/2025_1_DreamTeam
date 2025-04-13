@@ -1,7 +1,8 @@
 import { useState } from "./ourReact/jsx-runtime";
 import Validate from "./validate";
-import { loginUser, registerUser } from "./api";
+import { checkAuth, loginUser, registerUser } from "./api";
 import InputWithValidation from "@/components/InputWithValidation";
+import { setUser } from "./App";
 
 export interface FieldState {
   value: string;
@@ -189,6 +190,19 @@ async function signup(formData: FormData, setErrorAuth: Function) {
 
   if (result) {
     setErrorAuth("Успешная регистрация");
+    checkAuth().then((data) => {
+      if (data === false) {
+        return;
+      }
+      console.log(data);
+      setUser({
+        name: data.name,
+        email: data.email,
+        bio: data.bio,
+        avatar_src: data.avatar_src,
+        hide_email: data.hide_email,
+      });
+    });
     closeWindow();
   }
 
@@ -219,6 +233,19 @@ async function login(formData: FormData, setErrorAuth: Function) {
 
   if (result === true) {
     setErrorAuth("Успешный вход");
+    checkAuth().then((data) => {
+      if (data === false) {
+        return;
+      }
+      console.log(data);
+      setUser({
+        name: data.name,
+        email: data.email,
+        bio: data.bio,
+        avatar_src: data.avatar_src,
+        hide_email: data.hide_email,
+      });
+    });
     closeWindow();
   } else {
     setErrorAuth("Неправильные данные");
