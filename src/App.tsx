@@ -48,10 +48,6 @@ router.register("/settings", "Setting", () => {
   console.log("Настройки");
 });
 
-router.register("/course", "CourseMenu", () => {
-  console.log("Курс");
-});
-
 router.register("/course/{id}", "CourseMenu", async () => {
   const match = router.matchPathToRoute(location.pathname);
   const id = Number(match?.params.id);
@@ -147,6 +143,10 @@ export default function App() {
     case "CourseMenu":
       header = <div></div>;
       content = <CourseMenu key="CourseMenuContent" />;
+      break;
+    case "Lessons":
+      header = <div></div>;
+      content = <LessonPage key="LessonsContent" />;
       break;
     // case "Profile":
     // header = <ProfileHeader key="ProfileHeader" />;
