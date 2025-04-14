@@ -1,0 +1,65 @@
+import ButtonMenu from "@/ui/ButtonMenu";
+import closeMenu from "Public/static/icons/close-menu.svg";
+import profile from "Public/static/icons/profile.svg";
+import setting from "Public/static/icons/setting.svg";
+import logout from "Public/static/icons/logout.svg";
+import { fetchLogout } from "@/api";
+import { setMenu, setPage, setUser, usePage } from "@/App";
+import { router } from "@/router";
+
+export default function MenuOpen() {
+  const arrayButtons = [
+    {
+      name: "Свернуть",
+      image: closeMenu,
+      click: () => {
+        setMenu(false);
+      },
+    },
+    {
+      name: "Профиль",
+      image: profile,
+      click: () => {
+        setMenu(false);
+        router.goByState("Setting");
+      },
+    },
+    {
+      name: "Настройки",
+      image: setting,
+      click: () => {
+        setMenu(false);
+        router.goByState("Setting");
+      },
+    },
+    {
+      name: "Выйти",
+      image: logout,
+      click: async () => {
+        const result = await fetchLogout();
+        if (result) {
+          setMenu(false);
+          setUser(false);
+          if (usePage() === "Setting") {
+            setPage("MainMenu");
+          }
+          console.log("успешный выход");
+        } else {
+          console.error("Ошибка выхода");
+        }
+      },
+    },
+  ];
+  return (
+    <div class="block-menu">
+      {arrayButtons.map((button, index) => (
+        <ButtonMenu
+          key={`button-menu-${index}`}
+          name={button.name}
+          image={button.image}
+          click={button.click}
+        />
+      ))}
+    </div>
+  );
+}
