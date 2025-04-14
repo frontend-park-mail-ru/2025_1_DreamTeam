@@ -90,7 +90,7 @@ export default function SettingContent() {
               setInformationState("hide_email", event.target.checked);
             }}
           />
-          Сделать профиль приватным
+          Не отправлять письма на почту
         </div>
       </div>
       <div class="strings">
