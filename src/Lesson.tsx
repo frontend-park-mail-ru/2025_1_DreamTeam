@@ -278,7 +278,12 @@ export function LessonContentText({
           page_id={pagesNext}
           type="Следующая"
           onClick={() => {
-            getNextLessons(1, pagesNext).then((result) => {
+            const courseId = useCourseOpen().id;
+            if (courseId === undefined) {
+              console.error("Course не определён");
+              return;
+            }
+            getNextLessons(courseId, pagesNext).then((result) => {
               setText(result);
             });
           }}
