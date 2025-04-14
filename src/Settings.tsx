@@ -1,5 +1,10 @@
 import { useState } from "./ourReact/jsx-runtime";
-import { getAuthorizedUser, updateProfile, uploadProfilePhoto } from "./api";
+import {
+  deletePhoto,
+  getAuthorizedUser,
+  updateProfile,
+  uploadProfilePhoto,
+} from "./api";
 import { setUser, useUser } from "./App";
 import { info } from "console";
 // TODO: Добавить валидатор у инпутов
@@ -207,5 +212,3 @@ export function SettingContent() {
     </div>
   );
 }
-
-function deletePhoto() {}
