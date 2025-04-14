@@ -1,12 +1,13 @@
-import { checkAuth, getCourse, getLessons, validEmail } from "./api";
-import { CourseMenu } from "./CourseMenu";
-import Navbar from "./Header";
-import { LessonPage } from "./Lesson";
-import { MainMenuContent, MainMenuHeader } from "./MainMenuContent";
-import NotFoundView from "./nonFound";
-import { defineStore } from "./ourReact/jsx-runtime";
-import { router } from "./router";
-import { SettingContent, SettingHeader } from "./Settings";
+import { checkAuth, getCourse, getLessons, validEmail } from "@/api";
+import CourseMenu from "@/pages/CourseMenu";
+import Navbar from "@/modules/Navbar/Navbar";
+import LessonPage from "@/pages/Lesson";
+import NotFoundView from "@/nonFound";
+import Settings from "@/pages/Settings";
+import MainMenu from "@/pages/MainMenuContent";
+import { defineStore } from "@/ourReact/jsx-runtime";
+import { router } from "@/router";
+import { UserProfile } from "@/types/users";
 export const [useCourseOpen, setCourseOpen] = defineStore(
   "CourseOpen",
   {} as CourseOpen

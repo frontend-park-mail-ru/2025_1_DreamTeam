@@ -6,7 +6,6 @@ import {
   uploadProfilePhoto,
 } from "./api";
 import { setUser, useUser } from "./App";
-import { info } from "console";
 // TODO: Добавить валидатор у инпутов
 
 type UpdateData = {

@@ -1,7 +1,7 @@
-import timeIcon from "../public/static/icons/time.svg";
-import heartIcon from "../public/static/icons/heart.svg";
-import userIcon from "../public/static/icons/user.svg";
-import starIcon from "../public/static/icons/star.svg";
+import timeIcon from "Public/static/icons/time.svg";
+import heartIcon from "Public/static/icons/heart.svg";
+import userIcon from "Public/static/icons/user.svg";
+import starIcon from "Public/static/icons/star.svg";
 import { setCourseOpen } from "@/App";
 import { router } from "./router";
 

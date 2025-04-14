@@ -5,20 +5,20 @@ import {
   setPage,
   useCourseOpen,
 } from "./App";
-import starIcon from "../public/static/icons/star.svg";
-import timeIcon from "../public/static/icons/time.svg";
-import userIcon from "../public/static/icons/user.svg";
-import addCourseIcon from "../public/static/icons/addCourse.svg";
-import descIcon from "../public/static/icons/descriptionCourse.svg";
-import contentIcon from "../public/static/icons/contentCourse.svg";
-import reviewIcon from "../public/static/icons/reviewsCourse.svg";
-import closeIcon from "../public/static/icons/closeCourse.svg";
-import countMarkIcon from "../public/static/icons/courseCountMark.svg";
-import countBestMarkIcon from "../public/static/icons/courseCountBestMark.svg";
-import countTestIcon from "../public/static/icons/courseCountTest.svg";
-import countTimeVideoIcon from "../public/static/icons/courseCountTimeVideo.svg";
-import countLessonIcon from "../public/static/icons/courseCountLesson.svg";
-import arrowDownIcon from "../public/static/icons/arrowDown40x40.svg";
+import starIcon from "Public/static/icons/star.svg";
+import timeIcon from "Public/static/icons/time.svg";
+import userIcon from "Public/static/icons/user.svg";
+import addCourseIcon from "Public/static/icons/addCourse.svg";
+import descIcon from "Public/static/icons/descriptionCourse.svg";
+import contentIcon from "Public/static/icons/contentCourse.svg";
+import reviewIcon from "Public/static/icons/reviewsCourse.svg";
+import closeIcon from "Public/static/icons/closeCourse.svg";
+import countMarkIcon from "Public/static/icons/courseCountMark.svg";
+import countBestMarkIcon from "Public/static/icons/courseCountBestMark.svg";
+import countTestIcon from "Public/static/icons/courseCountTest.svg";
+import countTimeVideoIcon from "Public/static/icons/courseCountTimeVideo.svg";
+import countLessonIcon from "Public/static/icons/courseCountLesson.svg";
+import arrowDownIcon from "Public/static/icons/arrowDown40x40.svg";
 import { useState } from "@/ourReact/jsx-runtime";
 import GoogleIcon from "./components/GoogleIcon";
 import { GoogleIconType } from "./components/GoogleIcon/GoogleIcon";

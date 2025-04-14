@@ -1,11 +1,11 @@
-import logo from "public/static/icons/logo.svg";
-import search from "public/static/icons/iconSearch.svg";
-import login from "public/static/icons/login.svg";
-import menu from "public/static/icons/menu.svg";
-import closeMenu from "public/static/icons/close-menu.svg";
-import profile from "public/static/icons/profile.svg";
-import setting from "public/static/icons/setting.svg";
-import logout from "public/static/icons/logout.svg";
+import logo from "Public/static/icons/logo.svg";
+import search from "Public/static/icons/iconSearch.svg";
+import login from "Public/static/icons/login.svg";
+import menu from "Public/static/icons/menu.svg";
+import closeMenu from "Public/static/icons/close-menu.svg";
+import profile from "Public/static/icons/profile.svg";
+import setting from "Public/static/icons/setting.svg";
+import logout from "Public/static/icons/logout.svg";
 import { useState } from "./ourReact/jsx-runtime";
 import WindowLogin from "./WindowLogin";
 import { createApp } from "./ourReact/jsx-runtime";
@@ -16,12 +16,12 @@ import {
   useUser,
   setMenu,
   useMenu,
-  UserProfile,
   setLessonID,
   usePage,
   setPage,
 } from "./App";
 import { router } from "./router";
+import { UserProfile } from "./types/users";
 
 export default function Navbar() {
   const [isLoading, setIsLoading] = useState(true);
