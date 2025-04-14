@@ -1,6 +1,5 @@
-import { CourseOpen } from "@/App";
-import { CourseStructure } from "@/CourseMenu";
-import { LessonsStructure } from "@/Lesson";
+import { CourseOpen, CourseStructure } from "@/types/courseMenu";
+import { LessonsStructure } from "@/types/lesson";
 import { UserProfile } from "@/types/users";
 
 export const IP = "http://217.16.21.64";
