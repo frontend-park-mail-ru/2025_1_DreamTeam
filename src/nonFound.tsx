@@ -1,4 +1,4 @@
-export default function NotFoundView() {
+const NotFoundView = () => {
   return (
     <div class="content">
       <h1>404</h1>
@@ -6,3 +6,5 @@ export default function NotFoundView() {
     </div>
   );
 }
+
+export default NotFoundView;

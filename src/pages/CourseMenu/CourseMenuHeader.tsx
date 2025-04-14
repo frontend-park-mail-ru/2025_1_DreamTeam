@@ -9,13 +9,13 @@ import reviewIcon from "Public/static/icons/reviewsCourse.svg";
 import closeIcon from "Public/static/icons/closeCourse.svg";
 import { router } from "@/router";
 
-export default function CourseMenuHeader({
+const CourseMenuHeader = ({
   useFunc,
   setFunc,
 }: {
   useFunc: string;
   setFunc: (argv0: string) => void;
-}) {
+}) => {
   const data = useCourseOpen();
   const sections = [
     {
@@ -158,3 +158,5 @@ export default function CourseMenuHeader({
     </header>
   );
 }
+
+export default CourseMenuHeader;

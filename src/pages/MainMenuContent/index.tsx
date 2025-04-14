@@ -1,7 +1,7 @@
 import MainMenuContent from "./MainMenuContent";
 import MainMenuHeader from "./MainMenuHeader";
 
-export default function MainMenu() {
+const MainMenu = () => {
   return (
     <div>
       <MainMenuHeader key="MainMenuHeader" />
@@ -9,3 +9,5 @@ export default function MainMenu() {
     </div>
   );
 }
+
+export default MainMenu;

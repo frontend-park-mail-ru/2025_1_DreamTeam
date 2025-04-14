@@ -3,7 +3,7 @@ import { deletePhoto, updateProfile, uploadProfilePhoto } from "@/api";
 import { setUser, useUser } from "@/App";
 import { UpdateData } from "@/types/users";
 
-export default function SettingContent() {
+const SettingContent = () => {
   const [information, setInformation] = useState<UpdateData>({
     name: "",
     email: "",
@@ -160,3 +160,5 @@ export default function SettingContent() {
     </div>
   );
 }
+
+export default SettingContent;

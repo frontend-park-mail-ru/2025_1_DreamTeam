@@ -1,7 +1,7 @@
 import SettingContent from "./SettingsContent";
 import SettingsHeader from "./SettingsHeader";
 
-export default function Settings() {
+const Settings = () => {
   return (
     <div>
       <SettingsHeader key="SettingsHeader" />
@@ -9,3 +9,5 @@ export default function Settings() {
     </div>
   );
 }
+
+export default Settings;

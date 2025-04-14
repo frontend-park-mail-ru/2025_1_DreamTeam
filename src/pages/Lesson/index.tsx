@@ -54,7 +54,7 @@ let exam = {
   },
 };
 
-export default function LessonPage() {
+const LessonPage = () =>  {
   const [text, setText] = useState<LessonsStructure>(exam);
   const [isLoading, setLoading] = useState(true);
   if (isLoading) {
@@ -115,3 +115,5 @@ export default function LessonPage() {
     </div>
   );
 }
+
+export default LessonPage;

@@ -2,7 +2,7 @@ import CourseMenuHeader from "./CourseMenuHeader";
 import { CourseMenuContent, CourseMenuDescription } from "./CourseMenuContent";
 import { useState } from "@/ourReact/jsx-runtime";
 
-export default function CourseMenu() {
+const CourseMenu = () => {
   // TODO: Добавить новую логику отрисовки информации через запрос
   const [useStatus, setStatus] = useState("description");
 
@@ -23,3 +23,5 @@ export default function CourseMenu() {
     </div>
   );
 }
+
+export default CourseMenu;

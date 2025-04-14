@@ -19,7 +19,7 @@ export interface Course {
   tags: string[];
 }
 
-async function apiFetch(url: string, options = {}) {
+const apiFetch = async (url: string, options = {}) => {
   try {
     const response = await fetch(`${IP}:${PORT}/api${url}`, {
       credentials: "include",
@@ -38,7 +38,7 @@ async function apiFetch(url: string, options = {}) {
   }
 }
 
-export async function checkAuth(): Promise<UserProfile> {
+export const checkAuth = async (): Promise<UserProfile> => {
   const data = await apiFetch("/isAuthorized");
   if (data && !data.error) {
     console.log("✅ Пользователь авторизован");
@@ -48,21 +48,21 @@ export async function checkAuth(): Promise<UserProfile> {
   return false;
 }
 
-export async function getCourses() {
+export const getCourses = async () => {
   const data = await apiFetch("/getCourses");
   return data?.bucket_courses || [];
 }
 
-export async function getCourse(id: number): Promise<CourseOpen> {
+export const getCourse = async (id: number): Promise<CourseOpen> => {
   const data = await apiFetch(`/getCourse?courseId=${id}`);
   return data?.course || {};
 }
 
-export async function fetchLogout() {
+export const fetchLogout = async () => {
   return (await apiFetch("/logout")) !== null;
 }
 
-export async function loginUser(email: string, password: string) {
+export const loginUser = async (email: string, password: string) =>{
   const data = await apiFetch("/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -71,11 +71,11 @@ export async function loginUser(email: string, password: string) {
   return data ? true : "Ошибка авторизации";
 }
 
-export async function registerUser(
+export const registerUser = async (
   email: string,
   name: string,
   password: string
-) {
+) => {
   const data = await apiFetch("/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -84,13 +84,13 @@ export async function registerUser(
   return data ? true : "Ошибка регистрации";
 }
 
-export async function updateProfile(
+export const updateProfile = async (
   image: string,
   bio: string,
   email: string,
   hide_email: boolean,
   name: string
-) {
+) => {
   const data = await apiFetch("/updateProfile", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -99,7 +99,7 @@ export async function updateProfile(
   return data ? true : "Ошибка запроса";
 }
 
-export async function getAuthorizedUser() {
+export const getAuthorizedUser = async () => {
   console.log("authFetch");
   const data = await apiFetch("/isAuthorized", {
     method: "GET",
@@ -116,7 +116,7 @@ export async function getAuthorizedUser() {
       };
 }
 
-export async function uploadProfilePhoto(file: File) {
+export const uploadProfilePhoto = async (file: File) => {
   console.log("ok");
   const formData = new FormData();
 
@@ -143,16 +143,16 @@ export async function uploadProfilePhoto(file: File) {
   }
 }
 
-export async function getCourseRoadmap(
+export const getCourseRoadmap = async (
   courseId: number
-): Promise<CourseStructure> {
+): Promise<CourseStructure> => {
   const data = await apiFetch(`/getCourseRoadmap?courseId=${courseId}`);
   return data?.course_roadmap || { parts: [] };
 }
 
-export async function getLessons(
+export const getLessons = async (
   id: number
-): Promise<LessonsStructure | undefined> {
+): Promise<LessonsStructure | undefined> => {
   const data = await apiFetch(`/getCourseLesson?courseId=${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -160,7 +160,7 @@ export async function getLessons(
   return data ? data : undefined;
 }
 
-export async function getNextLessons(course_id: number, lesson_id: number) {
+export const getNextLessons = async (course_id: number, lesson_id: number) => {
   const data = await apiFetch(
     `/getNextLesson?courseId=${course_id}&lessonId=${lesson_id}`,
     {
@@ -171,7 +171,7 @@ export async function getNextLessons(course_id: number, lesson_id: number) {
   return data ? data : "Ошибка запроса";
 }
 
-export async function notCompleted(lesson_id: number) {
+export const notCompleted = async(lesson_id: number) => {
   const data = await apiFetch("/markLessonAsNotCompleted", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -180,7 +180,7 @@ export async function notCompleted(lesson_id: number) {
   return data ? true : "Ошибка запроса";
 }
 
-export async function deletePhoto() {
+export const deletePhoto = async () => {
   const data = await apiFetch("/deleteProfilePhoto", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -188,7 +188,7 @@ export async function deletePhoto() {
   return data ? true : "Ошибка удаления";
 }
 
-export async function validEmail(token: string) {
+export const validEmail = async (token: string) => {
   const data = await apiFetch(`/validEmail?token=${token}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },

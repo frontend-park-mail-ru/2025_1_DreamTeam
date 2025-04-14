@@ -1,6 +1,6 @@
 import videoIcon from "Public/static/icons/stepVideo.svg";
 
-export default function ButtonCourse({
+const ButtonCourse = ({
   is_done,
   type,
   onClick,
@@ -12,7 +12,7 @@ export default function ButtonCourse({
   onClick: Function;
   current_lesson_id: number;
   lesson_id: number;
-}) {
+}) => {
   const isCurrent = current_lesson_id === lesson_id;
   return (
     <button
@@ -29,3 +29,5 @@ export default function ButtonCourse({
     </button>
   );
 }
+
+export default ButtonCourse;

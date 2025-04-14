@@ -6,7 +6,7 @@ import { EnterCourse } from "@/modules/EnterCourse/EnterCourse";
 import countTests from "@/modules/EnterCourse/logic/countTests";
 import countLessons from "@/modules/EnterCourse/logic/countLessons";
 
-export function CourseMenuDescription() {
+export const CourseMenuDescription = () => {
   const data = useCourseOpen();
   return (
     <div class="content">

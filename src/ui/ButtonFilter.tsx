@@ -1,4 +1,4 @@
-export default function ButtonFilter({
+const ButtonFilter = ({
   name,
   image,
   onClick,
@@ -6,7 +6,7 @@ export default function ButtonFilter({
   name: string;
   image: string;
   onClick: Function;
-}) {
+}) => {
   return (
     <div class="filter--type--selector" ON_click={onClick}>
       {name}
@@ -14,3 +14,5 @@ export default function ButtonFilter({
     </div>
   );
 }
+
+export default ButtonFilter;

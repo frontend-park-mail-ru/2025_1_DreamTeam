@@ -1,4 +1,4 @@
-export default function SettingsHeader() {
+const SettingsHeader = () => {
   return (
     <header class="changes">
       <div class="headlines">Настройки</div>
@@ -23,3 +23,5 @@ export default function SettingsHeader() {
     </header>
   );
 }
+
+export default SettingsHeader;
