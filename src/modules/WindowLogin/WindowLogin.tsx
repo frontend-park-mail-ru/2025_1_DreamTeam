@@ -1,22 +1,10 @@
-import { useState } from "./ourReact/jsx-runtime";
-import Validate from "./validate";
-import { checkAuth, loginUser, registerUser } from "./api";
 import InputWithValidation from "@/components/InputWithValidation";
-import { setUser } from "./App";
-
-export interface FieldState {
-  value: string;
-  isValid: boolean[];
-  errorMessage: string[];
-}
-
-export type FormData = {
-  emailField: FieldState;
-  nameField: FieldState;
-  passwordField: FieldState;
-  passwordAdmitField: FieldState;
-  [key: string]: FieldState;
-};
+import { useState } from "@/ourReact/jsx-runtime";
+import { FieldState, FormData } from "@/types/WindowLogin";
+import Validate from "@/validate";
+import closeWindow from "./logic/closeWindow";
+import signup from "./logic/signup";
+import login from "./logic/login";
 
 export default function WindowLogin() {
   console.log("I am rerendering");
@@ -149,105 +137,4 @@ export default function WindowLogin() {
       </div>
     </div>
   );
-}
-
-function closeWindow() {
-  const blur = document.getElementById("blur") as Element;
-  blur.innerHTML = "";
-}
-
-// TODO: Вывод конкретной причины ошибки(Неправильный данные, занятая почта и тд)
-// TODO: Закрыть окно и рендер header, чтобы увидеть автар и имя пользователя
-async function signup(formData: FormData, setErrorAuth: Function) {
-  const emailError = formData.emailField.isValid.includes(false);
-  const nameError = formData.nameField.isValid.includes(false);
-  const passwordError = formData.passwordField.isValid.includes(false);
-  const passwordAdmitError =
-    formData.passwordAdmitField.isValid.includes(false);
-
-  if (emailError || nameError || passwordError || passwordAdmitError) {
-    console.error("Ошибка регистрации");
-    setErrorAuth("Поля заполнены не корректно");
-    return;
-  }
-
-  const email = formData.emailField.value;
-  const name = formData.nameField.value;
-  const password = formData.passwordField.value;
-  const passwordAdmit = formData.passwordAdmitField.value;
-
-  if (password !== passwordAdmit) {
-    setErrorAuth("Пароли не совпадают");
-    return;
-  }
-
-  if (!email || !name || !password || !passwordAdmit) {
-    setErrorAuth("Заполните все поля");
-    return;
-  }
-
-  const result = await registerUser(email, name, password);
-
-  if (result) {
-    setErrorAuth("Успешная регистрация");
-    checkAuth().then((data) => {
-      if (data === false) {
-        return;
-      }
-      console.log(data);
-      setUser({
-        name: data.name,
-        email: data.email,
-        bio: data.bio,
-        avatar_src: data.avatar_src,
-        hide_email: data.hide_email,
-      });
-    });
-    closeWindow();
-  }
-
-  return;
-}
-
-// TODO: Вывод конкретной причины ошибки(Неправильный данные, занятая почта и тд)
-// TODO: Закрыть окно и рендер header, чтобы увидеть автар и имя пользователя
-async function login(formData: FormData, setErrorAuth: Function) {
-  const emailError = formData.emailField.isValid.includes(false);
-  const passwordError = formData.passwordField.isValid.includes(false);
-
-  if (emailError || passwordError) {
-    console.error("Ошибка входа");
-    setErrorAuth("Поля заполнены не корректно");
-    return;
-  }
-
-  const email = formData.emailField.value;
-  const password = formData.passwordField.value;
-
-  if (!email || !password) {
-    setErrorAuth("Заполните все поля");
-    return;
-  }
-
-  const result = await loginUser(email, password);
-
-  if (result === true) {
-    setErrorAuth("Успешный вход");
-    checkAuth().then((data) => {
-      if (data === false) {
-        return;
-      }
-      console.log(data);
-      setUser({
-        name: data.name,
-        email: data.email,
-        bio: data.bio,
-        avatar_src: data.avatar_src,
-        hide_email: data.hide_email,
-      });
-    });
-    closeWindow();
-  } else {
-    setErrorAuth("Неправильные данные");
-  }
 }
