@@ -5,7 +5,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src/"),
-      "public": path.resolve(__dirname, "public"),
+      Public: path.resolve(__dirname, "public"),
     },
   },
   plugins: [],
