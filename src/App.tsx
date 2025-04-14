@@ -20,16 +20,6 @@ export const [usePage, setPage] = defineStore("Page", "MainMenu");
 export const [useMenu, setMenu] = defineStore("menu", false);
 export const [useUser, setUser] = defineStore("auth", false as UserProfile);
 
-export type UserProfile =
-  | {
-      name: string;
-      email: string;
-      bio: string;
-      avatar_src: string;
-      hide_email: boolean;
-    }
-  | false;
-
 export interface CourseOpen {
   title?: string;
   description?: string;
