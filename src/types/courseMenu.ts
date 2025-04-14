@@ -20,3 +20,16 @@ export type Part = {
 export type CourseStructure = {
   parts: Part[];
 };
+
+export interface CourseOpen {
+  title?: string;
+  description?: string;
+  id?: number;
+  price?: number;
+  rating?: number;
+  src_image?: string;
+  tags?: string[];
+  purchases_amount?: number;
+  time_to_pass?: number;
+  is_purchased?: boolean;
+}

@@ -20,17 +20,15 @@ export const [usePage, setPage] = defineStore("Page", "MainMenu");
 export const [useMenu, setMenu] = defineStore("menu", false);
 export const [useUser, setUser] = defineStore("auth", false as UserProfile);
 
-export interface CourseOpen {
-  title?: string;
-  description?: string;
-  id?: number;
-  price?: number;
-  rating?: number;
-  src_image?: string;
-  tags?: string[];
-  purchases_amount?: number;
-  time_to_pass?: number;
-  is_purchased?: boolean;
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/sw.js", { scope: "/" })
+    .then((registration) => {
+      console.log("SW registration OK:", registration);
+    })
+    .catch((err) => {
+      console.log("SW registration FAIL:", err);
+    });
 }
 
 router.register("/", "MainMenu", () => {
