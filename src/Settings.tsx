@@ -56,8 +56,7 @@ export function SettingContent() {
       console.error("Ошибка в setting");
       // ПРОВЕРИТЬ НА ПРОДЕ ЧТО РАБОТАЕТ КОРРЕКТНО
       // СНАЧАЛА ПОЛЬЗОВАТЕЛЬ НЕАВТОРИЗОВАН ПОТОМ ХЕДЕР МЕНЯЕТ СТАТУС И ПОЛЬЗОВАТЕЛЬ АВТОРИЗОВАН
-      setLoading(false);
-      return <div>Не авторизован</div>;
+      return <div class="content dont-content">Не авторизован</div>;
     }
 
     setInformation(useUser() as UpdateData);
