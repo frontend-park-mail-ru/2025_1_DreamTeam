@@ -8,6 +8,7 @@ import MainMenu from "@/pages/MainMenuContent";
 import { defineStore } from "@/ourReact/jsx-runtime";
 import { router } from "@/router";
 import { UserProfile } from "@/types/users";
+import { CourseOpen } from "@/types/courseMenu";
 export const [useCourseOpen, setCourseOpen] = defineStore(
   "CourseOpen",
   {} as CourseOpen
