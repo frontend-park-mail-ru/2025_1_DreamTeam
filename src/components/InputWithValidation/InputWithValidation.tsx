@@ -1,7 +1,7 @@
 // TODO: Чтобы рендер не сбивал фокус и при наведении на иконку ошибки сделать tooltrip
 
 import { FieldState } from "@/WindowLogin";
-import error from "public/static/icons/error.svg";
+import error from "Public/static/icons/error.svg";
 import "./InputWithValidation.css";
 
 // Решить проблемы с перерисовкой всех элементов, даже если меняется один
