@@ -121,32 +121,26 @@ router.setNotFoundView(NotFoundView);
 router.start();
 
 export default function App() {
-  let header;
   let content;
   switch (usePage()) {
     case "MainMenu":
-      header = <MainMenuHeader key="MainMenuHeader" />;
-      content = <MainMenuContent key="MainMenuContent" />;
+      content = <MainMenu key="MainMenu" />;
       break;
     case "Setting":
-      header = <SettingHeader key="SettingHeader" />;
-      content = <SettingContent key="SettingContent" />;
+      content = <Settings key="Settings" />;
       break;
     case "CourseMenu":
-      header = <div></div>;
-      content = <CourseMenu key="CourseMenuContent" />;
+      content = <CourseMenu key="CourseMenu" />;
       break;
     case "Lessons":
-      header = <div></div>;
-      content = <LessonPage key="LessonsContent" />;
+      content = <LessonPage key="LessonsPage" />;
       break;
     // case "Profile":
     // header = <ProfileHeader key="ProfileHeader" />;
     // content = <ProfileContent key="ProfileContent" />;
     //    break;
     default:
-      header = <MainMenuHeader key="MainMenuHeader" />;
-      content = <MainMenuContent key="MainMenuContent" />;
+      content = <MainMenu key="MainMenu" />;
       break;
   }
   // return (
@@ -159,7 +153,6 @@ export default function App() {
   return (
     <div>
       <Navbar key="MainHeader" />
-      {header}
       {content}
     </div>
   );
