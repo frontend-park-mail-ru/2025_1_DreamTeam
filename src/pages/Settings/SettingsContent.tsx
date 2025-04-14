@@ -1,48 +1,9 @@
-import { useState } from "./ourReact/jsx-runtime";
-import {
-  deletePhoto,
-  getAuthorizedUser,
-  updateProfile,
-  uploadProfilePhoto,
-} from "./api";
-import { setUser, useUser } from "./App";
-// TODO: Добавить валидатор у инпутов
+import { useState } from "@/ourReact/jsx-runtime";
+import { deletePhoto, updateProfile, uploadProfilePhoto } from "@/api";
+import { setUser, useUser } from "@/App";
+import { UpdateData } from "@/types/users";
 
-type UpdateData = {
-  name: string;
-  email: string;
-  bio: string;
-  hide_email: boolean;
-  avatar_src: string;
-};
-
-export function SettingHeader() {
-  return (
-    <header class="changes">
-      <div class="headlines">Настройки</div>
-      <div class="change-select">
-        <button class="choose--type--button" style="width: 314px;">
-          <img
-            src="../static/icons/user_settings.svg"
-            alt=""
-            class="editing__icon"
-          />
-          Редактирование профиля
-        </button>
-        <button class="choose--type--button" style="width: 218px;">
-          <img src="../static/icons/mail.svg" alt="" class="editing__icon" />
-          Изменить почту
-        </button>
-        <button class="choose--type--button" style="width: 232px;">
-          <img src="../static/icons/lock.svg" alt="" class="editing__icon" />
-          Изменить пароль
-        </button>
-      </div>
-    </header>
-  );
-}
-
-export function SettingContent() {
+export default function SettingContent() {
   const [information, setInformation] = useState<UpdateData>({
     name: "",
     email: "",
@@ -50,27 +11,15 @@ export function SettingContent() {
     hide_email: false,
     avatar_src: "",
   });
-
-  const [isLoading, setLoading] = useState(true);
   console.log(information);
-  if (isLoading) {
-    const user = useUser();
+  const user = useUser();
 
-    if (user === false) {
-      console.error("Ошибка в setting");
-      // ПРОВЕРИТЬ НА ПРОДЕ ЧТО РАБОТАЕТ КОРРЕКТНО
-      // СНАЧАЛА ПОЛЬЗОВАТЕЛЬ НЕАВТОРИЗОВАН ПОТОМ ХЕДЕР МЕНЯЕТ СТАТУС И ПОЛЬЗОВАТЕЛЬ АВТОРИЗОВАН
-      return <div class="content dont-content">Не авторизован</div>;
-    }
-
-    setInformation(useUser() as UpdateData);
-    setLoading(false);
+  if (user === false) {
+    console.error("Ошибка в setting");
+    return <div class="content dont-content">Не авторизован</div>;
   }
 
-  console.log("rerenderSetting");
-  if (isLoading) {
-    return <div class="content">Загрузка</div>;
-  }
+  setInformation(useUser() as UpdateData);
 
   const save_data = () => {
     const user = useUser();
