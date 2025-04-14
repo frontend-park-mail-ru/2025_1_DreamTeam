@@ -3,9 +3,9 @@ import heartIcon from "Public/static/icons/heart.svg";
 import userIcon from "Public/static/icons/user.svg";
 import starIcon from "Public/static/icons/star.svg";
 import { setCourseOpen } from "@/App";
-import { router } from "./router";
+import { router } from "@/router";
 
-export function Card({
+export default function Card({
   title,
   price,
   image,
