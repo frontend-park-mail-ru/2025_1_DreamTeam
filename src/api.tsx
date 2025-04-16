@@ -37,6 +37,21 @@ async function apiFetch(url: string, options = {}) {
   }
 }
 
+export async function fetchCSRFToken() {
+  const response = await fetch(`${IP}:${PORT}/api/updateProfile`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  const csrfToken = response.headers.get("X-Csrf-Token");
+  if (!csrfToken) {
+    console.error("CSRF token not received");
+    return null;
+  }
+
+  return csrfToken;
+}
+
 export async function checkAuth(): Promise<UserProfile> {
   const data = await apiFetch("/isAuthorized");
   if (data && !data.error) {
@@ -90,9 +105,13 @@ export async function updateProfile(
   hide_email: boolean,
   name: string
 ) {
+  const csrfToken = await fetchCSRFToken();
   const data = await apiFetch("/updateProfile", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+    },
     body: JSON.stringify({ image, bio, email, hide_email, name }), // Преобразуем объект в JSON строку
   });
   return data ? true : "Ошибка запроса";
@@ -119,6 +138,8 @@ export async function uploadProfilePhoto(file: File) {
   console.log("ok");
   const formData = new FormData();
 
+  const csrfToken = await fetchCSRFToken();
+
   console.log(file);
 
   formData.append("avatar", file);
@@ -131,6 +152,9 @@ export async function uploadProfilePhoto(file: File) {
       method: "POST",
       body: formData,
       credentials: "include",
+      headers: {
+        "X-CSRF-Token": csrfToken || "",
+      },
     });
     const responseData = await response.json();
     if (responseData) {
@@ -180,9 +204,10 @@ export async function notCompleted(lesson_id: number) {
 }
 
 export async function deletePhoto() {
+  const csrfToken = await fetchCSRFToken();
   const data = await apiFetch("/deleteProfilePhoto", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "X-CSRF-Token": csrfToken },
   });
   return data ? true : "Ошибка удаления";
 }
