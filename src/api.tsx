@@ -1,6 +1,5 @@
-import { CourseOpen } from "@/App";
-import { CourseStructure } from "@/CourseMenu";
-import { LessonsStructure } from "@/Lesson";
+import { CourseOpen, CourseStructure } from "@/types/courseMenu";
+import { LessonsStructure } from "@/types/lesson";
 import { UserProfile } from "@/types/users";
 
 export const IP = "http://217.16.21.64";
@@ -19,7 +18,7 @@ export interface Course {
   tags: string[];
 }
 
-const apiFetch = async (url: string, options = {}) => {
+async function apiFetch(url: string, options = {}) {
   try {
     const response = await fetch(`${IP}:${PORT}/api${url}`, {
       credentials: "include",
@@ -38,7 +37,22 @@ const apiFetch = async (url: string, options = {}) => {
   }
 }
 
-export const checkAuth = async (): Promise<UserProfile> => {
+export async function fetchCSRFToken() {
+  const response = await fetch(`${IP}:${PORT}/api/updateProfile`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  const csrfToken = response.headers.get("X-Csrf-Token");
+  if (!csrfToken) {
+    console.error("CSRF token not received");
+    return null;
+  }
+
+  return csrfToken;
+}
+
+export async function checkAuth(): Promise<UserProfile> {
   const data = await apiFetch("/isAuthorized");
   if (data && !data.error) {
     console.log("✅ Пользователь авторизован");
@@ -48,21 +62,21 @@ export const checkAuth = async (): Promise<UserProfile> => {
   return false;
 }
 
-export const getCourses = async () => {
+export async function getCourses() {
   const data = await apiFetch("/getCourses");
   return data?.bucket_courses || [];
 }
 
-export const getCourse = async (id: number): Promise<CourseOpen> => {
+export async function getCourse(id: number): Promise<CourseOpen> {
   const data = await apiFetch(`/getCourse?courseId=${id}`);
   return data?.course || {};
 }
 
-export const fetchLogout = async () => {
+export async function fetchLogout() {
   return (await apiFetch("/logout")) !== null;
 }
 
-export const loginUser = async (email: string, password: string) =>{
+export async function loginUser(email: string, password: string) {
   const data = await apiFetch("/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -71,11 +85,11 @@ export const loginUser = async (email: string, password: string) =>{
   return data ? true : "Ошибка авторизации";
 }
 
-export const registerUser = async (
+export async function registerUser(
   email: string,
   name: string,
   password: string
-) => {
+) {
   const data = await apiFetch("/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -84,23 +98,26 @@ export const registerUser = async (
   return data ? true : "Ошибка регистрации";
 }
 
-export const updateProfile = async (
+export async function updateProfile(
   image: string,
   bio: string,
   email: string,
   hide_email: boolean,
   name: string
-) => {
+) {
+  const csrfToken = await fetchCSRFToken();
   const data = await apiFetch("/updateProfile", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+    },
     body: JSON.stringify({ image, bio, email, hide_email, name }), // Преобразуем объект в JSON строку
   });
   return data ? true : "Ошибка запроса";
 }
 
-export const getAuthorizedUser = async () => {
-  console.log("authFetch");
+export async function getAuthorizedUser() {
   const data = await apiFetch("/isAuthorized", {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -116,9 +133,11 @@ export const getAuthorizedUser = async () => {
       };
 }
 
-export const uploadProfilePhoto = async (file: File) => {
+export async function uploadProfilePhoto(file: File) {
   console.log("ok");
   const formData = new FormData();
+
+  const csrfToken = await fetchCSRFToken();
 
   console.log(file);
 
@@ -132,6 +151,9 @@ export const uploadProfilePhoto = async (file: File) => {
       method: "POST",
       body: formData,
       credentials: "include",
+      headers: {
+        "X-CSRF-Token": csrfToken || "",
+      },
     });
     const responseData = await response.json();
     if (responseData) {
@@ -143,16 +165,16 @@ export const uploadProfilePhoto = async (file: File) => {
   }
 }
 
-export const getCourseRoadmap = async (
+export async function getCourseRoadmap(
   courseId: number
-): Promise<CourseStructure> => {
+): Promise<CourseStructure> {
   const data = await apiFetch(`/getCourseRoadmap?courseId=${courseId}`);
   return data?.course_roadmap || { parts: [] };
 }
 
-export const getLessons = async (
+export async function getLessons(
   id: number
-): Promise<LessonsStructure | undefined> => {
+): Promise<LessonsStructure | undefined> {
   const data = await apiFetch(`/getCourseLesson?courseId=${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -160,7 +182,7 @@ export const getLessons = async (
   return data ? data : undefined;
 }
 
-export const getNextLessons = async (course_id: number, lesson_id: number) => {
+export async function getNextLessons(course_id: number, lesson_id: number) {
   const data = await apiFetch(
     `/getNextLesson?courseId=${course_id}&lessonId=${lesson_id}`,
     {
@@ -171,7 +193,7 @@ export const getNextLessons = async (course_id: number, lesson_id: number) => {
   return data ? data : "Ошибка запроса";
 }
 
-export const notCompleted = async(lesson_id: number) => {
+export async function notCompleted(lesson_id: number) {
   const data = await apiFetch("/markLessonAsNotCompleted", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -180,15 +202,16 @@ export const notCompleted = async(lesson_id: number) => {
   return data ? true : "Ошибка запроса";
 }
 
-export const deletePhoto = async () => {
+export async function deletePhoto() {
+  const csrfToken = await fetchCSRFToken();
   const data = await apiFetch("/deleteProfilePhoto", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "X-CSRF-Token": csrfToken },
   });
   return data ? true : "Ошибка удаления";
 }
 
-export const validEmail = async (token: string) => {
+export async function validEmail(token: string) {
   const data = await apiFetch(`/validEmail?token=${token}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },

@@ -2,46 +2,45 @@ import { useState } from "@/ourReact/jsx-runtime";
 import { deletePhoto, updateProfile, uploadProfilePhoto } from "@/api";
 import { setUser, useUser } from "@/App";
 import { UpdateData } from "@/types/users";
+import admitWindow from "./logic/w";
 
 const SettingContent = () => {
-  const [information, setInformation] = useState<UpdateData>({
-    name: "",
-    email: "",
-    bio: "",
-    hide_email: false,
-    avatar_src: "",
-  });
-  console.log(information);
-  const user = useUser();
-
-  if (user === false) {
-    console.error("Ошибка в setting");
+  const user = useUser()
+  if (!(user)) {
+    console.log(user);
     return <div class="content dont-content">Не авторизован</div>;
   }
-
-  setInformation(useUser() as UpdateData);
-
+  const [information, setInformation] = useState<UpdateData>({
+    name: user.name,
+    email: user.email,
+    bio: user.bio,
+    hide_email: user.hide_email,
+    avatar_src: user.avatar_src,
+  });
+  
+  console.log(information)
+  console.log(user)
   const save_data = () => {
-    const user = useUser();
-    if (user === false) {
-      console.error("Ошибка в save_data");
-      return;
+    console.log(information)
+    if (!(user)) {
+      console.log(user);
+      return <div class="content dont-content">Не авторизован</div>;
     }
     updateProfile(
-      "",
+      user.avatar_src,
       information.bio,
-      information.email,
+      user.email,
       information.hide_email,
       information.name
     );
-    setUser({
-      name: information.name,
-      email: information.email,
-      bio: information.bio,
-      avatar_src: user.avatar_src,
-      hide_email: information.hide_email,
-    });
   };
+  setUser({
+    name: information.name,
+    email: information.email,
+    bio: information.bio,
+    hide_email: information.hide_email,
+    avatar_src: information.avatar_src,
+  })
 
   function setInformationState(key: string, newFieldData: string | boolean) {
     setInformation({
@@ -59,7 +58,7 @@ const SettingContent = () => {
           class="text__input"
           style="height: 39px;"
           id="name_input"
-          value={information.name}
+          value={user.name}
           ON_input={(event: { target: { value: string } }) => {
             setInformationState("name", event.target.value);
           }}
@@ -75,7 +74,7 @@ const SettingContent = () => {
             setInformationState("bio", event.target.value);
           }}
         >
-          {information.bio}
+          {user.bio}
         </textarea>
       </div>
       <div class="strings">
@@ -85,7 +84,7 @@ const SettingContent = () => {
             type="checkbox"
             class="checkbox__input"
             id="private_input"
-            {...(information.hide_email ? { checked: true } : {})}
+            {...(user.hide_email ? { checked: true } : {})}
             ON_change={(event: { target: { checked: boolean } }) => {
               setInformationState("hide_email", event.target.checked);
             }}
@@ -95,7 +94,7 @@ const SettingContent = () => {
       </div>
       <div class="strings">
         <div></div>
-        <button class="button__input" id="button_input" ON_click={save_data}>
+        <button class="button__input" id="button_input" ON_click={admitWindow}>
           Сохранить
         </button>
       </div>
@@ -129,7 +128,7 @@ const SettingContent = () => {
 
                     console.log("что скажешь", result);
                     if (typeof result !== "string") {
-                      console.log("не повезло", result);
+                      console.log("повезло", result);
                       return;
                     }
                     // TODO: Когда у бека будет готово возвращение пути, добавить отрисовка.
@@ -149,7 +148,15 @@ const SettingContent = () => {
             <a
               class="text__decoration"
               ON_click={() => {
-                deletePhoto();
+                deletePhoto()
+                setInformationState("avatar_src", "http://217.16.21.64:8006/avatars/default_avatar.png");
+                    setUser({
+                      name: user.name,
+                      email: user.email,
+                      bio: user.bio,
+                      hide_email: user.hide_email,
+                      avatar_src: "http://217.16.21.64:8006/avatars/default_avatar.png",
+                    });
               }}
             >
               Удалить
