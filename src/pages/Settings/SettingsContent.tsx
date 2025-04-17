@@ -94,7 +94,10 @@ const SettingContent = () => {
       </div>
       <div class="strings">
         <div></div>
-        <button class="button__input" id="button_input" ON_click={admitWindow}>
+        <button class="button__input" id="button_input" ON_click={() => {
+          admitWindow();
+          save_data();
+        }}>
           Сохранить
         </button>
       </div>
