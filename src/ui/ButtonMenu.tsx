@@ -1,4 +1,4 @@
-export default function ButtonMenu({
+const ButtonMenu = ({
   name,
   image,
   click,
@@ -6,7 +6,7 @@ export default function ButtonMenu({
   name: string;
   image: string;
   click: Function;
-}) {
+}) => {
   return (
     <div class="button_type_menu" ON_click={click}>
       <div class="button__text">{name}</div>
@@ -14,3 +14,5 @@ export default function ButtonMenu({
     </div>
   );
 }
+
+export default ButtonMenu;

@@ -6,7 +6,7 @@ import ButtonCourse from "@/ui/ButtonCourse";
 import closeIcon from "Public/static/icons/closeCourse.svg";
 import arrowDownIcon from "Public/static/icons/arrowDown40x40.svg";
 
-export function LessonHeader({
+export const LessonHeader = ({
   setText,
   header,
   text,
@@ -14,7 +14,7 @@ export function LessonHeader({
   setText: (argv0: LessonsStructure) => void;
   header: Header;
   text: LessonsStructure;
-}) {
+}) => {
   const lesson = header.part.order.toString();
   const current_lesson = text.lesson.lesson_body.footer.current_lesson_id;
   const name_lesson = header.part.title;

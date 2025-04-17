@@ -118,7 +118,6 @@ export async function updateProfile(
 }
 
 export async function getAuthorizedUser() {
-  console.log("authFetch");
   const data = await apiFetch("/isAuthorized", {
     method: "GET",
     headers: { "Content-Type": "application/json" },

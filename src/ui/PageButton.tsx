@@ -1,4 +1,4 @@
-export default function PageButton({
+const PageButton = ({
   page_id,
   type,
   onClick,
@@ -6,7 +6,7 @@ export default function PageButton({
   page_id: number;
   type: string;
   onClick: Function;
-}) {
+}) => {
   return page_id.toString() === "-1" ? (
     <button class="page--choose" ON_click={onClick} disabled>
       <label>{type}</label>
@@ -17,3 +17,5 @@ export default function PageButton({
     </button>
   );
 }
+
+export default PageButton;

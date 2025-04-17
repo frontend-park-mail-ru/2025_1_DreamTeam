@@ -2,7 +2,7 @@ import Card from "@/modules/Card";
 import { Course, getCourses } from "@/api";
 import { useState } from "@/ourReact/jsx-runtime";
 
-export default function MainMenuContent() {
+const MainMenuContent = () => {
   const [cards, setCards] = useState<Course[]>([]);
   const [isLoading, setLoading] = useState(true);
   if (isLoading) {
@@ -38,3 +38,5 @@ export default function MainMenuContent() {
     </div>
   );
 }
+
+export default MainMenuContent;

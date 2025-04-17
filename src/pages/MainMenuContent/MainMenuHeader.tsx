@@ -2,7 +2,7 @@ import arrowDown from "Public/static/icons/arrow-down.svg";
 import filter from "Public/static/icons/filter.svg";
 import ButtonFilter from "@/ui/ButtonFilter";
 
-export default function MainMenuHeader() {
+const MainMenuHeader = () => {
   const arrayFilter = [
     {
       name: "Какое направление?",
@@ -47,3 +47,5 @@ export default function MainMenuHeader() {
     </div>
   );
 }
+
+export default MainMenuHeader;

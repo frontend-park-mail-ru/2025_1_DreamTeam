@@ -120,7 +120,7 @@ router.register("/validate/{token}", "validDate", async () => {
 router.setNotFoundView(NotFoundView);
 router.start();
 
-export default function App() {
+const App = () => {
   let content;
   switch (usePage()) {
     case "MainMenu":
@@ -157,3 +157,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;
