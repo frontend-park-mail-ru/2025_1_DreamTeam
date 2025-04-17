@@ -156,6 +156,6 @@ const App = () => {
       {content}
     </div>
   );
-}
+};
 
 export default App;
