@@ -5,8 +5,8 @@ import { UpdateData } from "@/types/users";
 import admitWindow from "./logic/w";
 
 const SettingContent = () => {
-  const user = useUser()
-  if (!(user)) {
+  const user = useUser();
+  if (!user) {
     console.log(user);
     return <div class="content dont-content">Не авторизован</div>;
   }
@@ -17,12 +17,12 @@ const SettingContent = () => {
     hide_email: user.hide_email,
     avatar_src: user.avatar_src,
   });
-  
-  console.log(information)
-  console.log(user)
+
+  console.log(information);
+  console.log(user);
   const save_data = () => {
-    console.log(information)
-    if (!(user)) {
+    console.log(information);
+    if (!user) {
       console.log(user);
       return <div class="content dont-content">Не авторизован</div>;
     }
@@ -40,7 +40,7 @@ const SettingContent = () => {
     bio: information.bio,
     hide_email: information.hide_email,
     avatar_src: information.avatar_src,
-  })
+  });
 
   function setInformationState(key: string, newFieldData: string | boolean) {
     setInformation({
@@ -94,10 +94,14 @@ const SettingContent = () => {
       </div>
       <div class="strings">
         <div></div>
-        <button class="button__input" id="button_input" ON_click={() => {
-          admitWindow();
-          save_data();
-        }}>
+        <button
+          class="button__input"
+          id="button_input"
+          ON_click={() => {
+            admitWindow();
+            save_data();
+          }}
+        >
           Сохранить
         </button>
       </div>
@@ -134,7 +138,6 @@ const SettingContent = () => {
                       console.log("повезло", result);
                       return;
                     }
-                    // TODO: Когда у бека будет готово возвращение пути, добавить отрисовка.
                     setInformationState("avatar_src", result);
                     setUser({
                       name: user.name,
@@ -151,15 +154,19 @@ const SettingContent = () => {
             <a
               class="text__decoration"
               ON_click={() => {
-                deletePhoto()
-                setInformationState("avatar_src", "http://217.16.21.64:8006/avatars/default_avatar.png");
-                    setUser({
-                      name: user.name,
-                      email: user.email,
-                      bio: user.bio,
-                      hide_email: user.hide_email,
-                      avatar_src: "http://217.16.21.64:8006/avatars/default_avatar.png",
-                    });
+                deletePhoto();
+                setInformationState(
+                  "avatar_src",
+                  "http://217.16.21.64:8006/avatars/default_avatar.png"
+                );
+                setUser({
+                  name: user.name,
+                  email: user.email,
+                  bio: user.bio,
+                  hide_email: user.hide_email,
+                  avatar_src:
+                    "http://217.16.21.64:8006/avatars/default_avatar.png",
+                });
               }}
             >
               Удалить
@@ -169,6 +176,6 @@ const SettingContent = () => {
       </div>
     </div>
   );
-}
+};
 
 export default SettingContent;
