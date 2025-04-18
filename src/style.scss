@@ -428,11 +428,6 @@ body {
   color: $color6;
 }
 
-.logo {
-  font-size: 48px;
-  font-family: "Open Sans", sans-serif;
-}
-
 .field-input {
   display: flex;
   flex-direction: row;
@@ -535,7 +530,7 @@ body {
   font-family: "Open Sans", sans-serif;;
   color: $color4;
   width: 575px;
-  line-height: 150%;
+  line-height: 1.5;
 }
 
 .course-header {
