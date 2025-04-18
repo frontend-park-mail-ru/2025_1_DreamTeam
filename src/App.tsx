@@ -164,6 +164,8 @@ const App = () => {
   //     <GoogleIcon key="232e4" i="menu" />
   //   </div>
   // );
+
+  // TODO: здесь будет перебор всех notification
   return (
     <div>
       <Navbar key="MainHeader" />
