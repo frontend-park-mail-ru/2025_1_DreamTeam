@@ -1165,6 +1165,7 @@ code,
   font-family: "Open Sans", sans-serif;
   border: none;
   background: rgba(85, 209, 107, 0.5);
+  cursor: pointer;
 }
 
 .page--check {
@@ -1177,6 +1178,7 @@ code,
   font-family: "Open Sans", sans-serif;
   border: none;
   background: rgba(183, 181, 183, 0.5);
+  cursor: pointer;
 }
 
 .page--check:hover {
@@ -1184,7 +1186,7 @@ code,
 }
 
 .page--choose:hover {
-  opacity: 100;
+  background: rgba(24, 136, 44, 0.5);
 }
 
 .info {
@@ -1215,6 +1217,7 @@ code,
   justify-content: center;
   align-items: center;
   border: none;
+  cursor: pointer;
 }
 
 .lessons--watch {
