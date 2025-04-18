@@ -9,6 +9,7 @@ import { defineStore } from "@/ourReact/jsx-runtime";
 import { router } from "@/router";
 import { UserProfile } from "@/types/users";
 import { CourseOpen } from "@/types/courseMenu";
+import WindowLogin from "@/modules/WindowLogin";
 export const [useCourseOpen, setCourseOpen] = defineStore(
   "CourseOpen",
   {} as CourseOpen
@@ -20,6 +21,19 @@ export const [useLessonID, setLessonID] = defineStore<number | false>(
 export const [usePage, setPage] = defineStore("Page", "MainMenu");
 export const [useMenu, setMenu] = defineStore("menu", false);
 export const [useUser, setUser] = defineStore("auth", false as UserProfile);
+export const [useLoginWindow, setLoginWindow] = defineStore(
+  "loginWindow",
+  false
+);
+export const [useToast, setToast] = defineStore(
+  "toast",
+  null as
+    | null
+    | {
+        type: "error" | "success" | "warning" | "warning";
+        message: string;
+      }[]
+);
 
 // if ("serviceWorker" in navigator) {
 //   navigator.serviceWorker
@@ -154,6 +168,7 @@ const App = () => {
     <div>
       <Navbar key="MainHeader" />
       {content}
+      {useLoginWindow() ? <WindowLogin /> : ""}
     </div>
   );
 };

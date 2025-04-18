@@ -1,4 +1,5 @@
+import { setLoginWindow } from "@/App";
+
 export default function closeWindow() {
-  const blur = document.getElementById("blur") as Element;
-  blur.innerHTML = "";
+  setLoginWindow(false);
 }
