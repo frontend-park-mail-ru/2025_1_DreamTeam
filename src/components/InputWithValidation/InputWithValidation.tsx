@@ -40,7 +40,6 @@ export default function InputWithValidation(props: {
         ON_input={(e: KeyboardEvent) => {
           const target = e.target as HTMLInputElement;
           const resultValidate = onChanged(target.value);
-          console.log("resultValidate", resultValidate);
 
           setData(keys, {
             value: target.value,
@@ -48,7 +47,6 @@ export default function InputWithValidation(props: {
             errorMessage: resultValidate.errorMessage,
           });
           if (resultValidate.isValid.includes(false)) {
-            console.log("error", target.value);
           }
         }}
       />

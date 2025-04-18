@@ -5,6 +5,8 @@ import Validate from "@/validate";
 import closeWindow from "./logic/closeWindow";
 import signup from "./logic/signup";
 import login from "./logic/login";
+import closeIcon from "Public/static/icons/closeCourse.svg";
+import "./WindowLogin.css";
 
 export default function WindowLogin() {
   console.log("I am rerendering");
@@ -82,13 +84,24 @@ export default function WindowLogin() {
   }
 
   return (
-    <div class="blur" ON_mousedown={closeWindow}>
+    <div
+      class="blur"
+      ON_mousedown={closeWindow}
+      ON_keydown={(e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          closeWindow();
+        }
+      }}
+    >
+      <div class="close-window">
+        <img style={"cursor: pointer;"} src={closeIcon} />
+      </div>
       <div
         class="window"
         ON_mousedown={(event: PointerEvent) => event.stopPropagation()}
       >
         <div class="form">
-          <div class="logo">SkillForce</div>
+          <div class="window__logo">SkillForce</div>
           <div class="error error_color_red">{errorAuth}</div>
           {inputField.map((field) => {
             return (
