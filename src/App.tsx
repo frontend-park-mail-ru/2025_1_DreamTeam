@@ -27,12 +27,7 @@ export const [useLoginWindow, setLoginWindow] = defineStore(
 );
 export const [useToast, setToast] = defineStore(
   "toast",
-  null as
-    | null
-    | {
-        type: "error" | "success" | "warning" | "warning";
-        message: string;
-      }[]
+  false
 );
 
 // if ("serviceWorker" in navigator) {
