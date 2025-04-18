@@ -27,7 +27,7 @@ export default function WindowLogin() {
         const validator = new Validate().regex(
           "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"
         );
-        return validator.execute(value);
+        return validator.execute(value, "Почта");
       },
     },
     {
@@ -39,8 +39,8 @@ export default function WindowLogin() {
         const validator = new Validate()
           .min(2)
           .max(16)
-          .regex("^[a-zA-Z0-9_-]*$");
-        return validator.execute(value);
+          .regex("^[a-zA-Z0-9_-]+$");
+        return validator.execute(value, "Псевдоним");
       },
     },
     {
@@ -54,8 +54,8 @@ export default function WindowLogin() {
         const validator = new Validate()
           .min(8)
           .max(32)
-          .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]*$");
-        return validator.execute(value);
+          .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]+$");
+        return validator.execute(value, "Пароль");
       },
     },
     {
@@ -67,8 +67,8 @@ export default function WindowLogin() {
         const validator = new Validate()
           .min(8)
           .max(32)
-          .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]*$");
-        return validator.execute(value);
+          .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]+$");
+        return validator.execute(value, "Пароль");
       },
     },
   ];
