@@ -1,8 +1,6 @@
-// TODO: Чтобы рендер не сбивал фокус и при наведении на иконку ошибки сделать tooltrip
-
-import { FieldState } from "@/WindowLogin";
-import error from "Public/static/icons/error.svg";
+import { FieldState } from "@/types/WindowLogin";
 import "./InputWithValidation.css";
+import Tooltip from "@/components/Tooltip";
 
 // Решить проблемы с перерисовкой всех элементов, даже если меняется один
 export default function InputWithValidation(props: {
@@ -54,7 +52,15 @@ export default function InputWithValidation(props: {
           }
         }}
       />
-      {data.isValid.includes(false) ? <img class="icon" src={error} /> : ""}
+      {data.isValid.includes(false) ? (
+        <Tooltip
+          key={`tooltip-${type}`}
+          texts={data.errorMessage}
+          isValid={data.isValid}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }
