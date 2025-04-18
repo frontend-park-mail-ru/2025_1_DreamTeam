@@ -2,7 +2,7 @@ import { useCourseOpen } from "@/App";
 import { useState } from "@/ourReact/jsx-runtime";
 import { getCourseRoadmap } from "@/api";
 import Chapter from "@/components/Chapter";
-import { EnterCourse } from "@/modules/EnterCourse/EnterCourse";
+import EnterCourse from "@/modules/EnterCourse";
 import countTests from "@/modules/EnterCourse/logic/countTests";
 import countLessons from "@/modules/EnterCourse/logic/countLessons";
 
@@ -13,7 +13,7 @@ export const CourseMenuDescription = () => {
       <div class="text-content" innerHTML={data.description}></div>
     </div>
   );
-}
+};
 
 export type Lesson = {
   lesson_id: number;
