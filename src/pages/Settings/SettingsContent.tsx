@@ -2,7 +2,9 @@ import { useState } from "@/ourReact/jsx-runtime";
 import { deletePhoto, updateProfile, uploadProfilePhoto } from "@/api";
 import { setUser, useUser } from "@/App";
 import { UpdateData } from "@/types/users";
-import admitWindow from "./logic/w";
+import { useToast, setToast } from "@/App";
+import WindowALert from "@/components/WindowALert/WindowALert";
+import { openModal } from "@/types/message";
 
 const SettingContent = () => {
   const user = useUser()
@@ -17,9 +19,10 @@ const SettingContent = () => {
     hide_email: user.hide_email,
     avatar_src: user.avatar_src,
   });
-  
+
   console.log(information)
   console.log(user)
+
   const save_data = () => {
     console.log(information)
     if (!(user)) {
@@ -33,6 +36,8 @@ const SettingContent = () => {
       information.hide_email,
       information.name
     );
+    setToast(true)
+    return true;
   };
   setUser({
     name: information.name,
@@ -95,7 +100,6 @@ const SettingContent = () => {
       <div class="strings">
         <div></div>
         <button class="button__input" id="button_input" ON_click={() => {
-          admitWindow();
           save_data();
         }}>
           Сохранить
@@ -143,6 +147,7 @@ const SettingContent = () => {
                       hide_email: user.hide_email,
                       avatar_src: result,
                     });
+                    setToast(true)
                   }}
                 />
                 Загрузить
@@ -153,13 +158,13 @@ const SettingContent = () => {
               ON_click={() => {
                 deletePhoto()
                 setInformationState("avatar_src", "http://217.16.21.64:8006/avatars/default_avatar.png");
-                    setUser({
-                      name: user.name,
-                      email: user.email,
-                      bio: user.bio,
-                      hide_email: user.hide_email,
-                      avatar_src: "http://217.16.21.64:8006/avatars/default_avatar.png",
-                    });
+                setUser({
+                  name: user.name,
+                  email: user.email,
+                  bio: user.bio,
+                  hide_email: user.hide_email,
+                  avatar_src: "http://217.16.21.64:8006/avatars/default_avatar.png",
+                });
               }}
             >
               Удалить
@@ -167,6 +172,12 @@ const SettingContent = () => {
           </div>
         </div>
       </div>
+      {useToast() ? (<WindowALert 
+              key="saving"
+              type="green"
+            message="Успешно"
+            isOpen={useToast()} 
+              />) : <div />}
     </div>
   );
 }

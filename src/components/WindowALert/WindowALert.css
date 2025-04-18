@@ -1,0 +1,43 @@
+.alert-admit {
+    position: fixed;
+    display: flex;
+    background: rgba(1, 1, 1, 0.25);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+  }
+  
+  .alert-admit__window {
+    display: grid;
+    grid-template-columns: 5% 90% 5%;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: space-between;
+    width: 1000px;
+    height: 50px;
+    overflow: visible;
+    border-radius: 5px;
+    color: #FFFFFF;
+    
+  }
+  
+  .red-window {
+    background-color: rgb(119, 17, 17);
+    border: 3px solid #cc0202;
+  }
+  
+  .green-window {
+    background-color: rgb(8, 107, 59);
+    border: 3px solid #0f9914;
+  }
+  .blue-window {
+    background-color: rgb(18, 14, 134);
+    border: 3px solid #0d3cca;
+  }
+  
+  .alert-admit__button-admit {
+    background: transparent;
+    border: none;
+  }
