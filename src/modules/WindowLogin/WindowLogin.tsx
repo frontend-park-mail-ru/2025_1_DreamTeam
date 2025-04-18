@@ -27,7 +27,6 @@ export default function WindowLogin() {
         const validator = new Validate().regex(
           "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"
         );
-        console.log(validator.execute(value));
         return validator.execute(value);
       },
     },
@@ -41,7 +40,6 @@ export default function WindowLogin() {
           .min(2)
           .max(16)
           .regex("^[a-zA-Z0-9_-]*$");
-        console.log(validator.execute(value));
         return validator.execute(value);
       },
     },
@@ -57,7 +55,6 @@ export default function WindowLogin() {
           .min(8)
           .max(32)
           .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]*$");
-        console.log(validator.execute(value));
         return validator.execute(value);
       },
     },
@@ -71,7 +68,6 @@ export default function WindowLogin() {
           .min(8)
           .max(32)
           .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]*$");
-        console.log(validator.execute(value));
         return validator.execute(value);
       },
     },
@@ -85,8 +81,6 @@ export default function WindowLogin() {
     });
   }
 
-  console.log("Form data", JSON.stringify(formData), inputField);
-
   return (
     <div class="blur" ON_mousedown={closeWindow}>
       <div
@@ -97,7 +91,6 @@ export default function WindowLogin() {
           <div class="logo">SkillForce</div>
           <div class="error error_color_red">{errorAuth}</div>
           {inputField.map((field) => {
-            console.log(field.key, formData[field.key]);
             return (
               <InputWithValidation
                 key={field.key}
