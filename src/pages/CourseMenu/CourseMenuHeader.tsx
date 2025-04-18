@@ -157,6 +157,6 @@ const CourseMenuHeader = ({
       </div>
     </header>
   );
-}
+};
 
 export default CourseMenuHeader;
