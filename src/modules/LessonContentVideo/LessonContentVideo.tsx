@@ -1,6 +1,6 @@
 import { getLessons, getNextLessons, notCompleted } from "@/api";
 import { useCourseOpen } from "@/App";
-import { LessonsStructure } from "@/Lesson";
+import { LessonsStructure } from "@/types/lesson";
 import VideoPlayer from "@/modules/VideoPlayer";
 import PageButton from "@/ui/PageButton";
 
