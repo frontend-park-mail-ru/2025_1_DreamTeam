@@ -10,7 +10,6 @@ import { router } from "@/router";
 import { UserProfile } from "@/types/users";
 import { CourseOpen } from "@/types/courseMenu";
 import WindowLogin from "@/modules/WindowLogin";
-import Tooltip from "./components/Tooltip";
 export const [useCourseOpen, setCourseOpen] = defineStore(
   "CourseOpen",
   {} as CourseOpen
