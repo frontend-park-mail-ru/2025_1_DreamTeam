@@ -4,19 +4,25 @@
 }
 
 .tooltip-content {
-  display: none;
   position: absolute;
   top: 0;
   left: 0;
-  background: #f1f1f1;
-  border: 1px solid #ccc;
-  padding: 10px;
+  background: #1e3e62;
+  padding: 24px;
   z-index: 10;
   border-radius: 6px;
   white-space: nowrap;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  opacity: 0;
+  transform: translateY(-8px);
+  visibility: hidden;
+
+  transition: opacity 300ms ease-out, transform 300ms ease-out,
+    visibility 300ms ease-out;
 }
 
 .tooltip-container:hover .tooltip-content {
-  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
 }
