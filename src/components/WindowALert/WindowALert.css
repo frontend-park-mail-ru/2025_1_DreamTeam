@@ -1,43 +1,60 @@
 .alert-admit {
-    position: fixed;
-    display: flex;
-    background: rgba(1, 1, 1, 0.25);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    justify-content: center;
+  padding: 32px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  gap: 16px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.alert-admit__window {
+  display: flex;
+  flex-direction: row;
+  pointer-events: auto;
+  align-items: center;
+  width: 60%;
+  height: 50px;
+  border-radius: 8px;
+  justify-content: space-between;
+  padding: 4px 12px;
+  color: #ffffff;
+  animation: slide-in 0.3s ease-out forwards;
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
   }
-  
-  .alert-admit__window {
-    display: grid;
-    grid-template-columns: 5% 90% 5%;
-    align-items: center;
-    margin-top: 20px;
-    justify-content: space-between;
-    width: 1000px;
-    height: 50px;
-    overflow: visible;
-    border-radius: 5px;
-    color: #FFFFFF;
-    
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
-  
-  .red-window {
-    background-color: rgb(119, 17, 17);
-    border: 3px solid #cc0202;
-  }
-  
-  .green-window {
-    background-color: rgb(8, 107, 59);
-    border: 3px solid #0f9914;
-  }
-  .blue-window {
-    background-color: rgb(18, 14, 134);
-    border: 3px solid #0d3cca;
-  }
-  
-  .alert-admit__button-admit {
-    background: transparent;
-    border: none;
-  }
+}
+
+.error-window {
+  background-color: rgb(119, 17, 17);
+  border: 3px solid #cc0202;
+}
+
+.success-window {
+  background-color: rgb(8, 107, 59);
+  border: 3px solid #0f9914;
+}
+
+.notification-window {
+  background-color: rgb(18, 14, 134);
+  border: 3px solid #0d3cca;
+}
+
+.alert-admit__button-admit {
+  background: transparent;
+  border: none;
+}

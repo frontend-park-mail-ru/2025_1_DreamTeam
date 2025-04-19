@@ -1,31 +1,33 @@
-
-import { closeModal } from "@/types/message";
 import closeCourse from "Public/static/icons/closeCourse.svg";
 import error from "Public/static/icons/error.svg";
 import "./WindowALert.css";
+import { ToastType } from "@/types/notifications";
 
-
-
-const WindowALert = ({ type, message, isOpen }: { type: "green" | "red" | "blue", message: string, isOpen: boolean }) => {
-    console.log(type)
-    if (isOpen) {
-        return (
-            <div class="alert-admit">
-                <div class={`alert-admit__window active ${type}-window`}>
-                    <div class="alert-admit__image">
-                        <img src={error} alt="закрыть" />
-                    </div>
-                    <div class="alert-admit__text">
-                        {message}
-                    </div>
-                    <div class="alert-admit__button">
-                        <button class="alert-admit__button-admit" ON_mousedown={closeModal}><img src={closeCourse} alt="закрыть" /></button>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-    return <div></div>;
-}
+const WindowALert = ({
+  type,
+  message,
+  onClose,
+}: {
+  type: ToastType;
+  message: string;
+  onClose: () => void;
+}) => {
+  console.log(type);
+  return (
+    <div class={`alert-admit__window active ${type}-window`}>
+      <div style={"display: flex; align-items: center; gap: 8px; "}>
+        <div class="alert-admit__image">
+          <img src={error} alt="закрыть" />
+        </div>
+        <div class="alert-admit__text">{message}</div>
+      </div>
+      <div class="alert-admit__button">
+        <button class="alert-admit__button-admit" ON_click={onClose}>
+          <img src={closeCourse} alt="закрыть" />
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default WindowALert;
