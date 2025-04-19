@@ -11,7 +11,7 @@ const PageButton = ({
     <div></div>
   ) : (
     <button class="page--choose" ON_click={onClick}>
-      <label>{type}</label>
+      {type}
     </button>
   );
 };
