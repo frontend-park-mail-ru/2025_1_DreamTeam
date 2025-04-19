@@ -37,6 +37,6 @@ const MainMenuContent = () => {
       </div>
     </div>
   );
-}
+};
 
 export default MainMenuContent;

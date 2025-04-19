@@ -1,15 +1,15 @@
-import { setToast1, useToast1 } from "@/App";
+import { setToast, useToast } from "@/App";
 import { ToastType } from "@/types/notifications";
 
 const addToast = (type: ToastType, message: string) => {
-  const toast = useToast1();
+  const toast = useToast();
   const newToast = {
     id: toast.count,
     type,
     message,
   };
 
-  setToast1({
+  setToast({
     data: [...toast.data, newToast],
     count: toast.count + 1,
   });
