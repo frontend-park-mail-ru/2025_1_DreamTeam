@@ -2,9 +2,7 @@ import { useState } from "@/ourReact/jsx-runtime";
 import { deletePhoto, updateProfile, uploadProfilePhoto } from "@/api";
 import { setUser, useUser } from "@/App";
 import { UpdateData } from "@/types/users";
-import { useToast, setToast } from "@/App";
-import WindowALert from "@/components/WindowALert/WindowALert";
-import { openModal } from "@/types/message";
+import addToast from "@/components/WindowALert/logic/add";
 
 const SettingContent = () => {
   const user = useUser();
@@ -36,7 +34,7 @@ const SettingContent = () => {
       information.hide_email,
       information.name
     );
-    setToast(true);
+    addToast("success", "Успешное сохранение");
     return true;
   };
   setUser({
@@ -150,7 +148,7 @@ const SettingContent = () => {
                       hide_email: user.hide_email,
                       avatar_src: result,
                     });
-                    setToast(true);
+                    addToast("success", "Фотография успешно сохранена");
                   }}
                 />
                 Загрузить
@@ -179,16 +177,6 @@ const SettingContent = () => {
           </div>
         </div>
       </div>
-      {useToast() ? (
-        <WindowALert
-          key="saving"
-          type="green"
-          message="Успешно"
-          isOpen={useToast()}
-        />
-      ) : (
-        <div />
-      )}
     </div>
   );
 };
