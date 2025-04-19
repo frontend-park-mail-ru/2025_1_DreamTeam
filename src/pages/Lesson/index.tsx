@@ -1,5 +1,5 @@
 import { getLessons, getNextLessons } from "@/api";
-import { useCourseOpen, useLessonID } from "@/App";
+import { useCourseOpen, useLessonID, useUser } from "@/App";
 import { useState } from "@/ourReact/jsx-runtime";
 import { LessonsStructure } from "@/types/lesson";
 import { LessonHeader } from "./LessonHeader";
@@ -54,9 +54,13 @@ let exam = {
   },
 };
 
-const LessonPage = () =>  {
+const LessonPage = () => {
   const [text, setText] = useState<LessonsStructure>(exam);
   const [isLoading, setLoading] = useState(true);
+  if (useUser() === false) {
+    console.error("нету авторизации");
+    return <div class="dont-content">Не авторизован</div>;
+  }
   if (isLoading) {
     const courseId = useCourseOpen().id;
     if (courseId === undefined) {
@@ -114,6 +118,6 @@ const LessonPage = () =>  {
       )}
     </div>
   );
-}
+};
 
 export default LessonPage;
