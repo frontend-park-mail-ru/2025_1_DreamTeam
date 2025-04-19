@@ -10,6 +10,9 @@ import { router } from "@/router";
 import { UserProfile } from "@/types/users";
 import { CourseOpen } from "@/types/courseMenu";
 import WindowLogin from "@/modules/WindowLogin";
+import WindowALert from "./components/WindowALert/WindowALert";
+import { Toast } from "@/types/notifications";
+import removeToast from "./components/WindowALert/logic/remove";
 export const [useCourseOpen, setCourseOpen] = defineStore(
   "CourseOpen",
   {} as CourseOpen
@@ -25,10 +28,10 @@ export const [useLoginWindow, setLoginWindow] = defineStore(
   "loginWindow",
   false
 );
-export const [useToast, setToast] = defineStore(
-  "toast",
-  false
-);
+export const [useToast, setToast] = defineStore("toast1", {
+  data: [] as Toast,
+  count: 0 as number,
+});
 
 // if ("serviceWorker" in navigator) {
 //   navigator.serviceWorker
@@ -166,6 +169,17 @@ const App = () => {
       <Navbar key="MainHeader" />
       {content}
       {useLoginWindow() ? <WindowLogin key="WindowLogin" /> : ""}
+      <div class="alert-admit">
+        {useToast().data.map((notify, ind) => (
+          <WindowALert
+            key={`windowAlert-${ind}`}
+            type={notify.type}
+            message={notify.message}
+            isOpen={true}
+            onClose={() => removeToast(notify.id)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
