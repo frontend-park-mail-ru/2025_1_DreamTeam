@@ -6,10 +6,7 @@ import addToast from "@/components/WindowALert/logic/add";
 
 // TODO: Вывод конкретной причины ошибки(Неправильный данные, занятая почта и тд)
 // TODO: Закрыть окно и рендер header, чтобы увидеть автар и имя пользователя
-export default async function login(
-  formData: FormData,
-  setErrorAuth: Function
-) {
+export default async function login(formData: FormData) {
   const emailError = formData.emailField.isValid.includes(false);
   const passwordError = formData.passwordField.isValid.includes(false);
 

@@ -122,9 +122,7 @@ export default function WindowLogin() {
           <button
             class={`buttons__button ${state === "signup" ? "active" : ""}`}
             ON_click={() => {
-              state === "login"
-                ? setState("signup")
-                : signup(formData, setErrorAuth);
+              state === "login" ? setState("signup") : signup(formData);
             }}
           >
             Регистрация
@@ -132,9 +130,7 @@ export default function WindowLogin() {
           <button
             class={`buttons__button ${state === "login" ? "active" : ""}`}
             ON_click={() => {
-              state === "signup"
-                ? setState("login")
-                : login(formData, setErrorAuth);
+              state === "signup" ? setState("login") : login(formData);
             }}
           >
             Вход
