@@ -2,6 +2,7 @@ import { checkAuth, loginUser } from "@/api";
 import { setUser } from "@/App";
 import { FormData } from "@/types/WindowLogin";
 import closeWindow from "./closeWindow";
+import addToast from "@/components/WindowALert/logic/add";
 
 // TODO: Вывод конкретной причины ошибки(Неправильный данные, занятая почта и тд)
 // TODO: Закрыть окно и рендер header, чтобы увидеть автар и имя пользователя
@@ -14,7 +15,7 @@ export default async function login(
 
   if (emailError || passwordError) {
     console.error("Ошибка входа");
-    setErrorAuth("Поля заполнены не корректно");
+    addToast("error", "Поля заполнены не корректно");
     return;
   }
 
@@ -22,14 +23,14 @@ export default async function login(
   const password = formData.passwordField.value;
 
   if (!email || !password) {
-    setErrorAuth("Заполните все поля");
+    addToast("error", "Заполните все поля");
     return;
   }
 
   const result = await loginUser(email, password);
 
   if (result === true) {
-    setErrorAuth("Успешный вход");
+    addToast("success", "Успешный вход");
     checkAuth().then((data) => {
       if (data === false) {
         return;
@@ -45,6 +46,6 @@ export default async function login(
     });
     closeWindow();
   } else {
-    setErrorAuth("Неправильные данные");
+    addToast("error", "Неправильные данные");
   }
 }

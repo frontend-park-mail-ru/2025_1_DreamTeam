@@ -25,6 +25,7 @@ const SettingContent = () => {
     console.log(information);
     if (!user) {
       console.log(user);
+      addToast("error", "Отсутствует авторизация");
       return <div class="content dont-content">Не авторизован</div>;
     }
     updateProfile(

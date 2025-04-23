@@ -2,7 +2,6 @@ import { FieldState } from "@/types/WindowLogin";
 import "./InputWithValidation.css";
 import Tooltip from "@/components/Tooltip";
 
-// Решить проблемы с перерисовкой всех элементов, даже если меняется один
 export default function InputWithValidation(props: {
   type: string;
   keys: string;

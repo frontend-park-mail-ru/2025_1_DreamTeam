@@ -2,6 +2,7 @@ import { checkAuth, registerUser } from "@/api";
 import { setUser } from "@/App";
 import { FormData } from "@/types/WindowLogin";
 import closeWindow from "./closeWindow";
+import addToast from "@/components/WindowALert/logic/add";
 
 // TODO: Вывод конкретной причины ошибки(Неправильный данные, занятая почта и тд)
 // TODO: Закрыть окно и рендер header, чтобы увидеть автар и имя пользователя
@@ -17,7 +18,7 @@ export default async function signup(
 
   if (emailError || nameError || passwordError || passwordAdmitError) {
     console.error("Ошибка регистрации");
-    setErrorAuth("Поля заполнены не корректно");
+    addToast("error", "Поля заполнены не корректно");
     return;
   }
 
@@ -27,21 +28,21 @@ export default async function signup(
   const passwordAdmit = formData.passwordAdmitField.value;
 
   if (password !== passwordAdmit) {
-    setErrorAuth("Пароли не совпадают");
+    addToast("error", "Пароли не совпадают");
     return;
   }
 
   if (!email || !name || !password || !passwordAdmit) {
-    setErrorAuth("Заполните все поля");
+    addToast("error", "Заполните все поля");
     return;
   }
 
   const result = await registerUser(email, name, password);
 
   if (typeof result !== "string") {
-    setErrorAuth("Подтвердите почту, проверьте спам");
+    addToast("notification", "Подтвердите почту. Проверьте спам");
   } else {
-    setErrorAuth("Ошибка. Сервис недоступен, либо почта занята");
+    addToast("error", "Ошибка. Сервис недоступен, либо почта занята");
   }
 
   return;

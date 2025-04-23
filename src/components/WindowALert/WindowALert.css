@@ -26,6 +26,9 @@
   animation: slide-in 0.3s ease-out forwards;
   opacity: 0;
   transform: translateX(-100%);
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  -webkit-animation: slide-in 0.3s ease-out forwards;
 }
 
 @keyframes slide-in {
@@ -57,4 +60,5 @@
 .alert-admit__button-admit {
   background: transparent;
   border: none;
+  cursor: pointer;
 }
