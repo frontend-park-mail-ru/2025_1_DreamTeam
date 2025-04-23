@@ -11,7 +11,6 @@ import "./WindowLogin.css";
 export default function WindowLogin() {
   console.log("I am rerendering");
   const [state, setState] = useState("login");
-  const [errorAuth, setErrorAuth] = useState("");
   const [formData, setFormData] = useState<FormData>({
     emailField: { value: "", isValid: [], errorMessage: [] },
     nameField: { value: "", isValid: [], errorMessage: [] },
@@ -102,7 +101,6 @@ export default function WindowLogin() {
       >
         <div class="form">
           <div class="window__logo">SkillForce</div>
-          <div class="error error_color_red">{errorAuth}</div>
           {inputField.map((field) => {
             return (
               <InputWithValidation
