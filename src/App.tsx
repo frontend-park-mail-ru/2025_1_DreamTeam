@@ -163,7 +163,6 @@ const App = () => {
   //   </div>
   // );
 
-  // TODO: здесь будет перебор всех notification
   return (
     <div>
       <Navbar key="MainHeader" />
@@ -175,7 +174,7 @@ const App = () => {
             key={`windowAlert-${ind}`}
             type={notify.type}
             message={notify.message}
-            isOpen={true}
+            disappear={notify.disappear}
             onClose={() => removeToast(notify.id)}
           />
         ))}
