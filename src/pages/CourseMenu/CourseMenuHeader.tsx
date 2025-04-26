@@ -43,6 +43,13 @@ const CourseMenuHeader = ({
       },
     },
   ];
+  if (Object.keys(data).length === 0) {
+    return (
+      <div class="dont-content">
+        <img src={loadingIcon} />
+      </div>
+    );
+  }
   return (
     <header class="course-header1">
       <div class="close-page"></div>

@@ -8,6 +8,9 @@ import countLessons from "@/modules/EnterCourse/logic/countLessons";
 
 export const CourseMenuDescription = () => {
   const data = useCourseOpen();
+  if (Object.keys(data).length === 0) {
+    return <div class="dont-content"></div>;
+  }
   return (
     <div class="content">
       <div class="text-content" innerHTML={data.description}></div>
