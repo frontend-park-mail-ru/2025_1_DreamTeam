@@ -122,26 +122,42 @@ const SettingContent = () => {
               <label class="text__decoration">
                 <input
                   type="file"
-                  accept=".jpg, .jpeg, .png"
+                  accept=".jpg, .jpeg, .png, .webp"
                   class="image__input"
                   id="new_avatar_input"
                   ON_change={async (event: { target: { files: File[] } }) => {
+                    if (
+                      !event.target.files ||
+                      event.target.files.length === 0
+                    ) {
+                      addToast("error", "Файл не выбран");
+                      return;
+                    }
+
+                    const validTypes = ["image/jpeg", "image/jpg", "image/png"];
+
+                    if (!validTypes.includes(event.target.files[0].type)) {
+                      addToast(
+                        "error",
+                        "Неверный формат файла. Разрешены: JPG, JPEG, PNG, WEBP"
+                      );
+                      return;
+                    }
                     const result = await uploadProfilePhoto(
                       event.target.files[0]
                     );
                     const user = useUser();
 
                     if (user === false) {
-                      console.error("Ошибка в setting");
+                      addToast("error", "Ошибка авторизации");
                       return;
                     }
 
-                    console.log("что скажешь", result);
                     if (typeof result !== "string") {
-                      console.log("повезло", result);
+                      addToast("error", "Ошибка загрузки фото");
                       return;
                     }
-                    setInformationState("avatar_src", result);
+
                     setUser({
                       name: user.name,
                       email: user.email,
@@ -149,6 +165,7 @@ const SettingContent = () => {
                       hide_email: user.hide_email,
                       avatar_src: result,
                     });
+                    setInformationState("avatar_src", result);
                     addToast("success", "Фотография успешно сохранена");
                   }}
                 />
