@@ -100,7 +100,7 @@ const LessonPage = () => {
   }
   const isText = currentPoint.type === "text";
   return (
-    <div>
+    <div class="">
       <LessonHeader
         key="ClassHeader"
         setText={setText}
