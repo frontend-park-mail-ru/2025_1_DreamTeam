@@ -176,10 +176,6 @@ const SettingContent = () => {
               class="text__decoration"
               ON_click={() => {
                 deletePhoto();
-                setInformationState(
-                  "avatar_src",
-                  "http://217.16.21.64:8006/avatars/default_avatar.png"
-                );
                 setUser({
                   name: user.name,
                   email: user.email,
@@ -188,6 +184,11 @@ const SettingContent = () => {
                   avatar_src:
                     "http://217.16.21.64:8006/avatars/default_avatar.png",
                 });
+                setInformationState(
+                  "avatar_src",
+                  "http://217.16.21.64:8006/avatars/default_avatar.png"
+                );
+                addToast("success", "Фотография успешно удалена");
               }}
             >
               Удалить
