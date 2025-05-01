@@ -208,6 +208,8 @@ body {
 .content {
   padding: 56px 24px;
   display: flex;
+  color: $color4;
+  font-size: 20px;
   flex-direction: row;
   justify-content: center;
 }
@@ -1153,7 +1155,8 @@ code,
 
 .page--choose {
   width: 170px;
-  height: 38px;
+  display: flex;
+  justify-content: center;
   border-radius: 16px;
   padding: 8px 16px 8px 16px;
   color: $color4;
