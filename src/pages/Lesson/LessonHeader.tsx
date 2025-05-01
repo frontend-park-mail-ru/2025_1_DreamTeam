@@ -24,6 +24,7 @@ export const LessonHeader = ({
   header.Points.forEach((lessons) => {
     lessons.is_done.toString() === "true" ? (count_watch += 1) : count_watch;
   });
+  let count_page = 0;
   return (
     <header class="course-header1">
       <div
@@ -47,26 +48,30 @@ export const LessonHeader = ({
           </div>
           <div class="lessons--watch">
             {header.Points.map((lessons) => {
+              count_page += 1
               return (
-                <ButtonCourse
-                  key={"lesson" + lessons.lesson_id.toString()}
-                  type={lessons.type}
-                  current_lesson_id={current_lesson}
-                  lesson_id={lessons.lesson_id}
-                  is_done={lessons.is_done.toString()}
-                  onClick={() => {
-                    const courseId = useCourseOpen().id;
-                    if (courseId === undefined) {
-                      console.error("Course не определён");
-                      return;
-                    }
-                    getNextLessons(courseId, lessons.lesson_id).then(
-                      (result) => {
-                        setText(result);
+                <div class="page__lesson">
+                  <ButtonCourse
+                    key={"lesson" + lessons.lesson_id.toString()}
+                    current_lesson_id={current_lesson}
+                    count_page={count_page}
+                    lesson_id={lessons.lesson_id}
+                    is_done={lessons.is_done.toString()}
+                    onClick={() => {
+                      const courseId = useCourseOpen().id;
+                      if (courseId === undefined) {
+                        console.error("Course не определён");
+                        return;
                       }
-                    );
-                  }}
-                />
+                      getNextLessons(courseId, lessons.lesson_id).then(
+                        (result) => {
+                          setText(result);
+                        }
+                      );
+                    }}
+                  />
+                  {(count_page != header.Points.length && header.Points.length > 1) ? (<div class={`strip-page ${(lessons.is_done === true && header.Points[count_page].is_done === true) ? "is-done" : "none-done"}`} />) : (<div />)}
+                </div>
               );
             })}
           </div>

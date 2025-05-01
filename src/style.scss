@@ -1179,21 +1179,29 @@ body {
   width: 40px;
 }
 
-.page--lesson--choose {
+.page__lesson__choose {
   display: flex;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
-  background-color: $color5;
+  border: 2px solid #55D16B;
+  color: #55D16B;
+  border-radius: 50%;
+  background-color: transparent;
   justify-content: center;
   align-items: center;
-  border: none;
+  font-size: 24px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.page__lesson {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .lessons--watch {
   display: flex;
   flex-direction: row;
-  gap: 4px;
   height: 40px;
 }
 
@@ -1202,12 +1210,29 @@ body {
   width: 33px;
   padding-left: 0;
 }
+
 .none {
-  background-color: $color4;
+  border: 2px solid #D0CBCB;
+  color: #D0CBCB;
+}
+
+.none-done {
+  background-color: #D0CBCB;
+}
+
+.is-done {
+  background-color: #55D16B;
 }
 
 .current-lessons {
-  border: 2px solid #e05c05;
+  color: #0b192c;
+  background-color: #55D16B;
+}
+
+.strip-page {
+  display: flex;
+  width: 12px;
+  height: 1px;
 }
 
 .video-player {
