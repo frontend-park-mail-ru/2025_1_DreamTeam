@@ -1,6 +1,6 @@
 import { checkAuth, getCourse, getLessons, validEmail } from "@/api";
 import CourseMenu from "@/pages/CourseMenu";
-import Navbar from "@/modules/Navbar/Navbar";
+import Navbar from "@/modules/Navbar";
 import LessonPage from "@/pages/Lesson";
 import NotFoundView from "@/nonFound";
 import Settings from "@/pages/Settings";
