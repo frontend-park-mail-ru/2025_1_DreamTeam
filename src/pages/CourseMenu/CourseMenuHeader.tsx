@@ -19,6 +19,8 @@ const CourseMenuHeader = ({
   useFunc: string;
   setFunc: (argv0: string) => void;
 }) => {
+  const isMobile = useDevice().isMobile;
+
   const data = useCourseOpen();
   const sections = [
     {
@@ -53,50 +55,8 @@ const CourseMenuHeader = ({
       </div>
     );
   }
-  return (
-    <header class="course-header1">
-      <div class="close-page"></div>
-      <div class="header-content">
-        <div class="header-info">
-          <img class="course-image" src={`${data.src_image}`} alt="" />
-          <div class="course-text">
-            <div class="course-name">{data.title}</div>
-            <div class="course-descriptions">
-              <div class="course-description">
-                <img class="course-description__img" src={starIcon} />
-                <div class="course-description__text">
-                  <div class="course-description__text-number">
-                    {(data.rating ?? 0).toFixed(1)}
-                  </div>{" "}
-                  <div class="course-description__text-text">рейтинг</div>
-                </div>
-              </div>
-              <div class="course-description">
-                <img class="course-description__img" src={timeIcon} />
-                <div class="course-description__text">
-                  <div class="course-description__text-number">
-                    {data.time_to_pass?.toString()}
-                  </div>{" "}
-                  <div class="course-description__text-text">часов</div>
-                </div>
-              </div>
-              <div class="course-description">
-                <img class="course-description__img" src={userIcon} />
-                <div class="course-description__text">
-                  <div class="course-description__text-number">
-                    {data.purchases_amount?.toString()}
-                  </div>{" "}
-                  <div class="course-description__text-text">записались</div>
-                </div>
-              </div>
-            </div>
-            <div class="course-tags">
-              {data.tags?.map((tag, index) => (
-                <div key={index} class="course-tag">
-                  {tag}
-                </div>
-              ))}
-            </div>
+
+  const courseAndPrice = (
             <div class="course-price-and-button">
               <div
                 class={`course-price-and-button__price ${
@@ -140,8 +100,58 @@ const CourseMenuHeader = ({
                 </div>
               )}
             </div>
+  );
+
+  return (
+    <header class="course-header">
+      <div class="close-page"></div>
+      <div class="header-content">
+        <div class="header-info">
+          <div>
+            <img class="course-image" src={`${data.src_image}`} alt="" />
+          </div>
+          <div class="course-text">
+            <div class="course-name">{data.title}</div>
+            <div class="course-descriptions">
+              <div class="course-description">
+                <img class="course-description__img" src={starIcon} />
+                <div class="course-description__text">
+                  <div class="course-description__text-number">
+                    {(data.rating ?? 0).toFixed(1)}
+                  </div>{" "}
+                  <div class="course-description__text-text">рейтинг</div>
+                </div>
+              </div>
+              <div class="course-description">
+                <img class="course-description__img" src={timeIcon} />
+                <div class="course-description__text">
+                  <div class="course-description__text-number">
+                    {data.time_to_pass?.toString()}
+                  </div>{" "}
+                  <div class="course-description__text-text">часов</div>
+                </div>
+              </div>
+              <div class="course-description">
+                <img class="course-description__img" src={userIcon} />
+                <div class="course-description__text">
+                  <div class="course-description__text-number">
+                    {data.purchases_amount?.toString()}
+                  </div>{" "}
+                  <div class="course-description__text-text">записались</div>
+                </div>
+              </div>
+            </div>
+            <div class="course-tags">
+              {data.tags?.map((tag, index) => (
+                <div key={index} class="course-tag">
+                  {tag}
+                </div>
+              ))}
+            </div>
+            {isMobile ? "" : courseAndPrice}
           </div>
         </div>
+        {isMobile ? courseAndPrice : ""}
         <div class="changes1">
           {sections.map((section) => (
             <div
