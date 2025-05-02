@@ -1,6 +1,7 @@
 import { setCourseOpen, setLessonID } from "@/App";
 import { router } from "@/router";
 import logo from "Public/static/icons/logo.svg";
+import "./Logo.scss";
 
 export default function Logo() {
   return (

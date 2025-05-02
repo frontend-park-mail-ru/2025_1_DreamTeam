@@ -5,6 +5,7 @@ import Chapter from "@/components/Chapter";
 import EnterCourse from "@/modules/EnterCourse";
 import countTests from "@/modules/EnterCourse/logic/countTests";
 import countLessons from "@/modules/EnterCourse/logic/countLessons";
+import "./CourseMenu.scss";
 
 export const CourseMenuDescription = () => {
   const data = useCourseOpen();

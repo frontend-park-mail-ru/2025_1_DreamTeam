@@ -4,6 +4,7 @@ import { setUser, useUser } from "@/App";
 import Logo from "@/components/Logo";
 import Search from "@/components/Search";
 import GetMenuComponent from "@/modules/GetMenuComponent";
+import "./Navbar.scss";
 
 export default function Navbar() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,9 +30,6 @@ export default function Navbar() {
     return <div>"загрузка";</div>;
   }
 
-  console.log(useUser());
-
-  console.log("header");
   return (
     <div class="header">
       <Logo key="logo" />

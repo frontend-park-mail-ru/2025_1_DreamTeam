@@ -1,4 +1,4 @@
-import "./Card.css";
+import "./Card.scss";
 import timeIcon from "Public/static/icons/time.svg";
 import heartIcon from "Public/static/icons/heart.svg";
 import heartHoverIcon from "Public/static/icons/heartHover.svg";

@@ -1,4 +1,5 @@
 import search from "Public/static/icons/iconSearch.svg";
+import "./Search.scss";
 
 export default function Search() {
   return (
