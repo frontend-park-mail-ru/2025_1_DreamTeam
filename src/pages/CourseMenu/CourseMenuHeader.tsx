@@ -7,6 +7,7 @@ import descIcon from "Public/static/icons/descriptionCourse.svg";
 import contentIcon from "Public/static/icons/contentCourse.svg";
 import reviewIcon from "Public/static/icons/reviewsCourse.svg";
 import closeIcon from "Public/static/icons/closeCourse.svg";
+import loadingIcon from "Public/static/icons/loading.gif";
 import { router } from "@/router";
 import "./CourseMenu.scss";
 import { useState } from "@/ourReact/jsx-runtime";
