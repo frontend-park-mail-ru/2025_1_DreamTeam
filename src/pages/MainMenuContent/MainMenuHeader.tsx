@@ -1,6 +1,5 @@
 import arrowDown from "Public/static/icons/arrow-down.svg";
 import filter from "Public/static/icons/filter.svg";
-import ButtonFilter from "@/ui/ButtonFilter";
 import "./MainMenuContent.scss";
 
 const MainMenuHeader = () => {
@@ -32,21 +31,19 @@ const MainMenuHeader = () => {
     <div class="filters">
       <div class="headlines">Каталог</div>
       <div class="filter-select">
-        {arrayFilter.map((button, index) => (
-          <ButtonFilter
-            key={`button-${index}`}
-            name={button.name}
-            image={button.image}
-            onClick={button.onClick}
-          />
+        {arrayFilter.map((button) => (
+          <div class="filter--type--selector" ON_click={button.onClick}>
+            <div class="text">{button.name}</div>
+            <img src={button.image} alt="" class="filter__icon"></img>
+          </div>
         ))}
         <div class="filter--type--button">
           <img src={filter} alt="" class="filter__icon"></img>
-          Фильтры
+          <div class="text">Фильтры</div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default MainMenuHeader;
