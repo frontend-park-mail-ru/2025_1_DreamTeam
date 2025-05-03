@@ -1,6 +1,7 @@
 import Card from "@/modules/Card";
 import { Course, getCourses } from "@/api";
 import { useState } from "@/ourReact/jsx-runtime";
+import "./MainMenuContent.scss"
 
 const MainMenuContent = () => {
   const [cards, setCards] = useState<Course[]>([]);

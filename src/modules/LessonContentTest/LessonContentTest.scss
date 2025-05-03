@@ -1,0 +1,46 @@
+@import "@/style.scss";
+
+.lesson__test {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 24px;
+  font-family: "Open Sans", sans-serif;;
+  color: $color4;
+  line-height: 150%;
+  align-items: center;
+}
+
+.block-answer {
+  display: grid;
+  grid-template-columns: 15% 85%;
+  border: 2px solid $color4;
+  border-radius: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  color: $color4;
+}
+
+.form-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.block-answer__input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right {
+  border: 2px solid green;
+  color: green;
+}
+
+.wrong {
+  border: 2px solid #CC0202;
+  color: #CC0202;
+}

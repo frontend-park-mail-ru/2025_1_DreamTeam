@@ -277,13 +277,30 @@ export async function sendQuestions(payload: QuestionsStructure) {
   return data ? true : "Ошибка запроса";
 }
 
-export async function getTesttLesson(lesson_id: number) {
+export async function getTestLesson(lesson_id: number) {
   const data = await apiFetch(
-    `/getNextLesson?courseId=${course_id}&lessonId=${lesson_id}`,
+    `/GetTestLesson?lessonId=${lesson_id}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     }
   );
   return data ? data : "Ошибка запроса";
+}
+
+export async function postTestLesson(
+  question_id: number,
+  answer_id: number,
+  course_id: number,
+) {
+  const csrfToken = await fetchCSRFToken();
+  const data = await apiFetch("/AnswerQuiz", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+    },
+    body: JSON.stringify({ question_id, answer_id, course_id }), 
+  });
+  return data ? true : "Ошибка запроса";
 }

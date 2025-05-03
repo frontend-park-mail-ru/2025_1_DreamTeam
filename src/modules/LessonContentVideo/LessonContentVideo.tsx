@@ -44,13 +44,18 @@ export default function LessonContentVideo({
               console.error("Ошибка");
               return;
             }
-            notCompleted(body_lesson.footer.current_lesson_id);
-            getLessons(id).then((result) => {
-              if (result === undefined) {
+            notCompleted(body_lesson.footer.current_lesson_id).then((r) => {
+              if (r === undefined) {
                 console.error("Course не определён");
                 return;
               }
-              setVideo(result);
+              getLessons(id).then((result) => {
+                if (result === undefined) {
+                  console.error("Course не определён");
+                  return;
+                }
+                setVideo(result);
+              });
             });
           }}
         >

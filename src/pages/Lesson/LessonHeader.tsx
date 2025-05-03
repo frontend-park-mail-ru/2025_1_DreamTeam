@@ -5,6 +5,7 @@ import { Header, LessonsStructure } from "@/types/lesson";
 import ButtonCourse from "@/ui/ButtonCourse";
 import closeIcon from "Public/static/icons/closeCourse.svg";
 import arrowDownIcon from "Public/static/icons/arrowDown40x40.svg";
+import "./Lesson.scss"
 
 export const LessonHeader = ({
   setText,
@@ -70,6 +71,7 @@ export const LessonHeader = ({
                       );
                     }}
                   />
+                  
                   {(count_page != header.Points.length && header.Points.length > 1) ? (<div class={`strip-page ${(lessons.is_done === true && header.Points[count_page].is_done === true) ? "is-done" : "none-done"}`} />) : (<div />)}
                 </div>
               );

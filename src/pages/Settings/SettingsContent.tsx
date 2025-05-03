@@ -5,6 +5,7 @@ import { UpdateData } from "@/types/users";
 import { useToast, setToast } from "@/App";
 import WindowALert from "@/components/WindowALert/WindowALert";
 import { openModal } from "@/types/message";
+import "./Settings.scss"
 
 const SettingContent = () => {
   const user = useUser()
@@ -99,7 +100,7 @@ const SettingContent = () => {
       </div>
       <div class="strings">
         <div></div>
-        <button class="button__input" id="button_input" ON_click={() => {
+        <button class="button__input" ON_click={() => {
           save_data();
         }}>
           Сохранить
@@ -112,7 +113,6 @@ const SettingContent = () => {
             src={information.avatar_src}
             alt=""
             class="avatar__image"
-            id="avatar_input"
           />
           <div class="load__delete">
             <form method="post" enctype="multipart/form-data">

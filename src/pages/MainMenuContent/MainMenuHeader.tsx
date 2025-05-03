@@ -1,6 +1,7 @@
 import arrowDown from "Public/static/icons/arrow-down.svg";
 import filter from "Public/static/icons/filter.svg";
 import ButtonFilter from "@/ui/ButtonFilter";
+import "./MainMenuContent.scss";
 
 const MainMenuHeader = () => {
   const arrayFilter = [
