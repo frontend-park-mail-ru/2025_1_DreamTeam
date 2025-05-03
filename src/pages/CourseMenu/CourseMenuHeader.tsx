@@ -10,7 +10,6 @@ import closeIcon from "Public/static/icons/closeCourse.svg";
 import loadingIcon from "Public/static/icons/loading.gif";
 import { router } from "@/router";
 import "./CourseMenu.scss";
-import { useState } from "@/ourReact/jsx-runtime";
 import { useDevice } from "@/devise";
 
 const CourseMenuHeader = ({
