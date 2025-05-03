@@ -5,6 +5,8 @@ import { LessonsStructure } from "@/types/lesson";
 import { LessonHeader } from "./LessonHeader";
 import LessonContentText from "@/modules/LessonContentText/LessonContentText";
 import LessonContentVideo from "@/modules/LessonContentVideo/LessonContentVideo";
+import "./Lesson.scss"
+import LessonContentTest from "@/modules/LessonContentTest/LessonContentTest";
 
 let exam = {
   lesson: {
@@ -98,7 +100,7 @@ const LessonPage = () => {
   if (!currentPoint) {
     return <div>Ошибка: урок не найден</div>;
   }
-  const isText = currentPoint.type === "text";
+  const isType = currentPoint.type;
   return (
     <div class="">
       <LessonHeader
@@ -107,14 +109,18 @@ const LessonPage = () => {
         text={text}
         header={text.lesson.header}
       />
-      {isText ? (
+      {isType === "text" ? (
         <LessonContentText key="ClassContent" setText={setText} text={text} />
-      ) : (
-        <LessonContentVideo
+      ) : (isType === "video" ?
+        (<LessonContentVideo
           key="LessonContentVideo"
           setVideo={setText}
           video={text}
-        />
+        />) : (<LessonContentTest
+          key="LessonContentTest"
+          setText={setText}
+          text={text}
+        />)
       )}
     </div>
   );

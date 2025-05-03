@@ -3,6 +3,7 @@ import { deletePhoto, updateProfile, uploadProfilePhoto } from "@/api";
 import { setUser, useUser } from "@/App";
 import { UpdateData } from "@/types/users";
 import addToast from "@/components/WindowALert/logic/add";
+import "./Settings.scss";
 
 const SettingContent = () => {
   const user = useUser();
@@ -111,12 +112,7 @@ const SettingContent = () => {
       <div class="strings__avatar">
         Аватарка
         <div class="picture__load__delete">
-          <img
-            src={information.avatar_src}
-            alt=""
-            class="avatar__image"
-            id="avatar_input"
-          />
+          <img src={information.avatar_src} alt="" class="avatar__image" />
           <div class="load__delete">
             <form method="post" enctype="multipart/form-data">
               <label class="text__decoration">

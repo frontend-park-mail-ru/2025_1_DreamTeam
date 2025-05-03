@@ -76,11 +76,18 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.headlines {
+  font-size: 48px;
+  color: $color4;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+}
+
 .content {
   padding: 56px 24px;
   display: flex;
-  color: $color4;
-  font-size: 20px;
   flex-direction: row;
   justify-content: center;
 }
@@ -303,163 +310,7 @@ body {
   font-family: "Open Sans", sans-serif;;
   color: $color4;
   width: 575px;
-  line-height: 1.5;
-}
-
-.close-page {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  align-items: center;
-  justify-content: center;
-}
-
-.changes {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-  background-color: $color2;
-  border-top: 1px solid rgba(147, 128, 128, 0.21);
-  height: 200px;
-  box-sizing: border-box;
-}
-
-.change-select {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  width: 820 px;
-  height: 102px;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-.choose--type--button {
-  display: flex;
-  flex-direction: row;
-  font-size: 20px;
-  font-family: "Open Sans", sans-serif;
-  color: $color4;
-  border-radius: 16px;
-  background-color: $color1;
-  margin-top: auto;
-  margin-bottom: auto;
-  height: 32px;
-  border: none;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-}
-
-.profile {
-  width: 614px;
-  height: 672px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 56px;
-}
-
-.strings {
-  display: grid;
-  grid-template-columns: 184px 430px;
-  align-items: center;
-  cursor: pointer;
-  font-size: 20px;
-  color: $color6;
-}
-
-.strings__avatar {
-  display: grid;
-  grid-template-columns: 184px 430px;
-  height: 217px;
-  justify-content: space-between;
-  cursor: pointer;
-  font-size: 20px;
-  color: $color6;
-}
-
-.text__input {
-  all: unset;
-  border: 1px solid #b1a9a9;
-  border-radius: 16px;
-  width: 403px;
-  background-color: $color1;
-  box-sizing: border-box;
-  align-items: center;
-  font-family: "Open Sans", sans-serif;
-  font-size: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.checkbox__input {
-  border: 1px solid #b1a9a9;
-  border-radius: 4px;
-  width: 18px;
-  height: 18px;
-  box-sizing: border-box;
-  align-items: center;
-  background: $color1;
-  cursor: pointer;
-}
-
-.button__input {
-  all: unset;
-  border-radius: 16px;
-  width: 117px;
-  height: 38px;
-  background-color: $color5;
-  box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  padding: 8px 16px 8px 16px;
-}
-.button__input:hover {
-  opacity: 0.5;
-}
-
-.image__input {
-  display: none;
-}
-
-.avatar__image {
-  height: 160px;
-  width: 160px;
-  padding-top: 16px;
-  padding-bottom: 8px;
-}
-
-.load__delete {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  font-family: "Open Sans", sans-serif;
-}
-
-.text__decoration {
-  text-decoration: underline;
-}
-
-.text__decoration:hover {
-  text-decoration: none;
-}
-
-.picture__load__delete {
-  height: 185px;
-  width: 160px;
-}
-
-.editing__icon {
-  height: 24px;
-  width: 24px;
-  align-items: center;
+  line-height: 150%;
 }
 
 .hidden {
@@ -694,14 +545,6 @@ body {
   padding-bottom: 56px;
 }
 
-.lesson--pages {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-}
 
 .lesson--text {
   display: flex;
@@ -774,14 +617,6 @@ code,
   background: rgba(24, 136, 44, 0.5);
 }
 
-.info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  gap: 12px;
-}
 
 .under {
   font-size: 24px;
@@ -793,23 +628,18 @@ code,
   width: 40px;
 }
 
-.page--lesson--choose {
+.page__lesson__choose {
   display: flex;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
-  background-color: $color5;
+  border: 2px solid #55D16B;
+  color: #55D16B;
+  border-radius: 50%;
+  background-color: transparent;
   justify-content: center;
   align-items: center;
-  border: none;
-  cursor: pointer;
-}
-
-.lessons--watch {
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  height: 40px;
+  font-size: 24px;
+  font-family: "Open Sans", sans-serif;
 }
 
 .video__icon {
@@ -817,12 +647,15 @@ code,
   width: 33px;
   padding-left: 0;
 }
+
 .none {
-  background-color: $color4;
+  border: 2px solid #D0CBCB;
+  color: #D0CBCB;
 }
 
 .current-lessons {
-  border: 2px solid #e05c05;
+  color: #0b192c;
+  background-color: #55D16B;
 }
 
 .video-player {

@@ -218,3 +218,89 @@ export async function validEmail(token: string) {
   });
   return data ? data : undefined;
 }
+
+export async function sendSurveyAnswer(question_id: number, answer: number) {
+  const data = await apiFetch("/sendSurveyQuestionAnswer", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      question_id,
+      answer,
+    }),
+  });
+
+  if (data) {
+    console.log("Ответ успешно отправлен", data);
+    return true;
+  }
+
+  console.error("Ошибка при отправке ответа");
+  return false;
+}
+
+export async function getSurvey() {
+  const data = await apiFetch("/getSurvey", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (data) {
+    console.log("Опрос успешно получен", data);
+    return data;
+  }
+
+  console.error("Ошибка при получении опроса");
+  return null;
+}
+
+export async function getSurveyMetrics() {
+  const data = await apiFetch("/getSurveyMetrics", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (data) {
+    console.log("Опрос успешно получен", data);
+    return data;
+  }
+
+  console.error("Ошибка при получении опроса");
+  return null;
+}
+
+export async function sendQuestions(payload: QuestionsStructure) {
+  const data = await apiFetch("/createSurvey", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  return data ? true : "Ошибка запроса";
+}
+
+export async function getTestLesson(lesson_id: number) {
+  const data = await apiFetch(
+    `/GetTestLesson?lessonId=${lesson_id}`,
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+  return data ? data : "Ошибка запроса";
+}
+
+export async function postTestLesson(
+  question_id: number,
+  answer_id: number,
+  course_id: number,
+) {
+  const csrfToken = await fetchCSRFToken();
+  const data = await apiFetch("/AnswerQuiz", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+    },
+    body: JSON.stringify({ question_id, answer_id, course_id }), 
+  });
+  return data ? true : "Ошибка запроса";
+}
