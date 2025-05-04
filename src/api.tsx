@@ -331,3 +331,14 @@ export async function postTestLesson(
   });
   return data ? true : "Ошибка запроса";
 }
+
+export async function searchForm(keyword: string) {
+  const data = await apiFetch(
+    `/searchCourses?keywords=${keyword}`,
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+  return data?.bucket_courses || [];
+}

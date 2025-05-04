@@ -51,13 +51,13 @@ export const LessonHeader = ({
             {header.Points.map((lessons) => {
               count_page += 1
               return (
-                <div class="page__lesson">
                   <ButtonCourse
                     key={"lesson" + lessons.lesson_id.toString()}
                     current_lesson_id={current_lesson}
                     count_page={count_page}
                     lesson_id={lessons.lesson_id}
                     is_done={lessons.is_done.toString()}
+                    points={header}
                     onClick={() => {
                       const courseId = useCourseOpen().id;
                       if (courseId === undefined) {
@@ -71,9 +71,6 @@ export const LessonHeader = ({
                       );
                     }}
                   />
-                  
-                  {(count_page != header.Points.length && header.Points.length > 1) ? (<div class={`strip-page ${(lessons.is_done === true && header.Points[count_page].is_done === true) ? "is-done" : "none-done"}`} />) : (<div />)}
-                </div>
               );
             })}
           </div>

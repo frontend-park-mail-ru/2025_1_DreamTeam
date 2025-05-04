@@ -7,6 +7,7 @@ import LessonContentText from "@/modules/LessonContentText/LessonContentText";
 import LessonContentVideo from "@/modules/LessonContentVideo/LessonContentVideo";
 import "./Lesson.scss"
 import LessonContentTest from "@/modules/LessonContentTest/LessonContentTest";
+import LessonContentQuiz from "@/modules/LessonContentQuiz/LessonContentQuiz";
 
 let exam = {
   lesson: {
@@ -97,6 +98,7 @@ const LessonPage = () =>  {
     return <div>Ошибка: урок не найден</div>;
   }
   const isType = currentPoint.type;
+  const quiz_test = text.lesson.lesson_body.blocks[0].body;
   return (
     <div>
       <LessonHeader
@@ -112,11 +114,15 @@ const LessonPage = () =>  {
           key="LessonContentVideo"
           setVideo={setText}
           video={text}
-        />) : (<LessonContentTest
-          key="LessonContentTest"
+        />) : (quiz_test === 'quiz' ? <LessonContentQuiz
+          key="LessonContentQuiz"
           setText={setText}
           text={text}
-        />)
+        /> : <LessonContentTest
+        key="LessonContentTest"
+        setText={setText}
+        text={text}
+      />)
       )}
     </div>
   );

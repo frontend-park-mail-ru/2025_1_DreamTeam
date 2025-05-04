@@ -1,47 +1,74 @@
-import { getLessons, getNextLessons, getTestLesson,  postTestLesson } from "@/api";
+import { getLessons, getNextLessons, getQuizLesson, getTestLesson, postQuizLesson, postTestLesson } from "@/api";
 import { useCourseOpen } from "@/App";
 import { useState } from "@/ourReact/jsx-runtime";
 import { LessonsStructure } from "@/types/lesson";
-import { TestStructure } from "@/types/test";
+import { QuizStructure} from "@/types/test";
 import PageButton from "@/ui/PageButton";
-import "./LessonContentTest.scss"
+import "./LessonContentQuiz.scss"
 
-const example = {
-    "question": {
-        "question_id": 1,
-        "question": "Какие на Ваш взгляд существуют проблемы с ИБ в 2025?",
+const exam = {
+    "test": {
+        "question_id": 2,
+        "question": "Выберите то, что не относится к методам обеспечения конфиденциальности",
+        "answers": [
+            {
+                "answer_id": 2,
+                "answer": "Шифрование данных",
+                "is_right": false
+            },
+            {
+                "answer_id": 3,
+                "answer": "Системы аутентификации и авторизации",
+                "is_right": false
+            },
+            {
+                "answer_id": 4,
+                "answer": "Политики разграничения доступа",
+                "is_right": false
+            },
+            {
+                "answer_id": 5,
+                "answer": "Цифровые подписи",
+                "is_right": true
+            }
+        ],
         "user_answer": {
-            "status": "pending",
-            "answer": "Нет проблем"
+            "is_right": false,
+            "question_id": 2,
+            "answer_id": 0
         }
     }
 }
-export default function LessonContentTest({
+
+export default function LessonContentQuiz({
   setText,
   text,
 }: {
   setText: (argv0: LessonsStructure) => void;
   text: LessonsStructure;
 }) {
-    const [test, setTest] = useState<TestStructure>(example);
+    const [quiz, setQuiz] = useState<QuizStructure>(exam);
     const [isLoading, setLoading] = useState(true);
-    const [check, setCheck] = useState("not passed");
+    const [check, setCheck] = useState("0");
     const body_lesson = text.lesson.lesson_body;
     const pagesPrev = body_lesson.footer.previous_lesson_id;
     const pagesNext = body_lesson.footer.next_lesson_id;
     const pagesCurrent = body_lesson.footer.current_lesson_id;
     if (isLoading) {
-        getTestLesson(pagesCurrent).then((result) => {
+      getQuizLesson(pagesCurrent).then((result) => {
             if (result === undefined) {
               console.error(result);
               setLoading(false)
               return <div>Ошибка</div>;
             }
-            setTest(result);
+            setQuiz(result);
             setLoading(false)
-          })
-    }
-    const question = test.question.question
+          }) 
+      }
+
+    const question = quiz.test.question
+    const right = quiz.test.user_answer
+    console.log(quiz)
     
 
   return (
@@ -53,11 +80,16 @@ export default function LessonContentTest({
             {question}
         </div>
         <form class="form-answer">
-            <input type="text" class="text__input__test" value={test.question.user_answer.status != "not passed" ? test.question.user_answer.answer : ""} ON_input={(event: { target: { value: string } }) => {
+            { quiz.test.answers.map((block) => (
+                <div class={`block-answer ${right.answer_id != 0 ? (right.answer_id === block.answer_id ? (right.is_right === true ? "right" : "wrong") : "") : ""} ${right.answer_id != 0 ? (block.is_right === true ? "right": "") : ""}`}>
+                    <input type="radio" class="block-answer__input" name="contact" {...(right.answer_id !== 0 ? (right.answer_id === block.answer_id ? {checked: true} : {}) : {})} value={block.answer_id} ON_input={(event: { target: { value: string } }) => {
                 setCheck(event.target.value);
-              }}/>
+            }}/>
+                    <div>{block.answer}</div>
+                </div>
+                ))
+        }
         </form>
-        <div>{test.question.user_answer.status != "not passed" ? test.question.user_answer.status : "" }</div>
       <div class="lesson--pages">
         <PageButton
           key={"previous_lesson" + pagesPrev.toString()}
@@ -82,20 +114,21 @@ export default function LessonContentTest({
               console.error("Ошибка");
               return;
             }
-            postTestLesson(test.question.question_id, check).then((r) => {
+            if (check != "0") {
+              postQuizLesson(pagesCurrent, Number(check), id).then((r) => {
                 if (r === undefined) {
                   console.error("Course не определён");
                   return;
                 }
-                getTestLesson(pagesCurrent).then((result) => {
-                    if (result === undefined) {
-                      console.error(result);
-                      setLoading(false)
-                      return <div>Ошибка</div>;
-                    }
-                    setTest(result);
-                    setLoading(false)
-                  })});
+                getQuizLesson(pagesCurrent).then((result) => {
+                  if (result === undefined) {
+                    console.error(result);
+                    return <div>Ошибка</div>;
+                  }
+                  setQuiz(result);
+                })});
+              }
+            
 
           }}
         >

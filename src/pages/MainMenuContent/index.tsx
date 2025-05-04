@@ -1,4 +1,4 @@
-import MainMenuContent from "./MainMenuContent";
+import MainMenuContent from "../Lesson/MainMenuContent";
 import MainMenuHeader from "./MainMenuHeader";
 
 const MainMenu = () => {
