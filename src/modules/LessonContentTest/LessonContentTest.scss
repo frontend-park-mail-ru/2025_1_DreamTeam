@@ -1,5 +1,16 @@
 @import "@/style.scss";
 
+.lesson--content {
+  width: 660px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
 .lesson__test {
   display: flex;
   flex-direction: column;
@@ -27,6 +38,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  width: 660px;
 }
 
 .block-answer__input {
@@ -43,4 +55,36 @@
 .wrong {
   border: 2px solid #CC0202;
   color: #CC0202;
+}
+
+
+.page__check {
+  width: 233px;
+  height: 38px;
+  border-radius: 16px;
+  padding: 8px 16px 8px 16px;
+  color: $color4;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  border: none;
+  background: rgba(255, 101, 0, 0.5);
+}
+
+.page__check:hover {
+  background: rgba(183, 181, 183, 1);
+}
+
+.text__input__test {
+  all: unset;
+  border: 1px solid #b1a9a9;
+  border-radius: 16px;
+  width: 660px;
+  background-color: $color1;
+  box-sizing: border-box;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color:rgba(183, 181, 183, 1);
 }

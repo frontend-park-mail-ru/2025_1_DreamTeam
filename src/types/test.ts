@@ -15,7 +15,22 @@ export type Test = {
     answers: Answers[];
     user_answer: UserAnswer;
 };
-export type TestStructure = {
+export type QuizStructure = {
     test: Test;
+};
+
+export type UserAnswer1 = {
+    status: string;
+    answer: string;
+};
+
+export type Question = {
+    question_id: number;
+    question: string;
+    user_answer: UserAnswer1;
+};
+
+export type TestStructure = {
+    question: Question;
 };
   
