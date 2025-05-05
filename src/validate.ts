@@ -27,7 +27,7 @@ export default class Validate {
     this.rules.push({
       check: (value: string): boolean => regular.test(value),
       message: (fieldName: string): string =>
-        `${fieldName} содержит недопустимые символы`,
+        `${fieldName} содержит допустимые символы`,
     });
     return this;
   }

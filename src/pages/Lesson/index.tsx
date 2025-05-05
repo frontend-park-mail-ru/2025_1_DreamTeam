@@ -1,10 +1,13 @@
 import { getLessons, getNextLessons } from "@/api";
-import { useCourseOpen, useLessonID } from "@/App";
+import { useCourseOpen, useLessonID } from "@/stores";
 import { useState } from "@/ourReact/jsx-runtime";
 import { LessonsStructure } from "@/types/lesson";
 import { LessonHeader } from "./LessonHeader";
 import LessonContentText from "@/modules/LessonContentText/LessonContentText";
 import LessonContentVideo from "@/modules/LessonContentVideo/LessonContentVideo";
+import "./Lesson.scss";
+import LessonContentTest from "@/modules/LessonContentTest";
+import LessonContentQuiz from "@/modules/LessonContentQuiz";
 
 let exam = {
   lesson: {
@@ -54,7 +57,7 @@ let exam = {
   },
 };
 
-const LessonPage = () =>  {
+const LessonPage = () => {
   const [text, setText] = useState<LessonsStructure>(exam);
   const [isLoading, setLoading] = useState(true);
   if (isLoading) {
@@ -94,7 +97,8 @@ const LessonPage = () =>  {
   if (!currentPoint) {
     return <div>Ошибка: урок не найден</div>;
   }
-  const isText = currentPoint.type === "text";
+  const isType = currentPoint.type;
+  const quiz_test = text.lesson.lesson_body.blocks[0].body;
   return (
     <div>
       <LessonHeader
@@ -103,17 +107,29 @@ const LessonPage = () =>  {
         text={text}
         header={text.lesson.header}
       />
-      {isText ? (
+      {isType === "text" ? (
         <LessonContentText key="ClassContent" setText={setText} text={text} />
-      ) : (
+      ) : isType === "video" ? (
         <LessonContentVideo
           key="LessonContentVideo"
           setVideo={setText}
           video={text}
         />
+      ) : quiz_test === "quiz" ? (
+        <LessonContentQuiz
+          key="LessonContentQuiz"
+          setText={setText}
+          text={text}
+        />
+      ) : (
+        <LessonContentTest
+          key="LessonContentTest"
+          setText={setText}
+          text={text}
+        />
       )}
     </div>
   );
-}
+};
 
 export default LessonPage;

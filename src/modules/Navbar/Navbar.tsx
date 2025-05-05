@@ -1,12 +1,15 @@
 import { useState } from "@/ourReact/jsx-runtime";
 import { checkAuth } from "@/api";
-import { setUser, useUser } from "@/App";
+import { setUser, useUser } from "@/stores";
 import Logo from "@/components/Logo";
 import Search from "@/components/Search";
 import GetMenuComponent from "@/modules/GetMenuComponent";
+import styles from "./Navbar.module.scss";
+import { useDevice } from "@/devise";
 
 export default function Navbar() {
   const [isLoading, setIsLoading] = useState(true);
+  const isMobile = useDevice().isMobile;
   if (isLoading) {
     checkAuth().then((data) => {
       if (data === false) {
@@ -29,15 +32,16 @@ export default function Navbar() {
     return <div>"загрузка";</div>;
   }
 
-  console.log(useUser());
-
-  console.log("header");
   return (
-    <div class="header">
+    <div class={styles.navbar}>
       <Logo key="logo" />
       <Search key="search" />
 
-      <GetMenuComponent user={useUser()} key="menu" />
+      {isMobile ? (
+        <GetMenuComponent user={useUser()} key="menu" />
+      ) : (
+        <GetMenuComponent user={useUser()} key="menu" />
+      )}
     </div>
   );
 }

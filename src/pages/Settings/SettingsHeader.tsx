@@ -1,27 +1,29 @@
+import styles from "./Settings.module.scss";
+
 const SettingsHeader = () => {
   return (
-    <header class="changes">
-      <div class="headlines">Настройки</div>
-      <div class="change-select">
-        <button class="choose--type--button" style="width: 314px;">
+    <header class={styles.header}>
+      <div class={styles.headlines}>Настройки</div>
+      <div class={styles.changes}>
+        <div class={`${styles.change} ${styles.changeActive}`}>
           <img
             src="../static/icons/user_settings.svg"
             alt=""
-            class="editing__icon"
+            class={styles.changeImg}
           />
           Редактирование профиля
-        </button>
-        <button class="choose--type--button" style="width: 218px;">
-          <img src="../static/icons/mail.svg" alt="" class="editing__icon" />
+        </div>
+        <div class={styles.change}>
+          <img src="../static/icons/mail.svg" alt="" class={styles.changeImg} />
           Изменить почту
-        </button>
-        <button class="choose--type--button" style="width: 232px;">
-          <img src="../static/icons/lock.svg" alt="" class="editing__icon" />
+        </div>
+        <div class={styles.change}>
+          <img src="../static/icons/lock.svg" alt="" class={styles.changeImg} />
           Изменить пароль
-        </button>
+        </div>
       </div>
     </header>
   );
-}
+};
 
 export default SettingsHeader;

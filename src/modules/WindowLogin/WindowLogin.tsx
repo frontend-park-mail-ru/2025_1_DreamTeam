@@ -5,11 +5,12 @@ import Validate from "@/validate";
 import closeWindow from "./logic/closeWindow";
 import signup from "./logic/signup";
 import login from "./logic/login";
+import closeIcon from "Public/static/icons/closeCourse.svg";
+import styles from "./WindowLogin.module.scss";
 
 export default function WindowLogin() {
   console.log("I am rerendering");
   const [state, setState] = useState("login");
-  const [errorAuth, setErrorAuth] = useState("");
   const [formData, setFormData] = useState<FormData>({
     emailField: { value: "", isValid: [], errorMessage: [] },
     nameField: { value: "", isValid: [], errorMessage: [] },
@@ -27,8 +28,7 @@ export default function WindowLogin() {
         const validator = new Validate().regex(
           "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"
         );
-        console.log(validator.execute(value));
-        return validator.execute(value);
+        return validator.execute(value, "Почта");
       },
     },
     {
@@ -40,9 +40,8 @@ export default function WindowLogin() {
         const validator = new Validate()
           .min(2)
           .max(16)
-          .regex("^[a-zA-Z0-9_-]*$");
-        console.log(validator.execute(value));
-        return validator.execute(value);
+          .regex("^[a-zA-Z0-9_-]+$");
+        return validator.execute(value, "Псевдоним");
       },
     },
     {
@@ -56,9 +55,8 @@ export default function WindowLogin() {
         const validator = new Validate()
           .min(8)
           .max(32)
-          .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]*$");
-        console.log(validator.execute(value));
-        return validator.execute(value);
+          .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]+$");
+        return validator.execute(value, "Пароль");
       },
     },
     {
@@ -70,9 +68,8 @@ export default function WindowLogin() {
         const validator = new Validate()
           .min(8)
           .max(32)
-          .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]*$");
-        console.log(validator.execute(value));
-        return validator.execute(value);
+          .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]+$");
+        return validator.execute(value, "Пароль");
       },
     },
   ];
@@ -85,19 +82,26 @@ export default function WindowLogin() {
     });
   }
 
-  console.log("Form data", JSON.stringify(formData), inputField);
-
   return (
-    <div class="blur" ON_mousedown={closeWindow}>
+    <div
+      class="blur"
+      ON_mousedown={closeWindow}
+      ON_keydown={(e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          closeWindow();
+        }
+      }}
+    >
+      <div class={styles.closeWindow}>
+        <img style={"cursor: pointer;"} src={closeIcon} />
+      </div>
       <div
-        class="window"
+        class={styles.window}
         ON_mousedown={(event: PointerEvent) => event.stopPropagation()}
       >
-        <div class="form">
-          <div class="logo">SkillForce</div>
-          <div class="error error_color_red">{errorAuth}</div>
+        <div class={styles.form}>
+          <div class={styles.window__logo}>SkillForce</div>
           {inputField.map((field) => {
-            console.log(field.key, formData[field.key]);
             return (
               <InputWithValidation
                 key={field.key}
@@ -112,23 +116,23 @@ export default function WindowLogin() {
             );
           })}
         </div>
-        <div class="buttons">
+        <div class={styles.buttons}>
           <button
-            class={`buttons__button ${state === "signup" ? "active" : ""}`}
+            class={`${styles.buttons__button} ${
+              state === "signup" ? styles.active : ""
+            }`}
             ON_click={() => {
-              state === "login"
-                ? setState("signup")
-                : signup(formData, setErrorAuth);
+              state === "login" ? setState("signup") : signup(formData);
             }}
           >
             Регистрация
           </button>
           <button
-            class={`buttons__button ${state === "login" ? "active" : ""}`}
+            class={`${styles.buttons__button} ${
+              state === "login" ? styles.active : ""
+            }`}
             ON_click={() => {
-              state === "signup"
-                ? setState("login")
-                : login(formData, setErrorAuth);
+              state === "signup" ? setState("login") : login(formData);
             }}
           >
             Вход

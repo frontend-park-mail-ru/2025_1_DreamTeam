@@ -1,0 +1,35 @@
+@import '@/style.scss';
+
+.content {
+    padding: 56px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.lessonPages {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+.pageCheck {
+  width: 233px;
+  height: 38px;
+  border-radius: 16px;
+  padding: 8px 16px 8px 16px;
+  color: $color4;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  border: none;
+  background: rgba(183, 181, 183, 0.5);
+}
+
+.pageCheck:hover {
+  background: rgba(183, 181, 183, 1);
+}

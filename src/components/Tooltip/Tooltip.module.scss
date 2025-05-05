@@ -1,0 +1,71 @@
+@import '@/style.scss';
+
+.tooltipContainer {
+  position: relative;
+  display: inline-block;
+  align-items: center;
+}
+
+.tooltipContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #1e3e62;
+  padding: 24px;
+  z-index: 10;
+  border-radius: 6px;
+  white-space: nowrap;
+
+  opacity: 0;
+  transform: translateY(-8px);
+  visibility: hidden;
+
+  transition: opacity 300ms ease-out, transform 300ms ease-out,
+    visibility 300ms ease-out;
+}
+
+.tooltipContainer:hover .tooltipContent {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.icon {
+  display: inline;
+}
+
+.text {
+  white-space: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (max-width: 780px) {
+  .tooltipContainer:hover .tooltipContent {
+    width: 70vw;
+  }
+  .tooltipContent {
+    right: 0;
+    left: auto;
+    width: 70vw;
+  }
+  .text {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 1250px) and (min-width: 780px) {
+  .tooltipContainer:hover .tooltipContent {
+    width: 25vw;
+  }
+  .tooltipContent {
+    width: 25vw;
+  }
+  .text {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}

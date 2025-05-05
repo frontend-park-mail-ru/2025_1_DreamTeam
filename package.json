@@ -22,6 +22,7 @@
   "homepage": "https://github.com/frontend-park-mail-ru/2025_1_DreamTeam#readme",
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "sass": "^1.86.3",
     "typescript": "~5.7.2",
     "vite": "^6.2.0"
   }

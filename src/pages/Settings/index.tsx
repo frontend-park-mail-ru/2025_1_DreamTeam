@@ -8,6 +8,6 @@ const Settings = () => {
       <SettingContent key="SettingsContent" />
     </div>
   );
-}
+};
 
 export default Settings;

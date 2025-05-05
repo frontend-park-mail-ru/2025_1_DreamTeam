@@ -1,25 +1,35 @@
 import Card from "@/modules/Card";
-import { Course, getCourses } from "@/api";
+import { Course, getCourses, searchForm } from "@/api";
 import { useState } from "@/ourReact/jsx-runtime";
+import styles from "./MainMenuContent.module.scss";
+import { isSearch } from "@/stores";
 
 const MainMenuContent = () => {
   const [cards, setCards] = useState<Course[]>([]);
   const [isLoading, setLoading] = useState(true);
+  const searching = isSearch();
+  setLoading(true);
   if (isLoading) {
-    getCourses().then((data) => {
-      setCards(data);
-      setLoading(false);
-    });
+    console.log(searching);
+    searching != ""
+      ? searchForm(searching).then((data) => {
+          setCards(data);
+          setLoading(false);
+        })
+      : getCourses().then((data) => {
+          setCards(data);
+          setLoading(false);
+        });
   }
   console.log("render MainMenuContent");
   if (isLoading) {
     // TODO: Потом добавлю вывод более подробный
-    return <div class="content">Загрузка</div>;
+    return <div class={styles.content}>Загрузка</div>;
   }
 
   return (
-    <div class="content">
-      <div class="cards">
+    <div class={styles.content}>
+      <div class={styles.cards}>
         {cards.map((card) => (
           <Card
             key={`card-${card.id}`}
@@ -32,11 +42,12 @@ const MainMenuContent = () => {
             tags={card.tags}
             purchases_amount={card.purchases_amount}
             time_to_pass={card.time_to_pass}
+            favorite={card.is_favorite}
           />
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default MainMenuContent;

@@ -1,10 +1,7 @@
-// TODO: Чтобы рендер не сбивал фокус и при наведении на иконку ошибки сделать tooltrip
+import { FieldState } from "@/types/WindowLogin";
+import Tooltip from "@/components/Tooltip";
+import styles from "./InputWithValidation.module.scss";
 
-import { FieldState } from "@/WindowLogin";
-import error from "Public/static/icons/error.svg";
-import "./InputWithValidation.css";
-
-// Решить проблемы с перерисовкой всех элементов, даже если меняется один
 export default function InputWithValidation(props: {
   type: string;
   keys: string;
@@ -30,19 +27,18 @@ export default function InputWithValidation(props: {
   } = props;
   return (
     <div
-      class={`field-input ${hidden ? "hidden" : ""} ${
-        data.isValid.includes(false) ? "field-input__error" : ""
+      class={`${styles.fieldInput} ${hidden ? styles.hidden : ""} ${
+        data.isValid.includes(false) ? styles.fieldInput__error : ""
       }`}
     >
       <input
-        class="field-input__input"
+        class={styles.fieldInput__input}
         type={type}
         placeholder={placeholder}
         value={data.value}
         ON_input={(e: KeyboardEvent) => {
           const target = e.target as HTMLInputElement;
           const resultValidate = onChanged(target.value);
-          console.log("resultValidate", resultValidate);
 
           setData(keys, {
             value: target.value,
@@ -50,11 +46,18 @@ export default function InputWithValidation(props: {
             errorMessage: resultValidate.errorMessage,
           });
           if (resultValidate.isValid.includes(false)) {
-            console.log("error", target.value);
           }
         }}
       />
-      {data.isValid.includes(false) ? <img class="icon" src={error} /> : ""}
+      {data.isValid.includes(false) ? (
+        <Tooltip
+          key={`tooltip-${type}`}
+          texts={data.errorMessage}
+          isValid={data.isValid}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

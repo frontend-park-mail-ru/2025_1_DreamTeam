@@ -1,8 +1,9 @@
-import { setLessonID, useCourseOpen } from "@/App";
+import { setLessonID, useCourseOpen } from "@/stores";
 import { useState } from "@/ourReact/jsx-runtime";
 import { Bucket } from "@/pages/CourseMenu/CourseMenuContent";
 import { router } from "@/router";
 import arrowDownIcon from "Public/static/icons/arrowDown40x40.svg";
+import styles from "./Chapter.module.scss";
 
 export default function Chapter({
   title,
@@ -15,31 +16,35 @@ export default function Chapter({
   const chapterIsDone = subchapters.every((bucket) =>
     bucket.lessons.every((lesson) => lesson.is_done)
   )
-    ? "color_is_done"
-    : "color_is_not_done";
+    ? styles.color_is_done
+    : styles.color_is_not_done;
 
   return (
-    <div class="chapter">
-      <div class="progress-column">
-        <div class="progress__progress-circle_type_big">
-          <div class={`circle w-24 h-24 ${chapterIsDone}`}></div>
+    <div class={styles.chapter}>
+      <div class={styles.progressColumn}>
+        <div class={styles.progress__progressCircle_type_big}>
+          <div
+            class={`${styles.circle} ${styles.w24} ${styles.h24} ${chapterIsDone}`}
+          ></div>
         </div>
-        <div class="progress__progress-line">
-          <div class={`line ${chapterIsDone}`}></div>
+        <div class={styles.progress__progressLine}>
+          <div class={`${styles.line} ${chapterIsDone}`}></div>
         </div>
       </div>
       <div
-        class="progress-text-block"
+        class={styles.progressTextBlock}
         ON_click={() => {
           setStatus(!useStatus);
         }}
       >
-        <div class="progress-text-block-title">
+        <div class={styles.progressTextBlockTitle}>
           {title}
           <img
             src={arrowDownIcon}
             alt=""
-            class={`animation-rotate ${useStatus ? "flipped" : ""}`}
+            class={`${styles.animationRotate} ${
+              useStatus ? styles.flipped : ""
+            }`}
           />
         </div>
         {useStatus ? (
@@ -49,23 +54,25 @@ export default function Chapter({
               const subchapterIsDone = subchapter.lessons.every(
                 (lesson) => lesson.is_done
               )
-                ? "color_is_done"
-                : "color_is_not_done";
+                ? styles.color_is_done
+                : styles.color_is_not_done;
 
               return (
                 <div>
-                  <div class="progress__progress-line_type_small">
-                    <div class={`line ${subchapterIsDone}`}></div>
+                  <div class={styles.progress__progressLine_type_small}>
+                    <div class={`${styles.line} ${subchapterIsDone}`}></div>
                   </div>
                   <div
-                    class="subchapter"
+                    class={styles.subchapter}
                     ON_click={() => {
                       setLessonID(subchapter.lessons[0].lesson_id);
                       router.goToPath(`/course/${useCourseOpen().id}/lessons`);
                     }}
                   >
-                    <div class="progress__progress-circle_type_small">
-                      <div class={`circle w-24 h-24 ${subchapterIsDone}`}></div>
+                    <div class={styles.progress__progressCircle_type_small}>
+                      <div
+                        class={`${styles.circle} ${styles.w24} ${styles.h24} ${subchapterIsDone}`}
+                      ></div>
                     </div>
                     {subchapter.bucket_title}
                   </div>

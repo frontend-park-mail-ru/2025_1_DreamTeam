@@ -1,10 +1,11 @@
 import formatTime from "./logic/formatTime";
+import styles from "./VideoPlayer.module.scss";
 
 export default function VideoPlayer({ video }: { video: string }) {
   return (
-    <div class="video-player">
+    <div class={styles.videoPlayer}>
       <video
-        class="video-player__video"
+        class={styles.videoPlayer__video}
         id="video"
         ON_timeupdate={() => {
           const video = document.getElementById("video") as HTMLVideoElement;
@@ -33,9 +34,9 @@ export default function VideoPlayer({ video }: { video: string }) {
         Ваш браузер не поддерживает видео.
       </video>
 
-      <div class="video-player__controls">
+      <div class={styles.videoPlayer__controls}>
         <button
-          class="video-player__button"
+          class={styles.videoPlayer__button}
           id="play-pause"
           ON_click={() => {
             const video = document.getElementById("video") as HTMLVideoElement;
@@ -57,7 +58,7 @@ export default function VideoPlayer({ video }: { video: string }) {
         </button>
 
         <input
-          class="video-player__range"
+          class={styles.videoPlayer__range}
           type="range"
           id="progress"
           value="0"
@@ -72,12 +73,12 @@ export default function VideoPlayer({ video }: { video: string }) {
           }}
         />
 
-        <span class="video-player__time" id="time">
+        <span class={styles.videoPlayer__time} id="time">
           0:00 / 0:00
         </span>
 
         <button
-          class="video-player__button"
+          class={styles.videoPlayer__button}
           id="mute"
           ON_click={() => {
             const video = document.getElementById("video") as HTMLVideoElement;
@@ -91,7 +92,7 @@ export default function VideoPlayer({ video }: { video: string }) {
         </button>
 
         <input
-          class="video-player__range"
+          class={styles.videoPlayer__range}
           type="range"
           id="volume"
           min="0"
@@ -108,7 +109,7 @@ export default function VideoPlayer({ video }: { video: string }) {
         />
 
         <button
-          class="video-player__button"
+          class={styles.videoPlayer__button}
           id="fullscreen"
           ON_click={() => {
             const video = document.getElementById("video") as HTMLVideoElement;

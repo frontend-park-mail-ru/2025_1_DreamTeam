@@ -1,0 +1,9 @@
+.header__survey__name {
+    font-size: 18px;
+    font-family: "Open Sans", sans-serif;
+    color: white;
+}
+
+.division {
+    gap:24px;
+}

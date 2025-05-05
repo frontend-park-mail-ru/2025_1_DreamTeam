@@ -1,0 +1,149 @@
+@import '@/style.scss';
+
+.subchapter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  height: 24px;
+  box-sizing: border-box;
+}
+
+.chapter {
+  display: flex;
+  flex-direction: row;
+}
+
+.line {
+  width: 3px;
+  height: 100%;
+}
+
+.circle {
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.w24 {
+  width: 24px;
+}
+
+.h24 {
+  height: 24px;
+}
+
+.open {
+  height: auto;
+}
+
+.color_is_done {
+  background-color: $color5;
+}
+
+.color_is_not_done {
+  background-color: $color4;
+}
+
+.progress__progressCircle_type_big {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  box-sizing: border-box;
+}
+
+.progress__progressCircle_type_small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  box-sizing: border-box;
+}
+
+.progress__progressLine_type_big {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 32px;
+}
+
+.progress__progressLine_type_medium {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 24px;
+}
+
+.progress__progressLine_type_small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 8px;
+}
+
+.progressColumn {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+}
+
+.progressTextBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  gap: 8px;
+  min-width: auto;
+  background: rgba(11, 25, 44, 0.5);
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+  padding: 8px 24px;
+  box-sizing: border-box;
+  color: $color4;
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  cursor: pointer;
+}
+
+.progressTextBlockTitle {
+  display: flex;
+  flex-direction: row;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progress__progressLine {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }

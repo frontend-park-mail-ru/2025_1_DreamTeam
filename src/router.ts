@@ -1,4 +1,5 @@
-import { setPage } from "./App";
+import { setPage } from "./stores";
+import clearToast from "@/components/WindowALert/logic/clear";
 import NotFoundView from "./nonFound";
 
 type RouteState = string;
@@ -19,6 +20,8 @@ class Router {
     window.addEventListener("popstate", (event: PopStateEvent) => {
       const path = location.pathname;
       const matched = this.matchPathToRoute(path);
+
+      clearToast();
 
       if (matched) {
         const { state, view, params } = matched;
@@ -74,6 +77,9 @@ class Router {
       history.pushState({ page: route.state }, "", route.path);
     }
 
+    // Очищает все уведомление
+    clearToast();
+
     route.view();
   }
 
@@ -100,6 +106,10 @@ class Router {
       const { state, view, params } = matched;
       setPage(state);
       history.pushState({ page: state }, "", path);
+
+      // Очищает все уведомление
+      clearToast();
+
       view();
     } else {
       this.notFoundView();

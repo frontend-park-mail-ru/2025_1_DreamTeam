@@ -1,0 +1,59 @@
+@import '@/style.scss';
+
+.content {
+    padding: 56px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lessonText {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;;
+    color: $color4;
+    width: 100%;
+    max-width: 575px;
+    line-height: 1.5;
+}
+
+.lessonPages {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+.lessonText table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.pageCheck {
+  width: 233px;
+  height: 38px;
+  border-radius: 16px;
+  padding: 8px 16px 8px 16px;
+  color: $color4;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  border: none;
+  background: rgba(183, 181, 183, 0.5);
+}
+
+.pageCheck:hover {
+  background: rgba(183, 181, 183, 1);
+}
+
+@media (max-width: 780px) {
+  .content {
+    padding: 0 8px;
+    padding-bottom: 8px;
+  }
+}
+

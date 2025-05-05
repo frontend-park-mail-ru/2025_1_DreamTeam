@@ -358,7 +358,6 @@ class ComponentInstance<PropsType extends ComponentPropsType> {
       this.domElement?.elem.tagName.toUpperCase() !==
       this.vTree?.tagName.toUpperCase()
     ) {
-      console.log("Replace root element", this.domElement, this.vTree);
       const prevChild = this.domElement?.elem;
       this.domElement = {
         type: "element",
