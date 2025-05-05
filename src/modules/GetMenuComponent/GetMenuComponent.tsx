@@ -1,6 +1,6 @@
 import { UserProfile } from "@/types/users";
 import openWindow from "../WindowLogin/logic/openWindow";
-import { useMenu } from "@/App";
+import { useMenu } from "@/stores";
 import MenuOpen from "@/components/MenuOpen";
 import MenuLogout from "@/components/MenuLogout";
 import MenuLogin from "@/components/MenuLogin";

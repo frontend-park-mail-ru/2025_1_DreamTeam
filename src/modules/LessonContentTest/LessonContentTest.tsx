@@ -1,5 +1,5 @@
 import { getNextLessons, getTestLesson, postTestLesson } from "@/api";
-import { useCourseOpen } from "@/App";
+import { useCourseOpen } from "@/stores";
 import { useState } from "@/ourReact/jsx-runtime";
 import { LessonsStructure } from "@/types/lesson";
 import { TestStructure } from "@/types/test";

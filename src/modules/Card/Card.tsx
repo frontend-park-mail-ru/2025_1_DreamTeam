@@ -8,8 +8,9 @@ import userIcon from "Public/static/icons/user.svg";
 import starIcon from "Public/static/icons/star.svg";
 import starHalfIcon from "Public/static/icons/starHalf.svg";
 import starEmptyIcon from "Public/static/icons/starEmpty.svg";
-import { setCourseOpen } from "@/App";
+import { setCourseOpen } from "@/stores";
 import { router } from "@/router";
+import FavoriteButton from "@/components/FavoriteButton/FavoriteButton";
 
 export default function Card({
   title,
@@ -57,28 +58,7 @@ export default function Card({
             <img src={timeIcon} alt="" class={styles.description__icon}></img>
             {time_to_pass.toString()} ч
           </div>
-          <div class={styles.heart}>
-            <img
-              src={heartIcon}
-              alt=""
-              class={`${styles.heart__img} ${styles.heart_default}`}
-            ></img>
-            <img
-              src={heartHoverIcon}
-              alt=""
-              class={`${styles.heart__img} ${styles.heart_hover}`}
-            ></img>
-            <img
-              src={heartFillIcon}
-              alt=""
-              class={`${styles.heart__img} ${styles.heart_fill}`}
-            ></img>
-            <img
-              src={heartFillHoverIcon}
-              alt=""
-              class={`${styles.heart__img} ${styles.heart_fillHover}`}
-            ></img>
-          </div>
+          <FavoriteButton key={`favorite-${id}`} courseId={id} />
         </div>
         <div class={styles.descriptions}>
           <div class={styles.description}>

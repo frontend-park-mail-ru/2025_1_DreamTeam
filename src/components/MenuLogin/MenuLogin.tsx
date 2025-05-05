@@ -1,4 +1,4 @@
-import { setMenu, useUser } from "@/App";
+import { setMenu, useUser } from "@/stores";
 import menu from "Public/static/icons/menu.svg";
 import styles from "./MenuLogin.module.scss";
 

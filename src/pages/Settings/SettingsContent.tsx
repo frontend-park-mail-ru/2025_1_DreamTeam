@@ -1,6 +1,6 @@
 import { useState } from "@/ourReact/jsx-runtime";
 import { deletePhoto, updateProfile, uploadProfilePhoto } from "@/api";
-import { setUser, useUser } from "@/App";
+import { setUser, useUser } from "@/stores";
 import { UpdateData } from "@/types/users";
 import addToast from "@/components/WindowALert/logic/add";
 import styles from "./Settings.module.scss";

@@ -1,4 +1,4 @@
-import { setCourseOpen, setLessonID, useCourseOpen } from "@/App";
+import { setCourseOpen, setLessonID, useCourseOpen } from "@/stores";
 import starIcon from "Public/static/icons/star.svg";
 import timeIcon from "Public/static/icons/time.svg";
 import userIcon from "Public/static/icons/user.svg";

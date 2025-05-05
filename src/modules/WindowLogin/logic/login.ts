@@ -1,5 +1,5 @@
 import { checkAuth, loginUser } from "@/api";
-import { setUser } from "@/App";
+import { setUser } from "@/stores";
 import { FormData } from "@/types/WindowLogin";
 import closeWindow from "./closeWindow";
 import addToast from "@/components/WindowALert/logic/add";

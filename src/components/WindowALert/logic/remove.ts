@@ -1,4 +1,4 @@
-import { setToast, useToast } from "@/App";
+import { setToast, useToast } from "@/stores";
 
 const removeToast = (id: number) => {
   const toast = useToast();

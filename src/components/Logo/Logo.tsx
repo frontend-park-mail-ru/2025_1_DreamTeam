@@ -1,4 +1,4 @@
-import { setCourseOpen, setLessonID } from "@/App";
+import { setCourseOpen, setLessonID } from "@/stores";
 import { router } from "@/router";
 import logo from "Public/static/icons/logo.svg";
 import styles from "./Logo.module.scss";

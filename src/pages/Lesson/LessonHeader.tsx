@@ -1,5 +1,5 @@
 import { getNextLessons } from "@/api";
-import { setCourseOpen, useCourseOpen } from "@/App";
+import { setCourseOpen, useCourseOpen } from "@/stores";
 import { router } from "@/router";
 import { Header, LessonsStructure } from "@/types/lesson";
 import ButtonCourse from "@/ui/ButtonCourse";

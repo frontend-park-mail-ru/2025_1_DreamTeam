@@ -1,5 +1,6 @@
 import search from "Public/static/icons/iconSearch.svg";
 import styles from "./Search.module.scss";
+import { setSearch } from "@/stores";
 
 export default function Search() {
   return (
@@ -9,6 +10,9 @@ export default function Search() {
         type="text"
         placeholder="Поиск"
         class={styles.searchForm__input}
+        ON_input={(event: { target: { value: string } }) => {
+          setSearch(event.target.value);
+        }}
       ></input>
     </div>
   );

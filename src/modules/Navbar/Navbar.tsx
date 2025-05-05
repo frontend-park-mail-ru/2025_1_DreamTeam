@@ -1,6 +1,6 @@
 import { useState } from "@/ourReact/jsx-runtime";
 import { checkAuth } from "@/api";
-import { setUser, useUser } from "@/App";
+import { setUser, useUser } from "@/stores";
 import Logo from "@/components/Logo";
 import Search from "@/components/Search";
 import GetMenuComponent from "@/modules/GetMenuComponent";

@@ -1,4 +1,4 @@
-import { setToast, useToast } from "@/App";
+import { setToast, useToast } from "@/stores";
 import { ToastType } from "@/types/notifications";
 import removeToast from "./remove";
 

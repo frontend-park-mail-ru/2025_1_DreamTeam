@@ -4,7 +4,7 @@ import profile from "Public/static/icons/profile.svg";
 import setting from "Public/static/icons/setting.svg";
 import logout from "Public/static/icons/logout.svg";
 import { fetchLogout } from "@/api";
-import { setMenu, setPage, setUser, usePage } from "@/App";
+import { setMenu, setPage, setUser, usePage } from "@/stores";
 import { router } from "@/router";
 import styles from "./MenuOpen.module.scss";
 

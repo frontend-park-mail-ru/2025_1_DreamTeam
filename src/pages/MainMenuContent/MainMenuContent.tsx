@@ -1,16 +1,25 @@
 import Card from "@/modules/Card";
-import { Course, getCourses } from "@/api";
+import { Course, getCourses, searchForm } from "@/api";
 import { useState } from "@/ourReact/jsx-runtime";
-import "./MainMenuContent.scss";
+import styles from "./MainMenuContent.module.scss";
+import { isSearch } from "@/stores";
 
 const MainMenuContent = () => {
   const [cards, setCards] = useState<Course[]>([]);
   const [isLoading, setLoading] = useState(true);
+  const searching = isSearch();
+  setLoading(true);
   if (isLoading) {
-    getCourses().then((data) => {
-      setCards(data);
-      setLoading(false);
-    });
+    console.log(searching);
+    searching != ""
+      ? searchForm(searching).then((data) => {
+          setCards(data);
+          setLoading(false);
+        })
+      : getCourses().then((data) => {
+          setCards(data);
+          setLoading(false);
+        });
   }
   console.log("render MainMenuContent");
   if (isLoading) {

@@ -1,5 +1,5 @@
 import { getLessons, getNextLessons, notCompleted } from "@/api";
-import { useCourseOpen } from "@/App";
+import { useCourseOpen } from "@/stores";
 import { LessonsStructure } from "@/types/lesson";
 import PageButton from "@/ui/PageButton";
 import styles from "./LessontContentText.module.scss";

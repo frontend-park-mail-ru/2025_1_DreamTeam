@@ -1,4 +1,4 @@
-import { setLessonID, useCourseOpen } from "@/App";
+import { setLessonID, useCourseOpen } from "@/stores";
 import { useState } from "@/ourReact/jsx-runtime";
 import { Bucket } from "@/pages/CourseMenu/CourseMenuContent";
 import { router } from "@/router";

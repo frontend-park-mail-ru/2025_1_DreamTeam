@@ -1,5 +1,5 @@
-import { setLessonID } from "@/App";
-import { router } from "@/router";
+//import { setLessonID } from "@/stores";
+//import { router } from "@/router";
 
 const PageButton = ({
   page_id,

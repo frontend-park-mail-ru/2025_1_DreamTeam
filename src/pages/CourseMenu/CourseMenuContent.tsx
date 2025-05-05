@@ -1,4 +1,4 @@
-import { useCourseOpen } from "@/App";
+import { useCourseOpen } from "@/stores";
 import { useState } from "@/ourReact/jsx-runtime";
 import { getCourseRoadmap } from "@/api";
 import Chapter from "@/components/Chapter";
