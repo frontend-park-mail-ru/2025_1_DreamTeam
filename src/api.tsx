@@ -1,6 +1,7 @@
 import { CourseOpen, CourseStructure } from "@/types/courseMenu";
 import { LessonsStructure } from "@/types/lesson";
 import { UserProfile } from "@/types/users";
+import { QuestionsStructure } from "./types/question";
 
 export const IP = "http://217.16.21.64";
 export const PORT = "8080";
@@ -16,6 +17,7 @@ export interface Course {
   rating: number;
   src_image: string;
   tags: string[];
+  is_favorite: boolean;
 }
 
 async function apiFetch(url: string, options = {}) {
@@ -277,21 +279,18 @@ export async function sendQuestions(payload: QuestionsStructure) {
   return data ? true : "Ошибка запроса";
 }
 
-export async function getTestLesson(lesson_id: number) {
-  const data = await apiFetch(
-    `/GetTestLesson?lessonId=${lesson_id}`,
-    {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    }
-  );
+export async function getQuizLesson(lesson_id: number) {
+  const data = await apiFetch(`/GetTestLesson?lessonId=${lesson_id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
   return data ? data : "Ошибка запроса";
 }
 
-export async function postTestLesson(
+export async function postQuizLesson(
   question_id: number,
   answer_id: number,
-  course_id: number,
+  course_id: number
 ) {
   const csrfToken = await fetchCSRFToken();
   const data = await apiFetch("/AnswerQuiz", {
@@ -300,7 +299,36 @@ export async function postTestLesson(
       "Content-Type": "application/json",
       "X-CSRF-Token": csrfToken,
     },
-    body: JSON.stringify({ question_id, answer_id, course_id }), 
+    body: JSON.stringify({ question_id, answer_id, course_id }),
   });
   return data ? true : "Ошибка запроса";
+}
+
+export async function getTestLesson(lesson_id: number) {
+  const data = await apiFetch(`/GetQuestionTestLesson?lessonId=${lesson_id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  return data ? data : "Ошибка запроса";
+}
+
+export async function postTestLesson(question_id: number, answer: string) {
+  const csrfToken = await fetchCSRFToken();
+  const data = await apiFetch("/AnswerQuestion", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+    },
+    body: JSON.stringify({ question_id, answer }),
+  });
+  return data ? true : "Ошибка запроса";
+}
+
+export async function searchForm(keyword: string) {
+  const data = await apiFetch(`/searchCourses?keywords=${keyword}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  return data?.bucket_courses || [];
 }
