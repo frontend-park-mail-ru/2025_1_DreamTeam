@@ -364,5 +364,5 @@ export async function getFavoriteCourses() {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
-  return data ? data : "Ошибка получения избранных курсов";
+  return data ? data.bucket_courses : "Ошибка получения избранных курсов";
 }
