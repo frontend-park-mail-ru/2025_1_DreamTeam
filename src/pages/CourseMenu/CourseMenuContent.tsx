@@ -90,7 +90,9 @@ export function CourseMenuContent() {
                   />
                   {index !== parts.parts.length - 1 ? (
                     <div class={styles.progress__progressLine_type_medium}>
-                      <div class={`${styles.line} ${chapterIsDone}`}></div>
+                      <div
+                        class={`${styles.line} ${chapterIsDone} ${styles.color_is_done}`}
+                      ></div>
                     </div>
                   ) : (
                     ""
