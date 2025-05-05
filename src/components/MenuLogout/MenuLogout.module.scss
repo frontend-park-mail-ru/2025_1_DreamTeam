@@ -1,0 +1,63 @@
+@import '@/style.scss';
+
+.buttonTypeMenu {
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  color: $color6;
+  font-size: 16px;
+  width: fit-content;
+  font-family: "Open Sans", sans-serif;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0px 4px 0px 4px;
+}
+
+.buttonText {
+  color: $color6;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.buttonTypeMenu:hover {
+  background-color: $color7;
+  padding: 0px 16px 0px 16px;
+  color: $color2;
+}
+
+.buttonTypeMenu:hover .buttonText {
+  color: $color2;
+  width: fit-content;
+}
+
+.buttonText {
+  overflow: hidden;
+  width: 0px;
+}
+
+.buttonImg {
+    display: inline;
+}
+
+@media (max-width: 780px) {
+  .buttonText {
+    width: fit-content;
+  }
+}
+
+@media (hover: none) {
+  .buttonTypeMenu {
+    outline: 2px solid $color1;
+    ;
+  }
+  .buttonTypeMenu:hover {
+    color: $color6;
+    background-color: transparent;
+    padding: 0px 4px 0px 4px;
+  }
+  .buttonTypeMenu:hover .buttonText {
+    color: $color6;
+  }
+}

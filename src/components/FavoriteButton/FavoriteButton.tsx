@@ -7,8 +7,17 @@ import heartFillHoverIcon from "Public/static/icons/heartFillHover.svg";
 import styles from "./FavoriteButton.module.scss";
 import addToast from "../WindowALert/logic/add";
 
-export default function FavoriteButton({ courseId }: { courseId: number }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+export default function FavoriteButton({
+  favorite,
+  courseId,
+}: {
+  favorite: boolean;
+  courseId: number;
+}) {
+  const [isFavorite, setIsFavorite] = useState(favorite);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const canHover = window.matchMedia("(hover: hover)").matches;
 
   const toggleFavorite = async (e: Event) => {
     e.stopPropagation();
@@ -26,6 +35,7 @@ export default function FavoriteButton({ courseId }: { courseId: number }) {
     if (isFavorite) {
       const result = await deleteCourseFavorites(courseId);
       if (result === true) {
+        console.log("Удалено из избранного");
         setIsFavorite(false);
       } else {
         console.error("Ошибка удаления из избранного");
@@ -33,6 +43,7 @@ export default function FavoriteButton({ courseId }: { courseId: number }) {
     } else {
       const result = await addCourseFavorites(courseId);
       if (result === true) {
+        console.log("Добавлено в избранное");
         setIsFavorite(true);
       } else {
         console.error("Ошибка добавления в избранное");
@@ -40,22 +51,22 @@ export default function FavoriteButton({ courseId }: { courseId: number }) {
     }
   };
 
+  const getIcon = () => {
+    if (isFavorite) {
+      return isHovered ? heartFillHoverIcon : heartFillIcon;
+    } else {
+      return isHovered ? heartHoverIcon : heartIcon;
+    }
+  };
+
   return (
-    <div class={styles.heart} ON_click={toggleFavorite}>
-      <img
-        src={isFavorite ? heartFillIcon : heartIcon}
-        alt="Избранное"
-        class={`${styles.heart__img} ${
-          isFavorite ? styles.heart_fill : styles.heart_default
-        }`}
-      />
-      <img
-        src={isFavorite ? heartFillHoverIcon : heartHoverIcon}
-        alt="Избранное (наведение)"
-        class={`${styles.heart__img} ${
-          isFavorite ? styles.heart_fillHover : styles.heart_hover
-        }`}
-      />
+    <div
+      class={styles.heart}
+      ON_click={toggleFavorite}
+      ON_mouseenter={() => canHover && setIsHovered(true)}
+      ON_mouseleave={() => canHover && setIsHovered(false)}
+    >
+      <img src={getIcon()} alt="Избранное" class={styles.heart__img} />
     </div>
   );
 }
