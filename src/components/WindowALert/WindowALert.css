@@ -1,0 +1,84 @@
+.alert-admit__window {
+  display: flex;
+  flex-direction: row;
+  pointer-events: auto;
+  align-items: center;
+  width: 60%;
+  height: 50px;
+  border-radius: 8px;
+  justify-content: space-between;
+  padding: 4px 12px;
+  color: #ffffff;
+  opacity: 1;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    -o-transform: translateX(100%);
+  }
+}
+
+.append-alert {
+  animation: slide-in 0.3s ease-in forwards;
+  -webkit-animation: slide-in 0.3s ease-in forwards;
+}
+
+.disappear-alert {
+  animation: slide-out 0.3s ease-in forwards;
+  -webkit-animation: slide-out 0.3s ease-in forwards;
+}
+
+.error-window {
+  background-color: rgb(119, 17, 17);
+  border: 3px solid #cc0202;
+}
+
+.success-window {
+  background-color: rgb(8, 107, 59);
+  border: 3px solid #0f9914;
+}
+
+.notification-window {
+  background-color: rgb(18, 14, 134);
+  border: 3px solid #0d3cca;
+}
+
+.alert-admit__button-admit {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}

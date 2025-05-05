@@ -1,0 +1,60 @@
+.heart_default {
+  opacity: 1;
+  display: block;
+  position: absolute;
+  transition: opacity 0.3s ease;
+  top: 0;
+  left: 0;
+}
+
+.heart_default:hover {
+  opacity: 0;
+}
+
+.heart_hover {
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.3s ease;
+  top: 0;
+  left: 0;
+}
+
+.heart_hover:hover {
+  opacity: 1;
+}
+
+.heart_fill {
+  opacity: 1;
+  position: absolute;
+  transition: opacity 0.3s ease;
+  top: 0;
+  left: 0;
+}
+
+.heart_fill:hover {
+  opacity: 0;
+}
+
+.heart_fillHover {
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.3s ease;
+  top: 0;
+  left: 0;
+}
+
+.heart__img {
+  height: 34px;
+  width: 32px;
+}
+
+.heart_fillHover:hover {
+  opacity: 1;
+}
+
+.heart {
+  position: relative;
+  display: flex;
+  width: 32px;
+  height: 34px;
+}

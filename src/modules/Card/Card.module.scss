@@ -1,0 +1,141 @@
+@import '@/style.scss';
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  width: 279px;
+  height: 360px;
+  border-radius: 12px;
+  background-color: $color2;
+  box-sizing: border-box;
+  gap: 2px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.card:hover {
+  outline: 2px solid $color3;
+}
+
+.picture {
+  border-radius: 12px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-size: cover;
+  padding: 8px;
+  box-sizing: border-box;
+  background-size: 100% 100%;
+}
+
+.descriptions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.description {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: rgba(30, 62, 98, 0.9);
+  border-radius: 24px;
+  padding: 4px 16px;
+  font-size: 16px;
+  font-family: "Oxygen Mono", monospace;
+  gap: 8px;
+  color: $color4;
+  height: fit-content;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
+  -ms-border-radius: 24px;
+  -o-border-radius: 24px;
+}
+
+.heart__img {
+  height: 34px;
+  width: 32px;
+}
+
+.description__icon {
+  height: 14px;
+  width: 14px;
+}
+
+.name {
+  color: $color4;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+}
+
+.colorFree {
+  color: #408b1b;
+}
+
+.ratingAndPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: $color3;
+  font-size: 16px;
+  gap: 8px;
+  font-family: "Oxygen Mono", monospace;
+}
+
+.ratingAndPrice__price {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+
+.rating__star {
+  color: $color4;
+  background-image: $color4;
+}
+
+@media (max-width: 780px) {
+  .card {
+    min-width: 110px;
+    width: 48%;
+    max-width: 271px;
+    aspect-ratio: 31 / 40;
+    height: auto;
+    box-sizing: border-box;
+  }
+  .description {
+    font-size: 8px;
+    gap: 2px;
+    padding: 2px 8px;
+  }
+  .description__icon {
+    height: 8px;
+    width: 8px;
+  }
+  .rating__star {
+    height: 14px;
+    width: 14px;
+  }
+  .ratingAndPrice {
+    font-size: 14px;
+  }
+}
+
+@media (hover: none) {
+  .card:hover {
+    outline: none;
+  }
+}

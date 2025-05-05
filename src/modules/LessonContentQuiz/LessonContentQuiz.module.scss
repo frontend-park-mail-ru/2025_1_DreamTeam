@@ -1,0 +1,100 @@
+@import "@/style.scss";
+
+.content {
+  padding: 56px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.lesson__test {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 24px;
+  font-family: "Open Sans", sans-serif;;
+  color: $color4;
+  line-height: 150%;
+  align-items: center;
+}
+
+.blockAnswer {
+  display: grid;
+  grid-template-columns: 15% 85%;
+  border: 2px solid $color4;
+  border-radius: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 16px;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+  color: $color4;
+}
+
+.formAnswer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.blockAnswer__input {
+  display: flex;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.right {
+  border: 2px solid green;
+  color: green;
+}
+
+.wrong {
+  border: 2px solid #CC0202;
+  color: #CC0202;
+}
+
+.lessonPages {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
+.page__check {
+  width: 233px;
+  height: 38px;
+  border-radius: 16px;
+  padding: 8px 16px 8px 16px;
+  color: $color4;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  border: none;
+  background: rgba(255, 101, 0, 0.5);
+}
+
+.page__check:hover {
+  background: rgba(183, 181, 183, 1);
+}
+
+.text__input__test {
+  all: unset;
+  border: 1px solid #b1a9a9;
+  border-radius: 16px;
+  width: 660px;
+  background-color: $color1;
+  box-sizing: border-box;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color:rgba(183, 181, 183, 1);
+}

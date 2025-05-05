@@ -1,0 +1,12 @@
+@import '@/style.scss';
+
+.navbar {
+  position: relative;
+  padding: 30px 40px;
+  gap: 16px;
+  box-sizing: border-box;
+  background-color: $color2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

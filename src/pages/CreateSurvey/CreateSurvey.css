@@ -1,0 +1,34 @@
+.number__input{
+    height: 30px;
+    width: 150px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-family: "Open Sans", sans-serif;
+}
+
+.profile__block__question{
+    color: white;
+    font-size: 18px;
+    font-family: "Open Sans", sans-serif;
+}
+
+.profile__block{
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.survey__name {
+    font-size: 18px;
+    font-family: "Open Sans", sans-serif;
+    color: white;
+}
+.header__survey__name {
+    font-size: 18px;
+    font-family: "Open Sans", sans-serif;
+    color: white;
+}
+
+.division {
+    gap:24px;
+}
