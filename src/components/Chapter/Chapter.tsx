@@ -16,8 +16,8 @@ export default function Chapter({
   const chapterIsDone = subchapters.every((bucket) =>
     bucket.lessons.every((lesson) => lesson.is_done)
   )
-    ? "color_is_done"
-    : "color_is_not_done";
+    ? styles.color_is_done
+    : styles.color_is_not_done;
 
   return (
     <div class={styles.chapter}>
