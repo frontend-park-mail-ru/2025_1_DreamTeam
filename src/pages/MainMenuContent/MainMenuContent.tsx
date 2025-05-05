@@ -42,6 +42,7 @@ const MainMenuContent = () => {
             tags={card.tags}
             purchases_amount={card.purchases_amount}
             time_to_pass={card.time_to_pass}
+            favorite={card.is_favorite}
           />
         ))}
       </div>
