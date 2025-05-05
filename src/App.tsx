@@ -32,6 +32,7 @@ export const [useToast, setToast] = defineStore("toast1", {
   data: [] as Toast,
   count: 0 as number,
 });
+export const [isSearch, setSearch] = defineStore("search", "");
 
 // if ("serviceWorker" in navigator) {
 //   navigator.serviceWorker
