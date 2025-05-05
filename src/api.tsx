@@ -332,3 +332,37 @@ export async function searchForm(keyword: string) {
   });
   return data?.bucket_courses || [];
 }
+
+export async function addCourseFavorites(courseId: number) {
+  const csrfToken = await fetchCSRFToken();
+  const data = await apiFetch("/addCourseToFavourites", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+    },
+    body: JSON.stringify({ id: courseId }),
+  });
+  return data ? true : "Ошибка добавления в избранное";
+}
+
+export async function deleteCourseFavorites(courseId: number) {
+  const csrfToken = await fetchCSRFToken();
+  const data = await apiFetch("/deleteCourseFromFavourites", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+    },
+    body: JSON.stringify({ id: courseId }),
+  });
+  return data ? true : "Ошибка удаления из избранного";
+}
+
+export async function getFavoriteCourses() {
+  const data = await apiFetch("/getFavouriteCourses", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  return data ? data : "Ошибка получения избранных курсов";
+}
