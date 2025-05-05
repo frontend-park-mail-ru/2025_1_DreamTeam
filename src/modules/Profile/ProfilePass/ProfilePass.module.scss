@@ -1,0 +1,32 @@
+@import '@/style.scss';
+
+.cards {
+  width: 1188px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.content {
+  padding: 56px 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: $color4;
+  font-size: 48px;
+  font-family: "Open Sans", sans-serif;
+}
+
+@media (max-width: 780px) {
+    .cards {
+        gap: 8px;
+    }
+    .content {
+        padding: 24px 8px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
