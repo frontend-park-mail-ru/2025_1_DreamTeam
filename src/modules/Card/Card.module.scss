@@ -14,6 +14,10 @@
   transition: border-color 0.3s ease;
 }
 
+.card:hover {
+  outline: 2px solid $color3;
+}
+
 .picture {
   border-radius: 12px;
   position: relative;
@@ -127,5 +131,11 @@
   }
   .ratingAndPrice {
     font-size: 14px;
+  }
+}
+
+@media (hover: none) {
+  .card:hover {
+    outline: none;
   }
 }

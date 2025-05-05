@@ -1,9 +1,5 @@
 import styles from "./Card.module.scss";
 import timeIcon from "Public/static/icons/time.svg";
-import heartIcon from "Public/static/icons/heart.svg";
-import heartHoverIcon from "Public/static/icons/heartHover.svg";
-import heartFillIcon from "Public/static/icons/heartFill.svg";
-import heartFillHoverIcon from "Public/static/icons/heartFillHover.svg";
 import userIcon from "Public/static/icons/user.svg";
 import starIcon from "Public/static/icons/star.svg";
 import starHalfIcon from "Public/static/icons/starHalf.svg";
@@ -22,6 +18,7 @@ export default function Card({
   purchases_amount,
   time_to_pass,
   tags,
+  favorite,
 }: {
   title: string;
   price: number;
@@ -32,6 +29,7 @@ export default function Card({
   purchases_amount: number;
   time_to_pass: number;
   tags: string[];
+  favorite: boolean;
 }) {
   // TODO: Добавить новую логику открытия курса через запрос
   return (
@@ -58,7 +56,11 @@ export default function Card({
             <img src={timeIcon} alt="" class={styles.description__icon}></img>
             {time_to_pass.toString()} ч
           </div>
-          <FavoriteButton key={`favorite-${id}`} courseId={id} />
+          <FavoriteButton
+            key={`favorite-${id}`}
+            favorite={favorite}
+            courseId={id}
+          />
         </div>
         <div class={styles.descriptions}>
           <div class={styles.description}>
