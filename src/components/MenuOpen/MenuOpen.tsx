@@ -1,4 +1,4 @@
-import ButtonMenu from "@/ui/ButtonMenu";
+import ButtonMenu from "@/ui/ButtonMenu/ButtonMenu";
 import closeMenu from "Public/static/icons/close-menu.svg";
 import profile from "Public/static/icons/profile.svg";
 import setting from "Public/static/icons/setting.svg";
@@ -6,6 +6,7 @@ import logout from "Public/static/icons/logout.svg";
 import { fetchLogout } from "@/api";
 import { setMenu, setPage, setUser, usePage } from "@/App";
 import { router } from "@/router";
+import styles from "./MenuOpen.module.scss";
 
 export default function MenuOpen() {
   const arrayButtons = [
@@ -51,7 +52,7 @@ export default function MenuOpen() {
     },
   ];
   return (
-    <div class="block-menu">
+    <div class={styles.blockMenu}>
       {arrayButtons.map((button, index) => (
         <ButtonMenu
           key={`button-menu-${index}`}

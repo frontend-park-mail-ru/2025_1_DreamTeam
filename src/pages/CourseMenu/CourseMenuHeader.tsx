@@ -9,7 +9,7 @@ import reviewIcon from "Public/static/icons/reviewsCourse.svg";
 import closeIcon from "Public/static/icons/closeCourse.svg";
 import loadingIcon from "Public/static/icons/loading.gif";
 import { router } from "@/router";
-import "./CourseMenu.scss";
+import styles from "./CourseMenu.module.scss";
 import { useDevice } from "@/devise";
 
 const CourseMenuHeader = ({
@@ -57,17 +57,17 @@ const CourseMenuHeader = ({
   }
 
   const courseAndPrice = (
-    <div class="course-price-and-button">
+    <div class={styles.coursePriceAndButton}>
       <div
-        class={`course-price-and-button__price ${
-          data.price === 0 ? "color-free" : ""
+        class={`${styles.coursePriceAndButton__price} ${
+          data.price === 0 ? styles.colorFree : ""
         }`}
       >
         {data.price === 0 ? "Бесплатно" : `${data.price?.toString()} ₽`}
       </div>
       {!data.is_purchased ? (
         <div
-          class="course-price-and-button__button"
+          class={styles.coursePriceAndButton__button}
           ON_click={() => {
             console.log("Записаться");
             const id = data.id;
@@ -79,12 +79,12 @@ const CourseMenuHeader = ({
             router.goToPath(`/course/${useCourseOpen().id}/lessons`);
           }}
         >
-          <img class="button__icon" src={addCourseIcon} />
+          <img class={styles.button__icon} src={addCourseIcon} />
           Записаться на курс
         </div>
       ) : (
         <div
-          class="course-price-and-button__button"
+          class={styles.coursePriceAndButton__button}
           ON_click={() => {
             console.log("Записаться");
             const id = data.id;
@@ -103,47 +103,49 @@ const CourseMenuHeader = ({
   );
 
   return (
-    <header class="course-header">
-      <div class="close-page"></div>
-      <div class="header-content">
-        <div class="header-info">
+    <header class={styles.courseHeader}>
+      <div class={styles.closePage}></div>
+      <div class={styles.headerContent}>
+        <div class={styles.headerInfo}>
           <div>
-            <img class="course-image" src={`${data.src_image}`} alt="" />
+            <img class={styles.courseImage} src={`${data.src_image}`} alt="" />
           </div>
-          <div class="course-text">
-            <div class="course-name">{data.title}</div>
-            <div class="course-descriptions">
-              <div class="course-description">
-                <img class="course-description__img" src={starIcon} />
-                <div class="course-description__text">
-                  <div class="course-description__text-number">
+          <div class={styles.courseText}>
+            <div class={styles.courseName}>{data.title}</div>
+            <div class={styles.courseDescriptions}>
+              <div class={styles.courseDescription}>
+                <img class={styles.courseDescription_img} src={starIcon} />
+                <div class={styles.courseDescriptionText}>
+                  <div class={styles.courseDescriptionText__number}>
                     {(data.rating ?? 0).toFixed(1)}
                   </div>{" "}
-                  <div class="course-description__text-text">рейтинг</div>
+                  <div class={styles.courseDescriptionText__text}>рейтинг</div>
                 </div>
               </div>
-              <div class="course-description">
-                <img class="course-description__img" src={timeIcon} />
-                <div class="course-description__text">
-                  <div class="course-description__text-number">
+              <div class={styles.courseDescription}>
+                <img class={styles.courseDescription_img} src={timeIcon} />
+                <div class={styles.courseDescriptionText}>
+                  <div class={styles.courseDescriptionText__number}>
                     {data.time_to_pass?.toString()}
                   </div>{" "}
-                  <div class="course-description__text-text">часов</div>
+                  <div class={styles.courseDescriptionText__text}>часов</div>
                 </div>
               </div>
-              <div class="course-description">
-                <img class="course-description__img" src={userIcon} />
-                <div class="course-description__text">
-                  <div class="course-description__text-number">
+              <div class={styles.courseDescription}>
+                <img class={styles.courseDescription__Img} src={userIcon} />
+                <div class={styles.courseDescriptionText}>
+                  <div class={styles.courseDescriptionText__number}>
                     {data.purchases_amount?.toString()}
                   </div>{" "}
-                  <div class="course-description__text-text">записались</div>
+                  <div class={styles.courseDescriptionText__text}>
+                    записались
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="course-tags">
+            <div class={styles.courseTags}>
               {data.tags?.map((tag, index) => (
-                <div key={index} class="course-tag">
+                <div key={index} class={styles.courseTag}>
                   {tag}
                 </div>
               ))}
@@ -152,22 +154,23 @@ const CourseMenuHeader = ({
           </div>
         </div>
         {isMobile ? courseAndPrice : ""}
-        <div class="changes1">
+        <div class={styles.changes}>
           {sections.map((section) => (
             <div
               ON_click={section.click}
               class={
-                "change" + (useFunc === section.type ? " change-active" : "")
+                `${styles.change}` +
+                (useFunc === section.type ? ` ${styles.changeActive}` : "")
               }
             >
-              <img class="changes1__img" src={section.image} />
+              <img class={styles.changesImg} src={section.image} />
               {section.name}
             </div>
           ))}
         </div>
       </div>
       <div
-        class="close-page"
+        class={styles.closePage}
         ON_click={() => {
           setCourseOpen({});
           router.goByState("MainMenu");

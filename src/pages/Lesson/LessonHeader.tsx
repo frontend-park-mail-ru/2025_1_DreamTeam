@@ -5,7 +5,7 @@ import { Header, LessonsStructure } from "@/types/lesson";
 import ButtonCourse from "@/ui/ButtonCourse";
 import closeIcon from "Public/static/icons/closeCourse.svg";
 import arrowDownIcon from "Public/static/icons/arrowDown40x40.svg";
-import "./Lesson.scss"
+import styles from "./Lesson.module.scss";
 
 export const LessonHeader = ({
   setText,
@@ -27,9 +27,9 @@ export const LessonHeader = ({
   });
   let count_page = 0;
   return (
-    <header class="course-header1">
+    <header class={styles.courseHeader}>
       <div
-        class="close-page"
+        class={styles.closePage}
         ON_click={() => {
           const id = useCourseOpen().id;
           router.goToPath(`/course/${id}`);
@@ -37,50 +37,47 @@ export const LessonHeader = ({
       >
         <img style={"cursor: pointer;"} src={arrowDownIcon} />
       </div>
-      <div class="info">
-        <div class="headlines">{header.course_title}</div>
-        <div class="headlines under">
+      <div class={styles.info}>
+        <div class={styles.headlines}>{header.course_title}</div>
+        <div class={`${styles.headlines} ${styles.under}`}>
           {lesson}. {name_lesson} {lesson_after}. {name_lesson_after}
         </div>
-        <div class="lesson--pages">
-          <div class="headlines under">
+        <div class={styles.lessonPages}>
+          <div class={`${styles.headlines} ${styles.under} ${styles.count}`}>
             Пройдено шагов {count_watch.toString()} из{" "}
             {header.Points.length.toString()}
           </div>
-          <div class="lessons--watch">
+          <div class={styles.lessonsWatch}>
             {header.Points.map((lessons) => {
-              count_page += 1
+              count_page += 1;
               return (
-                <div class="page__lesson">
-                  <ButtonCourse
-                    key={"lesson" + lessons.lesson_id.toString()}
-                    current_lesson_id={current_lesson}
-                    count_page={count_page}
-                    lesson_id={lessons.lesson_id}
-                    is_done={lessons.is_done.toString()}
-                    onClick={() => {
-                      const courseId = useCourseOpen().id;
-                      if (courseId === undefined) {
-                        console.error("Course не определён");
-                        return;
+                <ButtonCourse
+                  key={"lesson" + lessons.lesson_id.toString()}
+                  current_lesson_id={current_lesson}
+                  count_page={count_page}
+                  lesson_id={lessons.lesson_id}
+                  is_done={lessons.is_done.toString()}
+                  points={header}
+                  onClick={() => {
+                    const courseId = useCourseOpen().id;
+                    if (courseId === undefined) {
+                      console.error("Course не определён");
+                      return;
+                    }
+                    getNextLessons(courseId, lessons.lesson_id).then(
+                      (result) => {
+                        setText(result);
                       }
-                      getNextLessons(courseId, lessons.lesson_id).then(
-                        (result) => {
-                          setText(result);
-                        }
-                      );
-                    }}
-                  />
-                  
-                  {(count_page != header.Points.length && header.Points.length > 1) ? (<div class={`strip-page ${(lessons.is_done === true && header.Points[count_page].is_done === true) ? "is-done" : "none-done"}`} />) : (<div />)}
-                </div>
+                    );
+                  }}
+                />
               );
             })}
           </div>
         </div>
       </div>
       <div
-        class="close-page"
+        class={styles.closePage}
         ON_click={() => {
           setCourseOpen({});
           router.goByState("MainMenu");
@@ -90,4 +87,4 @@ export const LessonHeader = ({
       </div>
     </header>
   );
-}
+};

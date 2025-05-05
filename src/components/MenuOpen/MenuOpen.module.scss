@@ -1,0 +1,19 @@
+@import '@/style.scss';
+
+.blockMenu {
+  display: flex;
+  flex-direction: row;
+  min-width: auto;
+  max-width: 300px;
+  width: 100%;
+  justify-content: end;
+}
+
+@media (max-width: 780px) {
+    .blockMenu {
+        flex-direction: column;
+        width: fit-content;
+        align-items: end;
+        gap: 16px;
+    }
+}

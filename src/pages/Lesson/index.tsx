@@ -1,12 +1,13 @@
 import { getLessons, getNextLessons } from "@/api";
-import { useCourseOpen, useLessonID, useUser } from "@/App";
+import { useCourseOpen, useLessonID } from "@/App";
 import { useState } from "@/ourReact/jsx-runtime";
 import { LessonsStructure } from "@/types/lesson";
 import { LessonHeader } from "./LessonHeader";
 import LessonContentText from "@/modules/LessonContentText/LessonContentText";
 import LessonContentVideo from "@/modules/LessonContentVideo/LessonContentVideo";
-import "./Lesson.scss"
-import LessonContentTest from "@/modules/LessonContentTest/LessonContentTest";
+import "./Lesson.scss";
+import LessonContentTest from "@/modules/LessonContentTest";
+import LessonContentQuiz from "@/modules/LessonContentQuiz";
 
 let exam = {
   lesson: {
@@ -59,10 +60,6 @@ let exam = {
 const LessonPage = () => {
   const [text, setText] = useState<LessonsStructure>(exam);
   const [isLoading, setLoading] = useState(true);
-  if (useUser() === false) {
-    console.error("нету авторизации");
-    return <div class="dont-content">Не авторизован</div>;
-  }
   if (isLoading) {
     const courseId = useCourseOpen().id;
     if (courseId === undefined) {
@@ -101,8 +98,9 @@ const LessonPage = () => {
     return <div>Ошибка: урок не найден</div>;
   }
   const isType = currentPoint.type;
+  const quiz_test = text.lesson.lesson_body.blocks[0].body;
   return (
-    <div class="">
+    <div>
       <LessonHeader
         key="ClassHeader"
         setText={setText}
@@ -111,16 +109,24 @@ const LessonPage = () => {
       />
       {isType === "text" ? (
         <LessonContentText key="ClassContent" setText={setText} text={text} />
-      ) : (isType === "video" ?
-        (<LessonContentVideo
+      ) : isType === "video" ? (
+        <LessonContentVideo
           key="LessonContentVideo"
           setVideo={setText}
           video={text}
-        />) : (<LessonContentTest
+        />
+      ) : quiz_test === "quiz" ? (
+        <LessonContentQuiz
+          key="LessonContentQuiz"
+          setText={setText}
+          text={text}
+        />
+      ) : (
+        <LessonContentTest
           key="LessonContentTest"
           setText={setText}
           text={text}
-        />)
+        />
       )}
     </div>
   );

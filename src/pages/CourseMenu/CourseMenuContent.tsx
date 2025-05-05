@@ -5,16 +5,16 @@ import Chapter from "@/components/Chapter";
 import EnterCourse from "@/modules/EnterCourse";
 import countTests from "@/modules/EnterCourse/logic/countTests";
 import countLessons from "@/modules/EnterCourse/logic/countLessons";
-import "./CourseMenu.scss";
+import styles from "./CourseMenu.module.scss";
 
 export const CourseMenuDescription = () => {
   const data = useCourseOpen();
   if (Object.keys(data).length === 0) {
-    return <div class="dont-content"></div>;
+    return <div class={styles.dontContent}></div>;
   }
   return (
-    <div class="content">
-      <div class="text-content" innerHTML={data.description}></div>
+    <div class={styles.content}>
+      <div class={styles.textContent} innerHTML={data.description}></div>
     </div>
   );
 };
@@ -49,7 +49,7 @@ export function CourseMenuContent() {
 
   if (courseOpen.id === undefined) {
     console.error("ID is undefined");
-    return <div class="content">Ошибка: ID не найден</div>;
+    return <div class={styles.content}>Ошибка: ID не найден</div>;
   }
 
   if (isLoading) {
@@ -64,23 +64,22 @@ export function CourseMenuContent() {
   console.log("render CourseMenu");
   if (isLoading) {
     // TODO: Потом добавлю вывод более подробный
-    return <div class="content">Загрузка</div>;
+    return <div class={styles.content}>Загрузка</div>;
   }
 
   return (
-    <div class="content">
-      <div class="section-content">
-        <div></div>
-        <div class="content-table">
+    <div class={styles.content}>
+      <div class={styles.sectionContent}>
+        <div class={styles.contentTable}>
           {!parts.parts?.length ? (
-            <div class="dont-content">Содержание отсутствует</div>
+            <div class={styles.dontContent}>Содержание отсутствует</div>
           ) : (
             parts.parts.map((part, index) => {
               const chapterIsDone = part.buckets.every((bucket) =>
                 bucket.lessons.every((lesson) => lesson.is_done)
               )
-                ? "color_is_done"
-                : "color_is_not_done";
+                ? styles.color_is_done
+                : styles.color_is_not_done;
 
               return (
                 <div>
@@ -90,8 +89,8 @@ export function CourseMenuContent() {
                     subchapters={part.buckets}
                   />
                   {index !== parts.parts.length - 1 ? (
-                    <div class="progress__progress-line_type_medium">
-                      <div class={`line ${chapterIsDone}`}></div>
+                    <div class={styles.progress__progressLine_type_medium}>
+                      <div class={`${styles.line} ${chapterIsDone}`}></div>
                     </div>
                   ) : (
                     ""

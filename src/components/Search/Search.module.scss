@@ -1,8 +1,9 @@
 @import '@/style.scss';
 
-.search-form {
+.searchForm {
     height: 32px;
     width: 448px;
+    min-width: 100px;
     display: flex;
     flex-direction: row;
     gap: 8px;
@@ -13,13 +14,13 @@
     font-size: 16px;
     font-family: "Open Sans", sans-serif;
   }
-  .search-form__icon {
+  .searchForm__icon {
     height: 19px;
     width: 19px;
     color: $color7;
   }
 
-  .search-form__input {
+  .searchForm__input {
     all: unset;
     width: 100%;
     color: $color7;

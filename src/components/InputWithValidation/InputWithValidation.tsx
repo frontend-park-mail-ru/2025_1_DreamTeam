@@ -1,6 +1,6 @@
 import { FieldState } from "@/types/WindowLogin";
-import "./InputWithValidation.css";
 import Tooltip from "@/components/Tooltip";
+import styles from "./InputWithValidation.module.scss";
 
 export default function InputWithValidation(props: {
   type: string;
@@ -27,12 +27,12 @@ export default function InputWithValidation(props: {
   } = props;
   return (
     <div
-      class={`field-input ${hidden ? "hidden" : ""} ${
-        data.isValid.includes(false) ? "field-input__error" : ""
+      class={`${styles.fieldInput} ${hidden ? styles.hidden : ""} ${
+        data.isValid.includes(false) ? styles.fieldInput__error : ""
       }`}
     >
       <input
-        class="field-input__input"
+        class={styles.fieldInput__input}
         type={type}
         placeholder={placeholder}
         value={data.value}

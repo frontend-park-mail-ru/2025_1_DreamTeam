@@ -1,0 +1,50 @@
+@import '@/style.scss';
+
+.logoAndCreateCurs {
+  width: 320px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logoImg {
+  height: 40px;
+  width: 40px;
+}
+
+@media (max-width: 780px) {
+  .logoAndCreateCurs {
+    width: fit-content;
+    align-items: start;
+  }
+
+  .logoText,
+  .logoAndCreateCursCreateCurs {
+    display: none;
+  }
+}
+
+.logoText {
+  color: $color4;
+  font-size: 24px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.logoAndCreateCursCreateCurs {
+  color: $color4;
+  padding: 4px;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}

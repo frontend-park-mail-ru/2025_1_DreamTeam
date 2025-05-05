@@ -1,7 +1,17 @@
 @import '@/style.scss';
 
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;;
+  color: $color4;
+  width: 575px;
+  line-height: 150%;
+}
 
-.course-header {
+.courseHeader {
   box-sizing: border-box;
   color: $color4;
   display: flex;
@@ -12,7 +22,7 @@
   padding: 24px 40px;
 }
 
-.changes1 {
+.changes {
   display: flex;
   overflow-x: auto;
   flex-direction: row;
@@ -24,8 +34,6 @@
 
 .change {
   padding: 4px 16px;
-  flex-shrink: 0;
-  min-width: 180px;
   background: rgba(30, 62, 98, 0.9);
   border-radius: 16px;
   font-size: 20px;
@@ -41,47 +49,49 @@
   cursor: pointer;
 }
 
-.change-active {
+.changeActive {
   background: rgba(52, 73, 97, 0.9);
 }
 
-.changes1__img {
+.changesImg {
   width: 24px;
   height: 24px;
 }
 
-.header-content {
+.headerContent {
   display: flex;
+  width: 100%;
+  max-width: max-content;
   flex-direction: column;
   gap: 56px;
 }
 
-.header-info {
+.headerInfo {
   display: flex;
   flex-direction: row;
   gap: 16px;
 }
 
 @media (max-width: 380px) {
-  .header-info {
+  .headerInfo {
     flex-direction: column;
   }
 }
 
-.course-text {
+.courseText {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.course-descriptions {
+.courseDescriptions {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.course-description {
+.courseDescription {
   display: flex;
   flex-direction: row;
   padding: 4px 16px;
@@ -89,31 +99,36 @@
   gap: 4px;
 }
 
-.course-description__img {
+.line {
+  width: 3px;
+  height: 100%;
+}
+
+.courseDescription__img {
   width: 19px;
   height: 19px;
 }
 
-.course-description__text {
+.courseDescriptionText {
   display: flex;
   flex-direction: row;
   align-items: end;
   display: inline;
 }
 
-.course-description__text-text {
+.courseDescriptionText__text {
   font-size: 20px;
   font-family: "Open Sans", sans-serif;
   display: inline;
 }
 
-.course-description__text-number {
+.courseDescriptionText__number {
   font-size: 16px;
   font-family: "Oxygen Mono", monospace;
   display: inline;
 }
 
-.course-tags {
+.courseTags {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -122,7 +137,7 @@
   gap: 8px;
 }
 
-.course-tag {
+.courseTag {
   padding: 4px 16px;
   background: rgba(147, 128, 128, 0.2);
   border-radius: 16px;
@@ -132,26 +147,27 @@
   -o-border-radius: 16px;
 }
 
-.course-price-and-button {
+.coursePriceAndButton {
   display: flex;
   flex-direction: row;
+  gap: 16px;
   justify-content: space-between;
   padding-left: 16px;
   padding-right: 16px;
   align-items: center;
 }
 
-.course-price-and-button__price {
+.coursePriceAndButton__price {
   font-size: 20px;
   font-family: "Open Sans", sans-serif;
   color: $color3;
 }
 
-.color-free {
+.colorFree {
   color: #408b1b;
 }
 
-.course-price-and-button__button {
+.coursePriceAndButton__button {
   font-size: 20px;
   font-family: "Open Sans", sans-serif;
   background-color: $color5;
@@ -169,12 +185,12 @@
   cursor: pointer;
 }
 
-.button__icon {
+.buttonIcon {
   width: 14px;
   height: 14px;
 }
 
-.course-image {
+.courseImage {
   width: 100%;
   max-width: 263px;
   min-width: 100px;
@@ -187,7 +203,90 @@
   -o-border-radius: 16px;
 }
 
-.course-name {
+.courseName {
   font-size: 32px;
   font-family: "Open Sans", sans-serif;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.sectionContent {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.content {
+  padding: 56px 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.contentTable {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.contentProgressColumn {
+  display: flex;
+  flex-direction: column;
+  width: 40px;
+  box-sizing: border-box;
+}
+
+.contentTextColumn {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  box-sizing: border-box;
+  gap: 32px;
+}
+
+.progress__progressLine_type_medium {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 24px;
+}
+
+.color_is_done {
+  background-color: $color5;
+}
+
+.color_is_not_done {
+  background-color: $color4;
+}
+
+.flipped {
+  transform: rotate(180deg);
+}
+
+.animationRotate {
+  transition: transform 0.3s ease;
+}
+
+.closePage {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 780px) {
+  .sectionContent {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 360px) {
+  .coursePriceAndButton {
+    flex-direction: column;
+  }
 }

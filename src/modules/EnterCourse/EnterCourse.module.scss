@@ -1,0 +1,35 @@
+@import '@/style.scss';
+
+.courseContentDescription {
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.courseContentDescriptionSection {
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  color: $color4;
+}
+
+.courseContentDescriptionBlock__desc {
+  display: flex;
+  width: fit-content;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  color: $color4;
+}
+
+.courseContentDescriptionBlock {
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+}

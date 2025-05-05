@@ -1,4 +1,4 @@
-import "./Card.scss";
+import styles from "./Card.module.scss";
 import timeIcon from "Public/static/icons/time.svg";
 import heartIcon from "Public/static/icons/heart.svg";
 import heartHoverIcon from "Public/static/icons/heartHover.svg";
@@ -35,7 +35,7 @@ export default function Card({
   // TODO: Добавить новую логику открытия курса через запрос
   return (
     <div
-      class="card"
+      class={styles.card}
       ON_click={() => {
         setCourseOpen({
           description,
@@ -51,37 +51,45 @@ export default function Card({
         router.goToPath(`/course/${id}`);
       }}
     >
-      <div class="picture" style={`background-image: url(${image})`}>
-        <div class="descriptions">
-          <div class="description">
-            <img src={timeIcon} alt="" class="description__icon"></img>
+      <div class={styles.picture} style={`background-image: url(${image})`}>
+        <div class={styles.descriptions}>
+          <div class={styles.description}>
+            <img src={timeIcon} alt="" class={styles.description__icon}></img>
             {time_to_pass.toString()} ч
           </div>
-          <div class="heart">
-            <img src={heartIcon} alt="" class="heart__img heart_default"></img>
+          <div class={styles.heart}>
+            <img
+              src={heartIcon}
+              alt=""
+              class={`${styles.heart__img} ${styles.heart_default}`}
+            ></img>
             <img
               src={heartHoverIcon}
               alt=""
-              class="heart__img heart_hover"
+              class={`${styles.heart__img} ${styles.heart_hover}`}
             ></img>
-            <img src={heartFillIcon} alt="" class="heart__img heart_fill"></img>
+            <img
+              src={heartFillIcon}
+              alt=""
+              class={`${styles.heart__img} ${styles.heart_fill}`}
+            ></img>
             <img
               src={heartFillHoverIcon}
               alt=""
-              class="heart__img heart_fill-hover"
+              class={`${styles.heart__img} ${styles.heart_fillHover}`}
             ></img>
           </div>
         </div>
-        <div class="descriptions">
-          <div class="description">
-            <img src={userIcon} alt="" class="description__icon"></img>
+        <div class={styles.descriptions}>
+          <div class={styles.description}>
+            <img src={userIcon} alt="" class={styles.description__icon}></img>
             {purchases_amount.toString()}
           </div>
         </div>
       </div>
-      <div class="name">{title}</div>
-      <div class="rating-and-price">
-        <div class="rating">
+      <div class={styles.name}>{title}</div>
+      <div class={styles.ratingAndPrice}>
+        <div class={styles.rating}>
           <img
             src={
               rating >= 1
@@ -91,7 +99,7 @@ export default function Card({
                 : starEmptyIcon
             }
             alt=""
-            class="rating__star"
+            class={styles.rating__star}
           ></img>
           <img
             src={
@@ -102,7 +110,7 @@ export default function Card({
                 : starEmptyIcon
             }
             alt=""
-            class="rating__star"
+            class={styles.rating__star}
           ></img>
           <img
             src={
@@ -113,7 +121,7 @@ export default function Card({
                 : starEmptyIcon
             }
             alt=""
-            class="rating__star"
+            class={styles.rating__star}
           ></img>
           <img
             src={
@@ -124,7 +132,7 @@ export default function Card({
                 : starEmptyIcon
             }
             alt=""
-            class="rating__star"
+            class={styles.rating__star}
           ></img>
           <img
             src={
@@ -135,11 +143,13 @@ export default function Card({
                 : starEmptyIcon
             }
             alt=""
-            class="rating__star"
+            class={styles.rating__star}
           ></img>
         </div>
         <div
-          class={`rating-and-price__price ${price === 0 ? "color-free" : ""}`}
+          class={`${styles.ratingAndPrice__price} ${
+            price === 0 ? styles.colorFree : ""
+          }`}
         >
           {price !== 0 ? `${price.toString()} ₽` : "Бесплатно"}
         </div>

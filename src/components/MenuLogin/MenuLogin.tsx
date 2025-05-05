@@ -1,5 +1,6 @@
 import { setMenu, useUser } from "@/App";
 import menu from "Public/static/icons/menu.svg";
+import styles from "./MenuLogin.module.scss";
 
 export default function MenuLogin({
   username,
@@ -9,19 +10,17 @@ export default function MenuLogin({
   avatar: string;
 }) {
   return (
-    <div
-      class="block-menu"
-      ON_click={() => {
-        setMenu(true);
-        console.log(useUser());
-      }}
-    >
-      <div class="block-avatar">
-        {username}
-        <div class="avatar">
-          <img src={menu} alt="Меню" class="avatar__icon"></img>
-          <img src={avatar} alt="Аватарка" class="avatar__img"></img>
-        </div>
+    <div class={styles.blockAvatar}>
+      <div class={styles.text}>{username}</div>
+      <div
+        class={styles.avatar}
+        ON_click={() => {
+          setMenu(true);
+          console.log(useUser());
+        }}
+      >
+        <img src={menu} alt="Меню" class={styles.avatarIcon} />
+        <img src={avatar} alt="Аватарка" class={styles.avatarImg} />
       </div>
     </div>
   );

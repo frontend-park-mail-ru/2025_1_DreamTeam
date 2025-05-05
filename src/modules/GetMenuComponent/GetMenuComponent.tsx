@@ -4,19 +4,19 @@ import { useMenu } from "@/App";
 import MenuOpen from "@/components/MenuOpen";
 import MenuLogout from "@/components/MenuLogout";
 import MenuLogin from "@/components/MenuLogin";
+import styles from "./GetMenuComponent.module.scss";
 
 export default function GetMenuComponent({ user }: { user: UserProfile }) {
   if (user === false) {
     return (
-      <div>
+      <div class={styles.blockMenu}>
         <MenuLogout key="buttonLogin" click={() => openWindow()} />
       </div>
     );
   }
   if (useMenu() === false) {
-    console.log("If menuStatus false", user);
     return (
-      <div>
+      <div class={styles.blockMenu}>
         <MenuLogin
           username={`${user.name}`}
           avatar={user.avatar_src}
@@ -26,7 +26,7 @@ export default function GetMenuComponent({ user }: { user: UserProfile }) {
     );
   }
   return (
-    <div>
+    <div class={styles.blockMenu2}>
       <MenuOpen key="menuOpen" />
     </div>
   );

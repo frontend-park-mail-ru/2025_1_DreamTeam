@@ -6,7 +6,7 @@ import closeWindow from "./logic/closeWindow";
 import signup from "./logic/signup";
 import login from "./logic/login";
 import closeIcon from "Public/static/icons/closeCourse.svg";
-import "./WindowLogin.css";
+import styles from "./WindowLogin.module.scss";
 
 export default function WindowLogin() {
   console.log("I am rerendering");
@@ -92,15 +92,15 @@ export default function WindowLogin() {
         }
       }}
     >
-      <div class="close-window">
+      <div class={styles.closeWindow}>
         <img style={"cursor: pointer;"} src={closeIcon} />
       </div>
       <div
-        class="window"
+        class={styles.window}
         ON_mousedown={(event: PointerEvent) => event.stopPropagation()}
       >
-        <div class="form">
-          <div class="window__logo">SkillForce</div>
+        <div class={styles.form}>
+          <div class={styles.window__logo}>SkillForce</div>
           {inputField.map((field) => {
             return (
               <InputWithValidation
@@ -116,9 +116,11 @@ export default function WindowLogin() {
             );
           })}
         </div>
-        <div class="buttons">
+        <div class={styles.buttons}>
           <button
-            class={`buttons__button ${state === "signup" ? "active" : ""}`}
+            class={`${styles.buttons__button} ${
+              state === "signup" ? styles.active : ""
+            }`}
             ON_click={() => {
               state === "login" ? setState("signup") : signup(formData);
             }}
@@ -126,7 +128,9 @@ export default function WindowLogin() {
             Регистрация
           </button>
           <button
-            class={`buttons__button ${state === "login" ? "active" : ""}`}
+            class={`${styles.buttons__button} ${
+              state === "login" ? styles.active : ""
+            }`}
             ON_click={() => {
               state === "signup" ? setState("login") : login(formData);
             }}

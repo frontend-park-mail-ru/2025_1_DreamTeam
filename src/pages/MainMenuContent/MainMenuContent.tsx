@@ -15,12 +15,12 @@ const MainMenuContent = () => {
   console.log("render MainMenuContent");
   if (isLoading) {
     // TODO: Потом добавлю вывод более подробный
-    return <div class="content">Загрузка</div>;
+    return <div class={styles.content}>Загрузка</div>;
   }
 
   return (
-    <div class="content">
-      <div class="cards">
+    <div class={styles.content}>
+      <div class={styles.cards}>
         {cards.map((card) => (
           <Card
             key={`card-${card.id}`}

@@ -1,4 +1,4 @@
-import "./Tooltip.css";
+import styles from "./Tooltip.module.scss";
 import error from "Public/static/icons/error.svg";
 
 export const Tooltip = ({
@@ -9,11 +9,14 @@ export const Tooltip = ({
   isValid: boolean[];
 }) => {
   return (
-    <div class="tooltip-container">
-      <img class="icon" src={error} />
-      <div class="tooltip-content">
+    <div class={styles.tooltipContainer}>
+      <img class={styles.icon} src={error} />
+      <div class={styles.tooltipContent}>
         {texts.map((text, i) => (
-          <div style={`color: ${isValid[i] ? "#B7B5B7" : "#cc0202"}`}>
+          <div
+            class={styles.text}
+            style={`color: ${isValid[i] ? "#B7B5B7" : "#cc0202"}`}
+          >
             {text}
           </div>
         ))}

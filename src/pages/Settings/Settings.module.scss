@@ -1,14 +1,74 @@
 @import "@/style.scss";
 
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  color: #D0CBCB;
+  background-color: #0b192c;
+  border-top: 1px solid rgba(147, 128, 128, 0.2);
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+.changes {
+  display: flex;
+  overflow-x: auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  max-width: 100%;
+  width: max-content;
+}
+
+.headlines {
+  font-size: 48px;
+  color: $color4;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+}
+
+.change {
+  padding: 4px 16px;
+  background: rgba(30, 62, 98, 0.9);
+  border-radius: 16px;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  gap: 4px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+  cursor: pointer;
+}
+
+.changeActive {
+  background: rgba(52, 73, 97, 0.9);
+}
+
+.changeImg {
+  width: 24px;
+  height: 24px;
+}
+
+.content {
+  padding: 56px 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .profile {
-  width: 614px;
-  height: 672px;
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 56px;
 }
 
 .strings {
@@ -24,7 +84,7 @@
   all: unset;
   border: 1px solid #b1a9a9;
   border-radius: 16px;
-  width: 403px;
+  width: 100%;
   background-color: $color1;
   box-sizing: border-box;
   align-items: center;
@@ -102,47 +162,17 @@
   display: none;
 }
 
-.changes {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-  background-color: $color2;
-  border-top: 1px solid rgba(147, 128, 128, 0.21);
-  height: 200px;
-  box-sizing: border-box;
-}
-
-.change-select {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  width: 820 px;
-  height: 102px;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-.choose__type__button {
-  display: flex;
-  flex-direction: row;
-  font-size: 20px;
-  font-family: "Open Sans", sans-serif;
-  color: $color4;
-  border-radius: 16px;
-  background-color: $color1;
-  margin-top: auto;
-  margin-bottom: auto;
-  height: 32px;
-  border: none;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-}
-
-.editing__icon {
-  height: 24px;
-  width: 24px;
-  align-items: center;
+@media (max-width: 780px) {
+  .strings {
+    grid-template-columns: auto;
+  }
+  .strings__avatar {
+    grid-template-columns: auto;
+  }
+  .content {
+    padding: 24px 8px;
+  }
+  .profile {
+    width: 70%;
+  }
 }
