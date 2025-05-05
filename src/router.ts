@@ -1,4 +1,4 @@
-import { setPage } from "./App";
+import { setPage } from "./stores";
 import clearToast from "@/components/WindowALert/logic/clear";
 import NotFoundView from "./nonFound";
 

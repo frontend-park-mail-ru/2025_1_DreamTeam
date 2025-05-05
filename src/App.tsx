@@ -8,6 +8,7 @@ import WindowLogin from "@/modules/WindowLogin";
 import ToastContainer from "./modules/ToastContainer";
 
 import { usePage, useLoginWindow } from "@/stores";
+import Profile from "./pages/Profile";
 
 // if ("serviceWorker" in navigator) {
 //   navigator.serviceWorker
@@ -37,10 +38,9 @@ const App = () => {
     case "Lessons":
       content = <LessonPage key="LessonsPage" />;
       break;
-    // case "Profile":
-    // header = <ProfileHeader key="ProfileHeader" />;
-    // content = <ProfileContent key="ProfileContent" />;
-    //    break;
+    case "Profile":
+      content = <Profile key="ProfilePage" />;
+      break;
     default:
       content = <MainMenu key="MainMenu" />;
       break;

@@ -12,6 +12,10 @@ export const configureRouter = () => {
     console.log("Настройки");
   });
 
+  router.register("/profile", "Profile", () => {
+    console.log("Профиль");
+  });
+
   router.register("/course/{id}", "CourseMenu", async () => {
     const match = router.matchPathToRoute(location.pathname);
     const id = Number(match?.params.id);
