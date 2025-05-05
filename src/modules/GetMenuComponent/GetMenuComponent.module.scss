@@ -5,6 +5,9 @@
   flex-direction: row;
   width: fit-content;
   justify-content: end;
+  min-width: auto;
+  max-width: 300px;
+  width: 100%;
 }
 
 .blockMenu2 {
@@ -16,5 +19,9 @@
 @media (max-width: 780px) {
     .blockMenu2 {
         width: fit-content;
+    }
+    .blockMenu {
+        width: fit-content;
+        justify-content: center;
     }
 }
