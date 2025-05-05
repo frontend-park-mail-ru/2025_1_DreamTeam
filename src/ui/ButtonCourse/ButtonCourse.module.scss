@@ -1,0 +1,45 @@
+@import '@/style.scss';
+
+.page__lesson__choose {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #55D16B;
+    color: #55D16B;
+    border-radius: 50%;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-family: "Open Sans", sans-serif;
+}
+
+.page__lesson {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stripPage {
+    display: flex;
+    width: 12px;
+    height: 1px;
+}
+
+.noneDone {
+    background-color: #D0CBCB;
+}
+
+.none {
+    border: 2px solid #D0CBCB;
+    color: #D0CBCB;
+}
+
+.isDone {
+    background-color: #55D16B;
+}
+
+.currentLessons {
+    color: #0b192c;
+    background-color: #55D16B;
+}
