@@ -366,3 +366,11 @@ export async function getFavoriteCourses() {
   });
   return data ? data.bucket_courses : "Ошибка получения избранных курсов";
 }
+
+export async function getPurchasedCourses() {
+  const data = await apiFetch("/getPurchasedCourses", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  return data ? data.bucket_courses : "Ошибка получения проходимых курсов";
+}
