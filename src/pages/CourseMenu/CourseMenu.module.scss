@@ -262,14 +262,6 @@
   background-color: $color4;
 }
 
-.flipped {
-  transform: rotate(180deg);
-}
-
-.animationRotate {
-  transition: transform 0.3s ease;
-}
-
 .closePage {
   width: 40px;
   height: 40px;
