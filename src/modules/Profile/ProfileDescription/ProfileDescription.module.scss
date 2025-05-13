@@ -19,6 +19,42 @@
   font-family: "Open Sans", sans-serif;
 }
 
+.textBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.textBlock__desc {
+  font-size: 12px;
+}
+
+.textBlock__data {
+  font-size: 24px;
+  max-width: 550px;
+}
+
+.textInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.picture {
+  width: 160px;
+  height: 160px;
+}
+
+.picture img {
+  width: 100%;
+  height: 100%;
+}
+
 @media (max-width: 780px) {
     .cards {
         gap: 8px;
