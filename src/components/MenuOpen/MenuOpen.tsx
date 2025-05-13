@@ -1,7 +1,6 @@
 import ButtonMenu from "@/ui/ButtonMenu/ButtonMenu";
 import closeMenu from "Public/static/icons/close-menu.svg";
 import profile from "Public/static/icons/profile.svg";
-import setting from "Public/static/icons/setting.svg";
 import logout from "Public/static/icons/logout.svg";
 import { fetchLogout } from "@/api";
 import { setMenu, setPage, setUser, usePage } from "@/stores";
