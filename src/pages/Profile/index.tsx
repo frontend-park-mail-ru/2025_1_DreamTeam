@@ -3,7 +3,7 @@ import ProfileContent from "./ProfileContent"; // Ensure ProfileContent is a def
 import ProfileHeader, { Section } from "./ProfileHeader";
 
 const Profile = () => {
-  const [activeSection, setActiveSection] = useState<Section>("favorite");
+  const [activeSection, setActiveSection] = useState<Section>("profile");
 
   console.log("render Profile");
 
@@ -14,7 +14,7 @@ const Profile = () => {
         setActiveSection={setActiveSection}
         key="headerProfile"
       />
-      <ProfileContent activeSection={activeSection} key="contentProfile" />;
+      <ProfileContent activeSection={activeSection} key="contentProfile" />
     </div>
   );
 };
