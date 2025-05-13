@@ -26,14 +26,6 @@ export default function MenuOpen() {
       },
     },
     {
-      name: "Настройки",
-      image: setting,
-      click: () => {
-        setMenu(false);
-        router.goByState("Setting");
-      },
-    },
-    {
       name: "Выйти",
       image: logout,
       click: async () => {
