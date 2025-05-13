@@ -1,16 +1,32 @@
 @import "@/style.scss";
 
+.closeMenu {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+
 .header {
   display: flex;
-  flex-direction: column;
-  gap: 24px;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
   color: #D0CBCB;
   background-color: #0b192c;
   border-top: 1px solid rgba(147, 128, 128, 0.2);
   box-sizing: border-box;
   padding: 16px;
+}
+
+.headerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
 }
 
 .changes {
@@ -46,11 +62,12 @@
   -moz-border-radius: 16px;
   -ms-border-radius: 16px;
   -o-border-radius: 16px;
-  cursor: pointer;
+  cursor: not-allowed;
 }
 
 .changeActive {
   background: rgba(52, 73, 97, 0.9);
+  cursor: pointer;
 }
 
 .changeImg {
@@ -63,6 +80,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  font-family: "Open Sans", sans-serif;
 }
 
 .profile {
@@ -75,7 +93,6 @@
   display: grid;
   grid-template-columns: 184px 430px;
   align-items: center;
-  cursor: pointer;
   font-size: 20px;
   color: $color6;
 }
@@ -110,7 +127,6 @@
   grid-template-columns: 184px 430px;
   height: 217px;
   justify-content: space-between;
-  cursor: pointer;
   font-size: 20px;
   color: $color6;
 }
@@ -152,6 +168,7 @@
 
 .text__decoration {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .text__decoration:hover {
