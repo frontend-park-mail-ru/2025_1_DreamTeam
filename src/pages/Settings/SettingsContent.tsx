@@ -120,7 +120,7 @@ const SettingContent = () => {
             />
             <div class={styles.load__delete}>
               <form method="post" enctype="multipart/form-data">
-                <label class="text__decoration">
+                <label class={styles.text__decoration}>
                   <input
                     type="file"
                     accept=".jpg, .jpeg, .png, .webp"
