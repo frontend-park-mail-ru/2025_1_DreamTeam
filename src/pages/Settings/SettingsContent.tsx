@@ -22,30 +22,35 @@ const SettingContent = () => {
   console.log(information);
   console.log(user);
 
-  const save_data = () => {
+  const save_data = async () => {
     console.log(information);
     if (!user) {
       console.log(user);
       addToast("error", "Отсутствует авторизация");
       return <div class="content dont-content">Не авторизован</div>;
     }
-    updateProfile(
+    const update = await updateProfile(
       user.avatar_src,
       information.bio,
       user.email,
       information.hide_email,
       information.name
     );
-    addToast("success", "Успешное сохранение");
+
+    if (update === true) {
+      addToast("success", "Успешное сохранение");
+
+      setUser({
+        name: information.name,
+        email: information.email,
+        bio: information.bio,
+        hide_email: information.hide_email,
+        avatar_src: information.avatar_src,
+      });
+    }
+
     return true;
   };
-  setUser({
-    name: information.name,
-    email: information.email,
-    bio: information.bio,
-    hide_email: information.hide_email,
-    avatar_src: information.avatar_src,
-  });
 
   function setInformationState(key: string, newFieldData: string | boolean) {
     setInformation({
@@ -103,8 +108,8 @@ const SettingContent = () => {
           <button
             class={styles.button__input}
             id="button_input"
-            ON_click={() => {
-              save_data();
+            ON_click={async () => {
+              await save_data();
             }}
           >
             Сохранить
