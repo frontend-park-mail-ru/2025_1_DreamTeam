@@ -367,6 +367,15 @@ export async function getFavoriteCourses() {
   return data ? data.bucket_courses : "Ошибка получения избранных курсов";
 }
 
+export async function Completed(lesson_id: number) {
+  const data = await apiFetch("/markLessonAsCompleted", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ lesson_id }),
+  });
+  return data ? true : "Ошибка запроса";
+}
+
 export async function getPurchasedCourses() {
   const data = await apiFetch("/getPurchasedCourses", {
     method: "GET",
