@@ -1,5 +1,9 @@
 import CourseMenuHeader from "./CourseMenuHeader";
-import { CourseMenuContent, CourseMenuDescription } from "./CourseMenuContent";
+import {
+  CourseMenuContent,
+  CourseMenuDescription,
+  CourseMenuReview,
+} from "./CourseMenuContent";
 import { useState } from "@/ourReact/jsx-runtime";
 
 const CourseMenu = () => {
@@ -17,11 +21,13 @@ const CourseMenu = () => {
         <CourseMenuDescription key="CourseDescription" />
       ) : useStatus === "content" ? (
         <CourseMenuContent key="CourseContent" />
+      ) : useStatus === "review" ? (
+        <CourseMenuReview key="CourseMenuReview" />
       ) : (
-        ""
+        <div>Ошибка: ID не найден</div>
       )}
     </div>
   );
-}
+};
 
 export default CourseMenu;

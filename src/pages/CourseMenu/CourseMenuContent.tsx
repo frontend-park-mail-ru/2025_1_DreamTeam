@@ -1,11 +1,13 @@
 import { useCourseOpen } from "@/stores";
 import { useState } from "@/ourReact/jsx-runtime";
-import { getCourseRoadmap } from "@/api";
+import { getCourseRoadmap, getRating } from "@/api";
 import Chapter from "@/components/Chapter";
 import EnterCourse from "@/modules/EnterCourse";
 import countTests from "@/modules/EnterCourse/logic/countTests";
 import countLessons from "@/modules/EnterCourse/logic/countLessons";
 import styles from "./CourseMenu.module.scss";
+import Rating from "@/modules/Rating";
+import { RatingList } from "@/types/rating";
 
 export const CourseMenuDescription = () => {
   const data = useCourseOpen();
@@ -15,6 +17,38 @@ export const CourseMenuDescription = () => {
   return (
     <div class={styles.content}>
       <div class={styles.textContent} innerHTML={data.description}></div>
+    </div>
+  );
+};
+
+export const CourseMenuReview = () => {
+  const [ratings, setRatings] = useState<RatingList>([]);
+  const [isLoading, setLoading] = useState(true);
+
+  const course = useCourseOpen();
+
+  if (course.id && isLoading) {
+    getRating(course.id).then((data) => {
+      if (Array.isArray(data)) {
+        setRatings(data);
+      } else {
+        console.error("Ошибка загрузки рейтинга:", data);
+      }
+      setLoading(false);
+    });
+  }
+
+  if (!course.id) {
+    return <div class={styles.content}>Ошибка: ID курса не найден</div>;
+  }
+
+  if (isLoading) {
+    return <div class={styles.content}>Загрузка рейтинга...</div>;
+  }
+
+  return (
+    <div class={styles.content}>
+      <Rating rating={ratings} key="Ratings" />
     </div>
   );
 };
