@@ -15,7 +15,7 @@ export const Tooltip = ({
         {texts.map((text, i) => (
           <div
             class={styles.text}
-            style={`color: ${isValid[i] ? "#B7B5B7" : "#cc0202"}`}
+            style={`color: ${isValid[i] ? "#B7B5B7" : "#FF6969"}`}
           >
             {text}
           </div>
