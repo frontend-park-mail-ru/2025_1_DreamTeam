@@ -22,12 +22,15 @@ export default class Validate {
     return this;
   }
 
-  regex(pattern: string | RegExp) {
+  regex(
+    pattern: string | RegExp,
+    allowedDescription = "содержит допустимые символы"
+  ) {
     const regular = new RegExp(pattern);
     this.rules.push({
       check: (value: string): boolean => regular.test(value),
       message: (fieldName: string): string =>
-        `${fieldName} содержит допустимые символы`,
+        `${fieldName} ${allowedDescription}`,
     });
     return this;
   }
