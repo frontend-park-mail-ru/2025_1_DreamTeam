@@ -384,6 +384,14 @@ export async function getPurchasedCourses() {
   return data ? data.bucket_courses : "Ошибка получения проходимых курсов";
 }
 
+export async function getCompletedCourses() {
+  const data = await apiFetch("/getCompletedCourses", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  return data ? data.bucket_courses : "Ошибка получения пройденных курсов";
+}
+
 export async function getRating(courseId: number) {
   const data = await apiFetch(`/getRating?courseId=${courseId}`, {
     method: "GET",
