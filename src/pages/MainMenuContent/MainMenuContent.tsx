@@ -10,6 +10,14 @@ const MainMenuContent = () => {
   const [prevSearch, setPrevSearch] = useState("");
   const searching = isSearch();
 
+  if (isLoading) {
+    getCourses().then((data) => {
+      setCards(data);
+      setLoading(false);
+    });
+    return <div class={styles.content}>Загрузка</div>;
+  }
+
   if (searching !== prevSearch) {
     setPrevSearch(searching);
     if (searching !== "") {
@@ -21,14 +29,6 @@ const MainMenuContent = () => {
         setCards(data);
       });
     }
-  }
-
-  if (isLoading) {
-    getCourses().then((data) => {
-      setCards(data);
-      setLoading(false);
-    });
-    return <div class={styles.content}>Загрузка</div>;
   }
 
   return (

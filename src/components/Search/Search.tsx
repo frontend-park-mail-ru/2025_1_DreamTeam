@@ -1,6 +1,7 @@
 import search from "Public/static/icons/iconSearch.svg";
 import styles from "./Search.module.scss";
 import { setSearch } from "@/stores";
+import { router } from "@/router";
 
 export default function Search() {
   return (
@@ -12,6 +13,11 @@ export default function Search() {
         class={styles.searchForm__input}
         ON_input={(event: { target: { value: string } }) => {
           setSearch(event.target.value);
+        }}
+        ON_keydown={(event: KeyboardEvent) => {
+          if (event.key === "Enter") {
+            router.goByState("MainMenu");
+          }
         }}
       ></input>
     </div>
