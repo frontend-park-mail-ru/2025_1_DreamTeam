@@ -47,6 +47,22 @@ const CourseMenuHeader = ({
         setFunc("review");
       },
     },
+    {
+      type: "rating",
+      name: "Рейтинг",
+      image: reviewIcon,
+      click: () => {
+        setFunc("rating");
+      },
+    },
+    {
+      type: "end",
+      name: "Завершение",
+      image: reviewIcon,
+      click: () => {
+        setFunc("end");
+      },
+    },
   ];
   if (Object.keys(data).length === 0) {
     return (

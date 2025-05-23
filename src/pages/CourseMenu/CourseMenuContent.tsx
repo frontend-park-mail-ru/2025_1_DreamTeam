@@ -8,6 +8,7 @@ import countLessons from "@/modules/EnterCourse/logic/countLessons";
 import styles from "./CourseMenu.module.scss";
 import Rating from "@/modules/Rating";
 import { RatingList } from "@/types/rating";
+import Progress from "@/components/Progress";
 
 export const CourseMenuDescription = () => {
   const data = useCourseOpen();
@@ -21,7 +22,28 @@ export const CourseMenuDescription = () => {
   );
 };
 
-export const CourseMenuReview = () => {
+export const CourseMenuEnd = () => {
+  const data = {
+    percentage: 0,
+    completed_lessons: 0,
+    amount_lessons: 0,
+    completed_videos: 0,
+    amount_videos: 0,
+    received_points: 0,
+    amount_points: 0,
+    completed_tests: 0,
+    amount_tests: 0,
+    completed_questions: 0,
+    amount_questions: 0,
+  };
+  return (
+    <div class={styles.content}>
+      <Progress data={data} key="ProgressCourse" />
+    </div>
+  );
+};
+
+export const CourseMenuRating = () => {
   const [ratings, setRatings] = useState<RatingList>([]);
   const [isLoading, setLoading] = useState(true);
 

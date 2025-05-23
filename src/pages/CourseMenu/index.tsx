@@ -2,9 +2,11 @@ import CourseMenuHeader from "./CourseMenuHeader";
 import {
   CourseMenuContent,
   CourseMenuDescription,
-  CourseMenuReview,
+  CourseMenuEnd,
+  CourseMenuRating,
 } from "./CourseMenuContent";
 import { useState } from "@/ourReact/jsx-runtime";
+import styles from "./CourseMenu.module.scss";
 
 const CourseMenu = () => {
   // TODO: Добавить новую логику отрисовки информации через запрос
@@ -21,10 +23,14 @@ const CourseMenu = () => {
         <CourseMenuDescription key="CourseDescription" />
       ) : useStatus === "content" ? (
         <CourseMenuContent key="CourseContent" />
+      ) : useStatus === "rating" ? (
+        <CourseMenuRating key="CourseMenuReview" />
       ) : useStatus === "review" ? (
-        <CourseMenuReview key="CourseMenuReview" />
+        ""
+      ) : useStatus === "end" ? (
+        <CourseMenuEnd key="CourseMenuEnd" />
       ) : (
-        <div>Ошибка: ID не найден</div>
+        <div class={styles.content}>Ошибка: ID не найден</div>
       )}
     </div>
   );
