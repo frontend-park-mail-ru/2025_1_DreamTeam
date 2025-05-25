@@ -17,9 +17,9 @@ const ProfileHeader = ({
 }) => {
   const sections = [
     { type: "profile", name: "Профиль", image: reviewIcon },
-    { type: "pass", name: "Обучение", image: reviewIcon },
+    { type: "history", name: "Обучение", image: reviewIcon },
     { type: "favorite", name: "Избранные", image: reviewIcon },
-    { type: "history", name: "Пройденные", image: reviewIcon },
+    { type: "pass", name: "Пройденные", image: reviewIcon },
     { type: "certificates", name: "Сертификаты", image: reviewIcon },
   ];
 
