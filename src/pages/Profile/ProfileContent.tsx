@@ -1,8 +1,8 @@
-import ProfileDescription from "@/modules/Profile/ProfileDescription";
 import ProfilePass from "@/modules/Profile/ProfilePass";
 import ProfileFavorites from "@/modules/Profile/ProfileFavorites";
 import ProfileHistory from "@/modules/Profile/ProfileHistory";
 import ProfileCertificates from "@/modules/Profile/ProfileCertificates";
+import SettingContent from "@/pages/Settings/SettingsContent";
 
 type Section = "profile" | "pass" | "favorite" | "history" | "certificates";
 
@@ -12,7 +12,7 @@ const ProfileContent = ({ activeSection }: { activeSection: Section }) => {
   let content;
   switch (activeSection) {
     case "profile":
-      content = <ProfileDescription key="ProfileDescription" />;
+      content = <SettingContent key="ProfileDescription" />;
       break;
     case "pass":
       content = <ProfilePass key="ProfilePass" />;
