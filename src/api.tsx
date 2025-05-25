@@ -40,7 +40,7 @@ async function apiFetch(url: string, options = {}) {
 }
 
 export async function fetchCSRFToken() {
-  const response = await fetch(`${IP}:${PORT}/api/updateProfile`, {
+  const response = await fetch(`${IP}/api/updateProfile`, {
     method: "GET",
     credentials: "include",
   });
