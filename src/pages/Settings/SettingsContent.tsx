@@ -4,8 +4,11 @@ import { setUser, useUser } from "@/stores";
 import { UpdateData } from "@/types/users";
 import addToast from "@/components/WindowALert/logic/add";
 import styles from "./Settings.module.scss";
+import CenterImageModal from "@/modules/ImageCropper/ImageCropper";
 
 const SettingContent = () => {
+  const [cropFile, setCropFile] = useState<File | null>(null);
+
   const user = useUser();
   if (!user) {
     console.log(user);
@@ -153,9 +156,9 @@ const SettingContent = () => {
                         );
                         return;
                       }
-                      const result = await uploadProfilePhoto(
-                        event.target.files[0]
-                      );
+                      // const result = await uploadProfilePhoto(
+                      //   event.target.files[0]
+                      // );
                       const user = useUser();
 
                       if (user === false) {
@@ -163,20 +166,23 @@ const SettingContent = () => {
                         return;
                       }
 
-                      if (typeof result !== "string") {
-                        addToast("error", "Ошибка загрузки фото");
-                        return;
-                      }
+                      // if (typeof result !== "string") {
+                      //   addToast("error", "Ошибка загрузки фото");
+                      //   return;
+                      // }
 
-                      setUser({
-                        name: user.name,
-                        email: user.email,
-                        bio: user.bio,
-                        hide_email: user.hide_email,
-                        avatar_src: result,
-                      });
-                      setInformationState("avatar_src", result);
-                      addToast("success", "Фотография успешно сохранена");
+                      setCropFile(event.target.files[0]);
+
+                      // setUser({
+                      //   name: user.name,
+                      //   email: user.email,
+                      //   bio: user.bio,
+                      //   hide_email: user.hide_email,
+                      //   avatar_src: result,
+                      // });
+                      // setInformationState("avatar_src", result);
+                      // FIX
+                      // addToast("success", "Фотография успешно сохранена");
                     }}
                   />
                   Загрузить
@@ -207,6 +213,28 @@ const SettingContent = () => {
           </div>
         </div>
       </div>
+      {cropFile ? (
+        <CenterImageModal
+          file={cropFile}
+          onClose={() => setCropFile(null)}
+          onSave={async (blob) => {
+            const file = new File([blob], "cropped.png", { type: "image/png" });
+            const result = await uploadProfilePhoto(file);
+
+            if (typeof result !== "string") {
+              addToast("error", "Ошибка загрузки фото");
+              return;
+            }
+
+            setUser({ ...user, avatar_src: result });
+            setInformationState("avatar_src", result);
+            addToast("success", "Фотография успешно сохранена");
+            setCropFile(null);
+          }}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
