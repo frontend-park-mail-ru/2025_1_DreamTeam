@@ -9,6 +9,7 @@ import styles from "./CourseMenu.module.scss";
 import Rating from "@/modules/Rating";
 import { RatingList } from "@/types/rating";
 import Progress from "@/components/Progress";
+import { StatisticType } from "@/types/staticsCourse";
 
 export const CourseMenuDescription = () => {
   const data = useCourseOpen();
@@ -23,7 +24,7 @@ export const CourseMenuDescription = () => {
 };
 
 export const CourseMenuEnd = () => {
-  const data = {
+  const [data, setData] = useState<StatisticType>({
     percentage: 0,
     completed_lessons: 0,
     amount_lessons: 0,
@@ -35,7 +36,20 @@ export const CourseMenuEnd = () => {
     amount_tests: 0,
     completed_questions: 0,
     amount_questions: 0,
-  };
+  });
+  const [isLoading, setLoading] = useState(true);
+
+  if (isLoading) {
+    const course = useCourseOpen();
+    if (course.id) {
+      getStatics(course.id).then((data) => {
+        console.log("data", data);
+        setData(data);
+        setLoading(false);
+      });
+    }
+  }
+
   return (
     <div class={styles.content}>
       <Progress data={data} key="ProgressCourse" />
