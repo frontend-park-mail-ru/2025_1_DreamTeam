@@ -1,6 +1,6 @@
 import { useCourseOpen } from "@/stores";
 import { useState } from "@/ourReact/jsx-runtime";
-import { getCourseRoadmap, getRating } from "@/api";
+import { getCourseRoadmap, getRating, getStatics } from "@/api";
 import Chapter from "@/components/Chapter";
 import EnterCourse from "@/modules/EnterCourse";
 import countTests from "@/modules/EnterCourse/logic/countTests";
