@@ -100,7 +100,7 @@ const SettingContent = () => {
                 setInformationState("hide_email", event.target.checked);
               }}
             />
-            Не отправлять письма на почту
+            Отправлять письма на почту
           </div>
         </div>
         <div class={styles.strings}>
@@ -192,11 +192,11 @@ const SettingContent = () => {
                     bio: user.bio,
                     hide_email: user.hide_email,
                     avatar_src:
-                      "http://217.16.21.64:8006/avatars/default_avatar.png",
+                      "https://skill-force.ru/avatars/default_avatar.png",
                   });
                   setInformationState(
                     "avatar_src",
-                    "http://217.16.21.64:8006/avatars/default_avatar.png"
+                    "https://skill-force.ru/avatars/default_avatar.png"
                   );
                   addToast("success", "Фотография успешно удалена");
                 }}
