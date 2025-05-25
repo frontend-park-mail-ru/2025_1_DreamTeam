@@ -3,8 +3,8 @@ import { LessonsStructure } from "@/types/lesson";
 import { UserProfile } from "@/types/users";
 import { QuestionsStructure } from "./types/question";
 
-export const IP = "http://217.16.21.64";
-export const PORT = "8080";
+export const IP = "https://skill-force.ru";
+export const PORT = "80";
 
 export interface Course {
   id: number;
@@ -22,7 +22,7 @@ export interface Course {
 
 async function apiFetch(url: string, options = {}) {
   try {
-    const response = await fetch(`${IP}:${PORT}/api${url}`, {
+    const response = await fetch(`${IP}/api${url}`, {
       credentials: "include",
       ...options,
     });
@@ -149,7 +149,7 @@ export async function uploadProfilePhoto(file: File) {
   formData.append("data", jsonData);
 
   try {
-    const response = await fetch(`${IP}:${PORT}/api/updateProfilePhoto`, {
+    const response = await fetch(`${IP}/api/updateProfilePhoto`, {
       method: "POST",
       body: formData,
       credentials: "include",
