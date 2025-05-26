@@ -8,6 +8,7 @@ import contentIcon from "Public/static/icons/contentCourse.svg";
 import reviewIcon from "Public/static/icons/reviewsCourse.svg";
 import closeIcon from "Public/static/icons/closeCourse.svg";
 import loadingIcon from "Public/static/icons/loading.gif";
+import ratingIcon from "Public/static/icons/ratingTab.svg";
 import { router } from "@/router";
 import styles from "./CourseMenu.module.scss";
 import { useDevice } from "@/devise";
@@ -47,7 +48,10 @@ const CourseMenuHeader = ({
       name: "Описание",
       image: descIcon,
       click: () => {
-        setFunc("description");
+        const id = useCourseOpen().id;
+        if (id !== undefined) {
+          router.goToPath(`/course/${id}/${sections[0].type}`);
+        }
       },
     },
     {
@@ -55,7 +59,10 @@ const CourseMenuHeader = ({
       name: "Содержание",
       image: contentIcon,
       click: () => {
-        setFunc("content");
+        const id = useCourseOpen().id;
+        if (id !== undefined) {
+          router.goToPath(`/course/${id}/${sections[1].type}`);
+        }
       },
     },
     {
@@ -63,15 +70,21 @@ const CourseMenuHeader = ({
       name: "Отзывы",
       image: reviewIcon,
       click: () => {
-        setFunc("review");
+        const id = useCourseOpen().id;
+        if (id !== undefined) {
+          router.goToPath(`/course/${id}/${sections[2].type}`);
+        }
       },
     },
     {
       type: "rating",
       name: "Рейтинг",
-      image: reviewIcon,
+      image: ratingIcon,
       click: () => {
-        setFunc("rating");
+        const id = useCourseOpen().id;
+        if (id !== undefined) {
+          router.goToPath(`/course/${id}/${sections[3].type}`);
+        }
       },
     },
     {
@@ -79,7 +92,10 @@ const CourseMenuHeader = ({
       name: "Завершение",
       image: reviewIcon,
       click: () => {
-        setFunc("end");
+        const id = useCourseOpen().id;
+        if (id !== undefined) {
+          router.goToPath(`/course/${id}/${sections[4].type}`);
+        }
       },
     },
   ];
