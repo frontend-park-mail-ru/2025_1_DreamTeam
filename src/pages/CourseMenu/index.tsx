@@ -7,27 +7,28 @@ import {
 } from "./CourseMenuContent";
 import { useState } from "@/ourReact/jsx-runtime";
 import styles from "./CourseMenu.module.scss";
+import { activeTab, setActiveTab } from "@/stores";
 
 const CourseMenu = () => {
   // TODO: Добавить новую логику отрисовки информации через запрос
-  const [useStatus, setStatus] = useState("description");
+  const tab = activeTab();
 
   return (
     <div>
       <CourseMenuHeader
         key="CourseHeader"
-        useFunc={useStatus}
-        setFunc={setStatus}
+        useFunc={tab}
+        setFunc={setActiveTab as (newTab: string) => void}
       />
-      {useStatus === "description" ? (
+      {tab === "description" ? (
         <CourseMenuDescription key="CourseDescription" />
-      ) : useStatus === "content" ? (
+      ) : tab === "content" ? (
         <CourseMenuContent key="CourseContent" />
-      ) : useStatus === "rating" ? (
+      ) : tab === "rating" ? (
         <CourseMenuRating key="CourseMenuReview" />
-      ) : useStatus === "review" ? (
+      ) : tab === "review" ? (
         ""
-      ) : useStatus === "end" ? (
+      ) : tab === "end" ? (
         <CourseMenuEnd key="CourseMenuEnd" />
       ) : (
         <div class={styles.content}>Ошибка: ID не найден</div>

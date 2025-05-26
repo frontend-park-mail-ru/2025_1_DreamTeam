@@ -1,3 +1,4 @@
+import { router } from "@/router";
 import styles from "./Profile.module.scss";
 import reviewIcon from "Public/static/icons/addCourse.svg";
 
@@ -35,7 +36,7 @@ const ProfileHeader = ({
             class={`${styles.change} ${
               activeSection === section.type ? styles.changeActive : ""
             }`}
-            ON_click={() => setActiveSection(section.type as Section)}
+            ON_click={() => router.goToPath(`/profile/${section.type}`)}
           >
             <img src={section.image} alt={section.name} />
             <span>{section.name}</span>

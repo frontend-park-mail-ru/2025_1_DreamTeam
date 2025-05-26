@@ -1,7 +1,8 @@
 import { router } from "@/router";
 import { checkAuth, getCourse, getLessons, validEmail } from "@/api";
-import { setCourseOpen, setLessonID, setUser } from "@/stores";
+import { setActiveTab, setCourseOpen, setLessonID, setUser } from "@/stores";
 import NotFoundView from "@/nonFound";
+import { ActiveTabType } from "./types/activeTab";
 
 export const configureRouter = () => {
   router.register("/", "MainMenu", () => {
@@ -10,21 +11,6 @@ export const configureRouter = () => {
 
   router.register("/profile", "Profile", () => {
     console.log("Профиль");
-  });
-
-  router.register("/course/{id}", "CourseMenu", async () => {
-    const match = router.matchPathToRoute(location.pathname);
-    const id = Number(match?.params.id);
-
-    if (!isNaN(id)) {
-      const course = await getCourse(id);
-      if (course) {
-        setCourseOpen(course);
-      } else {
-        console.error("курс не найден");
-        setCourseOpen({});
-      }
-    }
   });
 
   router.register("/course/{id}/lessons", "Lessons", async () => {
@@ -48,6 +34,32 @@ export const configureRouter = () => {
       if (course) {
         setCourseOpen(course);
         setLessonID(lessonId.lesson.header.Points[0].lesson_id);
+      } else {
+        console.error("курс не найден");
+        setCourseOpen({});
+      }
+    }
+  });
+
+  router.register("/profile/{tab}", "Profile", async () => {
+    const match = router.matchPathToRoute(location.pathname);
+    const tab = match?.params.tab;
+    console.log("Профиль, вкладка:", tab);
+
+    // Здесь можно добавить проверку на допустимые значения tab, если нужно
+    setActiveTab(tab as ActiveTabType);
+  });
+
+  router.register("/course/{id}/{tab}", "CourseMenu", async () => {
+    const match = router.matchPathToRoute(location.pathname);
+    const id = Number(match?.params.id);
+    console.log("Курс", match?.params.tab, id);
+
+    if (!isNaN(id)) {
+      const course = await getCourse(id);
+      if (course) {
+        setCourseOpen(course);
+        setActiveTab((match?.params.tab as ActiveTabType) || "");
       } else {
         console.error("курс не найден");
         setCourseOpen({});
