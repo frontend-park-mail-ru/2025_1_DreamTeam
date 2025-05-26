@@ -47,7 +47,7 @@ export default function Card({
           time_to_pass,
           title,
         });
-        router.goToPath(`/course/${id}`);
+        router.goToPath(`/course/${id}/description`);
       }}
     >
       <div class={styles.picture} style={`background-image: url(${image})`}>

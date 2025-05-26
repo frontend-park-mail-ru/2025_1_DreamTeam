@@ -2,6 +2,7 @@ import { defineStore } from "@/ourReact/jsx-runtime";
 import { UserProfile } from "@/types/users";
 import { CourseOpen } from "@/types/courseMenu";
 import { Toast } from "@/types/notifications";
+import { ActiveTabType } from "./types/activeTab";
 
 export const [useCourseOpen, setCourseOpen] = defineStore(
   "CourseOpen",
@@ -23,3 +24,7 @@ export const [useToast, setToast] = defineStore("toast", {
   count: 0 as number,
 });
 export const [isSearch, setSearch] = defineStore("search", "");
+export const [activeTab, setActiveTab] = defineStore(
+  "activeTab",
+  "" as ActiveTabType
+);
