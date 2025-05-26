@@ -45,13 +45,6 @@ const App = () => {
       content = <MainMenu key="MainMenu" />;
       break;
   }
-  // return (
-  //   <div>
-  //     <GoogleIcon key="234" i="search" />
-  //     <GoogleIcon key="2324" i="home" />
-  //     <GoogleIcon key="232e4" i="menu" />
-  //   </div>
-  // );
 
   return (
     <div>
