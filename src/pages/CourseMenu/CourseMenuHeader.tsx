@@ -1,4 +1,4 @@
-import { setCourseOpen, setLessonID, useCourseOpen } from "@/stores";
+import { setCourseOpen, setLessonID, useCourseOpen, useUser } from "@/stores";
 import starIcon from "Public/static/icons/star.svg";
 import timeIcon from "Public/static/icons/time.svg";
 import userIcon from "Public/static/icons/user.svg";
@@ -8,9 +8,15 @@ import contentIcon from "Public/static/icons/contentCourse.svg";
 import reviewIcon from "Public/static/icons/reviewsCourse.svg";
 import closeIcon from "Public/static/icons/closeCourse.svg";
 import loadingIcon from "Public/static/icons/loading.gif";
+import ratingIcon from "Public/static/icons/ratingTab.svg";
 import { router } from "@/router";
 import styles from "./CourseMenu.module.scss";
 import { useDevice } from "@/devise";
+import { payCourse } from "@/api/Course/pay";
+import addToast from "@/components/WindowALert/logic/add";
+import { getCourse } from "@/api";
+import { useState } from "@/ourReact/jsx-runtime";
+import { UserProfile } from "@/types/users";
 
 const CourseMenuHeader = ({
   useFunc,
@@ -19,8 +25,22 @@ const CourseMenuHeader = ({
   useFunc: string;
   setFunc: (argv0: string) => void;
 }) => {
-  const isMobile = useDevice().isMobile;
+  const user = useUser();
+  const [prevUser, setPrevUser] = useState<UserProfile>(user);
 
+  if (prevUser !== user) {
+    const courseId = useCourseOpen().id;
+    if (courseId === undefined) {
+      console.error("Ошибка: ID курса не определен");
+      return <div class="dont-content">Ошибка: ID курса не определен</div>;
+    }
+    getCourse(courseId).then((data) => {
+      console.log("Данные курса обновлены", data);
+      setCourseOpen(data);
+      setPrevUser(user);
+    });
+  }
+  const isMobile = useDevice().isMobile;
   const data = useCourseOpen();
   const sections = [
     {
@@ -28,7 +48,10 @@ const CourseMenuHeader = ({
       name: "Описание",
       image: descIcon,
       click: () => {
-        setFunc("description");
+        const id = useCourseOpen().id;
+        if (id !== undefined) {
+          router.goToPath(`/course/${id}/${sections[0].type}`);
+        }
       },
     },
     {
@@ -36,7 +59,10 @@ const CourseMenuHeader = ({
       name: "Содержание",
       image: contentIcon,
       click: () => {
-        setFunc("content");
+        const id = useCourseOpen().id;
+        if (id !== undefined) {
+          router.goToPath(`/course/${id}/${sections[1].type}`);
+        }
       },
     },
     {
@@ -44,7 +70,32 @@ const CourseMenuHeader = ({
       name: "Отзывы",
       image: reviewIcon,
       click: () => {
-        setFunc("review");
+        const id = useCourseOpen().id;
+        if (id !== undefined) {
+          router.goToPath(`/course/${id}/${sections[2].type}`);
+        }
+      },
+    },
+    {
+      type: "rating",
+      name: "Рейтинг",
+      image: ratingIcon,
+      click: () => {
+        const id = useCourseOpen().id;
+        if (id !== undefined) {
+          router.goToPath(`/course/${id}/${sections[3].type}`);
+        }
+      },
+    },
+    {
+      type: "end",
+      name: "Завершение",
+      image: reviewIcon,
+      click: () => {
+        const id = useCourseOpen().id;
+        if (id !== undefined) {
+          router.goToPath(`/course/${id}/${sections[4].type}`);
+        }
       },
     },
   ];
@@ -65,7 +116,7 @@ const CourseMenuHeader = ({
       >
         {data.price === 0 ? "Бесплатно" : `${data.price?.toString()} ₽`}
       </div>
-      {!data.is_purchased ? (
+      {!data.is_purchased && data.price === 0 ? (
         <div
           class={styles.coursePriceAndButton__button}
           ON_click={() => {
@@ -75,12 +126,42 @@ const CourseMenuHeader = ({
               console.error("Ошибка");
               return;
             }
+            if (!user) {
+              addToast("error", "Пользователь не авторизован");
+              console.error("Пользователь не авторизован");
+              return;
+            }
             setLessonID(false);
             router.goToPath(`/course/${useCourseOpen().id}/lessons`);
           }}
         >
           <img class={styles.button__icon} src={addCourseIcon} />
-          Записаться на курс
+          {user ? "Записаться на курс" : "Войти для записи"}
+        </div>
+      ) : !data.is_purchased && data.price !== 0 ? (
+        <div
+          class={styles.coursePriceAndButton__buttonPay}
+          ON_click={() => {
+            console.log("Купить");
+            const id = data.id;
+            if (id === undefined) {
+              console.error("Ошибка");
+              return;
+            }
+            if (!user) {
+              addToast("error", "Пользователь не авторизован");
+              console.error("Пользователь не авторизован");
+              return;
+            }
+            setLessonID(false);
+            payCourse(id).then((data) => {
+              console.log("Покупка успешно завершена");
+              window.location.href = data;
+            });
+          }}
+        >
+          <img class={styles.button__icon} src={addCourseIcon} />
+          {user ? "Купить курс" : "Войти для покупки"}
         </div>
       ) : (
         <div

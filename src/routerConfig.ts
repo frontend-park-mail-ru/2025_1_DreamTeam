@@ -8,10 +8,6 @@ export const configureRouter = () => {
     console.log("Главная страница");
   });
 
-  router.register("/settings", "Setting", () => {
-    console.log("Настройки");
-  });
-
   router.register("/profile", "Profile", () => {
     console.log("Профиль");
   });

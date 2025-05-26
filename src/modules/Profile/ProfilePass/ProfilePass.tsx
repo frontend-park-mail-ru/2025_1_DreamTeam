@@ -1,7 +1,7 @@
 import { useState } from "@/ourReact/jsx-runtime";
 import styles from "./ProfilePass.module.scss";
 import Card from "@/modules/Card";
-import { Course, getPurchasedCourses } from "@/api";
+import { Course, getCompletedCourses } from "@/api";
 // import addToast from "@/components/WindowALert/logic/add";
 
 const ProfileFavorites = () => {
@@ -11,7 +11,7 @@ const ProfileFavorites = () => {
   console.log("render ProfileFavorites");
 
   if (isLoading) {
-    getPurchasedCourses().then((data) => {
+    getCompletedCourses().then((data) => {
       setData(data);
       setIsLoading(false);
     });

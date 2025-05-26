@@ -20,7 +20,7 @@ export interface Course {
   is_favorite: boolean;
 }
 
-async function apiFetch(url: string, options = {}) {
+export async function apiFetch(url: string, options = {}) {
   try {
     const response = await fetch(`${IP}/api${url}`, {
       credentials: "include",
@@ -401,4 +401,15 @@ export async function getRating(courseId: number) {
   });
 
   return data ? data.course_raiting.rating : "Ошибка получения рейтинга";
+}
+
+export async function getStatics(courseId: number) {
+  const data = await apiFetch(`/getStatistic?courseId=${courseId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return data ? data.statistic : "Ошибка получения статистики курса";
 }
