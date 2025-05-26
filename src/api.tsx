@@ -3,8 +3,8 @@ import { LessonsStructure } from "@/types/lesson";
 import { UserProfile } from "@/types/users";
 import { QuestionsStructure } from "./types/question";
 
-export const IP = "http://217.16.21.64";
-export const PORT = "8080";
+export const IP = "https://skill-force.ru";
+export const PORT = "80";
 
 export interface Course {
   id: number;
@@ -20,9 +20,9 @@ export interface Course {
   is_favorite: boolean;
 }
 
-async function apiFetch(url: string, options = {}) {
+export async function apiFetch(url: string, options = {}) {
   try {
-    const response = await fetch(`${IP}:${PORT}/api${url}`, {
+    const response = await fetch(`${IP}/api${url}`, {
       credentials: "include",
       ...options,
     });
@@ -40,7 +40,7 @@ async function apiFetch(url: string, options = {}) {
 }
 
 export async function fetchCSRFToken() {
-  const response = await fetch(`${IP}:${PORT}/api/updateProfile`, {
+  const response = await fetch(`${IP}/api/updateProfile`, {
     method: "GET",
     credentials: "include",
   });
@@ -149,7 +149,7 @@ export async function uploadProfilePhoto(file: File) {
   formData.append("data", jsonData);
 
   try {
-    const response = await fetch(`${IP}:${PORT}/api/updateProfilePhoto`, {
+    const response = await fetch(`${IP}/api/updateProfilePhoto`, {
       method: "POST",
       body: formData,
       credentials: "include",
@@ -365,4 +365,51 @@ export async function getFavoriteCourses() {
     headers: { "Content-Type": "application/json" },
   });
   return data ? data.bucket_courses : "Ошибка получения избранных курсов";
+}
+
+export async function Completed(lesson_id: number) {
+  const data = await apiFetch("/markLessonAsCompleted", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ lesson_id }),
+  });
+  return data ? true : "Ошибка запроса";
+}
+
+export async function getPurchasedCourses() {
+  const data = await apiFetch("/getPurchasedCourses", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  return data ? data.bucket_courses : "Ошибка получения проходимых курсов";
+}
+
+export async function getCompletedCourses() {
+  const data = await apiFetch("/getCompletedCourses", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  return data ? data.bucket_courses : "Ошибка получения пройденных курсов";
+}
+
+export async function getRating(courseId: number) {
+  const data = await apiFetch(`/getRating?courseId=${courseId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return data ? data.course_raiting.rating : "Ошибка получения рейтинга";
+}
+
+export async function getStatics(courseId: number) {
+  const data = await apiFetch(`/getStatistic?courseId=${courseId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return data ? data.statistic : "Ошибка получения статистики курса";
 }

@@ -1,0 +1,64 @@
+@import '@/style.scss';
+$colorDone: $color5;
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(11, 25, 44, 0.7);
+  border-radius: 16px;
+  padding: 8px 24px;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  color: #d0cbcb;
+}
+.progressTitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.progressBars {
+  display: flex;
+  flex-direction: row;
+  padding-left: 8px;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.progressBarsPoint {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 8px;
+  .progressBar {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: space-between;
+  }
+}
+
+.progressBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.progressContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 460px;
+}
+
+.goodProgress {
+  color: $colorDone;
+}
+
+.badProgress {
+  color: #cc0202;
+}
+
+.processProgress {
+  color: #EDFF69;
+}

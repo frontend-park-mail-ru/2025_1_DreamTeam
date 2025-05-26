@@ -1,0 +1,71 @@
+@import '@/style.scss';
+
+.rating {
+    display: flex;
+    flex-direction: cow;
+    color: $text;
+    font-size: 32px;
+    font-family: "Open Sans", sans-serif;
+}
+
+.numberRatings {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.numberRating {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(11, 25, 44, 0.7);
+    border-radius: 50px 0px 0px 50px;
+    padding: 4px 16px 4px 16px;
+    align-self: stretch;
+}
+
+.countRatings {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.countRating {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(11, 25, 44, 0.4);
+    padding: 4px 16px 4px 16px;
+    align-self: stretch;
+}
+
+.nameRatings {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.nameRating {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+    background: rgba(11, 25, 44, 0.3);
+    border-radius: 0px 50px 50px 0px;
+    padding: 4px 16px 4px 16px;
+    align-self: stretch;
+}
+
+.ratingImg {
+    border-radius: 8px;
+    flex-shrink: 0;
+    width: 40px;
+    aspect-ratio: 39.88/40;
+}

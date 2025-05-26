@@ -37,6 +37,7 @@
   background: rgba(30, 62, 98, 0.9);
   border-radius: 16px;
   font-size: 20px;
+  align-items: center;
   font-family: "Open Sans", sans-serif;
   gap: 4px;
   display: flex;
@@ -64,6 +65,7 @@
   max-width: max-content;
   flex-direction: column;
   gap: 56px;
+  align-items: center;
 }
 
 .headerInfo {
@@ -155,6 +157,7 @@
   padding-left: 16px;
   padding-right: 16px;
   align-items: center;
+  width: 100%;
 }
 
 .coursePriceAndButton__price {
@@ -195,7 +198,6 @@
   max-width: 263px;
   min-width: 100px;
   aspect-ratio: 1;
-  background-color: $color5;
   border-radius: 16px;
   -webkit-border-radius: 16px;
   -moz-border-radius: 16px;
@@ -262,14 +264,6 @@
   background-color: $color4;
 }
 
-.flipped {
-  transform: rotate(180deg);
-}
-
-.animationRotate {
-  transition: transform 0.3s ease;
-}
-
 .closePage {
   width: 40px;
   height: 40px;
@@ -293,4 +287,22 @@
   .coursePriceAndButton {
     flex-direction: column;
   }
+}
+
+.coursePriceAndButton__buttonPay {
+  background-color: $color3;
+  color: $color6;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+  gap: 8px;
+  cursor: pointer;
 }

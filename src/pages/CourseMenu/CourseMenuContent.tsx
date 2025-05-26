@@ -1,11 +1,15 @@
 import { useCourseOpen } from "@/stores";
 import { useState } from "@/ourReact/jsx-runtime";
-import { getCourseRoadmap } from "@/api";
+import { getCourseRoadmap, getRating, getStatics } from "@/api";
 import Chapter from "@/components/Chapter";
 import EnterCourse from "@/modules/EnterCourse";
 import countTests from "@/modules/EnterCourse/logic/countTests";
 import countLessons from "@/modules/EnterCourse/logic/countLessons";
 import styles from "./CourseMenu.module.scss";
+import Rating from "@/modules/Rating";
+import { RatingList } from "@/types/rating";
+import Progress from "@/components/Progress";
+import { StatisticType } from "@/types/staticsCourse";
 
 export const CourseMenuDescription = () => {
   const data = useCourseOpen();
@@ -15,6 +19,72 @@ export const CourseMenuDescription = () => {
   return (
     <div class={styles.content}>
       <div class={styles.textContent} innerHTML={data.description}></div>
+    </div>
+  );
+};
+
+export const CourseMenuEnd = () => {
+  const [data, setData] = useState<StatisticType>({
+    percentage: 0,
+    completed_lessons: 0,
+    amount_lessons: 0,
+    completed_videos: 0,
+    amount_videos: 0,
+    received_points: 0,
+    amount_points: 0,
+    completed_tests: 0,
+    amount_tests: 0,
+    completed_questions: 0,
+    amount_questions: 0,
+  });
+  const [isLoading, setLoading] = useState(true);
+
+  if (isLoading) {
+    const course = useCourseOpen();
+    if (course.id) {
+      getStatics(course.id).then((data) => {
+        console.log("data", data);
+        setData(data);
+        setLoading(false);
+      });
+    }
+  }
+
+  return (
+    <div class={styles.content}>
+      <Progress data={data} key="ProgressCourse" />
+    </div>
+  );
+};
+
+export const CourseMenuRating = () => {
+  const [ratings, setRatings] = useState<RatingList>([]);
+  const [isLoading, setLoading] = useState(true);
+
+  const course = useCourseOpen();
+
+  if (course.id && isLoading) {
+    getRating(course.id).then((data) => {
+      if (Array.isArray(data)) {
+        setRatings(data);
+      } else {
+        console.error("Ошибка загрузки рейтинга:", data);
+      }
+      setLoading(false);
+    });
+  }
+
+  if (!course.id) {
+    return <div class={styles.content}>Ошибка: ID курса не найден</div>;
+  }
+
+  if (isLoading) {
+    return <div class={styles.content}>Загрузка рейтинга...</div>;
+  }
+
+  return (
+    <div class={styles.content}>
+      <Rating rating={ratings} key="Ratings" />
     </div>
   );
 };

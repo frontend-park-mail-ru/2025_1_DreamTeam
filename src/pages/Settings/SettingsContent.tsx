@@ -22,30 +22,35 @@ const SettingContent = () => {
   console.log(information);
   console.log(user);
 
-  const save_data = () => {
+  const save_data = async () => {
     console.log(information);
     if (!user) {
       console.log(user);
       addToast("error", "Отсутствует авторизация");
       return <div class="content dont-content">Не авторизован</div>;
     }
-    updateProfile(
+    const update = await updateProfile(
       user.avatar_src,
       information.bio,
       user.email,
       information.hide_email,
       information.name
     );
-    addToast("success", "Успешное сохранение");
+
+    if (update === true) {
+      addToast("success", "Успешное сохранение");
+
+      setUser({
+        name: information.name,
+        email: information.email,
+        bio: information.bio,
+        hide_email: information.hide_email,
+        avatar_src: information.avatar_src,
+      });
+    }
+
     return true;
   };
-  setUser({
-    name: information.name,
-    email: information.email,
-    bio: information.bio,
-    hide_email: information.hide_email,
-    avatar_src: information.avatar_src,
-  });
 
   function setInformationState(key: string, newFieldData: string | boolean) {
     setInformation({
@@ -95,7 +100,7 @@ const SettingContent = () => {
                 setInformationState("hide_email", event.target.checked);
               }}
             />
-            Не отправлять письма на почту
+            Отправлять письма на почту
           </div>
         </div>
         <div class={styles.strings}>
@@ -103,8 +108,8 @@ const SettingContent = () => {
           <button
             class={styles.button__input}
             id="button_input"
-            ON_click={() => {
-              save_data();
+            ON_click={async () => {
+              await save_data();
             }}
           >
             Сохранить
@@ -120,7 +125,7 @@ const SettingContent = () => {
             />
             <div class={styles.load__delete}>
               <form method="post" enctype="multipart/form-data">
-                <label class="text__decoration">
+                <label class={styles.text__decoration}>
                   <input
                     type="file"
                     accept=".jpg, .jpeg, .png, .webp"
@@ -187,11 +192,11 @@ const SettingContent = () => {
                     bio: user.bio,
                     hide_email: user.hide_email,
                     avatar_src:
-                      "http://217.16.21.64:8006/avatars/default_avatar.png",
+                      "https://skill-force.ru/avatars/default_avatar.png",
                   });
                   setInformationState(
                     "avatar_src",
-                    "http://217.16.21.64:8006/avatars/default_avatar.png"
+                    "https://skill-force.ru/avatars/default_avatar.png"
                   );
                   addToast("success", "Фотография успешно удалена");
                 }}

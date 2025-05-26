@@ -1,3 +1,4 @@
+import { router } from "@/router";
 import styles from "./Profile.module.scss";
 import reviewIcon from "Public/static/icons/addCourse.svg";
 
@@ -17,9 +18,9 @@ const ProfileHeader = ({
 }) => {
   const sections = [
     { type: "profile", name: "Профиль", image: reviewIcon },
-    { type: "pass", name: "Обучение", image: reviewIcon },
+    { type: "history", name: "Обучение", image: reviewIcon },
     { type: "favorite", name: "Избранные", image: reviewIcon },
-    { type: "history", name: "Пройденные", image: reviewIcon },
+    { type: "pass", name: "Пройденные", image: reviewIcon },
     { type: "certificates", name: "Сертификаты", image: reviewIcon },
   ];
 
@@ -35,7 +36,7 @@ const ProfileHeader = ({
             class={`${styles.change} ${
               activeSection === section.type ? styles.changeActive : ""
             }`}
-            ON_click={() => setActiveSection(section.type as Section)}
+            ON_click={() => router.goToPath(`/profile/${section.type}`)}
           >
             <img src={section.image} alt={section.name} />
             <span>{section.name}</span>

@@ -7,24 +7,28 @@ import { isSearch } from "@/stores";
 const MainMenuContent = () => {
   const [cards, setCards] = useState<Course[]>([]);
   const [isLoading, setLoading] = useState(true);
+  const [prevSearch, setPrevSearch] = useState("");
   const searching = isSearch();
-  setLoading(true);
+
   if (isLoading) {
-    console.log(searching);
-    searching != ""
-      ? searchForm(searching).then((data) => {
-          setCards(data);
-          setLoading(false);
-        })
-      : getCourses().then((data) => {
-          setCards(data);
-          setLoading(false);
-        });
-  }
-  console.log("render MainMenuContent");
-  if (isLoading) {
-    // TODO: Потом добавлю вывод более подробный
+    getCourses().then((data) => {
+      setCards(data);
+      setLoading(false);
+    });
     return <div class={styles.content}>Загрузка</div>;
+  }
+
+  if (searching !== prevSearch) {
+    setPrevSearch(searching);
+    if (searching !== "") {
+      searchForm(searching).then((data) => {
+        setCards(data);
+      });
+    } else {
+      getCourses().then((data) => {
+        setCards(data);
+      });
+    }
   }
 
   return (

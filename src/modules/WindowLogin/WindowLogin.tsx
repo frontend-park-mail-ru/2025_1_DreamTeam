@@ -26,7 +26,8 @@ export default function WindowLogin() {
       key: "emailField",
       onChanged: (value: string) => {
         const validator = new Validate().regex(
-          "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"
+          "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$",
+          `должно быть в формате example@domain.com и содержать только латинские буквы, цифры, ".", "-", "_"`
         );
         return validator.execute(value, "Почта");
       },
@@ -40,7 +41,10 @@ export default function WindowLogin() {
         const validator = new Validate()
           .min(2)
           .max(16)
-          .regex("^[a-zA-Z0-9_-]+$");
+          .regex(
+            "^[a-zA-Z0-9_-]+$",
+            "содержит только буквы, цифры, дефисы и нижние подчеркивания"
+          );
         return validator.execute(value, "Псевдоним");
       },
     },
@@ -55,7 +59,10 @@ export default function WindowLogin() {
         const validator = new Validate()
           .min(8)
           .max(32)
-          .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]+$");
+          .regex(
+            "^[a-zA-Z0-9!@#$%^&*_+-=;:|?]+$",
+            "содержит только буквы, цифры и специальные символы !@#$%^&*_+-=;:|?"
+          );
         return validator.execute(value, "Пароль");
       },
     },
@@ -68,7 +75,10 @@ export default function WindowLogin() {
         const validator = new Validate()
           .min(8)
           .max(32)
-          .regex("^[a-zA-Z0-9!@#$%^&*_+-=;:|?]+$");
+          .regex(
+            "^[a-zA-Z0-9!@#$%^&*_+-=;:|?]+$",
+            "содержит только буквы, цифры и специальные символы !@#$%^&*_+-=;:|?"
+          );
         return validator.execute(value, "Пароль");
       },
     },
