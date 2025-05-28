@@ -21,7 +21,7 @@ export default function MenuOpen() {
       image: profile,
       click: () => {
         setMenu(false);
-        router.goByState("Profile");
+        router.goToPath("/profile/profile");
       },
     },
     {

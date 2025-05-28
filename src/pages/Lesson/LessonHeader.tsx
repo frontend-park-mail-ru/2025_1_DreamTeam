@@ -32,7 +32,7 @@ export const LessonHeader = ({
         class={styles.closePage}
         ON_click={() => {
           const id = useCourseOpen().id;
-          router.goToPath(`/course/${id}`);
+          router.goToPath(`/course/${id}/content`);
         }}
       >
         <img style={"cursor: pointer;"} src={arrowDownIcon} />
