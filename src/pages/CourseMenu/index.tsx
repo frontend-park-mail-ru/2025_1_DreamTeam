@@ -5,7 +5,6 @@ import {
   CourseMenuEnd,
   CourseMenuRating,
 } from "./CourseMenuContent";
-import { useState } from "@/ourReact/jsx-runtime";
 import styles from "./CourseMenu.module.scss";
 import { activeTab, setActiveTab } from "@/stores";
 

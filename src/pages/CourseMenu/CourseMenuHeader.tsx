@@ -9,6 +9,7 @@ import reviewIcon from "Public/static/icons/reviewsCourse.svg";
 import closeIcon from "Public/static/icons/closeCourse.svg";
 import loadingIcon from "Public/static/icons/loading.gif";
 import ratingIcon from "Public/static/icons/ratingTab.svg";
+import sertificateIcon from "Public/static/icons/sertificateTab.svg";
 import { router } from "@/router";
 import styles from "./CourseMenu.module.scss";
 import { useDevice } from "@/devise";
@@ -65,10 +66,21 @@ const CourseMenuHeader = ({
         }
       },
     },
+    // {
+    //   type: "review",
+    //   name: "Отзывы",
+    //   image: reviewIcon,
+    //   click: () => {
+    //     const id = useCourseOpen().id;
+    //     if (id !== undefined) {
+    //       router.goToPath(`/course/${id}/${sections[2].type}`);
+    //     }
+    //   },
+    // },
     {
-      type: "review",
-      name: "Отзывы",
-      image: reviewIcon,
+      type: "rating",
+      name: "Рейтинг",
+      image: ratingIcon,
       click: () => {
         const id = useCourseOpen().id;
         if (id !== undefined) {
@@ -77,24 +89,13 @@ const CourseMenuHeader = ({
       },
     },
     {
-      type: "rating",
-      name: "Рейтинг",
-      image: ratingIcon,
+      type: "end",
+      name: "Завершение",
+      image: sertificateIcon,
       click: () => {
         const id = useCourseOpen().id;
         if (id !== undefined) {
           router.goToPath(`/course/${id}/${sections[3].type}`);
-        }
-      },
-    },
-    {
-      type: "end",
-      name: "Завершение",
-      image: reviewIcon,
-      click: () => {
-        const id = useCourseOpen().id;
-        if (id !== undefined) {
-          router.goToPath(`/course/${id}/${sections[4].type}`);
         }
       },
     },
@@ -138,7 +139,7 @@ const CourseMenuHeader = ({
           <img class={styles.button__icon} src={addCourseIcon} />
           {user ? "Записаться на курс" : "Войти для записи"}
         </div>
-      ) : !data.is_purchased && data.price !== 0 ? (
+      ) : !(data.is_purchased || data.is_completed) && data.price !== 0 ? (
         <div
           class={styles.coursePriceAndButton__buttonPay}
           ON_click={() => {

@@ -10,6 +10,8 @@ import Rating from "@/modules/Rating";
 import { RatingList } from "@/types/rating";
 import Progress from "@/components/Progress";
 import { StatisticType } from "@/types/staticsCourse";
+import { maxPoint } from "@/modules/EnterCourse/logic/maxPoint";
+import countVideo from "@/modules/EnterCourse/logic/countVideo";
 
 export const CourseMenuDescription = () => {
   const data = useCourseOpen();
@@ -175,10 +177,10 @@ export function CourseMenuContent() {
         {parts.parts?.length ? (
           <EnterCourse
             key="EnterCourse"
-            mark={0}
-            bestMark={0}
+            mark={maxPoint(parts.parts).maxPoints}
+            bestMark={maxPoint(parts.parts).distinctionPoints}
             countTest={countTests(parts.parts)}
-            countTimeToPassVideo={0}
+            countTimeToPassVideo={countVideo(parts.parts)}
             countLesson={countLessons(parts.parts)}
           />
         ) : (
