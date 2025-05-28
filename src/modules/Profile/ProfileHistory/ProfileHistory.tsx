@@ -32,7 +32,7 @@ const ProfileFavorites = () => {
   }
 
   if (data.length === 0) {
-    return <div class={styles.content}>У вас нет избранных курсов</div>;
+    return <div class={styles.content}>У вас нет проходимых курсов</div>;
   }
 
   return (
