@@ -27,10 +27,8 @@ const MainMenuHeader = () => {
     },
   ];
 
-  return (
-    <div class={styles.filters}>
-      <div class={styles.headlines}>Каталог</div>
-      <div class={styles.filterSelect}>
+  {
+    /* <div class={styles.filterSelect}>
         {arrayFilter.map((button) => (
           <div class={styles.filter__type__selector} ON_click={button.onClick}>
             <div class={styles.text}>{button.name}</div>
@@ -40,8 +38,12 @@ const MainMenuHeader = () => {
         <div class={styles.filter__type__button}>
           <img src={filter} alt="" class={styles.filter__icon}></img>
           <div class={styles.text}>Фильтры</div>
-        </div>
-      </div>
+        </div> */
+  }
+
+  return (
+    <div class={styles.filters}>
+      <div class={styles.headlines}>Каталог</div>
     </div>
   );
 };
