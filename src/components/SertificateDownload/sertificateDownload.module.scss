@@ -1,0 +1,15 @@
+@import '@/style.scss';
+
+.downloadButton {
+    background: rgba(11, 25, 44, 0.3);
+    border-radius: 16px;
+    padding: 4px 16px 4px 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: center;
+    justify-content: flex-start;
+    color: $text;
+    font-size: 32px;
+    font-family: "Open Sans", sans-serif;
+}
