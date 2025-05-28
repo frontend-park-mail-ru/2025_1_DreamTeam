@@ -14,11 +14,7 @@ const CourseMenu = () => {
 
   return (
     <div>
-      <CourseMenuHeader
-        key="CourseHeader"
-        useFunc={tab}
-        setFunc={setActiveTab as (newTab: string) => void}
-      />
+      <CourseMenuHeader key="CourseHeader" useFunc={tab} />
       {tab === "description" ? (
         <CourseMenuDescription key="CourseDescription" />
       ) : tab === "content" ? (

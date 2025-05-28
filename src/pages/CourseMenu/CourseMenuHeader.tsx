@@ -5,7 +5,6 @@ import userIcon from "Public/static/icons/user.svg";
 import addCourseIcon from "Public/static/icons/addCourse.svg";
 import descIcon from "Public/static/icons/descriptionCourse.svg";
 import contentIcon from "Public/static/icons/contentCourse.svg";
-import reviewIcon from "Public/static/icons/reviewsCourse.svg";
 import closeIcon from "Public/static/icons/closeCourse.svg";
 import loadingIcon from "Public/static/icons/loading.gif";
 import ratingIcon from "Public/static/icons/ratingTab.svg";
@@ -19,13 +18,7 @@ import { getCourse } from "@/api";
 import { useState } from "@/ourReact/jsx-runtime";
 import { UserProfile } from "@/types/users";
 
-const CourseMenuHeader = ({
-  useFunc,
-  setFunc,
-}: {
-  useFunc: string;
-  setFunc: (argv0: string) => void;
-}) => {
+const CourseMenuHeader = ({ useFunc }: { useFunc: string }) => {
   const user = useUser();
   const [prevUser, setPrevUser] = useState<UserProfile>(user);
 
