@@ -32,4 +32,5 @@ export interface CourseOpen {
   purchases_amount?: number;
   time_to_pass?: number;
   is_purchased?: boolean;
+  is_completed?: boolean;
 }
