@@ -1,11 +1,15 @@
 import { Part } from "@/types/courseMenu";
 
-export default function countLessons(parts: Part[]): number {
-  return parts.reduce((lessonCount, part) => {
+export default function countTests(parts: Part[]): number {
+  return parts.reduce((testCount, part) => {
     return (
-      lessonCount +
+      testCount +
       part.buckets.reduce((bucketCount, bucket) => {
-        return bucketCount + bucket.lessons.length;
+        return (
+          bucketCount +
+          bucket.lessons.filter((lesson) => lesson.lesson_type === "text")
+            .length
+        );
       }, 0)
     );
   }, 0);
