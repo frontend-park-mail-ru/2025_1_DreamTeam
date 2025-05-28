@@ -19,12 +19,6 @@ export function EnterCourse({
   countTimeToPassVideo: number;
   countLesson: number;
 }) {
-  const hours = Math.floor(countTimeToPassVideo / 3600);
-  const minutes = Math.floor((countTimeToPassVideo % 3600) / 60);
-
-  const hourLabel = pluralize(hours, ["час", "часа", "часов"]);
-  const minuteLabel = pluralize(minutes, ["минута", "минуты", "минут"]);
-
   return (
     <div class={styles.courseContentDescription}>
       <div class={styles.courseContentDescriptionSection}>
@@ -32,7 +26,7 @@ export function EnterCourse({
         <div class={styles.courseContentDescriptionBlock}>
           <div class={styles.courseContentDescriptionBlock__desc}>
             <img src={countMarkIcon} alt="" />
-            {mark.toString()} баллов - об окончании
+            {mark.toString()} всего баллов
           </div>
           <div class={styles.courseContentDescriptionBlock__desc}>
             <img src={countBestMarkIcon} alt="" />
@@ -49,8 +43,7 @@ export function EnterCourse({
           </div>
           <div class={styles.courseContentDescriptionBlock__desc}>
             <img src={countTimeVideoIcon} alt="" />
-            {hours > 0 ? `${hours.toString()} ${hourLabel}` : ""}{" "}
-            {minutes.toString()} {minuteLabel} видео
+            {countTimeToPassVideo.toString()} видео
           </div>
           <div class={styles.courseContentDescriptionBlock__desc}>
             <img src={countLessonIcon} alt="" />
