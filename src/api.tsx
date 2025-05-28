@@ -381,7 +381,7 @@ export async function getPurchasedCourses() {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
-  return data ? data.bucket_courses : "Ошибка получения проходимых курсов";
+  return data ? data.bucket_courses : [];
 }
 
 export async function getCompletedCourses() {
@@ -389,7 +389,7 @@ export async function getCompletedCourses() {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
-  return data ? data.bucket_courses : "Ошибка получения пройденных курсов";
+  return data ? data.bucket_courses : [];
 }
 
 export async function getRating(courseId: number) {
@@ -412,4 +412,13 @@ export async function getStatics(courseId: number) {
   });
 
   return data ? data.statistic : "Ошибка получения статистики курса";
+}
+
+export async function markCourseAsCompleted(course_id: number) {
+  const data = await apiFetch("/markCourseAsCompleted", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ course_id }),
+  });
+  return data ? true : "Ошибка запроса";
 }
