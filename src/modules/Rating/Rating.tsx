@@ -2,6 +2,9 @@ import { RatingList } from "@/types/rating";
 import styles from "./Rating.module.scss";
 
 const Rating = ({ rating }: { rating: RatingList }) => {
+  if (!rating || rating.length === 0) {
+    return <div class={styles.ratingEmpty}>Рейтинг пока отсутствует</div>;
+  }
   const numberRatings = Array.from({ length: rating.length }, (_, i) => i + 1);
   const countRatings = rating.map((item) => item.rating);
   const nameRatings = rating.map((item) => item.user);

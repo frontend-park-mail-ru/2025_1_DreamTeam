@@ -69,3 +69,11 @@
     width: 40px;
     aspect-ratio: 39.88/40;
 }
+
+.ratingEmpty {
+    color: $text;
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+    justify-content: center;
+}
