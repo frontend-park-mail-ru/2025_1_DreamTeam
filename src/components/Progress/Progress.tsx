@@ -1,5 +1,8 @@
 import { StatisticType } from "@/types/staticsCourse";
 import styles from "./Progress.module.scss";
+import { getSertificate } from "@/api/Course/certificate";
+import { useCourseOpen } from "@/stores";
+import SertificateDownload from "../SertificateDownload";
 
 const isCompleted = (completed: number, total: number) => completed === total;
 const getClass = (completed: number, total: number) =>
@@ -73,16 +76,21 @@ const Progress = ({ data }: { data: StatisticType }) => {
               </label>{" "}
               квизов
             </div>
-            <div>
+            {/* <div>
               <label class={classColorQuestion}>
                 {data.completed_questions.toString()} из{" "}
                 {data.amount_questions.toString()}
               </label>{" "}
               вопросов
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
+      {useCourseOpen().is_completed ? (
+        <SertificateDownload key="SertificateDownload" />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

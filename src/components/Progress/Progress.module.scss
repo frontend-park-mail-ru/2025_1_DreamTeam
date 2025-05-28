@@ -26,8 +26,9 @@ $colorDone: $color5;
 
 .progressBarsPoint {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 16px;
+  justify-content: space-between;
   padding-left: 8px;
   .progressBar {
     display: flex;
