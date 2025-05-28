@@ -1,5 +1,9 @@
 @import '@/style.scss';
 
+html {
+  scroll-behavior: smooth;
+}
+
 .content {
     padding: 56px 24px;
     display: flex;

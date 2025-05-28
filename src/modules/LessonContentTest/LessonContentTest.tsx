@@ -1,10 +1,17 @@
-import { getNextLessons, getTestLesson, postTestLesson } from "@/api";
+import {
+  getNextLessons,
+  getTestLesson,
+  markCourseAsCompleted,
+  postTestLesson,
+} from "@/api";
 import { useCourseOpen } from "@/stores";
 import { useState } from "@/ourReact/jsx-runtime";
 import { LessonsStructure } from "@/types/lesson";
 import { TestStructure } from "@/types/test";
 import PageButton from "@/ui/PageButton";
 import styles from "./LessonContentTest.module.scss";
+import { generateSertificate } from "@/api/Course/certificate";
+import { router } from "@/router";
 
 const example = {
   question: {
@@ -71,7 +78,7 @@ export default function LessonContentTest({
       <div class={styles.lessonPages}>
         <PageButton
           key={"previous_lesson" + pagesPrev.toString()}
-          page_id={pagesPrev}
+          page_id={pagesPrev.toString()}
           type="Предыдущая"
           onClick={() => {
             const courseId = useCourseOpen().id;
@@ -113,7 +120,7 @@ export default function LessonContentTest({
         </button>
         <PageButton
           key={"lesson_page" + pagesNext.toString()}
-          page_id={pagesNext}
+          page_id={pagesNext.toString()}
           type="Следующая"
           onClick={() => {
             const courseId = useCourseOpen().id;
@@ -121,9 +128,29 @@ export default function LessonContentTest({
               console.error("Course не определён");
               return;
             }
-            getNextLessons(courseId, pagesNext).then((result) => {
-              setText(result);
-            });
+            console.log(courseId);
+            if (pagesNext !== -1) {
+              getNextLessons(courseId, pagesNext).then((result) => {
+                setText(result);
+              });
+            } else {
+              console.log("AAAAAAAAAAAAAKKROFJKROJVROCOVJOCJVEOJV");
+              generateSertificate(courseId).then((result) => {
+                if (result === undefined) {
+                  console.error("Ошибка в гет сертификат");
+                }
+                // router.goToPath(`/course/${courseId}/description`);
+                console.log(result);
+                router.goToPath(`/course/${courseId}/end`);
+              });
+              markCourseAsCompleted(courseId).then((result) => {
+                if (result === undefined) {
+                  console.error("Ошибка в марк курсе как завершён");
+                }
+              });
+              console.error("Course не определён");
+              return;
+            }
           }}
         />
       </div>
