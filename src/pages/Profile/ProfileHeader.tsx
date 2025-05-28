@@ -1,6 +1,10 @@
 import { router } from "@/router";
 import styles from "./Profile.module.scss";
 import reviewIcon from "Public/static/icons/addCourse.svg";
+import favoriteIcon from "Public/static/icons/favoriteTab.svg";
+import compTab from "Public/static/icons/compTab.svg";
+import profileTab from "Public/static/icons/profileTab.svg";
+import pushTab from "Public/static/icons/pushTab.svg";
 
 export type Section =
   | "profile"
@@ -17,11 +21,10 @@ const ProfileHeader = ({
   setActiveSection: (section: Section) => void;
 }) => {
   const sections = [
-    { type: "profile", name: "Профиль", image: reviewIcon },
-    { type: "history", name: "Обучение", image: reviewIcon },
-    { type: "favorite", name: "Избранные", image: reviewIcon },
-    { type: "pass", name: "Пройденные", image: reviewIcon },
-    { type: "certificates", name: "Сертификаты", image: reviewIcon },
+    { type: "profile", name: "Профиль", image: profileTab },
+    { type: "history", name: "Обучение", image: compTab },
+    { type: "favorite", name: "Избранные", image: favoriteIcon },
+    { type: "pass", name: "Пройденные", image: pushTab },
   ];
 
   console.log("render ProfileHeader");
