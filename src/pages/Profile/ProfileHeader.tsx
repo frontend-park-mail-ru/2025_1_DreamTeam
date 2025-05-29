@@ -39,7 +39,10 @@ const ProfileHeader = ({
             class={`${styles.change} ${
               activeSection === section.type ? styles.changeActive : ""
             }`}
-            ON_click={() => router.goToPath(`/profile/${section.type}`)}
+            ON_click={() => {
+              setActiveSection(section.type as Section);
+              router.goToPath(`/profile/${section.type}`);
+            }}
           >
             <img src={section.image} alt={section.name} />
             <span>{section.name}</span>
