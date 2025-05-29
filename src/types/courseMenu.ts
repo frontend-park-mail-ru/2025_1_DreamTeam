@@ -33,4 +33,5 @@ export interface CourseOpen {
   time_to_pass?: number;
   is_purchased?: boolean;
   is_completed?: boolean;
+  is_favorite?: boolean;
 }
