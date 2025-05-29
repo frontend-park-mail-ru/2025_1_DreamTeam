@@ -6,7 +6,7 @@ import {
   CourseMenuRating,
 } from "./CourseMenuContent";
 import styles from "./CourseMenu.module.scss";
-import { activeTab, setActiveTab } from "@/stores";
+import { activeTab } from "@/stores";
 
 const CourseMenu = () => {
   // TODO: Добавить новую логику отрисовки информации через запрос
