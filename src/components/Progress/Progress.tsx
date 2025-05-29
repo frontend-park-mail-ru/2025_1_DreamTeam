@@ -1,6 +1,5 @@
 import { StatisticType } from "@/types/staticsCourse";
 import styles from "./Progress.module.scss";
-import { getSertificate } from "@/api/Course/certificate";
 import { useCourseOpen } from "@/stores";
 import SertificateDownload from "../SertificateDownload";
 
@@ -15,10 +14,6 @@ const Progress = ({ data }: { data: StatisticType }) => {
   );
   const classColorVideo = getClass(data.completed_videos, data.amount_videos);
   const classColorTest = getClass(data.completed_tests, data.amount_tests);
-  const classColorQuestion = getClass(
-    data.completed_questions,
-    data.amount_questions
-  );
   const classColorPoints = getClass(data.received_points, data.amount_points);
   const classColorPercentage =
     data.percentage === 100 ? styles.goodProgress : styles.processProgress;
@@ -89,7 +84,7 @@ const Progress = ({ data }: { data: StatisticType }) => {
       {useCourseOpen().is_completed ? (
         <SertificateDownload key="SertificateDownload" />
       ) : (
-        ""
+        <div>Сертификат будет доступен после прохождения курса</div>
       )}
     </div>
   );
