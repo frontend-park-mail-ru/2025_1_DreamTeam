@@ -1,6 +1,7 @@
-import { apiFetch } from "@/api";
+import { apiFetch, fetchCSRFToken } from "@/api";
 
 export const payCourse = async (courseId: number) => {
+  const csrfToken = await fetchCSRFToken();
   const data = await apiFetch("/createPaymentHandler", {
     method: "POST",
     body: JSON.stringify({
@@ -9,6 +10,7 @@ export const payCourse = async (courseId: number) => {
     }),
     headers: {
       "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
     },
   });
   return data ? data.continue_url : "Ошибка при оплате курса";
