@@ -1,7 +1,7 @@
 import download from "Public/static/icons/download.svg";
 import styles from "./sertificateDownload.module.scss";
 import { useCourseOpen } from "@/stores";
-import { generateSertificate, getSertificate } from "@/api/Course/certificate";
+import { getSertificate } from "@/api/Course/certificate";
 
 const SertificateDownload = () => {
   return (

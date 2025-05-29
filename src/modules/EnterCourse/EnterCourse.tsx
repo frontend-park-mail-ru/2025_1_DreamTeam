@@ -1,4 +1,3 @@
-import pluralize from "./logic/pluralize";
 import countMarkIcon from "Public/static/icons/courseCountMark.svg";
 import countBestMarkIcon from "Public/static/icons/courseCountBestMark.svg";
 import countTestIcon from "Public/static/icons/courseCountTest.svg";
