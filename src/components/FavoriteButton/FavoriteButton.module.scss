@@ -1,3 +1,5 @@
+@import '@/style.scss';
+
 .heart_default {
   opacity: 1;
   display: block;
@@ -57,4 +59,22 @@
   display: flex;
   width: 32px;
   height: 34px;
+}
+
+.coursePriceAndButton__buttonText {
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  outline: 2px solid $color5;
+  color: $color6;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+  gap: 8px;
+  cursor: pointer;
 }

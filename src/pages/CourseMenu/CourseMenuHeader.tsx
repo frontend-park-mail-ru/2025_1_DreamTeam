@@ -17,6 +17,7 @@ import addToast from "@/components/WindowALert/logic/add";
 import { getCourse } from "@/api";
 import { useState } from "@/ourReact/jsx-runtime";
 import { UserProfile } from "@/types/users";
+import FavoriteButton from "@/components/FavoriteButton/FavoriteButton";
 
 const CourseMenuHeader = ({ useFunc }: { useFunc: string }) => {
   const user = useUser();
@@ -110,6 +111,12 @@ const CourseMenuHeader = ({ useFunc }: { useFunc: string }) => {
       >
         {data.price === 0 ? "Бесплатно" : `${data.price?.toString()} ₽`}
       </div>
+      <FavoriteButton
+        favorite={data.is_favorite as boolean}
+        courseId={data.id as number}
+        buttonCourse={true}
+        key="FavoriteButtonCourseMenu"
+      ></FavoriteButton>
       {!data.is_purchased && data.price === 0 ? (
         <div
           class={styles.coursePriceAndButton__button}

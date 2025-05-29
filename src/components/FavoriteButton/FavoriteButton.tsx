@@ -10,9 +10,11 @@ import addToast from "../WindowALert/logic/add";
 export default function FavoriteButton({
   favorite,
   courseId,
+  buttonCourse = false,
 }: {
   favorite: boolean;
   courseId: number;
+  buttonCourse?: boolean;
 }) {
   const [isFavorite, setIsFavorite] = useState(favorite);
   const [isHovered, setIsHovered] = useState(false);
@@ -58,6 +60,22 @@ export default function FavoriteButton({
       return isHovered ? heartHoverIcon : heartIcon;
     }
   };
+
+  if (buttonCourse) {
+    return (
+      <div
+        class={styles.coursePriceAndButton__buttonText}
+        ON_click={toggleFavorite}
+        ON_mouseenter={() => canHover && setIsHovered(true)}
+        ON_mouseleave={() => canHover && setIsHovered(false)}
+      >
+        <div class={styles.heart}>
+          <img src={getIcon()} alt="Избранное" class={styles.heart__img} />
+        </div>
+        Хочу пройти
+      </div>
+    );
+  }
 
   return (
     <div
