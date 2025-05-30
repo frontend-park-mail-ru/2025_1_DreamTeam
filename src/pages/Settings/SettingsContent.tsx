@@ -144,6 +144,7 @@ const SettingContent = () => {
                         "image/jpeg",
                         "image/jpg",
                         "image/png",
+                        "image/webp",
                       ];
 
                       if (!validTypes.includes(event.target.files[0].type)) {
