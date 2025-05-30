@@ -5,7 +5,20 @@ const Rating = ({ rating }: { rating: RatingList }) => {
   if (!rating || rating.length === 0) {
     return <div class={styles.ratingEmpty}>Рейтинг пока отсутствует</div>;
   }
-  const numberRatings = Array.from({ length: rating.length }, (_, i) => i + 1);
+  const numberRatings: number[] = [];
+  let currentPlace = 1;
+  let prevRating = rating[0].rating;
+  for (let i = 0; i < rating.length; i++) {
+    if (i === 0) {
+      numberRatings.push(currentPlace);
+    } else if (rating[i].rating !== prevRating) {
+      currentPlace += 1;
+      numberRatings.push(currentPlace);
+      prevRating = rating[i].rating;
+    } else {
+      numberRatings.push(currentPlace);
+    }
+  }
   const countRatings = rating.map((item) => item.rating);
   const nameRatings = rating.map((item) => item.user);
 
