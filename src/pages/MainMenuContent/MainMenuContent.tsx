@@ -3,12 +3,20 @@ import { Course, getCourses, searchForm } from "@/api";
 import { useState } from "@/ourReact/jsx-runtime";
 import styles from "./MainMenuContent.module.scss";
 import { isSearch } from "@/stores";
+import { useOnUserChange } from "@/onChangeUser";
+import { router } from "@/router";
 
 const MainMenuContent = () => {
   const [cards, setCards] = useState<Course[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [prevSearch, setPrevSearch] = useState("");
   const searching = isSearch();
+
+  useOnUserChange(() => {
+    console.log("User changed, redirecting to main menu");
+    setLoading(true);
+    router.goByState("MainMenu");
+  });
 
   if (isLoading) {
     getCourses().then((data) => {
