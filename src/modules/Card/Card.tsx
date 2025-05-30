@@ -31,7 +31,6 @@ export default function Card({
   tags: string[];
   favorite: boolean;
 }) {
-  // TODO: Добавить новую логику открытия курса через запрос
   return (
     <div
       class={styles.card}
