@@ -31,7 +31,7 @@ const WindowALert = ({
         <div class="alert-admit__image">
           <img src={error} alt="закрыть" />
         </div>
-        <div class="alert-admit__text">{message}</div>
+        <div class="alert-admit__text" innerHTML={message}></div>
       </div>
       <div class="alert-admit__button">
         <button class="alert-admit__button-admit" ON_click={onClose}>
