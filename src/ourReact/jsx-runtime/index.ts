@@ -230,7 +230,16 @@ const patchAttributes = (repr: DOMElement, newAttrs: Map<string, any>) => {
   // 2) Заменить изменившие атрибуты
   repr.attrs.forEach((v, k) => {
     if (newAttrs.get(k) !== v) {
-      repr.elem.setAttribute(k, newAttrs.get(k));
+      if (
+        k === "value" &&
+        (repr.elem instanceof HTMLInputElement ||
+          repr.elem instanceof HTMLTextAreaElement ||
+          repr.elem instanceof HTMLSelectElement)
+      ) {
+        (repr.elem as any).value = newAttrs.get(k);
+      } else {
+        repr.elem.setAttribute(k, newAttrs.get(k));
+      }
     }
   });
 
@@ -244,8 +253,14 @@ const patchAttributes = (repr: DOMElement, newAttrs: Map<string, any>) => {
     if (!repr.attrs.has(k)) {
       if (k === "innerHTML") {
         repr.elem.innerHTML = v;
-      }
-      if (k.startsWith("ON_")) {
+      } else if (
+        k === "value" &&
+        (repr.elem instanceof HTMLInputElement ||
+          repr.elem instanceof HTMLTextAreaElement ||
+          repr.elem instanceof HTMLSelectElement)
+      ) {
+        (repr.elem as any).value = v;
+      } else if (k.startsWith("ON_")) {
         const type = k.slice(3);
         const cb = v as () => void;
         repr.elem.addEventListener(type, cb);
