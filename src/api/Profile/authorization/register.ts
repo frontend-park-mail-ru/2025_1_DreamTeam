@@ -14,6 +14,6 @@ export async function registerUser(
     ok: res.ok,
     status: res.status,
     data: null,
-    error: undefined,
+    error: res.error || "Ошибка регистрации",
   };
 }
