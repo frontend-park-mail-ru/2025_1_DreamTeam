@@ -5,7 +5,7 @@ export const payCourse = async (courseId: number) => {
   const data = await apiFetch("/createPaymentHandler", {
     method: "POST",
     body: JSON.stringify({
-      return_url: `${window.location.origin}/course/${courseId}`,
+      return_url: `${window.location.origin}/course/${courseId}/description`,
       course_id: courseId,
     }),
     headers: {
