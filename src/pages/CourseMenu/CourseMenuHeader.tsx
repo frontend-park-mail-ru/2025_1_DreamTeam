@@ -14,10 +14,11 @@ import styles from "./CourseMenu.module.scss";
 import { useDevice } from "@/devise";
 import { payCourse } from "@/api/Course/pay";
 import addToast from "@/components/WindowALert/logic/add";
-import { getCourse } from "@/api";
 import { useState } from "@/ourReact/jsx-runtime";
 import { UserProfile } from "@/types/users";
 import FavoriteButton from "@/components/FavoriteButton/FavoriteButton";
+import { getCourse } from "@/api/Course/get/course";
+import { CourseOpen } from "@/types/courseMenu";
 
 const CourseMenuHeader = ({ useFunc }: { useFunc: string }) => {
   const user = useUser();
@@ -30,8 +31,13 @@ const CourseMenuHeader = ({ useFunc }: { useFunc: string }) => {
       return <div class="dont-content">Ошибка: ID курса не определен</div>;
     }
     getCourse(courseId).then((data) => {
-      console.log("Данные курса обновлены", data);
-      setCourseOpen(data);
+      if (data.ok === false) {
+        console.error("Ошибка при получении данных курса", data);
+        addToast("error", "Ошибка при получении данных курса");
+        return;
+      }
+      console.log("Данные курса успешно получены", data);
+      setCourseOpen(data.data || ({} as CourseOpen));
       setPrevUser(user);
     });
   }

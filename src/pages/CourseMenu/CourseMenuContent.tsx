@@ -12,6 +12,7 @@ import Progress from "@/components/Progress";
 import { StatisticType } from "@/types/staticsCourse";
 import { maxPoint } from "@/modules/EnterCourse/logic/maxPoint";
 import countVideo from "@/modules/EnterCourse/logic/countVideo";
+import { useOnUserChange } from "@/onChangeUser";
 
 export const CourseMenuDescription = () => {
   const data = useCourseOpen();
@@ -40,6 +41,10 @@ export const CourseMenuEnd = () => {
     amount_questions: 0,
   });
   const [isLoading, setLoading] = useState(true);
+
+  useOnUserChange(() => {
+    setLoading(true);
+  });
 
   if (isLoading) {
     const course = useCourseOpen();
@@ -123,6 +128,10 @@ export function CourseMenuContent() {
     console.error("ID is undefined");
     return <div class={styles.content}>Ошибка: ID не найден</div>;
   }
+
+  useOnUserChange(() => {
+    setLoading(true);
+  });
 
   if (isLoading) {
     getCourseRoadmap(courseOpen.id).then((data) => {
