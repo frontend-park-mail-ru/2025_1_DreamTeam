@@ -17,6 +17,6 @@ export async function checkAuth(): Promise<FetchResponse<AuthResponse>> {
     ok: false,
     status: res.status,
     data: undefined,
-    error: res.error || "Пользователь не авторизован",
+    error: res.error,
   };
 }
