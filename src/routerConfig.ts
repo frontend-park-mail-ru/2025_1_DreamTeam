@@ -9,6 +9,10 @@ export const configureRouter = () => {
     console.log("Главная страница");
   });
 
+  router.register("/courseCreate", "CourseCreate", () => {
+    console.log("Создание курса");
+  });
+
   router.register("/profile", "Profile", () => {
     console.log("Профиль");
   });

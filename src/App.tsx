@@ -9,6 +9,7 @@ import ToastContainer from "./modules/ToastContainer";
 
 import { usePage, useLoginWindow } from "@/stores";
 import Profile from "./pages/Profile";
+import CourseCreate from "@/pages/CourseCreate";
 
 // if ("serviceWorker" in navigator) {
 //   navigator.serviceWorker
@@ -40,6 +41,9 @@ const App = () => {
       break;
     case "Profile":
       content = <Profile key="ProfilePage" />;
+      break;
+    case "CourseCreate":
+      content = <CourseCreate key="CreateCourses" />;
       break;
     default:
       content = <MainMenu key="MainMenu" />;
