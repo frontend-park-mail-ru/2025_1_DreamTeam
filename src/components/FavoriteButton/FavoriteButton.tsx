@@ -1,11 +1,13 @@
 import { useState } from "@/ourReact/jsx-runtime";
-import { addCourseFavorites, checkAuth, deleteCourseFavorites } from "@/api";
 import heartIcon from "Public/static/icons/heart.svg";
 import heartHoverIcon from "Public/static/icons/heartHover.svg";
 import heartFillIcon from "Public/static/icons/heartFill.svg";
 import heartFillHoverIcon from "Public/static/icons/heartFillHover.svg";
 import styles from "./FavoriteButton.module.scss";
 import addToast from "../WindowALert/logic/add";
+import { checkAuth } from "@/api/Profile/authorization/check";
+import { addCourseFavorites } from "@/api/Course/CourseOpen/operationFavorites/add";
+import { deleteCourseFavorites } from "@/api/Course/CourseOpen/operationFavorites/delete";
 
 export default function FavoriteButton({
   favorite,
@@ -25,7 +27,12 @@ export default function FavoriteButton({
     e.stopPropagation();
 
     const isAuthorized = await checkAuth();
-    if (!isAuthorized) {
+    if (isAuthorized.ok === false) {
+      if (isAuthorized.error !== "not authorized") {
+        console.error("Ошибка проверки авторизации:", isAuthorized.error);
+        addToast("error", "Ошибка проверки авторизации");
+        return;
+      }
       console.error("Пользователь не авторизован");
       addToast(
         "error",
@@ -36,18 +43,20 @@ export default function FavoriteButton({
 
     if (isFavorite) {
       const result = await deleteCourseFavorites(courseId);
-      if (result === true) {
+      if (result.ok === true) {
         console.log("Удалено из избранного");
         setIsFavorite(false);
       } else {
+        addToast("error", "Ошибка удаления из избранного");
         console.error("Ошибка удаления из избранного");
       }
     } else {
       const result = await addCourseFavorites(courseId);
-      if (result === true) {
+      if (result.ok === true) {
         console.log("Добавлено в избранное");
         setIsFavorite(true);
       } else {
+        addToast("error", "Ошибка добавления в избранное");
         console.error("Ошибка добавления в избранное");
       }
     }
@@ -72,7 +81,7 @@ export default function FavoriteButton({
         <div class={styles.heart}>
           <img src={getIcon()} alt="Избранное" class={styles.heart__img} />
         </div>
-        Хочу пройти
+        Избранное
       </div>
     );
   }
