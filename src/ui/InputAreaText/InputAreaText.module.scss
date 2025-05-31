@@ -1,0 +1,37 @@
+@import '@/style.scss';
+
+.fieldInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  background-color: $color2;
+  box-sizing: border-box;
+  color: $color6;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+}
+
+.fieldInput__input {
+  all: unset;
+  width: 100%;
+  color: $color7;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+
+  &[type="text"] {
+    height: 32px;
+  }
+
+  &:not([type]) {
+    min-height: 32px;
+    max-height: 720px;
+    resize: vertical;
+    overflow-y: auto;
+    display: block;
+    line-height: 1.4;
+    padding: 4px 0;
+  }
+}
