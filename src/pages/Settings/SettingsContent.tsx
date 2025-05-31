@@ -69,7 +69,7 @@ const SettingContent = () => {
             class={styles.text__input}
             style="height: 39px;"
             id="name_input"
-            value={user.name}
+            value={information.name}
             ON_input={(event: { target: { value: string } }) => {
               setInformationState("name", event.target.value);
             }}
