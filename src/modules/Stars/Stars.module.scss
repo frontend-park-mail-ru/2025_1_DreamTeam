@@ -1,0 +1,41 @@
+@import '@/style.scss';
+
+.rating {
+  color: $color4;
+  background-image: $color4;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.stars {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: $text;
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    width: 100%;
+}
+
+.rating__star {
+    width: 40px;
+}
+
+.rating__button {
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: $color3;
+    color: $color6;
+    font-size: 20px;
+    font-family: "Open Sans", sans-serif;
+    border-radius: 8px;
+}
