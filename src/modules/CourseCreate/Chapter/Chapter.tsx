@@ -1,39 +1,96 @@
-import { useState } from "@/ourReact/jsx-runtime";
 import CourseCreateLesson from "../Lesson";
-import { Part } from "../type";
+import { Bucket, Part } from "../type";
+import addToast from "@/components/WindowALert/logic/add";
+import styles from "./Chapter.module.scss";
+import InputText from "@/ui/InputText";
 
-const CourseCreateChapter = () => {
-  const [countLessons, setCountLessons] = useState<number>(1);
-  const [partTitle, setPartTitle] = useState("");
+interface ChapterProps {
+  part: Part;
+  onChange: (newPart: Part) => void;
+  onRemove: () => void;
+  idxPart: number;
+}
 
-  const increment = () => {
-    setCountLessons(countLessons < 20 ? countLessons + 1 : countLessons);
+const CourseCreateChapter = ({
+  part,
+  onChange,
+  onRemove,
+  idxPart,
+}: ChapterProps) => {
+  const addBucket = () => {
+    if (part.buckets.length >= 20) {
+      addToast("error", "Максимальное количество уроков - 20");
+      return;
+    }
+    onChange({
+      ...part,
+      buckets: [
+        ...part.buckets,
+        {
+          bucket_title: "",
+          lessons: [
+            { lesson_type: "text", lesson_title: "", lesson_value: "" },
+          ],
+        },
+      ],
+    });
   };
 
-  const decrement = () => {
-    setCountLessons(countLessons > 1 ? countLessons - 1 : countLessons);
+  // Удалить букет
+  const removeBucket = (bucketIdx: number) => {
+    if (part.buckets.length <= 1) {
+      addToast("error", "Нельзя удалить последний урок");
+      return;
+    }
+    onChange({
+      ...part,
+      buckets: part.buckets.filter((_, i) => i !== bucketIdx),
+    });
+  };
+
+  // Обновить букет
+  const updateBucket = (bucketIdx: number, newBucket: Bucket) => {
+    onChange({
+      ...part,
+      buckets: part.buckets.map((b, i) => (i === bucketIdx ? newBucket : b)),
+    });
   };
 
   return (
-    <div style="border: 1px solid #ccc; padding: 12px; margin-bottom: 24px;">
-      <input
+    <div class={styles.chapter}>
+      <button
+        type="button"
+        ON_click={onRemove}
+        style="position: absolute; top: 8px; right: 8px; background: none; border: none; font-size: 20px; cursor: pointer;"
+        title="Удалить главу"
+      >
+        ×
+      </button>
+      <InputText
+        key={"chapterTitle" + idxPart}
         type="text"
-        placeholder="Название главы"
-        value={partTitle}
-        ON_input={(e: any) => setPartTitle(e.target.value)}
+        placeholder={"Название главы"}
+        value={part.part_title}
+        onInput={(e: any) => {
+          onChange({ ...part, part_title: e.target.value });
+        }}
         style="margin-bottom: 8px;"
       />
-      <div>
-        <button type="button" ON_click={decrement}>
-          -
+      <div class={styles.counter}>
+        <span>Количество уроков</span>
+        <button type="button" ON_click={addBucket}>
+          Добавить урок
         </button>
-        <span style="margin: 0 8px;">{countLessons.toString()}</span>
-        <button type="button" ON_click={increment}>
-          +
-        </button>
+        <span>{part.buckets.length.toString()}</span>
       </div>
-      {Array.from({ length: countLessons }).map((_, idx) => (
-        <CourseCreateLesson key={`Subchapter${idx + 1}`} />
+      {part.buckets.map((bucket, idx) => (
+        <CourseCreateLesson
+          key={"chapterCreate" + idx}
+          bucket={bucket}
+          idxBucket={idx}
+          onChange={(newBucket: any) => updateBucket(idx, newBucket)}
+          onRemove={() => removeBucket(idx)}
+        />
       ))}
     </div>
   );

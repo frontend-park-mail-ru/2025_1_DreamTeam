@@ -1,0 +1,23 @@
+@import '@/style.scss';
+
+.chapter {
+    padding: 16px;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 100%;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.counter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: $text;
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+}

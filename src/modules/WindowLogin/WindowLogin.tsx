@@ -42,7 +42,7 @@ export default function WindowLogin() {
           .min(2)
           .max(16)
           .regex(
-            "^[a-zA-Z0-9_-]+$",
+            "^[a-zA-Zа-яА-Я0-9 ()_-]+$",
             "содержит только буквы, цифры, дефисы и нижние подчеркивания"
           );
         return validator.execute(value, "Псевдоним");
