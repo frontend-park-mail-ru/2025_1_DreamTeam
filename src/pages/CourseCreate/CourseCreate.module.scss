@@ -1,0 +1,37 @@
+@import "@/style.scss";
+
+.content {
+    padding: 56px 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.courseCreate {
+    display: flex;
+    width: 650px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.counter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: $text;
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+}

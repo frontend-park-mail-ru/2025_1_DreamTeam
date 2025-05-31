@@ -1,5 +1,10 @@
 import { useState } from "@/ourReact/jsx-runtime";
 import CourseCreateChapter from "@/modules/CourseCreate/Chapter/Chapter";
+import addToast from "@/components/WindowALert/logic/add";
+import styles from "./CourseCreate.module.scss";
+import InputText from "@/ui/InputText";
+import InputAreaText from "@/ui/InputAreaText";
+import { createCourse } from "@/api/Course/create/create";
 
 type Lesson = {
   lesson_type: string;
@@ -12,7 +17,8 @@ type Part = { part_title: string; buckets: Bucket[] };
 const CourseCreate = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [countChapters, setCountChapters] = useState(1);
+  const [price, setPrice] = useState(0);
+  const [time_to_pass, setTimeToPass] = useState(0);
   const [parts, setParts] = useState<Part[]>([
     {
       part_title: "",
@@ -34,6 +40,10 @@ const CourseCreate = () => {
 
   // Добавить новую главу
   const addChapter = () => {
+    if (parts.length >= 20) {
+      addToast("error", "Максимальное количество глав - 20");
+      return;
+    }
     setParts([
       ...parts,
       {
@@ -52,79 +62,95 @@ const CourseCreate = () => {
 
   // Удалить главу
   const removeChapter = (idx: number) => {
+    if (parts.length <= 1) {
+      addToast("error", "Нельзя удалить последнюю главу");
+      return;
+    }
     setParts(parts.filter((_, i) => i !== idx));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const courseData = {
-      price: 0,
-      time_to_pass: 30,
+      price,
+      time_to_pass,
       title,
       description,
       parts,
     };
     console.log(JSON.stringify(courseData, null, 2));
-  };
-
-  addChapter();
-  removeChapter(0);
-  updatePart(0, {
-    part_title: "Updated Part Title",
-    buckets: [
-      {
-        bucket_title: "Updated Bucket Title",
-        lessons: [
-          {
-            lesson_type: "text",
-            lesson_title: "Updated Lesson Title",
-            lesson_value: "Updated Value",
-          },
-        ],
-      },
-    ],
-  });
-
-  const incrementChapter = () => {
-    setCountChapters(countChapters < 20 ? countChapters + 1 : countChapters);
-  };
-
-  const decrementChapter = () => {
-    setCountChapters(countChapters > 1 ? countChapters - 1 : countChapters);
+    const res = await createCourse(courseData);
+    if (!res.ok) {
+      addToast("error", `Ошибка при сохранении курса: ${res.error}`);
+      return;
+    }
+    addToast("success", "Курс успешно сохранен");
   };
 
   return (
-    <div>
-      <div>
-        <input
-          type="text"
-          placeholder="Название курса"
-          value={title}
-          ON_input={(e: any) => setTitle(e.target.value)}
-        />
-        <textarea
-          placeholder="Описание курса"
-          value={description}
-          ON_input={(e: any) => setDescription(e.target.value)}
-        />
-        <button type="button" ON_click={decrementChapter}>
-          -
-        </button>
-        <span style="margin: 0 8px;">{countChapters.toString()}</span>
-        <button type="button" ON_click={incrementChapter}>
-          +
+    <div class={styles.content}>
+      <div class={styles.courseCreate}>
+        <div class={styles.header}>
+          <InputText
+            key={"titleCourse"}
+            placeholder="Название курса"
+            value={title}
+            onInput={(e: any) => setTitle(e.target.value)}
+          />
+          <InputAreaText
+            key={"descriptionCourse"}
+            placeholder="Описание курса"
+            value={description}
+            onInput={(e: any) => setDescription(e.target.value)}
+          />
+          <InputText
+            key={"priceCourse"}
+            type="number"
+            placeholder="Цена курса"
+            value={price.toString()}
+            onInput={(e: any) => {
+              if (Number(e.target.value) < 0) {
+                addToast("error", "Цена не может быть отрицательной");
+                setPrice(0);
+                return;
+              }
+              setPrice(Number(e.target.value));
+            }}
+          />
+          <InputText
+            key={"timeToPassCourse"}
+            type="number"
+            placeholder="Время на прохождение курса (в минутах)"
+            value={time_to_pass.toString()}
+            onInput={(e: any) => {
+              if (Number(e.target.value) < 0) {
+                addToast("error", "Время не может быть отрицательным");
+                setTimeToPass(0);
+                return;
+              }
+              setTimeToPass(Number(e.target.value));
+            }}
+          />
+          <div class={styles.counter}>
+            <span>Количество глав</span>
+            <button type="button" ON_click={addChapter}>
+              Добавить главу
+            </button>
+            <span style="margin: 0 8px;">{parts.length.toString()}</span>
+          </div>
+        </div>
+        {parts.map((part, idx) => (
+          <CourseCreateChapter
+            key={"Chapter" + idx}
+            idxPart={idx}
+            part={part}
+            onChange={(newPart: any) => updatePart(idx, newPart)}
+            onRemove={() => removeChapter(idx)}
+          />
+        ))}
+        <button type="button" ON_click={handleSave}>
+          Сохранить
         </button>
       </div>
-      {parts.map((part, idx) => (
-        <CourseCreateChapter
-          key={idx}
-          part={part}
-          onChange={(newPart: any) => updatePart(idx, newPart)}
-          onRemove={() => removeChapter(idx)}
-        />
-      ))}
-      <button type="button" ON_click={handleSave}>
-        Сохранить
-      </button>
     </div>
   );
 };
