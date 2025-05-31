@@ -3,6 +3,7 @@ import { checkAuth, getCourse, getLessons, validEmail } from "@/api";
 import { setActiveTab, setCourseOpen, setLessonID, setUser } from "@/stores";
 import NotFoundView from "@/nonFound";
 import { ActiveTabType } from "./types/activeTab";
+import addToast from "./components/WindowALert/logic/add";
 
 export const configureRouter = () => {
   router.register("/", "MainMenu", () => {
@@ -29,6 +30,13 @@ export const configureRouter = () => {
       if (courseId === undefined) {
         console.error("Ошибка");
         return;
+      }
+      if (course.price !== 0) {
+        if (course.is_completed || course.is_purchased) {
+        } else {
+          router.goToPath(`/course/${id}/description`);
+          return;
+        }
       }
       const lessonId = await getLessons(courseId);
       if (lessonId === undefined) {
