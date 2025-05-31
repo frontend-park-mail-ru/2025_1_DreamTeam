@@ -4,6 +4,7 @@ import { Bucket } from "@/pages/CourseMenu/CourseMenuContent";
 import { router } from "@/router";
 import arrowDownIcon from "Public/static/icons/arrowDown40x40.svg";
 import styles from "./Chapter.module.scss";
+import addToast from "../WindowALert/logic/add";
 
 export default function Chapter({
   title,
@@ -65,6 +66,18 @@ export default function Chapter({
                   <div
                     class={styles.subchapter}
                     ON_click={() => {
+                      const course = useCourseOpen();
+                      if (
+                        course.price !== 0 &&
+                        !(
+                          course.is_purchased === true ||
+                          course.is_completed === true
+                        )
+                      ) {
+                        console.error("Курс не куплен или не завершен");
+                        addToast("error", "Курс не куплен.");
+                        return;
+                      }
                       setLessonID(subchapter.lessons[0].lesson_id);
                       router.goToPath(`/course/${useCourseOpen().id}/lessons`);
                     }}
