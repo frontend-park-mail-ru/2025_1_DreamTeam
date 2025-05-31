@@ -13,6 +13,7 @@ import { StatisticType } from "@/types/staticsCourse";
 import { maxPoint } from "@/modules/EnterCourse/logic/maxPoint";
 import countVideo from "@/modules/EnterCourse/logic/countVideo";
 import { useOnUserChange } from "@/onChangeUser";
+import Stars from "@/modules/Stars/Stars";
 
 export const CourseMenuDescription = () => {
   const data = useCourseOpen();
@@ -57,9 +58,16 @@ export const CourseMenuEnd = () => {
     }
   }
 
+  const course = useCourseOpen();
+
   return (
     <div class={styles.content}>
       <Progress data={data} key="ProgressCourse" />
+      {course.is_completed ? (
+        <Stars courseID={useCourseOpen().id as number} key="Stars" />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

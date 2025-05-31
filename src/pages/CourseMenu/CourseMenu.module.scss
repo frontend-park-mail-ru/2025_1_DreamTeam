@@ -223,8 +223,10 @@
 .content {
   padding: 56px 24px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 24px;
 }
 
 .contentTable {
